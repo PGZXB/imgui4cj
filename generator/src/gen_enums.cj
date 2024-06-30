@@ -15,8 +15,6 @@ struct EnumDef {
     }
 }
 
-type ImEnumDefs = Array<EnumDef>
-
 func parseEnumsJson(enumsJson: JsonValue): ArrayList<EnumDef> {
     let result = ArrayList<EnumDef>()
 
