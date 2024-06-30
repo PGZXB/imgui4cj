@@ -1233,3 +1233,24 @@ public const ImGuiWindowFlags_AlwaysVerticalScrollbar: ImGuiWindowFlags_ = 16384
 public const ImGuiWindowFlags_AlwaysHorizontalScrollbar: ImGuiWindowFlags_ = 32768
 public const ImGuiWindowFlags_NoNavInputs: ImGuiWindowFlags_ = 65536
 public const ImGuiWindowFlags_NoNavFocus: ImGuiWindowFlags_ = 131072
+public const ImGuiWindowFlags_UnsavedDocument: ImGuiWindowFlags_ = 262144
+public const ImGuiWindowFlags_NoDocking: ImGuiWindowFlags_ = 524288
+public const ImGuiWindowFlags_NoNav: ImGuiWindowFlags_ = 196608
+public const ImGuiWindowFlags_NoDecoration: ImGuiWindowFlags_ = 43
+public const ImGuiWindowFlags_NoInputs: ImGuiWindowFlags_ = 197120
+public const ImGuiWindowFlags_NavFlattened: ImGuiWindowFlags_ = 8388608
+public const ImGuiWindowFlags_ChildWindow: ImGuiWindowFlags_ = 16777216
+public const ImGuiWindowFlags_Tooltip: ImGuiWindowFlags_ = 33554432
+public const ImGuiWindowFlags_Popup: ImGuiWindowFlags_ = 67108864
+public const ImGuiWindowFlags_Modal: ImGuiWindowFlags_ = 134217728
+public const ImGuiWindowFlags_ChildMenu: ImGuiWindowFlags_ = 268435456
+public const ImGuiWindowFlags_DockNodeHost: ImGuiWindowFlags_ = 536870912
+
+// enum ImGuiWindowRefreshFlags_
+public type ImGuiWindowRefreshFlags_ = Int32
+
+public const ImGuiWindowRefreshFlags_None: ImGuiWindowRefreshFlags_ = 0
+public const ImGuiWindowRefreshFlags_TryToAvoidRefresh: ImGuiWindowRefreshFlags_ = 1
+public const ImGuiWindowRefreshFlags_RefreshOnHover: ImGuiWindowRefreshFlags_ = 2
+public const ImGuiWindowRefreshFlags_RefreshOnFocus: ImGuiWindowRefreshFlags_ = 4
+
