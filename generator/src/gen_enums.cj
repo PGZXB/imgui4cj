@@ -69,6 +69,9 @@ func genEnumsCode<T>(os: StringWriter<T>, pkgName: String, enumDefs: ArrayList<E
 }
 
 func genEnumsCode(filename: String, pkgName: String, enumDefs: ArrayList<EnumDef>) {
-    let fp = File(filename, OpenOption.CreateOrTruncate(false))
-    return genEnumsCode(StringWriter(fp), pkgName, enumDefs)
+    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+        try (sw = StringWriter(fp)) {
+            return genEnumsCode(sw, pkgName, enumDefs)
+        }
+    }
 }
