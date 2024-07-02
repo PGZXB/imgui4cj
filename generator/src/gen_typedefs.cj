@@ -39,7 +39,12 @@ func genTypeDefsCode<T>(os: StringWriter<T>, pkgName: String, defs: ArrayList<Ty
         let cjType = CjType.fromCType(def.typename)
         match (cjType) {
             case StructType(name) => continue
-            case _ => os.writeln("type ${def.alias} = ${cjType}")
+            case _ =>
+                let typename = match (cjType) {
+                    case TypeAlias(name) => tryConvertTemplateTypename(name) ?? name
+                    case _ => cjType.toString()
+                }
+                os.writeln("type ${def.alias} = ${typename}")
         }
     }
     os.flush()

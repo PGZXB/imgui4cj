@@ -439,7 +439,7 @@ public struct ImGuiContext {
         LastKeyModsChangeTime = 0.0f64
         LastKeyModsChangeFromNoneTime = 0.0f64
         LastKeyboardKeyPressTime = 0.0f64
-        KeysMayBeCharInput = ImBitArray<ImGuiKey_NamedKey_COUNT,-ImGuiKey_NamedKey_BEGIN>()
+        KeysMayBeCharInput = ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN()
         KeysOwnerData = VArray<ImGuiKeyOwnerData, $154>(item: ImGuiKeyOwnerData())
         KeysRoutingTable = ImGuiKeyRoutingTable()
         ActiveIdUsingNavDirMask = 0
@@ -1054,18 +1054,18 @@ public struct ImGuiInputEventMouseWheel {
 // struct ImGuiInputEventText
 @C
 public struct ImGuiInputEventText {
-    public ImGuiInputEventText(public var Char!: Int32) {
+    public ImGuiInputEventText(public var `Char`!: Int32) {
     }
 
     public init() {
-        Char = 0
+        `Char` = 0
     }
 }
 
 // struct ImGuiInputTextCallbackData
 @C
 public struct ImGuiInputTextCallbackData {
-    public ImGuiInputTextCallbackData(public var Ctx!: CPointer<ImGuiContext>, public var EventFlag!: ImGuiInputTextFlags, public var Flags!: ImGuiInputTextFlags, public var UserData!: CPointer<Unit>, public var EventChar!: ImWchar, public var EventKey!: ImGuiKey, public var Buf!: CPointer<UInt8>, public var BufTextLen!: Int32, public var BufSize!: Int32, public var BufDirty!: Bool, public var CursorPos!: Int32, public var SelectionStart!: Int32, public var SelectionEnd!: Int32) {
+    public ImGuiInputTextCallbackData(public var Ctx!: CPointer<ImGuiContext>, public var EventFlag!: ImGuiInputTextFlags, public var Flags!: ImGuiInputTextFlags, public var UserData!: CPointer<Unit>, public var EventChar!: ImWchar, public var EventKey!: ImGuiKey, public var Buf!: CString, public var BufTextLen!: Int32, public var BufSize!: Int32, public var BufDirty!: Bool, public var CursorPos!: Int32, public var SelectionStart!: Int32, public var SelectionEnd!: Int32) {
     }
 
     public init() {
@@ -1075,7 +1075,7 @@ public struct ImGuiInputTextCallbackData {
         UserData = CPointer<Unit>()
         EventChar = 0
         EventKey = 0
-        Buf = CPointer<UInt8>()
+        Buf = CString(CPointer<UInt8>())
         BufTextLen = 0
         BufSize = 0
         BufDirty = false
@@ -2235,12 +2235,12 @@ public struct ImGuiViewportP {
 // struct ImGuiWindow
 @C
 public struct ImGuiWindow {
-    public ImGuiWindow(public var Ctx!: CPointer<ImGuiContext>, public var Name!: CPointer<UInt8>, public var ID!: ImGuiID, public var Flags!: ImGuiWindowFlags, public var FlagsPreviousFrame!: ImGuiWindowFlags, public var ChildFlags!: ImGuiChildFlags, public var WindowClass!: ImGuiWindowClass, public var Viewport!: CPointer<ImGuiViewportP>, public var ViewportId!: ImGuiID, public var ViewportPos!: ImVec2, public var ViewportAllowPlatformMonitorExtend!: Int32, public var Pos!: ImVec2, public var Size!: ImVec2, public var SizeFull!: ImVec2, public var ContentSize!: ImVec2, public var ContentSizeIdeal!: ImVec2, public var ContentSizeExplicit!: ImVec2, public var WindowPadding!: ImVec2, public var WindowRounding!: Float32, public var WindowBorderSize!: Float32, public var TitleBarHeight!: Float32, public var MenuBarHeight!: Float32, public var DecoOuterSizeX1!: Float32, public var DecoOuterSizeY1!: Float32, public var DecoOuterSizeX2!: Float32, public var DecoOuterSizeY2!: Float32, public var DecoInnerSizeX1!: Float32, public var DecoInnerSizeY1!: Float32, public var NameBufLen!: Int32, public var MoveId!: ImGuiID, public var TabId!: ImGuiID, public var ChildId!: ImGuiID, public var PopupId!: ImGuiID, public var Scroll!: ImVec2, public var ScrollMax!: ImVec2, public var ScrollTarget!: ImVec2, public var ScrollTargetCenterRatio!: ImVec2, public var ScrollTargetEdgeSnapDist!: ImVec2, public var ScrollbarSizes!: ImVec2, public var ScrollbarX!: Bool, public var ScrollbarY!: Bool, public var ViewportOwned!: Bool, public var Active!: Bool, public var WasActive!: Bool, public var WriteAccessed!: Bool, public var Collapsed!: Bool, public var WantCollapseToggle!: Bool, public var SkipItems!: Bool, public var SkipRefresh!: Bool, public var Appearing!: Bool, public var Hidden!: Bool, public var IsFallbackWindow!: Bool, public var IsExplicitChild!: Bool, public var HasCloseButton!: Bool, public var ResizeBorderHovered!: Int8, public var ResizeBorderHeld!: Int8, public var BeginCount!: Int16, public var BeginCountPreviousFrame!: Int16, public var BeginOrderWithinParent!: Int16, public var BeginOrderWithinContext!: Int16, public var FocusOrder!: Int16, public var AutoFitFramesX!: ImS8, public var AutoFitFramesY!: ImS8, public var AutoFitOnlyGrows!: Bool, public var AutoPosLastDirection!: ImGuiDir, public var HiddenFramesCanSkipItems!: ImS8, public var HiddenFramesCannotSkipItems!: ImS8, public var HiddenFramesForRenderOnly!: ImS8, public var DisableInputsFrames!: ImS8, public var SetWindowPosAllowFlags!: ImGuiCond, public var SetWindowSizeAllowFlags!: ImGuiCond, public var SetWindowCollapsedAllowFlags!: ImGuiCond, public var SetWindowDockAllowFlags!: ImGuiCond, public var SetWindowPosVal!: ImVec2, public var SetWindowPosPivot!: ImVec2, public var IDStack!: ImVector_ImGuiID, public var DC!: ImGuiWindowTempData, public var OuterRectClipped!: ImRect, public var InnerRect!: ImRect, public var InnerClipRect!: ImRect, public var WorkRect!: ImRect, public var ParentWorkRect!: ImRect, public var ClipRect!: ImRect, public var ContentRegionRect!: ImRect, public var HitTestHoleSize!: ImVec2ih, public var HitTestHoleOffset!: ImVec2ih, public var LastFrameActive!: Int32, public var LastFrameJustFocused!: Int32, public var LastTimeActive!: Float32, public var ItemWidthDefault!: Float32, public var StateStorage!: ImGuiStorage, public var ColumnsStorage!: ImVector_ImGuiOldColumns, public var FontWindowScale!: Float32, public var FontDpiScale!: Float32, public var SettingsOffset!: Int32, public var DrawList!: CPointer<ImDrawList>, public var DrawListInst!: ImDrawList, public var ParentWindow!: CPointer<ImGuiWindow>, public var ParentWindowInBeginStack!: CPointer<ImGuiWindow>, public var RootWindow!: CPointer<ImGuiWindow>, public var RootWindowPopupTree!: CPointer<ImGuiWindow>, public var RootWindowDockTree!: CPointer<ImGuiWindow>, public var RootWindowForTitleBarHighlight!: CPointer<ImGuiWindow>, public var RootWindowForNav!: CPointer<ImGuiWindow>, public var ParentWindowForFocusRoute!: CPointer<ImGuiWindow>, public var NavLastChildNavWindow!: CPointer<ImGuiWindow>, public var NavLastIds!: VArray<ImGuiID, $2>, public var NavRectRel!: VArray<ImRect, $2>, public var NavPreferredScoringPosRel!: VArray<ImVec2, $2>, public var NavRootFocusScopeId!: ImGuiID, public var MemoryDrawListIdxCapacity!: Int32, public var MemoryDrawListVtxCapacity!: Int32, public var MemoryCompacted!: Bool, public var DockIsActive!: Bool, public var DockNodeIsVisible!: Bool, public var DockTabIsVisible!: Bool, public var DockTabWantClose!: Bool, public var DockOrder!: Int16, public var DockStyle!: ImGuiWindowDockStyle, public var DockNode!: CPointer<ImGuiDockNode>, public var DockNodeAsHost!: CPointer<ImGuiDockNode>, public var DockId!: ImGuiID, public var DockTabItemStatusFlags!: ImGuiItemStatusFlags, public var DockTabItemRect!: ImRect) {
+    public ImGuiWindow(public var Ctx!: CPointer<ImGuiContext>, public var Name!: CString, public var ID!: ImGuiID, public var Flags!: ImGuiWindowFlags, public var FlagsPreviousFrame!: ImGuiWindowFlags, public var ChildFlags!: ImGuiChildFlags, public var WindowClass!: ImGuiWindowClass, public var Viewport!: CPointer<ImGuiViewportP>, public var ViewportId!: ImGuiID, public var ViewportPos!: ImVec2, public var ViewportAllowPlatformMonitorExtend!: Int32, public var Pos!: ImVec2, public var Size!: ImVec2, public var SizeFull!: ImVec2, public var ContentSize!: ImVec2, public var ContentSizeIdeal!: ImVec2, public var ContentSizeExplicit!: ImVec2, public var WindowPadding!: ImVec2, public var WindowRounding!: Float32, public var WindowBorderSize!: Float32, public var TitleBarHeight!: Float32, public var MenuBarHeight!: Float32, public var DecoOuterSizeX1!: Float32, public var DecoOuterSizeY1!: Float32, public var DecoOuterSizeX2!: Float32, public var DecoOuterSizeY2!: Float32, public var DecoInnerSizeX1!: Float32, public var DecoInnerSizeY1!: Float32, public var NameBufLen!: Int32, public var MoveId!: ImGuiID, public var TabId!: ImGuiID, public var ChildId!: ImGuiID, public var PopupId!: ImGuiID, public var Scroll!: ImVec2, public var ScrollMax!: ImVec2, public var ScrollTarget!: ImVec2, public var ScrollTargetCenterRatio!: ImVec2, public var ScrollTargetEdgeSnapDist!: ImVec2, public var ScrollbarSizes!: ImVec2, public var ScrollbarX!: Bool, public var ScrollbarY!: Bool, public var ViewportOwned!: Bool, public var Active!: Bool, public var WasActive!: Bool, public var WriteAccessed!: Bool, public var Collapsed!: Bool, public var WantCollapseToggle!: Bool, public var SkipItems!: Bool, public var SkipRefresh!: Bool, public var Appearing!: Bool, public var Hidden!: Bool, public var IsFallbackWindow!: Bool, public var IsExplicitChild!: Bool, public var HasCloseButton!: Bool, public var ResizeBorderHovered!: Int8, public var ResizeBorderHeld!: Int8, public var BeginCount!: Int16, public var BeginCountPreviousFrame!: Int16, public var BeginOrderWithinParent!: Int16, public var BeginOrderWithinContext!: Int16, public var FocusOrder!: Int16, public var AutoFitFramesX!: ImS8, public var AutoFitFramesY!: ImS8, public var AutoFitOnlyGrows!: Bool, public var AutoPosLastDirection!: ImGuiDir, public var HiddenFramesCanSkipItems!: ImS8, public var HiddenFramesCannotSkipItems!: ImS8, public var HiddenFramesForRenderOnly!: ImS8, public var DisableInputsFrames!: ImS8, public var SetWindowPosAllowFlags!: ImGuiCond, public var SetWindowSizeAllowFlags!: ImGuiCond, public var SetWindowCollapsedAllowFlags!: ImGuiCond, public var SetWindowDockAllowFlags!: ImGuiCond, public var SetWindowPosVal!: ImVec2, public var SetWindowPosPivot!: ImVec2, public var IDStack!: ImVector_ImGuiID, public var DC!: ImGuiWindowTempData, public var OuterRectClipped!: ImRect, public var InnerRect!: ImRect, public var InnerClipRect!: ImRect, public var WorkRect!: ImRect, public var ParentWorkRect!: ImRect, public var ClipRect!: ImRect, public var ContentRegionRect!: ImRect, public var HitTestHoleSize!: ImVec2ih, public var HitTestHoleOffset!: ImVec2ih, public var LastFrameActive!: Int32, public var LastFrameJustFocused!: Int32, public var LastTimeActive!: Float32, public var ItemWidthDefault!: Float32, public var StateStorage!: ImGuiStorage, public var ColumnsStorage!: ImVector_ImGuiOldColumns, public var FontWindowScale!: Float32, public var FontDpiScale!: Float32, public var SettingsOffset!: Int32, public var DrawList!: CPointer<ImDrawList>, public var DrawListInst!: ImDrawList, public var ParentWindow!: CPointer<ImGuiWindow>, public var ParentWindowInBeginStack!: CPointer<ImGuiWindow>, public var RootWindow!: CPointer<ImGuiWindow>, public var RootWindowPopupTree!: CPointer<ImGuiWindow>, public var RootWindowDockTree!: CPointer<ImGuiWindow>, public var RootWindowForTitleBarHighlight!: CPointer<ImGuiWindow>, public var RootWindowForNav!: CPointer<ImGuiWindow>, public var ParentWindowForFocusRoute!: CPointer<ImGuiWindow>, public var NavLastChildNavWindow!: CPointer<ImGuiWindow>, public var NavLastIds!: VArray<ImGuiID, $2>, public var NavRectRel!: VArray<ImRect, $2>, public var NavPreferredScoringPosRel!: VArray<ImVec2, $2>, public var NavRootFocusScopeId!: ImGuiID, public var MemoryDrawListIdxCapacity!: Int32, public var MemoryDrawListVtxCapacity!: Int32, public var MemoryCompacted!: Bool, public var DockIsActive!: Bool, public var DockNodeIsVisible!: Bool, public var DockTabIsVisible!: Bool, public var DockTabWantClose!: Bool, public var DockOrder!: Int16, public var DockStyle!: ImGuiWindowDockStyle, public var DockNode!: CPointer<ImGuiDockNode>, public var DockNodeAsHost!: CPointer<ImGuiDockNode>, public var DockId!: ImGuiID, public var DockTabItemStatusFlags!: ImGuiItemStatusFlags, public var DockTabItemRect!: ImRect) {
     }
 
     public init() {
         Ctx = CPointer<ImGuiContext>()
-        Name = CPointer<UInt8>()
+        Name = CString(CPointer<UInt8>())
         ID = 0
         Flags = 0
         FlagsPreviousFrame = 0
@@ -2583,11 +2583,11 @@ public struct StbTexteditRow {
 // struct StbUndoRecord
 @C
 public struct StbUndoRecord {
-    public StbUndoRecord(public var where!: Int32, public var insert_length!: Int32, public var delete_length!: Int32, public var char_storage!: Int32) {
+    public StbUndoRecord(public var `where`!: Int32, public var insert_length!: Int32, public var delete_length!: Int32, public var char_storage!: Int32) {
     }
 
     public init() {
-        where = 0
+        `where` = 0
         insert_length = 0
         delete_length = 0
         char_storage = 0
@@ -2607,5 +2607,804 @@ public struct StbUndoState {
         redo_point = 0
         undo_char_point = 0
         redo_char_point = 0
+    }
+}
+
+// struct ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN
+@C
+public struct ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN {
+    public ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN(public var Storage!: VArray<ImU32, $5>) {
+    }
+
+    public init() {
+        Storage = VArray<ImU32, $5>(item: 0)
+    }
+}
+
+// struct ImChunkStream_ImGuiTableSettings
+@C
+public struct ImChunkStream_ImGuiTableSettings {
+    public ImChunkStream_ImGuiTableSettings(public var Buf!: ImVector_char) {
+    }
+
+    public init() {
+        Buf = ImVector_char()
+    }
+}
+
+// struct ImChunkStream_ImGuiWindowSettings
+@C
+public struct ImChunkStream_ImGuiWindowSettings {
+    public ImChunkStream_ImGuiWindowSettings(public var Buf!: ImVector_char) {
+    }
+
+    public init() {
+        Buf = ImVector_char()
+    }
+}
+
+// struct ImPool_ImGuiTabBar
+@C
+public struct ImPool_ImGuiTabBar {
+    public ImPool_ImGuiTabBar(public var Buf!: ImVector_ImGuiTabBar, public var Map!: ImGuiStorage, public var FreeIdx!: ImPoolIdx, public var AliveCount!: ImPoolIdx) {
+    }
+
+    public init() {
+        Buf = ImVector_ImGuiTabBar()
+        Map = ImGuiStorage()
+        FreeIdx = 0
+        AliveCount = 0
+    }
+}
+
+// struct ImPool_ImGuiTable
+@C
+public struct ImPool_ImGuiTable {
+    public ImPool_ImGuiTable(public var Buf!: ImVector_ImGuiTable, public var Map!: ImGuiStorage, public var FreeIdx!: ImPoolIdx, public var AliveCount!: ImPoolIdx) {
+    }
+
+    public init() {
+        Buf = ImVector_ImGuiTable()
+        Map = ImGuiStorage()
+        FreeIdx = 0
+        AliveCount = 0
+    }
+}
+
+// struct ImSpan_ImGuiTableCellData
+@C
+public struct ImSpan_ImGuiTableCellData {
+    public ImSpan_ImGuiTableCellData(public var Data!: CPointer<ImGuiTableCellData>, public var DataEnd!: CPointer<ImGuiTableCellData>) {
+    }
+
+    public init() {
+        Data = CPointer<ImGuiTableCellData>()
+        DataEnd = CPointer<ImGuiTableCellData>()
+    }
+}
+
+// struct ImSpan_ImGuiTableColumn
+@C
+public struct ImSpan_ImGuiTableColumn {
+    public ImSpan_ImGuiTableColumn(public var Data!: CPointer<ImGuiTableColumn>, public var DataEnd!: CPointer<ImGuiTableColumn>) {
+    }
+
+    public init() {
+        Data = CPointer<ImGuiTableColumn>()
+        DataEnd = CPointer<ImGuiTableColumn>()
+    }
+}
+
+// struct ImSpan_ImGuiTableColumnIdx
+@C
+public struct ImSpan_ImGuiTableColumnIdx {
+    public ImSpan_ImGuiTableColumnIdx(public var Data!: CPointer<ImGuiTableColumnIdx>, public var DataEnd!: CPointer<ImGuiTableColumnIdx>) {
+    }
+
+    public init() {
+        Data = CPointer<ImGuiTableColumnIdx>()
+        DataEnd = CPointer<ImGuiTableColumnIdx>()
+    }
+}
+
+// struct ImVector_ImDrawChannel
+@C
+public struct ImVector_ImDrawChannel {
+    public ImVector_ImDrawChannel(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImDrawChannel>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImDrawChannel>()
+    }
+}
+
+// struct ImVector_ImDrawCmd
+@C
+public struct ImVector_ImDrawCmd {
+    public ImVector_ImDrawCmd(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImDrawCmd>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImDrawCmd>()
+    }
+}
+
+// struct ImVector_ImDrawIdx
+@C
+public struct ImVector_ImDrawIdx {
+    public ImVector_ImDrawIdx(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImDrawIdx>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImDrawIdx>()
+    }
+}
+
+// struct ImVector_ImDrawListPtr
+@C
+public struct ImVector_ImDrawListPtr {
+    public ImVector_ImDrawListPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<ImDrawList>>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CPointer<ImDrawList>>()
+    }
+}
+
+// struct ImVector_ImDrawVert
+@C
+public struct ImVector_ImDrawVert {
+    public ImVector_ImDrawVert(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImDrawVert>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImDrawVert>()
+    }
+}
+
+// struct ImVector_ImFontPtr
+@C
+public struct ImVector_ImFontPtr {
+    public ImVector_ImFontPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<ImFont>>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CPointer<ImFont>>()
+    }
+}
+
+// struct ImVector_ImFontAtlasCustomRect
+@C
+public struct ImVector_ImFontAtlasCustomRect {
+    public ImVector_ImFontAtlasCustomRect(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImFontAtlasCustomRect>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImFontAtlasCustomRect>()
+    }
+}
+
+// struct ImVector_ImFontConfig
+@C
+public struct ImVector_ImFontConfig {
+    public ImVector_ImFontConfig(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImFontConfig>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImFontConfig>()
+    }
+}
+
+// struct ImVector_ImFontGlyph
+@C
+public struct ImVector_ImFontGlyph {
+    public ImVector_ImFontGlyph(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImFontGlyph>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImFontGlyph>()
+    }
+}
+
+// struct ImVector_ImGuiColorMod
+@C
+public struct ImVector_ImGuiColorMod {
+    public ImVector_ImGuiColorMod(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiColorMod>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiColorMod>()
+    }
+}
+
+// struct ImVector_ImGuiContextHook
+@C
+public struct ImVector_ImGuiContextHook {
+    public ImVector_ImGuiContextHook(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiContextHook>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiContextHook>()
+    }
+}
+
+// struct ImVector_ImGuiDockNodeSettings
+@C
+public struct ImVector_ImGuiDockNodeSettings {
+    public ImVector_ImGuiDockNodeSettings(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiDockNodeSettings>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiDockNodeSettings>()
+    }
+}
+
+// struct ImVector_ImGuiDockRequest
+@C
+public struct ImVector_ImGuiDockRequest {
+    public ImVector_ImGuiDockRequest(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiDockRequest>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiDockRequest>()
+    }
+}
+
+// struct ImVector_ImGuiFocusScopeData
+@C
+public struct ImVector_ImGuiFocusScopeData {
+    public ImVector_ImGuiFocusScopeData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiFocusScopeData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiFocusScopeData>()
+    }
+}
+
+// struct ImVector_ImGuiGroupData
+@C
+public struct ImVector_ImGuiGroupData {
+    public ImVector_ImGuiGroupData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiGroupData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiGroupData>()
+    }
+}
+
+// struct ImVector_ImGuiID
+@C
+public struct ImVector_ImGuiID {
+    public ImVector_ImGuiID(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiID>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiID>()
+    }
+}
+
+// struct ImVector_ImGuiInputEvent
+@C
+public struct ImVector_ImGuiInputEvent {
+    public ImVector_ImGuiInputEvent(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiInputEvent>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiInputEvent>()
+    }
+}
+
+// struct ImVector_ImGuiItemFlags
+@C
+public struct ImVector_ImGuiItemFlags {
+    public ImVector_ImGuiItemFlags(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiItemFlags>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiItemFlags>()
+    }
+}
+
+// struct ImVector_ImGuiKeyRoutingData
+@C
+public struct ImVector_ImGuiKeyRoutingData {
+    public ImVector_ImGuiKeyRoutingData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiKeyRoutingData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiKeyRoutingData>()
+    }
+}
+
+// struct ImVector_ImGuiListClipperData
+@C
+public struct ImVector_ImGuiListClipperData {
+    public ImVector_ImGuiListClipperData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiListClipperData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiListClipperData>()
+    }
+}
+
+// struct ImVector_ImGuiListClipperRange
+@C
+public struct ImVector_ImGuiListClipperRange {
+    public ImVector_ImGuiListClipperRange(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiListClipperRange>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiListClipperRange>()
+    }
+}
+
+// struct ImVector_ImGuiNavTreeNodeData
+@C
+public struct ImVector_ImGuiNavTreeNodeData {
+    public ImVector_ImGuiNavTreeNodeData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiNavTreeNodeData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiNavTreeNodeData>()
+    }
+}
+
+// struct ImVector_ImGuiOldColumnData
+@C
+public struct ImVector_ImGuiOldColumnData {
+    public ImVector_ImGuiOldColumnData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiOldColumnData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiOldColumnData>()
+    }
+}
+
+// struct ImVector_ImGuiOldColumns
+@C
+public struct ImVector_ImGuiOldColumns {
+    public ImVector_ImGuiOldColumns(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiOldColumns>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiOldColumns>()
+    }
+}
+
+// struct ImVector_ImGuiPlatformMonitor
+@C
+public struct ImVector_ImGuiPlatformMonitor {
+    public ImVector_ImGuiPlatformMonitor(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiPlatformMonitor>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiPlatformMonitor>()
+    }
+}
+
+// struct ImVector_ImGuiPopupData
+@C
+public struct ImVector_ImGuiPopupData {
+    public ImVector_ImGuiPopupData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiPopupData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiPopupData>()
+    }
+}
+
+// struct ImVector_ImGuiPtrOrIndex
+@C
+public struct ImVector_ImGuiPtrOrIndex {
+    public ImVector_ImGuiPtrOrIndex(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiPtrOrIndex>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiPtrOrIndex>()
+    }
+}
+
+// struct ImVector_ImGuiSettingsHandler
+@C
+public struct ImVector_ImGuiSettingsHandler {
+    public ImVector_ImGuiSettingsHandler(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiSettingsHandler>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiSettingsHandler>()
+    }
+}
+
+// struct ImVector_ImGuiShrinkWidthItem
+@C
+public struct ImVector_ImGuiShrinkWidthItem {
+    public ImVector_ImGuiShrinkWidthItem(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiShrinkWidthItem>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiShrinkWidthItem>()
+    }
+}
+
+// struct ImVector_ImGuiStackLevelInfo
+@C
+public struct ImVector_ImGuiStackLevelInfo {
+    public ImVector_ImGuiStackLevelInfo(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiStackLevelInfo>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiStackLevelInfo>()
+    }
+}
+
+// struct ImVector_ImGuiStoragePair
+@C
+public struct ImVector_ImGuiStoragePair {
+    public ImVector_ImGuiStoragePair(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiStoragePair>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiStoragePair>()
+    }
+}
+
+// struct ImVector_ImGuiStyleMod
+@C
+public struct ImVector_ImGuiStyleMod {
+    public ImVector_ImGuiStyleMod(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiStyleMod>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiStyleMod>()
+    }
+}
+
+// struct ImVector_ImGuiTabBar
+@C
+public struct ImVector_ImGuiTabBar {
+    public ImVector_ImGuiTabBar(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTabBar>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTabBar>()
+    }
+}
+
+// struct ImVector_ImGuiTabItem
+@C
+public struct ImVector_ImGuiTabItem {
+    public ImVector_ImGuiTabItem(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTabItem>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTabItem>()
+    }
+}
+
+// struct ImVector_ImGuiTable
+@C
+public struct ImVector_ImGuiTable {
+    public ImVector_ImGuiTable(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTable>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTable>()
+    }
+}
+
+// struct ImVector_ImGuiTableColumnSortSpecs
+@C
+public struct ImVector_ImGuiTableColumnSortSpecs {
+    public ImVector_ImGuiTableColumnSortSpecs(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTableColumnSortSpecs>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTableColumnSortSpecs>()
+    }
+}
+
+// struct ImVector_ImGuiTableHeaderData
+@C
+public struct ImVector_ImGuiTableHeaderData {
+    public ImVector_ImGuiTableHeaderData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTableHeaderData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTableHeaderData>()
+    }
+}
+
+// struct ImVector_ImGuiTableInstanceData
+@C
+public struct ImVector_ImGuiTableInstanceData {
+    public ImVector_ImGuiTableInstanceData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTableInstanceData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTableInstanceData>()
+    }
+}
+
+// struct ImVector_ImGuiTableTempData
+@C
+public struct ImVector_ImGuiTableTempData {
+    public ImVector_ImGuiTableTempData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTableTempData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTableTempData>()
+    }
+}
+
+// struct ImVector_ImGuiTextRange
+@C
+public struct ImVector_ImGuiTextRange {
+    public ImVector_ImGuiTextRange(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiTextRange>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiTextRange>()
+    }
+}
+
+// struct ImVector_ImGuiViewportPtr
+@C
+public struct ImVector_ImGuiViewportPtr {
+    public ImVector_ImGuiViewportPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<ImGuiViewport>>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CPointer<ImGuiViewport>>()
+    }
+}
+
+// struct ImVector_ImGuiViewportPPtr
+@C
+public struct ImVector_ImGuiViewportPPtr {
+    public ImVector_ImGuiViewportPPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<ImGuiViewportP>>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CPointer<ImGuiViewportP>>()
+    }
+}
+
+// struct ImVector_ImGuiWindowPtr
+@C
+public struct ImVector_ImGuiWindowPtr {
+    public ImVector_ImGuiWindowPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<ImGuiWindow>>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CPointer<ImGuiWindow>>()
+    }
+}
+
+// struct ImVector_ImGuiWindowStackData
+@C
+public struct ImVector_ImGuiWindowStackData {
+    public ImVector_ImGuiWindowStackData(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImGuiWindowStackData>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImGuiWindowStackData>()
+    }
+}
+
+// struct ImVector_ImTextureID
+@C
+public struct ImVector_ImTextureID {
+    public ImVector_ImTextureID(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImTextureID>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImTextureID>()
+    }
+}
+
+// struct ImVector_ImU32
+@C
+public struct ImVector_ImU32 {
+    public ImVector_ImU32(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImU32>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImU32>()
+    }
+}
+
+// struct ImVector_ImVec2
+@C
+public struct ImVector_ImVec2 {
+    public ImVector_ImVec2(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImVec2>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImVec2>()
+    }
+}
+
+// struct ImVector_ImVec4
+@C
+public struct ImVector_ImVec4 {
+    public ImVector_ImVec4(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImVec4>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImVec4>()
+    }
+}
+
+// struct ImVector_ImWchar
+@C
+public struct ImVector_ImWchar {
+    public ImVector_ImWchar(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<ImWchar>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<ImWchar>()
+    }
+}
+
+// struct ImVector_char
+@C
+public struct ImVector_char {
+    public ImVector_char(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CString) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CString(CPointer<UInt8>())
+    }
+}
+
+// struct ImVector_const_charPtr
+@C
+public struct ImVector_const_charPtr {
+    public ImVector_const_charPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CString>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<CString>()
+    }
+}
+
+// struct ImVector_float
+@C
+public struct ImVector_float {
+    public ImVector_float(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<Float32>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<Float32>()
+    }
+}
+
+// struct ImVector_int
+@C
+public struct ImVector_int {
+    public ImVector_int(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<Int32>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<Int32>()
+    }
+}
+
+// struct ImVector_unsigned_char
+@C
+public struct ImVector_unsigned_char {
+    public ImVector_unsigned_char(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<UInt8>) {
+    }
+
+    public init() {
+        Size = 0
+        Capacity = 0
+        Data = CPointer<UInt8>()
     }
 }

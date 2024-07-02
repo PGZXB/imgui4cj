@@ -5,7 +5,7 @@
 
 package capi
 
-type ImBitArrayForNamedKeys = ImBitArray<ImGuiKey_NamedKey_COUNT,-ImGuiKey_NamedKey_BEGIN>
+type ImBitArrayForNamedKeys = ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN
 type ImBitArrayPtr = CPointer<ImU32>
 type ImDrawCallback = CFunc<(parent_list: CPointer<ImDrawList>, cmd: CPointer<ImDrawCmd>) -> Unit>
 type ImDrawFlags = Int32

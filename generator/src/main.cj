@@ -4,6 +4,14 @@ from std import fs.*
 from std import argopt.*
 from encoding import json.*
 
+extend ArrayList<T> {
+    operator func +(other: Collection<T>): ArrayList<T> {
+        let result = this.clone()
+        result.appendAll(other)
+        return result
+    }
+}
+
 main(args: Array<String>): Int64 {
     let argopt = ArgOpt(
         args,
@@ -39,6 +47,33 @@ main(args: Array<String>): Int64 {
     genEnumsCode(enumsCodeFilename, pkgName, enumDefs)
     println("Generated cimgui enums -> ${enumsCodeFilename}")
 
+    // Construct global constant table (only from enum now)
+    let globalConstants = HashMap<String, String>()
+    for (def in enumDefs) {
+        for (val in def.values) {
+            globalConstants.put(val.name, val.calcValue.toString())
+        }
+    }
+
+    // Spec cimgui template structs
+    let templStructDefs = parseTemplateStructsJson(
+        structsAndEnumsJson["templated_structs"],
+        structsAndEnumsJson["typenames"]
+    )
+    let templateSpecOnes = parseTemplateSpecTypenamesJson(structsAndEnumsJson["templates_done"])
+    let templateSpecOneStructDefs = ArrayList<StructDef>()
+    let template2SepcOne = HashMap<String, String>(); // used to update typeAlias
+    for (tsDef in templStructDefs) {
+        if (let Some(ones) <- templateSpecOnes.get(tsDef.name)) {
+            for (tSpecOne in ones) {
+                let specStructCxxName = tsDef.getSpecStructCxxName(tSpecOne)
+                let specStructDef = tsDef.specialize(tSpecOne)
+                template2SepcOne.put(specStructCxxName, specStructDef.name)
+                templateSpecOneStructDefs.append(specStructDef)
+            }
+        }
+    }
+
     // Consutuct type alias map
     let typeAlias = HashMap<String, CjType>()
     //// 1. typedefs
@@ -47,18 +82,21 @@ main(args: Array<String>): Int64 {
             "ImGuiErrorLogCallback") {
             continue // SKIP the four
         }
-        typeAlias.put(d.alias, CjType.fromCType(d.typename))
+        typeAlias.put(d.alias, CjType.fromCType(template2SepcOne.get(d.typename) ?? d.typename))
     }
     /// 2. enums
     for (e in enumDefs) {
         typeAlias.put(e.name, Int32Type)
     }
 
+    // Prepare cimgui structs
+    let structDefs = parseStructsJson(structsAndEnumsJson["structs"])
+
     // Generate cimgui structs -> src/capi/structs.cj
     let structsCodeFilename = "${outputDir}/structs.cj"
     println("Generating cimgui structs -> ${structsCodeFilename} ...")
-    let structDefs = parseStructsJson(structsAndEnumsJson["structs"])
-    genStructsCode(structsCodeFilename, pkgName, structDefs, typeAlias: typeAlias)
+    genStructsCode(structsCodeFilename, pkgName, structDefs + templateSpecOneStructDefs, typeAlias: typeAlias,
+        globalConstants: globalConstants)
     println("Generated cimgui structs -> ${structsCodeFilename}")
 
     return 0
