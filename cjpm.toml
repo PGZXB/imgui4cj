@@ -12,6 +12,5 @@
   version = "1.0.0"
   package-configuration = {}
 
-# [ffi.c]
-#   cimgui = { path = "src/libs" }
-#   cimgui_impl = { path = "src/libs" }
+[ffi.c]
+  cimgui = { path = "src/libs" }
