@@ -154,9 +154,6 @@ enum CjType <: ToString {
             case VArrayType(ty, size) => "${this}(item: ${ty.getDefaultValueLiteral(typeAlias: typeAlias)})"
             case StructType(name) => "${this}()"
             case TypeAlias(name) => if (let Some(td) <- typeAlias) {
-                if (let None <- td.get(name)) {
-                    println("TODO: ${name} --> ${td.get(name)}")
-                }
                 td.get(name)?.getDefaultValueLiteral(typeAlias: typeAlias) ?? "${this}()"
             } else {
                 "${this}()"
