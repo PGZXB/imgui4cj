@@ -125,6 +125,8 @@ func parseStructsJson(structsJson: JsonValue): ArrayList<StructDef> {
     let result = ArrayList<StructDef>()
 
     for ((k, vJ) in structsJson.asObject().getFields()) {
+        var hasBitfield = false
+        var hasUnionMember = false
         let values = ArrayList<StructMemberDef>()
         for (vDefJ in vJ.asArray().getItems()) {
             let vDefJObj = vDefJ.asObject()
@@ -137,8 +139,18 @@ func parseStructsJson(structsJson: JsonValue): ArrayList<StructDef> {
                     vDefJObj.get("bitfield")?.asString().getValue(),
                 )
             )
+            if (values[values.size - 1].bitfield.isSome()) {
+                hasBitfield = true
+            }
+            if (values[values.size - 1].ty.startsWith("union {")) {
+                hasUnionMember = true
+            }
         }
-        result.append(StructDef(k, values))
+
+        // Skip some structs which are not supported by Cangjie's @C now
+        if (!hasBitfield && !hasUnionMember) {
+            result.append(StructDef(k, values))
+        }
     }
 
     return result
