@@ -28,6 +28,7 @@ type ImGuiDataType = Int32
 type ImGuiDebugLogFlags = Int32
 type ImGuiDockNodeFlags = Int32
 type ImGuiDragDropFlags = Int32
+type ImGuiErrorLogCallback = CPointer<Unit>
 type ImGuiFocusRequestFlags = Int32
 type ImGuiFocusedFlags = Int32
 type ImGuiHoveredFlags = Int32
