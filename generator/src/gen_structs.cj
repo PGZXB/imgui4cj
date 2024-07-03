@@ -1,26 +1,18 @@
 package cimgui_generator
 
-from std import collection.{HashMap, withIndex, forEach as cForSeach, map as cMap}
+from std import collection.{HashMap, withIndex, forEach}
 from std import io.{OutputStream, StringWriter}
 from std import fs.{File, OpenOption}
 from std import convert.*
 from std import ast.*
 
-func forEach<T>(iter: Iterable<T>, visitor: (T) -> Unit) {
-    cForSeach(visitor)(iter)
-}
-
-func map<T, D>(iter: Iterable<T>, transform: (T) -> D): Iterable<D> {
-    return cMap(transform)(iter)
-}
-
 extend ArrayList<T> {
     static func fromIterator(iter: Iterable<T>): ArrayList<T> {
         let result = ArrayList<T>()
-        forEach(iter) {
+        iter |> forEach {
             val => result.append(val)
         }
-        result
+        return result
     }
 }
 
