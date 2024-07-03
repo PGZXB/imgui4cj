@@ -32,9 +32,13 @@ func genTypeDefsCode<T>(os: StringWriter<T>, pkgName: String, defs: ArrayList<Ty
     os.writeln("package ${pkgName}")
     os.writeln()
     for (def in defs) {
-        if (def.alias == "const_iterator" || def.alias == "iterator" || def.alias == "value_type" || def.alias ==
-            "ImGuiErrorLogCallback") {
-            continue // SKIP the four
+        if (def.alias == "const_iterator" || def.alias == "iterator" || def.alias == "value_type") {
+            continue // SKIP the three
+        }
+        if (def.alias == "ImGuiErrorLogCallback") {
+            // Cangjie CFunc template type does not support `...` argument now
+            os.writeln("type ImGuiErrorLogCallback = CPointer<Unit>")
+            continue
         }
         let cjType = CjType.fromCType(def.typename)
         match (cjType) {
