@@ -40,7 +40,6 @@ let CJ_BASIC_TYPE_OF_C_TYPE = HashMap<String, CjType>(
         ("size_t", UIntNativeType),
         ("float", Float32Type),
         ("double", Float64Type),
-        ("const char*", CStringType),
         ("char*", CStringType),
         ("FILE", UnitType) // FILE* -> CPointer<Unit>
     ]
@@ -172,7 +171,22 @@ enum CjType <: ToString {
     }
 
     private static func tryGetCjTypeOfBuiltinCType(ty: String): ?CjType {
-        return CJ_BASIC_TYPE_OF_C_TYPE.get(ty)
+        return CJ_BASIC_TYPE_OF_C_TYPE.get(ty) ?? CJ_BASIC_TYPE_OF_C_TYPE.get(ty)
+    }
+
+    private static func tryGetCjTypeOfCArrayType(ty: String): ?CjType {
+        if (!ty.endsWith("]") || ty.count("]") != 1 || ty.count("[") != 1) {
+            return None
+        }
+
+        let leftPPos = ty.indexOf("[").getOrThrow()
+        let size = ty[leftPPos + 1..].trimRight("]")
+        let cjTy = fromCType(ty[0..leftPPos])
+        return if (size.isEmpty()) {
+            cjTy.getPointer()
+        } else {
+            cjTy.getVArray(Int64.parse(size))
+        }
     }
 
     private static func tryGetCjTypeOfCPointer(ty: String): ?CjType {
@@ -217,9 +231,10 @@ enum CjType <: ToString {
         )
     }
 
-    private static func getCjTypeOfCType(ty: String, size!: ?Int64 = None): CjType {
-        let cjTy: CjType = tryGetCjTypeOfBuiltinCType(ty) ?? tryGetCjTypeOfCPointer(ty) ?? tryGetCjTypeOfCFunc(ty) ??
-            tryGetCjTypeOfCExplicitStructType(ty) ?? TypeAlias(ty)
+    private static func getCjTypeOfCType(_ty: String, size!: ?Int64 = None): CjType {
+        let ty = _ty.replace("const ", "").trimAscii().replace(" const", "").trimAscii()
+        let cjTy = tryGetCjTypeOfBuiltinCType(ty) ?? tryGetCjTypeOfCArrayType(ty) ?? tryGetCjTypeOfCPointer(ty) ??
+            tryGetCjTypeOfCFunc(ty) ?? tryGetCjTypeOfCExplicitStructType(ty) ?? TypeAlias(ty)
 
         return match (size) {
             case Some(size) => cjTy.getVArray(size)

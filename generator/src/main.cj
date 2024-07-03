@@ -26,7 +26,7 @@ main(args: Array<String>): Int64 {
         ]
     )
 
-    // let definitionsJson = readJsonFile(argopt.getArg("definitions-json").getOrThrow()).asObject()
+    let definitionsJson = readJsonFile(argopt.getArg("definitions-json").getOrThrow()).asObject()
     // let implDefinitionsJson = readJsonFile(argopt.getArg("impl-definitions-json").getOrThrow()).asObject()
     let structsAndEnumsJson = readJsonFile(argopt.getArg("structs-and-enums-json").getOrThrow()).asObject()
     let typedefsDictJson = readJsonFile(argopt.getArg("typedefs-dict-json").getOrThrow()).asObject()
@@ -113,6 +113,13 @@ main(args: Array<String>): Int64 {
     println("Generating cimgui undefined structs -> ${undefStructsCodeFilename} ...")
     genTypeDefsCode(undefStructsCodeFilename, pkgName, undefStructTypedefs)
     println("Generated cimgui undefined structs -> ${undefStructsCodeFilename}")
+
+    // Generate cimgui functions(only decl) -> src/capi/imgui.cj
+    let funcsCodeFilename = "${outputDir}/imgui.cj"
+    println("Generating cimgui functions(only decl) -> ${funcsCodeFilename} ...")
+    let funcsSigs = parseFuncsJson(definitionsJson)
+    genFuncsCode(funcsCodeFilename, pkgName, funcsSigs)
+    println("Generated cimgui functions(only decl) -> ${funcsCodeFilename}")
 
     return 0
 }
