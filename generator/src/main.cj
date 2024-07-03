@@ -89,15 +89,30 @@ main(args: Array<String>): Int64 {
         typeAlias.put(e.name, Int32Type)
     }
 
-    // Prepare cimgui structs
-    let structDefs = parseStructsJson(structsAndEnumsJson["structs"])
-
     // Generate cimgui structs -> src/capi/structs.cj
     let structsCodeFilename = "${outputDir}/structs.cj"
     println("Generating cimgui structs -> ${structsCodeFilename} ...")
-    genStructsCode(structsCodeFilename, pkgName, structDefs + templateSpecOneStructDefs, typeAlias: typeAlias,
-        globalConstants: globalConstants)
+    let structDefs = parseStructsJson(structsAndEnumsJson["structs"]) + templateSpecOneStructDefs
+    genStructsCode(structsCodeFilename, pkgName, structDefs, typeAlias: typeAlias, globalConstants: globalConstants)
     println("Generated cimgui structs -> ${structsCodeFilename}")
+
+    // Check all types & Construct typedefs for undefined cimgui structs
+    let undefStructTypedefs = ArrayList<TypeDef>()
+    let definedStructNames = HashSet<String>(structDefs.size, {i => structDefs[i].name})
+    for ((alias, ty) in typeAlias) {
+        match (ty) {
+            case StructType(name) => if (!definedStructNames.contains(name)) {
+                undefStructTypedefs.append(TypeDef(alias, "void"))
+            }
+            case _ => continue
+        }
+    }
+
+    // Generate cimgui undefined structs -> src/capi/undef_structs.cj
+    let undefStructsCodeFilename = "${outputDir}/undef_structs.cj"
+    println("Generating cimgui undefined structs -> ${undefStructsCodeFilename} ...")
+    genTypeDefsCode(undefStructsCodeFilename, pkgName, undefStructTypedefs)
+    println("Generated cimgui undefined structs -> ${undefStructsCodeFilename}")
 
     return 0
 }
