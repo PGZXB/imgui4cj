@@ -114,8 +114,8 @@ main(args: Array<String>): Int64 {
     genTypeDefsCode(undefStructsCodeFilename, pkgName, undefStructTypedefs)
     println("Generated cimgui undefined structs -> ${undefStructsCodeFilename}")
 
-    // Generate cimgui functions(only decl) -> src/capi/imgui.cj
-    let funcsCodeFilename = "${outputDir}/imgui.cj"
+    // Generate cimgui functions(only decl) -> src/capi/cimgui.cj
+    let funcsCodeFilename = "${outputDir}/cimgui.cj"
     println("Generating cimgui functions(only decl) -> ${funcsCodeFilename} ...")
     let funcsSigs = parseFuncsJson(definitionsJson)
     genFuncsCode(funcsCodeFilename, pkgName, funcsSigs)
