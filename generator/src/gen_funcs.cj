@@ -68,19 +68,28 @@ func genFuncsCode<T>(os: StringWriter<T>, pkgName: String, funcs: ArrayList<Func
     os.writeln("package ${pkgName}")
     os.writeln()
     for ((i, fn) in withIndex(funcs)) {
-        os.writeln("@C")
-        os.write("foreign func ${fn.name}(")
+        let fnSb = StringBuilder()
+        var hasVaList = false
+        fnSb.append("foreign func ${fn.name}(")
         for ((i, p) in withIndex(fn.params)) {
-            if ((p.name == "..." && p.ty == "...") || p.ty == "va_list") {
-                os.write("...")
+            if (p.ty == "va_list") {
+                hasVaList = true
+            }
+            if (p.name == "..." && p.ty == "...") {
+                fnSb.append("...")
             } else {
-                os.write("${getValidCjIdentifier(p.name)}: ${CjType.fromCType(p.ty)}")
+                fnSb.append("${getValidCjIdentifier(p.name)}: ${CjType.fromCType(p.ty)}")
             }
             if (i != fn.params.size - 1) {
-                os.write(", ")
+                fnSb.append(", ")
             }
         }
-        os.writeln("): ${CjType.fromCType(fn.retType)}")
+        fnSb.append("): ${CjType.fromCType(fn.retType)}")
+        if (hasVaList) {
+            os.writeln("// Cangjie does not support `va_list`")
+            os.write("// ")
+        }
+        os.writeln(fnSb.toString())
         if (i != funcs.size - 1) {
             os.writeln()
         }

@@ -5,4169 +5,2797 @@
 
 package capi
 
-@C
 foreign func ImBitVector_Clear(self: CPointer<ImBitVector>): Unit
 
-@C
 foreign func ImBitVector_ClearBit(self: CPointer<ImBitVector>, n: Int32): Unit
 
-@C
 foreign func ImBitVector_Create(self: CPointer<ImBitVector>, sz: Int32): Unit
 
-@C
 foreign func ImBitVector_SetBit(self: CPointer<ImBitVector>, n: Int32): Unit
 
-@C
 foreign func ImBitVector_TestBit(self: CPointer<ImBitVector>, n: Int32): Bool
 
-@C
 foreign func ImColor_HSV(pOut: CPointer<ImColor>, h: Float32, s: Float32, v: Float32, a: Float32): Unit
 
-@C
 foreign func ImColor_ImColor_Nil(): CPointer<ImColor>
 
-@C
 foreign func ImColor_ImColor_Float(r: Float32, g: Float32, b: Float32, a: Float32): CPointer<ImColor>
 
-@C
 foreign func ImColor_ImColor_Vec4(col: ImVec4): CPointer<ImColor>
 
-@C
 foreign func ImColor_ImColor_Int(r: Int32, g: Int32, b: Int32, a: Int32): CPointer<ImColor>
 
-@C
 foreign func ImColor_ImColor_U32(rgba: ImU32): CPointer<ImColor>
 
-@C
 foreign func ImColor_SetHSV(self: CPointer<ImColor>, h: Float32, s: Float32, v: Float32, a: Float32): Unit
 
-@C
 foreign func ImColor_destroy(self: CPointer<ImColor>): Unit
 
-@C
 foreign func ImDrawCmd_GetTexID(self: CPointer<ImDrawCmd>): ImTextureID
 
-@C
 foreign func ImDrawCmd_ImDrawCmd(): CPointer<ImDrawCmd>
 
-@C
 foreign func ImDrawCmd_destroy(self: CPointer<ImDrawCmd>): Unit
 
-@C
 foreign func ImDrawDataBuilder_ImDrawDataBuilder(): CPointer<ImDrawDataBuilder>
 
-@C
 foreign func ImDrawDataBuilder_destroy(self: CPointer<ImDrawDataBuilder>): Unit
 
-@C
 foreign func ImDrawData_AddDrawList(self: CPointer<ImDrawData>, draw_list: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawData_Clear(self: CPointer<ImDrawData>): Unit
 
-@C
 foreign func ImDrawData_DeIndexAllBuffers(self: CPointer<ImDrawData>): Unit
 
-@C
 foreign func ImDrawData_ImDrawData(): CPointer<ImDrawData>
 
-@C
 foreign func ImDrawData_ScaleClipRects(self: CPointer<ImDrawData>, fb_scale: ImVec2): Unit
 
-@C
 foreign func ImDrawData_destroy(self: CPointer<ImDrawData>): Unit
 
-@C
 foreign func ImDrawListSharedData_ImDrawListSharedData(): CPointer<ImDrawListSharedData>
 
-@C
 foreign func ImDrawListSharedData_SetCircleTessellationMaxError(self: CPointer<ImDrawListSharedData>, max_error: Float32): Unit
 
-@C
 foreign func ImDrawListSharedData_destroy(self: CPointer<ImDrawListSharedData>): Unit
 
-@C
 foreign func ImDrawListSplitter_Clear(self: CPointer<ImDrawListSplitter>): Unit
 
-@C
 foreign func ImDrawListSplitter_ClearFreeMemory(self: CPointer<ImDrawListSplitter>): Unit
 
-@C
 foreign func ImDrawListSplitter_ImDrawListSplitter(): CPointer<ImDrawListSplitter>
 
-@C
 foreign func ImDrawListSplitter_Merge(self: CPointer<ImDrawListSplitter>, draw_list: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawListSplitter_SetCurrentChannel(self: CPointer<ImDrawListSplitter>, draw_list: CPointer<ImDrawList>, channel_idx: Int32): Unit
 
-@C
 foreign func ImDrawListSplitter_Split(self: CPointer<ImDrawListSplitter>, draw_list: CPointer<ImDrawList>, count: Int32): Unit
 
-@C
 foreign func ImDrawListSplitter_destroy(self: CPointer<ImDrawListSplitter>): Unit
 
-@C
 foreign func ImDrawList_AddBezierCubic(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_AddBezierQuadratic(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_AddCallback(self: CPointer<ImDrawList>, callback: ImDrawCallback, callback_data: CPointer<Unit>): Unit
 
-@C
 foreign func ImDrawList_AddCircle(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddCircleFilled(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_AddConcavePolyFilled(self: CPointer<ImDrawList>, points: CPointer<ImVec2>, num_points: Int32, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddConvexPolyFilled(self: CPointer<ImDrawList>, points: CPointer<ImVec2>, num_points: Int32, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddDrawCmd(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_AddEllipse(self: CPointer<ImDrawList>, center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddEllipseFilled(self: CPointer<ImDrawList>, center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_AddImage(self: CPointer<ImDrawList>, user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddImageQuad(self: CPointer<ImDrawList>, user_texture_id: ImTextureID, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, uv1: ImVec2, uv2: ImVec2, uv3: ImVec2, uv4: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddImageRounded(self: CPointer<ImDrawList>, user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit
 
-@C
 foreign func ImDrawList_AddLine(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, col: ImU32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddNgon(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddNgonFilled(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_AddPolyline(self: CPointer<ImDrawList>, points: CPointer<ImVec2>, num_points: Int32, col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddQuad(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddQuadFilled(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddRect(self: CPointer<ImDrawList>, p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddRectFilled(self: CPointer<ImDrawList>, p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit
 
-@C
 foreign func ImDrawList_AddRectFilledMultiColor(self: CPointer<ImDrawList>, p_min: ImVec2, p_max: ImVec2, col_upr_left: ImU32, col_upr_right: ImU32, col_bot_right: ImU32, col_bot_left: ImU32): Unit
 
-@C
 foreign func ImDrawList_AddText_Vec2(self: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString): Unit
 
-@C
 foreign func ImDrawList_AddText_FontPtr(self: CPointer<ImDrawList>, font: CPointer<ImFont>, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip_rect: CPointer<ImVec4>): Unit
 
-@C
 foreign func ImDrawList_AddTriangle(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_AddTriangleFilled(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_ChannelsMerge(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_ChannelsSetCurrent(self: CPointer<ImDrawList>, n: Int32): Unit
 
-@C
 foreign func ImDrawList_ChannelsSplit(self: CPointer<ImDrawList>, count: Int32): Unit
 
-@C
 foreign func ImDrawList_CloneOutput(self: CPointer<ImDrawList>): CPointer<ImDrawList>
 
-@C
 foreign func ImDrawList_GetClipRectMax(pOut: CPointer<ImVec2>, self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_GetClipRectMin(pOut: CPointer<ImVec2>, self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_ImDrawList(shared_data: CPointer<ImDrawListSharedData>): CPointer<ImDrawList>
 
-@C
 foreign func ImDrawList_PathArcTo(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_PathArcToFast(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, a_min_of_12: Int32, a_max_of_12: Int32): Unit
 
-@C
 foreign func ImDrawList_PathBezierCubicCurveTo(self: CPointer<ImDrawList>, p2: ImVec2, p3: ImVec2, p4: ImVec2, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_PathBezierQuadraticCurveTo(self: CPointer<ImDrawList>, p2: ImVec2, p3: ImVec2, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_PathClear(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_PathEllipticalArcTo(self: CPointer<ImDrawList>, center: ImVec2, radius: ImVec2, rot: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList_PathFillConcave(self: CPointer<ImDrawList>, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PathFillConvex(self: CPointer<ImDrawList>, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PathLineTo(self: CPointer<ImDrawList>, pos: ImVec2): Unit
 
-@C
 foreign func ImDrawList_PathLineToMergeDuplicate(self: CPointer<ImDrawList>, pos: ImVec2): Unit
 
-@C
 foreign func ImDrawList_PathRect(self: CPointer<ImDrawList>, rect_min: ImVec2, rect_max: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit
 
-@C
 foreign func ImDrawList_PathStroke(self: CPointer<ImDrawList>, col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit
 
-@C
 foreign func ImDrawList_PopClipRect(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_PopTextureID(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_PrimQuadUV(self: CPointer<ImDrawList>, a: ImVec2, b: ImVec2, c: ImVec2, d: ImVec2, uv_a: ImVec2, uv_b: ImVec2, uv_c: ImVec2, uv_d: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PrimRect(self: CPointer<ImDrawList>, a: ImVec2, b: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PrimRectUV(self: CPointer<ImDrawList>, a: ImVec2, b: ImVec2, uv_a: ImVec2, uv_b: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PrimReserve(self: CPointer<ImDrawList>, idx_count: Int32, vtx_count: Int32): Unit
 
-@C
 foreign func ImDrawList_PrimUnreserve(self: CPointer<ImDrawList>, idx_count: Int32, vtx_count: Int32): Unit
 
-@C
 foreign func ImDrawList_PrimVtx(self: CPointer<ImDrawList>, pos: ImVec2, uv: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PrimWriteIdx(self: CPointer<ImDrawList>, idx: ImDrawIdx): Unit
 
-@C
 foreign func ImDrawList_PrimWriteVtx(self: CPointer<ImDrawList>, pos: ImVec2, uv: ImVec2, col: ImU32): Unit
 
-@C
 foreign func ImDrawList_PushClipRect(self: CPointer<ImDrawList>, clip_rect_min: ImVec2, clip_rect_max: ImVec2, intersect_with_current_clip_rect: Bool): Unit
 
-@C
 foreign func ImDrawList_PushClipRectFullScreen(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_PushTextureID(self: CPointer<ImDrawList>, texture_id: ImTextureID): Unit
 
-@C
 foreign func ImDrawList__CalcCircleAutoSegmentCount(self: CPointer<ImDrawList>, radius: Float32): Int32
 
-@C
 foreign func ImDrawList__ClearFreeMemory(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__OnChangedClipRect(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__OnChangedTextureID(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__OnChangedVtxOffset(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__PathArcToFastEx(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, a_min_sample: Int32, a_max_sample: Int32, a_step: Int32): Unit
 
-@C
 foreign func ImDrawList__PathArcToN(self: CPointer<ImDrawList>, center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit
 
-@C
 foreign func ImDrawList__PopUnusedDrawCmd(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__ResetForNewFrame(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList__TryMergeDrawCmds(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImDrawList_destroy(self: CPointer<ImDrawList>): Unit
 
-@C
 foreign func ImFontAtlasCustomRect_ImFontAtlasCustomRect(): CPointer<ImFontAtlasCustomRect>
 
-@C
 foreign func ImFontAtlasCustomRect_IsPacked(self: CPointer<ImFontAtlasCustomRect>): Bool
 
-@C
 foreign func ImFontAtlasCustomRect_destroy(self: CPointer<ImFontAtlasCustomRect>): Unit
 
-@C
 foreign func ImFontAtlas_AddCustomRectFontGlyph(self: CPointer<ImFontAtlas>, font: CPointer<ImFont>, id: ImWchar, width: Int32, height: Int32, advance_x: Float32, offset: ImVec2): Int32
 
-@C
 foreign func ImFontAtlas_AddCustomRectRegular(self: CPointer<ImFontAtlas>, width: Int32, height: Int32): Int32
 
-@C
 foreign func ImFontAtlas_AddFont(self: CPointer<ImFontAtlas>, font_cfg: CPointer<ImFontConfig>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_AddFontDefault(self: CPointer<ImFontAtlas>, font_cfg: CPointer<ImFontConfig>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_AddFontFromMemoryCompressedTTF(self: CPointer<ImFontAtlas>, compressed_font_data: CPointer<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_AddFontFromMemoryTTF(self: CPointer<ImFontAtlas>, font_data: CPointer<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
-@C
 foreign func ImFontAtlas_Build(self: CPointer<ImFontAtlas>): Bool
 
-@C
 foreign func ImFontAtlas_CalcCustomRectUV(self: CPointer<ImFontAtlas>, rect: CPointer<ImFontAtlasCustomRect>, out_uv_min: CPointer<ImVec2>, out_uv_max: CPointer<ImVec2>): Unit
 
-@C
 foreign func ImFontAtlas_Clear(self: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func ImFontAtlas_ClearFonts(self: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func ImFontAtlas_ClearInputData(self: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func ImFontAtlas_ClearTexData(self: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func ImFontAtlas_GetCustomRectByIndex(self: CPointer<ImFontAtlas>, index: Int32): CPointer<ImFontAtlasCustomRect>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesChineseFull(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesCyrillic(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesDefault(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesGreek(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesJapanese(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesKorean(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesThai(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetGlyphRangesVietnamese(self: CPointer<ImFontAtlas>): CPointer<ImWchar>
 
-@C
 foreign func ImFontAtlas_GetMouseCursorTexData(self: CPointer<ImFontAtlas>, cursor: ImGuiMouseCursor, out_offset: CPointer<ImVec2>, out_size: CPointer<ImVec2>, out_uv_border: VArray<ImVec2, $2>, out_uv_fill: VArray<ImVec2, $2>): Bool
 
-@C
 foreign func ImFontAtlas_GetTexDataAsAlpha8(self: CPointer<ImFontAtlas>, out_pixels: CPointer<CPointer<UInt8>>, out_width: CPointer<Int32>, out_height: CPointer<Int32>, out_bytes_per_pixel: CPointer<Int32>): Unit
 
-@C
 foreign func ImFontAtlas_GetTexDataAsRGBA32(self: CPointer<ImFontAtlas>, out_pixels: CPointer<CPointer<UInt8>>, out_width: CPointer<Int32>, out_height: CPointer<Int32>, out_bytes_per_pixel: CPointer<Int32>): Unit
 
-@C
 foreign func ImFontAtlas_ImFontAtlas(): CPointer<ImFontAtlas>
 
-@C
 foreign func ImFontAtlas_IsBuilt(self: CPointer<ImFontAtlas>): Bool
 
-@C
 foreign func ImFontAtlas_SetTexID(self: CPointer<ImFontAtlas>, id: ImTextureID): Unit
 
-@C
 foreign func ImFontAtlas_destroy(self: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func ImFontConfig_ImFontConfig(): CPointer<ImFontConfig>
 
-@C
 foreign func ImFontConfig_destroy(self: CPointer<ImFontConfig>): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_AddChar(self: CPointer<ImFontGlyphRangesBuilder>, c: ImWchar): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_AddRanges(self: CPointer<ImFontGlyphRangesBuilder>, ranges: CPointer<ImWchar>): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CString, text_end: CString): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_BuildRanges(self: CPointer<ImFontGlyphRangesBuilder>, out_ranges: CPointer<ImVector_ImWchar>): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_Clear(self: CPointer<ImFontGlyphRangesBuilder>): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_GetBit(self: CPointer<ImFontGlyphRangesBuilder>, n: UIntNative): Bool
 
-@C
 foreign func ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder(): CPointer<ImFontGlyphRangesBuilder>
 
-@C
 foreign func ImFontGlyphRangesBuilder_SetBit(self: CPointer<ImFontGlyphRangesBuilder>, n: UIntNative): Unit
 
-@C
 foreign func ImFontGlyphRangesBuilder_destroy(self: CPointer<ImFontGlyphRangesBuilder>): Unit
 
-@C
 foreign func ImFont_AddGlyph(self: CPointer<ImFont>, src_cfg: CPointer<ImFontConfig>, c: ImWchar, x0: Float32, y0: Float32, x1: Float32, y1: Float32, u0: Float32, v0: Float32, u1: Float32, v1: Float32, advance_x: Float32): Unit
 
-@C
 foreign func ImFont_AddRemapChar(self: CPointer<ImFont>, dst: ImWchar, src: ImWchar, overwrite_dst: Bool): Unit
 
-@C
 foreign func ImFont_BuildLookupTable(self: CPointer<ImFont>): Unit
 
-@C
 foreign func ImFont_CalcTextSizeA(pOut: CPointer<ImVec2>, self: CPointer<ImFont>, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CString, text_end: CString, remaining: CPointer<CString>): Unit
 
-@C
 foreign func ImFont_CalcWordWrapPositionA(self: CPointer<ImFont>, scale: Float32, text: CString, text_end: CString, wrap_width: Float32): CString
 
-@C
 foreign func ImFont_ClearOutputData(self: CPointer<ImFont>): Unit
 
-@C
 foreign func ImFont_FindGlyph(self: CPointer<ImFont>, c: ImWchar): CPointer<ImFontGlyph>
 
-@C
 foreign func ImFont_FindGlyphNoFallback(self: CPointer<ImFont>, c: ImWchar): CPointer<ImFontGlyph>
 
-@C
 foreign func ImFont_GetCharAdvance(self: CPointer<ImFont>, c: ImWchar): Float32
 
-@C
 foreign func ImFont_GetDebugName(self: CPointer<ImFont>): CString
 
-@C
 foreign func ImFont_GrowIndex(self: CPointer<ImFont>, new_size: Int32): Unit
 
-@C
 foreign func ImFont_ImFont(): CPointer<ImFont>
 
-@C
 foreign func ImFont_IsGlyphRangeUnused(self: CPointer<ImFont>, c_begin: Int32, c_last: Int32): Bool
 
-@C
 foreign func ImFont_IsLoaded(self: CPointer<ImFont>): Bool
 
-@C
 foreign func ImFont_RenderChar(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, c: ImWchar): Unit
 
-@C
 foreign func ImFont_RenderText(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip: Bool): Unit
 
-@C
 foreign func ImFont_SetGlyphVisible(self: CPointer<ImFont>, c: ImWchar, visible: Bool): Unit
 
-@C
 foreign func ImFont_destroy(self: CPointer<ImFont>): Unit
 
-@C
 foreign func ImGuiComboPreviewData_ImGuiComboPreviewData(): CPointer<ImGuiComboPreviewData>
 
-@C
 foreign func ImGuiComboPreviewData_destroy(self: CPointer<ImGuiComboPreviewData>): Unit
 
-@C
 foreign func ImGuiContextHook_ImGuiContextHook(): CPointer<ImGuiContextHook>
 
-@C
 foreign func ImGuiContextHook_destroy(self: CPointer<ImGuiContextHook>): Unit
 
-@C
 foreign func ImGuiContext_ImGuiContext(shared_font_atlas: CPointer<ImFontAtlas>): CPointer<ImGuiContext>
 
-@C
 foreign func ImGuiContext_destroy(self: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func ImGuiDataVarInfo_GetVarPtr(self: CPointer<ImGuiDataVarInfo>, parent: CPointer<Unit>): CPointer<Unit>
 
-@C
 foreign func ImGuiDebugAllocInfo_ImGuiDebugAllocInfo(): CPointer<ImGuiDebugAllocInfo>
 
-@C
 foreign func ImGuiDebugAllocInfo_destroy(self: CPointer<ImGuiDebugAllocInfo>): Unit
 
-@C
 foreign func ImGuiDockContext_ImGuiDockContext(): CPointer<ImGuiDockContext>
 
-@C
 foreign func ImGuiDockContext_destroy(self: CPointer<ImGuiDockContext>): Unit
 
-@C
 foreign func ImGuiDockNode_ImGuiDockNode(id: ImGuiID): CPointer<ImGuiDockNode>
 
-@C
 foreign func ImGuiDockNode_IsCentralNode(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsDockSpace(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsEmpty(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsFloatingNode(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsHiddenTabBar(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsLeafNode(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsNoTabBar(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsRootNode(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_IsSplitNode(self: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func ImGuiDockNode_Rect(pOut: CPointer<ImRect>, self: CPointer<ImGuiDockNode>): Unit
 
-@C
 foreign func ImGuiDockNode_SetLocalFlags(self: CPointer<ImGuiDockNode>, flags: ImGuiDockNodeFlags): Unit
 
-@C
 foreign func ImGuiDockNode_UpdateMergedFlags(self: CPointer<ImGuiDockNode>): Unit
 
-@C
 foreign func ImGuiDockNode_destroy(self: CPointer<ImGuiDockNode>): Unit
 
-@C
 foreign func ImGuiIDStackTool_ImGuiIDStackTool(): CPointer<ImGuiIDStackTool>
 
-@C
 foreign func ImGuiIDStackTool_destroy(self: CPointer<ImGuiIDStackTool>): Unit
 
-@C
 foreign func ImGuiIO_AddFocusEvent(self: CPointer<ImGuiIO>, focused: Bool): Unit
 
-@C
 foreign func ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: Int32): Unit
 
-@C
 foreign func ImGuiIO_AddInputCharacterUTF16(self: CPointer<ImGuiIO>, c: ImWchar16): Unit
 
-@C
 foreign func ImGuiIO_AddInputCharactersUTF8(self: CPointer<ImGuiIO>, str: CString): Unit
 
-@C
 foreign func ImGuiIO_AddKeyAnalogEvent(self: CPointer<ImGuiIO>, key: ImGuiKey, down: Bool, v: Float32): Unit
 
-@C
 foreign func ImGuiIO_AddKeyEvent(self: CPointer<ImGuiIO>, key: ImGuiKey, down: Bool): Unit
 
-@C
 foreign func ImGuiIO_AddMouseButtonEvent(self: CPointer<ImGuiIO>, button: Int32, down: Bool): Unit
 
-@C
 foreign func ImGuiIO_AddMousePosEvent(self: CPointer<ImGuiIO>, x: Float32, y: Float32): Unit
 
-@C
 foreign func ImGuiIO_AddMouseSourceEvent(self: CPointer<ImGuiIO>, source: ImGuiMouseSource): Unit
 
-@C
 foreign func ImGuiIO_AddMouseViewportEvent(self: CPointer<ImGuiIO>, id: ImGuiID): Unit
 
-@C
 foreign func ImGuiIO_AddMouseWheelEvent(self: CPointer<ImGuiIO>, wheel_x: Float32, wheel_y: Float32): Unit
 
-@C
 foreign func ImGuiIO_ClearEventsQueue(self: CPointer<ImGuiIO>): Unit
 
-@C
 foreign func ImGuiIO_ClearInputKeys(self: CPointer<ImGuiIO>): Unit
 
-@C
 foreign func ImGuiIO_ImGuiIO(): CPointer<ImGuiIO>
 
-@C
 foreign func ImGuiIO_SetAppAcceptingEvents(self: CPointer<ImGuiIO>, accepting_events: Bool): Unit
 
-@C
 foreign func ImGuiIO_SetKeyEventNativeData(self: CPointer<ImGuiIO>, key: ImGuiKey, native_keycode: Int32, native_scancode: Int32, native_legacy_index: Int32): Unit
 
-@C
 foreign func ImGuiIO_destroy(self: CPointer<ImGuiIO>): Unit
 
-@C
 foreign func ImGuiInputEvent_ImGuiInputEvent(): CPointer<ImGuiInputEvent>
 
-@C
 foreign func ImGuiInputEvent_destroy(self: CPointer<ImGuiInputEvent>): Unit
 
-@C
 foreign func ImGuiInputTextCallbackData_ClearSelection(self: CPointer<ImGuiInputTextCallbackData>): Unit
 
-@C
 foreign func ImGuiInputTextCallbackData_DeleteChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, bytes_count: Int32): Unit
 
-@C
 foreign func ImGuiInputTextCallbackData_HasSelection(self: CPointer<ImGuiInputTextCallbackData>): Bool
 
-@C
 foreign func ImGuiInputTextCallbackData_ImGuiInputTextCallbackData(): CPointer<ImGuiInputTextCallbackData>
 
-@C
 foreign func ImGuiInputTextCallbackData_InsertChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, text: CString, text_end: CString): Unit
 
-@C
 foreign func ImGuiInputTextCallbackData_SelectAll(self: CPointer<ImGuiInputTextCallbackData>): Unit
 
-@C
 foreign func ImGuiInputTextCallbackData_destroy(self: CPointer<ImGuiInputTextCallbackData>): Unit
 
-@C
 foreign func ImGuiInputTextDeactivatedState_ClearFreeMemory(self: CPointer<ImGuiInputTextDeactivatedState>): Unit
 
-@C
 foreign func ImGuiInputTextDeactivatedState_ImGuiInputTextDeactivatedState(): CPointer<ImGuiInputTextDeactivatedState>
 
-@C
 foreign func ImGuiInputTextDeactivatedState_destroy(self: CPointer<ImGuiInputTextDeactivatedState>): Unit
 
-@C
 foreign func ImGuiInputTextState_ClearFreeMemory(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_ClearSelection(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_ClearText(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_CursorAnimReset(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_CursorClamp(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_GetCursorPos(self: CPointer<ImGuiInputTextState>): Int32
 
-@C
 foreign func ImGuiInputTextState_GetRedoAvailCount(self: CPointer<ImGuiInputTextState>): Int32
 
-@C
 foreign func ImGuiInputTextState_GetSelectionEnd(self: CPointer<ImGuiInputTextState>): Int32
 
-@C
 foreign func ImGuiInputTextState_GetSelectionStart(self: CPointer<ImGuiInputTextState>): Int32
 
-@C
 foreign func ImGuiInputTextState_GetUndoAvailCount(self: CPointer<ImGuiInputTextState>): Int32
 
-@C
 foreign func ImGuiInputTextState_HasSelection(self: CPointer<ImGuiInputTextState>): Bool
 
-@C
 foreign func ImGuiInputTextState_ImGuiInputTextState(): CPointer<ImGuiInputTextState>
 
-@C
 foreign func ImGuiInputTextState_OnKeyPressed(self: CPointer<ImGuiInputTextState>, key: Int32): Unit
 
-@C
 foreign func ImGuiInputTextState_ReloadUserBufAndKeepSelection(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_ReloadUserBufAndMoveToEnd(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_ReloadUserBufAndSelectAll(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_SelectAll(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiInputTextState_destroy(self: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func ImGuiKeyOwnerData_ImGuiKeyOwnerData(): CPointer<ImGuiKeyOwnerData>
 
-@C
 foreign func ImGuiKeyOwnerData_destroy(self: CPointer<ImGuiKeyOwnerData>): Unit
 
-@C
 foreign func ImGuiKeyRoutingData_ImGuiKeyRoutingData(): CPointer<ImGuiKeyRoutingData>
 
-@C
 foreign func ImGuiKeyRoutingData_destroy(self: CPointer<ImGuiKeyRoutingData>): Unit
 
-@C
 foreign func ImGuiKeyRoutingTable_Clear(self: CPointer<ImGuiKeyRoutingTable>): Unit
 
-@C
 foreign func ImGuiKeyRoutingTable_ImGuiKeyRoutingTable(): CPointer<ImGuiKeyRoutingTable>
 
-@C
 foreign func ImGuiKeyRoutingTable_destroy(self: CPointer<ImGuiKeyRoutingTable>): Unit
 
-@C
 foreign func ImGuiLastItemData_ImGuiLastItemData(): CPointer<ImGuiLastItemData>
 
-@C
 foreign func ImGuiLastItemData_destroy(self: CPointer<ImGuiLastItemData>): Unit
 
-@C
 foreign func ImGuiListClipperData_ImGuiListClipperData(): CPointer<ImGuiListClipperData>
 
-@C
 foreign func ImGuiListClipperData_Reset(self: CPointer<ImGuiListClipperData>, clipper: CPointer<ImGuiListClipper>): Unit
 
-@C
 foreign func ImGuiListClipperData_destroy(self: CPointer<ImGuiListClipperData>): Unit
 
-@C
 foreign func ImGuiListClipperRange_FromIndices(min: Int32, max: Int32): ImGuiListClipperRange
 
-@C
 foreign func ImGuiListClipperRange_FromPositions(y1: Float32, y2: Float32, off_min: Int32, off_max: Int32): ImGuiListClipperRange
 
-@C
 foreign func ImGuiListClipper_Begin(self: CPointer<ImGuiListClipper>, items_count: Int32, items_height: Float32): Unit
 
-@C
 foreign func ImGuiListClipper_End(self: CPointer<ImGuiListClipper>): Unit
 
-@C
 foreign func ImGuiListClipper_ImGuiListClipper(): CPointer<ImGuiListClipper>
 
-@C
 foreign func ImGuiListClipper_IncludeItemByIndex(self: CPointer<ImGuiListClipper>, item_index: Int32): Unit
 
-@C
 foreign func ImGuiListClipper_IncludeItemsByIndex(self: CPointer<ImGuiListClipper>, item_begin: Int32, item_end: Int32): Unit
 
-@C
 foreign func ImGuiListClipper_Step(self: CPointer<ImGuiListClipper>): Bool
 
-@C
 foreign func ImGuiListClipper_destroy(self: CPointer<ImGuiListClipper>): Unit
 
-@C
 foreign func ImGuiMenuColumns_CalcNextTotalWidth(self: CPointer<ImGuiMenuColumns>, update_offsets: Bool): Unit
 
-@C
 foreign func ImGuiMenuColumns_DeclColumns(self: CPointer<ImGuiMenuColumns>, w_icon: Float32, w_label: Float32, w_shortcut: Float32, w_mark: Float32): Float32
 
-@C
 foreign func ImGuiMenuColumns_ImGuiMenuColumns(): CPointer<ImGuiMenuColumns>
 
-@C
 foreign func ImGuiMenuColumns_Update(self: CPointer<ImGuiMenuColumns>, spacing: Float32, window_reappearing: Bool): Unit
 
-@C
 foreign func ImGuiMenuColumns_destroy(self: CPointer<ImGuiMenuColumns>): Unit
 
-@C
 foreign func ImGuiNavItemData_Clear(self: CPointer<ImGuiNavItemData>): Unit
 
-@C
 foreign func ImGuiNavItemData_ImGuiNavItemData(): CPointer<ImGuiNavItemData>
 
-@C
 foreign func ImGuiNavItemData_destroy(self: CPointer<ImGuiNavItemData>): Unit
 
-@C
 foreign func ImGuiNextItemData_ClearFlags(self: CPointer<ImGuiNextItemData>): Unit
 
-@C
 foreign func ImGuiNextItemData_ImGuiNextItemData(): CPointer<ImGuiNextItemData>
 
-@C
 foreign func ImGuiNextItemData_destroy(self: CPointer<ImGuiNextItemData>): Unit
 
-@C
 foreign func ImGuiNextWindowData_ClearFlags(self: CPointer<ImGuiNextWindowData>): Unit
 
-@C
 foreign func ImGuiNextWindowData_ImGuiNextWindowData(): CPointer<ImGuiNextWindowData>
 
-@C
 foreign func ImGuiNextWindowData_destroy(self: CPointer<ImGuiNextWindowData>): Unit
 
-@C
 foreign func ImGuiOldColumnData_ImGuiOldColumnData(): CPointer<ImGuiOldColumnData>
 
-@C
 foreign func ImGuiOldColumnData_destroy(self: CPointer<ImGuiOldColumnData>): Unit
 
-@C
 foreign func ImGuiOldColumns_ImGuiOldColumns(): CPointer<ImGuiOldColumns>
 
-@C
 foreign func ImGuiOldColumns_destroy(self: CPointer<ImGuiOldColumns>): Unit
 
-@C
 foreign func ImGuiOnceUponAFrame_ImGuiOnceUponAFrame(): CPointer<ImGuiOnceUponAFrame>
 
-@C
 foreign func ImGuiOnceUponAFrame_destroy(self: CPointer<ImGuiOnceUponAFrame>): Unit
 
-@C
 foreign func ImGuiPayload_Clear(self: CPointer<ImGuiPayload>): Unit
 
-@C
 foreign func ImGuiPayload_ImGuiPayload(): CPointer<ImGuiPayload>
 
-@C
 foreign func ImGuiPayload_IsDataType(self: CPointer<ImGuiPayload>, `type`: CString): Bool
 
-@C
 foreign func ImGuiPayload_IsDelivery(self: CPointer<ImGuiPayload>): Bool
 
-@C
 foreign func ImGuiPayload_IsPreview(self: CPointer<ImGuiPayload>): Bool
 
-@C
 foreign func ImGuiPayload_destroy(self: CPointer<ImGuiPayload>): Unit
 
-@C
 foreign func ImGuiPlatformIO_ImGuiPlatformIO(): CPointer<ImGuiPlatformIO>
 
-@C
 foreign func ImGuiPlatformIO_destroy(self: CPointer<ImGuiPlatformIO>): Unit
 
-@C
 foreign func ImGuiPlatformImeData_ImGuiPlatformImeData(): CPointer<ImGuiPlatformImeData>
 
-@C
 foreign func ImGuiPlatformImeData_destroy(self: CPointer<ImGuiPlatformImeData>): Unit
 
-@C
 foreign func ImGuiPlatformMonitor_ImGuiPlatformMonitor(): CPointer<ImGuiPlatformMonitor>
 
-@C
 foreign func ImGuiPlatformMonitor_destroy(self: CPointer<ImGuiPlatformMonitor>): Unit
 
-@C
 foreign func ImGuiPopupData_ImGuiPopupData(): CPointer<ImGuiPopupData>
 
-@C
 foreign func ImGuiPopupData_destroy(self: CPointer<ImGuiPopupData>): Unit
 
-@C
 foreign func ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(ptr: CPointer<Unit>): CPointer<ImGuiPtrOrIndex>
 
-@C
 foreign func ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(index: Int32): CPointer<ImGuiPtrOrIndex>
 
-@C
 foreign func ImGuiPtrOrIndex_destroy(self: CPointer<ImGuiPtrOrIndex>): Unit
 
-@C
 foreign func ImGuiSettingsHandler_ImGuiSettingsHandler(): CPointer<ImGuiSettingsHandler>
 
-@C
 foreign func ImGuiSettingsHandler_destroy(self: CPointer<ImGuiSettingsHandler>): Unit
 
-@C
 foreign func ImGuiStackLevelInfo_ImGuiStackLevelInfo(): CPointer<ImGuiStackLevelInfo>
 
-@C
 foreign func ImGuiStackLevelInfo_destroy(self: CPointer<ImGuiStackLevelInfo>): Unit
 
-@C
 foreign func ImGuiStackSizes_CompareWithContextState(self: CPointer<ImGuiStackSizes>, ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func ImGuiStackSizes_ImGuiStackSizes(): CPointer<ImGuiStackSizes>
 
-@C
 foreign func ImGuiStackSizes_SetToContextState(self: CPointer<ImGuiStackSizes>, ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func ImGuiStackSizes_destroy(self: CPointer<ImGuiStackSizes>): Unit
 
-@C
 foreign func ImGuiStoragePair_ImGuiStoragePair_Int(_key: ImGuiID, _val: Int32): CPointer<ImGuiStoragePair>
 
-@C
 foreign func ImGuiStoragePair_ImGuiStoragePair_Float(_key: ImGuiID, _val: Float32): CPointer<ImGuiStoragePair>
 
-@C
 foreign func ImGuiStoragePair_ImGuiStoragePair_Ptr(_key: ImGuiID, _val: CPointer<Unit>): CPointer<ImGuiStoragePair>
 
-@C
 foreign func ImGuiStoragePair_destroy(self: CPointer<ImGuiStoragePair>): Unit
 
-@C
 foreign func ImGuiStorage_BuildSortByKey(self: CPointer<ImGuiStorage>): Unit
 
-@C
 foreign func ImGuiStorage_Clear(self: CPointer<ImGuiStorage>): Unit
 
-@C
 foreign func ImGuiStorage_GetBool(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Bool): Bool
 
-@C
 foreign func ImGuiStorage_GetBoolRef(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Bool): CPointer<Bool>
 
-@C
 foreign func ImGuiStorage_GetFloat(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Float32): Float32
 
-@C
 foreign func ImGuiStorage_GetFloatRef(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Float32): CPointer<Float32>
 
-@C
 foreign func ImGuiStorage_GetInt(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Int32): Int32
 
-@C
 foreign func ImGuiStorage_GetIntRef(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: Int32): CPointer<Int32>
 
-@C
 foreign func ImGuiStorage_GetVoidPtr(self: CPointer<ImGuiStorage>, key: ImGuiID): CPointer<Unit>
 
-@C
 foreign func ImGuiStorage_GetVoidPtrRef(self: CPointer<ImGuiStorage>, key: ImGuiID, default_val: CPointer<Unit>): CPointer<CPointer<Unit>>
 
-@C
 foreign func ImGuiStorage_SetAllInt(self: CPointer<ImGuiStorage>, val: Int32): Unit
 
-@C
 foreign func ImGuiStorage_SetBool(self: CPointer<ImGuiStorage>, key: ImGuiID, val: Bool): Unit
 
-@C
 foreign func ImGuiStorage_SetFloat(self: CPointer<ImGuiStorage>, key: ImGuiID, val: Float32): Unit
 
-@C
 foreign func ImGuiStorage_SetInt(self: CPointer<ImGuiStorage>, key: ImGuiID, val: Int32): Unit
 
-@C
 foreign func ImGuiStorage_SetVoidPtr(self: CPointer<ImGuiStorage>, key: ImGuiID, val: CPointer<Unit>): Unit
 
-@C
 foreign func ImGuiStyleMod_ImGuiStyleMod_Int(idx: ImGuiStyleVar, v: Int32): CPointer<ImGuiStyleMod>
 
-@C
 foreign func ImGuiStyleMod_ImGuiStyleMod_Float(idx: ImGuiStyleVar, v: Float32): CPointer<ImGuiStyleMod>
 
-@C
 foreign func ImGuiStyleMod_ImGuiStyleMod_Vec2(idx: ImGuiStyleVar, v: ImVec2): CPointer<ImGuiStyleMod>
 
-@C
 foreign func ImGuiStyleMod_destroy(self: CPointer<ImGuiStyleMod>): Unit
 
-@C
 foreign func ImGuiStyle_ImGuiStyle(): CPointer<ImGuiStyle>
 
-@C
 foreign func ImGuiStyle_ScaleAllSizes(self: CPointer<ImGuiStyle>, scale_factor: Float32): Unit
 
-@C
 foreign func ImGuiStyle_destroy(self: CPointer<ImGuiStyle>): Unit
 
-@C
 foreign func ImGuiTabBar_ImGuiTabBar(): CPointer<ImGuiTabBar>
 
-@C
 foreign func ImGuiTabBar_destroy(self: CPointer<ImGuiTabBar>): Unit
 
-@C
 foreign func ImGuiTabItem_ImGuiTabItem(): CPointer<ImGuiTabItem>
 
-@C
 foreign func ImGuiTabItem_destroy(self: CPointer<ImGuiTabItem>): Unit
 
-@C
 foreign func ImGuiTableColumnSettings_ImGuiTableColumnSettings(): CPointer<ImGuiTableColumnSettings>
 
-@C
 foreign func ImGuiTableColumnSettings_destroy(self: CPointer<ImGuiTableColumnSettings>): Unit
 
-@C
 foreign func ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs(): CPointer<ImGuiTableColumnSortSpecs>
 
-@C
 foreign func ImGuiTableColumnSortSpecs_destroy(self: CPointer<ImGuiTableColumnSortSpecs>): Unit
 
-@C
 foreign func ImGuiTableColumn_ImGuiTableColumn(): CPointer<ImGuiTableColumn>
 
-@C
 foreign func ImGuiTableColumn_destroy(self: CPointer<ImGuiTableColumn>): Unit
 
-@C
 foreign func ImGuiTableInstanceData_ImGuiTableInstanceData(): CPointer<ImGuiTableInstanceData>
 
-@C
 foreign func ImGuiTableInstanceData_destroy(self: CPointer<ImGuiTableInstanceData>): Unit
 
-@C
 foreign func ImGuiTableSettings_GetColumnSettings(self: CPointer<ImGuiTableSettings>): CPointer<ImGuiTableColumnSettings>
 
-@C
 foreign func ImGuiTableSettings_ImGuiTableSettings(): CPointer<ImGuiTableSettings>
 
-@C
 foreign func ImGuiTableSettings_destroy(self: CPointer<ImGuiTableSettings>): Unit
 
-@C
 foreign func ImGuiTableSortSpecs_ImGuiTableSortSpecs(): CPointer<ImGuiTableSortSpecs>
 
-@C
 foreign func ImGuiTableSortSpecs_destroy(self: CPointer<ImGuiTableSortSpecs>): Unit
 
-@C
 foreign func ImGuiTableTempData_ImGuiTableTempData(): CPointer<ImGuiTableTempData>
 
-@C
 foreign func ImGuiTableTempData_destroy(self: CPointer<ImGuiTableTempData>): Unit
 
-@C
 foreign func ImGuiTable_ImGuiTable(): CPointer<ImGuiTable>
 
-@C
 foreign func ImGuiTable_destroy(self: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func ImGuiTextBuffer_ImGuiTextBuffer(): CPointer<ImGuiTextBuffer>
 
-@C
 foreign func ImGuiTextBuffer_append(self: CPointer<ImGuiTextBuffer>, str: CString, str_end: CString): Unit
 
-@C
 foreign func ImGuiTextBuffer_appendf(self: CPointer<ImGuiTextBuffer>, fmt: CString, ...): Unit
 
-@C
-foreign func ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CString, args: va_list): Unit
 
-@C
 foreign func ImGuiTextBuffer_begin(self: CPointer<ImGuiTextBuffer>): CString
 
-@C
 foreign func ImGuiTextBuffer_c_str(self: CPointer<ImGuiTextBuffer>): CString
 
-@C
 foreign func ImGuiTextBuffer_clear(self: CPointer<ImGuiTextBuffer>): Unit
 
-@C
 foreign func ImGuiTextBuffer_destroy(self: CPointer<ImGuiTextBuffer>): Unit
 
-@C
 foreign func ImGuiTextBuffer_empty(self: CPointer<ImGuiTextBuffer>): Bool
 
-@C
 foreign func ImGuiTextBuffer_end(self: CPointer<ImGuiTextBuffer>): CString
 
-@C
 foreign func ImGuiTextBuffer_reserve(self: CPointer<ImGuiTextBuffer>, capacity: Int32): Unit
 
-@C
 foreign func ImGuiTextBuffer_size(self: CPointer<ImGuiTextBuffer>): Int32
 
-@C
 foreign func ImGuiTextFilter_Build(self: CPointer<ImGuiTextFilter>): Unit
 
-@C
 foreign func ImGuiTextFilter_Clear(self: CPointer<ImGuiTextFilter>): Unit
 
-@C
 foreign func ImGuiTextFilter_Draw(self: CPointer<ImGuiTextFilter>, label: CString, width: Float32): Bool
 
-@C
 foreign func ImGuiTextFilter_ImGuiTextFilter(default_filter: CString): CPointer<ImGuiTextFilter>
 
-@C
 foreign func ImGuiTextFilter_IsActive(self: CPointer<ImGuiTextFilter>): Bool
 
-@C
 foreign func ImGuiTextFilter_PassFilter(self: CPointer<ImGuiTextFilter>, text: CString, text_end: CString): Bool
 
-@C
 foreign func ImGuiTextFilter_destroy(self: CPointer<ImGuiTextFilter>): Unit
 
-@C
 foreign func ImGuiTextIndex_append(self: CPointer<ImGuiTextIndex>, base: CString, old_size: Int32, new_size: Int32): Unit
 
-@C
 foreign func ImGuiTextIndex_clear(self: CPointer<ImGuiTextIndex>): Unit
 
-@C
 foreign func ImGuiTextIndex_get_line_begin(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString
 
-@C
 foreign func ImGuiTextIndex_get_line_end(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString
 
-@C
 foreign func ImGuiTextIndex_size(self: CPointer<ImGuiTextIndex>): Int32
 
-@C
 foreign func ImGuiTextRange_ImGuiTextRange_Nil(): CPointer<ImGuiTextRange>
 
-@C
 foreign func ImGuiTextRange_ImGuiTextRange_Str(_b: CString, _e: CString): CPointer<ImGuiTextRange>
 
-@C
 foreign func ImGuiTextRange_destroy(self: CPointer<ImGuiTextRange>): Unit
 
-@C
 foreign func ImGuiTextRange_empty(self: CPointer<ImGuiTextRange>): Bool
 
-@C
 foreign func ImGuiTextRange_split(self: CPointer<ImGuiTextRange>, separator: UInt8, out: CPointer<ImVector_ImGuiTextRange>): Unit
 
-@C
 foreign func ImGuiTypingSelectState_Clear(self: CPointer<ImGuiTypingSelectState>): Unit
 
-@C
 foreign func ImGuiTypingSelectState_ImGuiTypingSelectState(): CPointer<ImGuiTypingSelectState>
 
-@C
 foreign func ImGuiTypingSelectState_destroy(self: CPointer<ImGuiTypingSelectState>): Unit
 
-@C
 foreign func ImGuiViewportP_CalcWorkRectPos(pOut: CPointer<ImVec2>, self: CPointer<ImGuiViewportP>, off_min: ImVec2): Unit
 
-@C
 foreign func ImGuiViewportP_CalcWorkRectSize(pOut: CPointer<ImVec2>, self: CPointer<ImGuiViewportP>, off_min: ImVec2, off_max: ImVec2): Unit
 
-@C
 foreign func ImGuiViewportP_ClearRequestFlags(self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewportP_GetBuildWorkRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewportP_GetMainRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewportP_GetWorkRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewportP_ImGuiViewportP(): CPointer<ImGuiViewportP>
 
-@C
 foreign func ImGuiViewportP_UpdateWorkRect(self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewportP_destroy(self: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func ImGuiViewport_GetCenter(pOut: CPointer<ImVec2>, self: CPointer<ImGuiViewport>): Unit
 
-@C
 foreign func ImGuiViewport_GetWorkCenter(pOut: CPointer<ImVec2>, self: CPointer<ImGuiViewport>): Unit
 
-@C
 foreign func ImGuiViewport_ImGuiViewport(): CPointer<ImGuiViewport>
 
-@C
 foreign func ImGuiViewport_destroy(self: CPointer<ImGuiViewport>): Unit
 
-@C
 foreign func ImGuiWindowClass_ImGuiWindowClass(): CPointer<ImGuiWindowClass>
 
-@C
 foreign func ImGuiWindowClass_destroy(self: CPointer<ImGuiWindowClass>): Unit
 
-@C
 foreign func ImGuiWindowSettings_GetName(self: CPointer<ImGuiWindowSettings>): CString
 
-@C
 foreign func ImGuiWindowSettings_ImGuiWindowSettings(): CPointer<ImGuiWindowSettings>
 
-@C
 foreign func ImGuiWindowSettings_destroy(self: CPointer<ImGuiWindowSettings>): Unit
 
-@C
 foreign func ImGuiWindow_CalcFontSize(self: CPointer<ImGuiWindow>): Float32
 
-@C
 foreign func ImGuiWindow_GetID_Str(self: CPointer<ImGuiWindow>, str: CString, str_end: CString): ImGuiID
 
-@C
 foreign func ImGuiWindow_GetID_Ptr(self: CPointer<ImGuiWindow>, ptr: CPointer<Unit>): ImGuiID
 
-@C
 foreign func ImGuiWindow_GetID_Int(self: CPointer<ImGuiWindow>, n: Int32): ImGuiID
 
-@C
 foreign func ImGuiWindow_GetIDFromRectangle(self: CPointer<ImGuiWindow>, r_abs: ImRect): ImGuiID
 
-@C
 foreign func ImGuiWindow_ImGuiWindow(context: CPointer<ImGuiContext>, name: CString): CPointer<ImGuiWindow>
 
-@C
 foreign func ImGuiWindow_MenuBarRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func ImGuiWindow_Rect(pOut: CPointer<ImRect>, self: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func ImGuiWindow_TitleBarRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func ImGuiWindow_destroy(self: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func ImRect_Add_Vec2(self: CPointer<ImRect>, p: ImVec2): Unit
 
-@C
 foreign func ImRect_Add_Rect(self: CPointer<ImRect>, r: ImRect): Unit
 
-@C
 foreign func ImRect_ClipWith(self: CPointer<ImRect>, r: ImRect): Unit
 
-@C
 foreign func ImRect_ClipWithFull(self: CPointer<ImRect>, r: ImRect): Unit
 
-@C
 foreign func ImRect_Contains_Vec2(self: CPointer<ImRect>, p: ImVec2): Bool
 
-@C
 foreign func ImRect_Contains_Rect(self: CPointer<ImRect>, r: ImRect): Bool
 
-@C
 foreign func ImRect_ContainsWithPad(self: CPointer<ImRect>, p: ImVec2, pad: ImVec2): Bool
 
-@C
 foreign func ImRect_Expand_Float(self: CPointer<ImRect>, amount: Float32): Unit
 
-@C
 foreign func ImRect_Expand_Vec2(self: CPointer<ImRect>, amount: ImVec2): Unit
 
-@C
 foreign func ImRect_Floor(self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetArea(self: CPointer<ImRect>): Float32
 
-@C
 foreign func ImRect_GetBL(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetBR(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetCenter(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetHeight(self: CPointer<ImRect>): Float32
 
-@C
 foreign func ImRect_GetSize(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetTL(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetTR(pOut: CPointer<ImVec2>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_GetWidth(self: CPointer<ImRect>): Float32
 
-@C
 foreign func ImRect_ImRect_Nil(): CPointer<ImRect>
 
-@C
 foreign func ImRect_ImRect_Vec2(min: ImVec2, max: ImVec2): CPointer<ImRect>
 
-@C
 foreign func ImRect_ImRect_Vec4(v: ImVec4): CPointer<ImRect>
 
-@C
 foreign func ImRect_ImRect_Float(x1: Float32, y1: Float32, x2: Float32, y2: Float32): CPointer<ImRect>
 
-@C
 foreign func ImRect_IsInverted(self: CPointer<ImRect>): Bool
 
-@C
 foreign func ImRect_Overlaps(self: CPointer<ImRect>, r: ImRect): Bool
 
-@C
 foreign func ImRect_ToVec4(pOut: CPointer<ImVec4>, self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImRect_Translate(self: CPointer<ImRect>, d: ImVec2): Unit
 
-@C
 foreign func ImRect_TranslateX(self: CPointer<ImRect>, dx: Float32): Unit
 
-@C
 foreign func ImRect_TranslateY(self: CPointer<ImRect>, dy: Float32): Unit
 
-@C
 foreign func ImRect_destroy(self: CPointer<ImRect>): Unit
 
-@C
 foreign func ImVec1_ImVec1_Nil(): CPointer<ImVec1>
 
-@C
 foreign func ImVec1_ImVec1_Float(_x: Float32): CPointer<ImVec1>
 
-@C
 foreign func ImVec1_destroy(self: CPointer<ImVec1>): Unit
 
-@C
 foreign func ImVec2_ImVec2_Nil(): CPointer<ImVec2>
 
-@C
 foreign func ImVec2_ImVec2_Float(_x: Float32, _y: Float32): CPointer<ImVec2>
 
-@C
 foreign func ImVec2_destroy(self: CPointer<ImVec2>): Unit
 
-@C
 foreign func ImVec2ih_ImVec2ih_Nil(): CPointer<ImVec2ih>
 
-@C
 foreign func ImVec2ih_ImVec2ih_short(_x: Int16, _y: Int16): CPointer<ImVec2ih>
 
-@C
 foreign func ImVec2ih_ImVec2ih_Vec2(rhs: ImVec2): CPointer<ImVec2ih>
 
-@C
 foreign func ImVec2ih_destroy(self: CPointer<ImVec2ih>): Unit
 
-@C
 foreign func ImVec4_ImVec4_Nil(): CPointer<ImVec4>
 
-@C
 foreign func ImVec4_ImVec4_Float(_x: Float32, _y: Float32, _z: Float32, _w: Float32): CPointer<ImVec4>
 
-@C
 foreign func ImVec4_destroy(self: CPointer<ImVec4>): Unit
 
-@C
 foreign func igAcceptDragDropPayload(`type`: CString, flags: ImGuiDragDropFlags): CPointer<ImGuiPayload>
 
-@C
 foreign func igActivateItemByID(id: ImGuiID): Unit
 
-@C
 foreign func igAddContextHook(context: CPointer<ImGuiContext>, hook: CPointer<ImGuiContextHook>): ImGuiID
 
-@C
 foreign func igAddDrawListToDrawDataEx(draw_data: CPointer<ImDrawData>, out_list: CPointer<ImVector_ImDrawListPtr>, draw_list: CPointer<ImDrawList>): Unit
 
-@C
 foreign func igAddSettingsHandler(handler: CPointer<ImGuiSettingsHandler>): Unit
 
-@C
 foreign func igAlignTextToFramePadding(): Unit
 
-@C
 foreign func igArrowButton(str_id: CString, dir: ImGuiDir): Bool
 
-@C
 foreign func igArrowButtonEx(str_id: CString, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
 
-@C
 foreign func igBegin(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginChild_Str(str_id: CString, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginChild_ID(id: ImGuiID, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginChildEx(name: CString, id: ImGuiID, size_arg: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginColumns(str_id: CString, count: Int32, flags: ImGuiOldColumnFlags): Unit
 
-@C
 foreign func igBeginCombo(label: CString, preview_value: CString, flags: ImGuiComboFlags): Bool
 
-@C
 foreign func igBeginComboPopup(popup_id: ImGuiID, bb: ImRect, flags: ImGuiComboFlags): Bool
 
-@C
 foreign func igBeginComboPreview(): Bool
 
-@C
 foreign func igBeginDisabled(disabled: Bool): Unit
 
-@C
 foreign func igBeginDisabledOverrideReenable(): Unit
 
-@C
 foreign func igBeginDockableDragDropSource(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBeginDockableDragDropTarget(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBeginDocked(window: CPointer<ImGuiWindow>, p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igBeginDragDropSource(flags: ImGuiDragDropFlags): Bool
 
-@C
 foreign func igBeginDragDropTarget(): Bool
 
-@C
 foreign func igBeginDragDropTargetCustom(bb: ImRect, id: ImGuiID): Bool
 
-@C
 foreign func igBeginGroup(): Unit
 
-@C
 foreign func igBeginItemTooltip(): Bool
 
-@C
 foreign func igBeginListBox(label: CString, size: ImVec2): Bool
 
-@C
 foreign func igBeginMainMenuBar(): Bool
 
-@C
 foreign func igBeginMenu(label: CString, enabled: Bool): Bool
 
-@C
 foreign func igBeginMenuBar(): Bool
 
-@C
 foreign func igBeginMenuEx(label: CString, icon: CString, enabled: Bool): Bool
 
-@C
 foreign func igBeginPopup(str_id: CString, flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginPopupContextItem(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
 
-@C
 foreign func igBeginPopupContextVoid(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
 
-@C
 foreign func igBeginPopupContextWindow(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
 
-@C
 foreign func igBeginPopupEx(id: ImGuiID, extra_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginPopupModal(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginTabBar(str_id: CString, flags: ImGuiTabBarFlags): Bool
 
-@C
 foreign func igBeginTabBarEx(tab_bar: CPointer<ImGuiTabBar>, bb: ImRect, flags: ImGuiTabBarFlags): Bool
 
-@C
 foreign func igBeginTabItem(label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags): Bool
 
-@C
 foreign func igBeginTable(str_id: CString, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
 
-@C
 foreign func igBeginTableEx(name: CString, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
 
-@C
 foreign func igBeginTooltip(): Bool
 
-@C
 foreign func igBeginTooltipEx(tooltip_flags: ImGuiTooltipFlags, extra_window_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBeginTooltipHidden(): Bool
 
-@C
 foreign func igBeginViewportSideBar(name: CString, viewport: CPointer<ImGuiViewport>, dir: ImGuiDir, size: Float32, window_flags: ImGuiWindowFlags): Bool
 
-@C
 foreign func igBringWindowToDisplayBack(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBringWindowToDisplayBehind(window: CPointer<ImGuiWindow>, above_window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBringWindowToDisplayFront(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBringWindowToFocusFront(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igBullet(): Unit
 
-@C
 foreign func igBulletText(fmt: CString, ...): Unit
 
-@C
-foreign func igBulletTextV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igBulletTextV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igButton(label: CString, size: ImVec2): Bool
 
-@C
 foreign func igButtonBehavior(bb: ImRect, id: ImGuiID, out_hovered: CPointer<Bool>, out_held: CPointer<Bool>, flags: ImGuiButtonFlags): Bool
 
-@C
 foreign func igButtonEx(label: CString, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
 
-@C
 foreign func igCalcItemSize(pOut: CPointer<ImVec2>, size: ImVec2, default_w: Float32, default_h: Float32): Unit
 
-@C
 foreign func igCalcItemWidth(): Float32
 
-@C
 foreign func igCalcRoundingFlagsForRectInRect(r_in: ImRect, r_outer: ImRect, threshold: Float32): ImDrawFlags
 
-@C
 foreign func igCalcTextSize(pOut: CPointer<ImVec2>, text: CString, text_end: CString, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit
 
-@C
 foreign func igCalcTypematicRepeatAmount(t0: Float32, t1: Float32, repeat_delay: Float32, repeat_rate: Float32): Int32
 
-@C
 foreign func igCalcWindowNextAutoFitSize(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igCalcWrapWidthForPos(pos: ImVec2, wrap_pos_x: Float32): Float32
 
-@C
 foreign func igCallContextHooks(context: CPointer<ImGuiContext>, `type`: ImGuiContextHookType): Unit
 
-@C
 foreign func igCheckbox(label: CString, v: CPointer<Bool>): Bool
 
-@C
 foreign func igCheckboxFlags_IntPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool
 
-@C
 foreign func igCheckboxFlags_UintPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool
 
-@C
 foreign func igCheckboxFlags_S64Ptr(label: CString, flags: CPointer<ImS64>, flags_value: ImS64): Bool
 
-@C
 foreign func igCheckboxFlags_U64Ptr(label: CString, flags: CPointer<ImU64>, flags_value: ImU64): Bool
 
-@C
 foreign func igClearActiveID(): Unit
 
-@C
 foreign func igClearDragDrop(): Unit
 
-@C
 foreign func igClearIniSettings(): Unit
 
-@C
 foreign func igClearWindowSettings(name: CString): Unit
 
-@C
 foreign func igCloseButton(id: ImGuiID, pos: ImVec2): Bool
 
-@C
 foreign func igCloseCurrentPopup(): Unit
 
-@C
 foreign func igClosePopupToLevel(remaining: Int32, restore_focus_to_window_under_popup: Bool): Unit
 
-@C
 foreign func igClosePopupsExceptModals(): Unit
 
-@C
 foreign func igClosePopupsOverWindow(ref_window: CPointer<ImGuiWindow>, restore_focus_to_window_under_popup: Bool): Unit
 
-@C
 foreign func igCollapseButton(id: ImGuiID, pos: ImVec2, dock_node: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func igCollapsingHeader_TreeNodeFlags(label: CString, flags: ImGuiTreeNodeFlags): Bool
 
-@C
 foreign func igCollapsingHeader_BoolPtr(label: CString, p_visible: CPointer<Bool>, flags: ImGuiTreeNodeFlags): Bool
 
-@C
 foreign func igColorButton(desc_id: CString, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool
 
-@C
 foreign func igColorConvertFloat4ToU32(`in`: ImVec4): ImU32
 
-@C
 foreign func igColorConvertHSVtoRGB(h: Float32, s: Float32, v: Float32, out_r: CPointer<Float32>, out_g: CPointer<Float32>, out_b: CPointer<Float32>): Unit
 
-@C
 foreign func igColorConvertRGBtoHSV(r: Float32, g: Float32, b: Float32, out_h: CPointer<Float32>, out_s: CPointer<Float32>, out_v: CPointer<Float32>): Unit
 
-@C
 foreign func igColorConvertU32ToFloat4(pOut: CPointer<ImVec4>, `in`: ImU32): Unit
 
-@C
 foreign func igColorEdit3(label: CString, col: VArray<Float32, $3>, flags: ImGuiColorEditFlags): Bool
 
-@C
 foreign func igColorEdit4(label: CString, col: VArray<Float32, $4>, flags: ImGuiColorEditFlags): Bool
 
-@C
 foreign func igColorEditOptionsPopup(col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-@C
 foreign func igColorPicker3(label: CString, col: VArray<Float32, $3>, flags: ImGuiColorEditFlags): Bool
 
-@C
 foreign func igColorPicker4(label: CString, col: VArray<Float32, $4>, flags: ImGuiColorEditFlags, ref_col: CPointer<Float32>): Bool
 
-@C
 foreign func igColorPickerOptionsPopup(ref_col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-@C
 foreign func igColorTooltip(text: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-@C
 foreign func igColumns(count: Int32, id: CString, border: Bool): Unit
 
-@C
 foreign func igCombo_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, popup_max_height_in_items: Int32): Bool
 
-@C
 foreign func igCombo_Str(label: CString, current_item: CPointer<Int32>, items_separated_by_zeros: CString, popup_max_height_in_items: Int32): Bool
 
-@C
 foreign func igCombo_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool
 
-@C
 foreign func igConvertSingleModFlagToKey(key: ImGuiKey): ImGuiKey
 
-@C
 foreign func igCreateContext(shared_font_atlas: CPointer<ImFontAtlas>): CPointer<ImGuiContext>
 
-@C
 foreign func igCreateNewWindowSettings(name: CString): CPointer<ImGuiWindowSettings>
 
-@C
 foreign func igDataTypeApplyFromText(buf: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_data_when_empty: CPointer<Unit>): Bool
 
-@C
 foreign func igDataTypeApplyOp(data_type: ImGuiDataType, op: Int32, output: CPointer<Unit>, arg_1: CPointer<Unit>, arg_2: CPointer<Unit>): Unit
 
-@C
 foreign func igDataTypeClamp(data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>): Bool
 
-@C
 foreign func igDataTypeCompare(data_type: ImGuiDataType, arg_1: CPointer<Unit>, arg_2: CPointer<Unit>): Int32
 
-@C
 foreign func igDataTypeFormatString(buf: CString, buf_size: Int32, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString): Int32
 
-@C
 foreign func igDataTypeGetInfo(data_type: ImGuiDataType): CPointer<ImGuiDataTypeInfo>
 
-@C
 foreign func igDebugAllocHook(info: CPointer<ImGuiDebugAllocInfo>, frame_count: Int32, ptr: CPointer<Unit>, size: UIntNative): Unit
 
-@C
 foreign func igDebugBreakButton(label: CString, description_of_location: CString): Bool
 
-@C
 foreign func igDebugBreakButtonTooltip(keyboard_only: Bool, description_of_location: CString): Unit
 
-@C
 foreign func igDebugBreakClearData(): Unit
 
-@C
 foreign func igDebugCheckVersionAndDataLayout(version_str: CString, sz_io: UIntNative, sz_style: UIntNative, sz_vec2: UIntNative, sz_vec4: UIntNative, sz_drawvert: UIntNative, sz_drawidx: UIntNative): Bool
 
-@C
 foreign func igDebugDrawCursorPos(col: ImU32): Unit
 
-@C
 foreign func igDebugDrawItemRect(col: ImU32): Unit
 
-@C
 foreign func igDebugDrawLineExtents(col: ImU32): Unit
 
-@C
 foreign func igDebugFlashStyleColor(idx: ImGuiCol): Unit
 
-@C
 foreign func igDebugHookIdInfo(id: ImGuiID, data_type: ImGuiDataType, data_id: CPointer<Unit>, data_id_end: CPointer<Unit>): Unit
 
-@C
 foreign func igDebugLocateItem(target_id: ImGuiID): Unit
 
-@C
 foreign func igDebugLocateItemOnHover(target_id: ImGuiID): Unit
 
-@C
 foreign func igDebugLocateItemResolveWithLastItem(): Unit
 
-@C
 foreign func igDebugLog(fmt: CString, ...): Unit
 
-@C
-foreign func igDebugLogV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igDebugLogV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igDebugNodeColumns(columns: CPointer<ImGuiOldColumns>): Unit
 
-@C
 foreign func igDebugNodeDockNode(node: CPointer<ImGuiDockNode>, label: CString): Unit
 
-@C
 foreign func igDebugNodeDrawCmdShowMeshAndBoundingBox(out_draw_list: CPointer<ImDrawList>, draw_list: CPointer<ImDrawList>, draw_cmd: CPointer<ImDrawCmd>, show_mesh: Bool, show_aabb: Bool): Unit
 
-@C
 foreign func igDebugNodeDrawList(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>, draw_list: CPointer<ImDrawList>, label: CString): Unit
 
-@C
 foreign func igDebugNodeFont(font: CPointer<ImFont>): Unit
 
-@C
 foreign func igDebugNodeFontGlyph(font: CPointer<ImFont>, glyph: CPointer<ImFontGlyph>): Unit
 
-@C
 foreign func igDebugNodeInputTextState(state: CPointer<ImGuiInputTextState>): Unit
 
-@C
 foreign func igDebugNodeStorage(storage: CPointer<ImGuiStorage>, label: CString): Unit
 
-@C
 foreign func igDebugNodeTabBar(tab_bar: CPointer<ImGuiTabBar>, label: CString): Unit
 
-@C
 foreign func igDebugNodeTable(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igDebugNodeTableSettings(settings: CPointer<ImGuiTableSettings>): Unit
 
-@C
 foreign func igDebugNodeTypingSelectState(state: CPointer<ImGuiTypingSelectState>): Unit
 
-@C
 foreign func igDebugNodeViewport(viewport: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func igDebugNodeWindow(window: CPointer<ImGuiWindow>, label: CString): Unit
 
-@C
 foreign func igDebugNodeWindowSettings(settings: CPointer<ImGuiWindowSettings>): Unit
 
-@C
 foreign func igDebugNodeWindowsList(windows: CPointer<ImVector_ImGuiWindowPtr>, label: CString): Unit
 
-@C
 foreign func igDebugNodeWindowsListByBeginStackParent(windows: CPointer<CPointer<ImGuiWindow>>, windows_size: Int32, parent_in_begin_stack: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igDebugRenderKeyboardPreview(draw_list: CPointer<ImDrawList>): Unit
 
-@C
 foreign func igDebugRenderViewportThumbnail(draw_list: CPointer<ImDrawList>, viewport: CPointer<ImGuiViewportP>, bb: ImRect): Unit
 
-@C
 foreign func igDebugStartItemPicker(): Unit
 
-@C
 foreign func igDebugTextEncoding(text: CString): Unit
 
-@C
 foreign func igDebugTextUnformattedWithLocateItem(line_begin: CString, line_end: CString): Unit
 
-@C
 foreign func igDestroyContext(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDestroyPlatformWindow(viewport: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func igDestroyPlatformWindows(): Unit
 
-@C
 foreign func igDockBuilderAddNode(node_id: ImGuiID, flags: ImGuiDockNodeFlags): ImGuiID
 
-@C
 foreign func igDockBuilderCopyDockSpace(src_dockspace_id: ImGuiID, dst_dockspace_id: ImGuiID, in_window_remap_pairs: CPointer<ImVector_const_charPtr>): Unit
 
-@C
 foreign func igDockBuilderCopyNode(src_node_id: ImGuiID, dst_node_id: ImGuiID, out_node_remap_pairs: CPointer<ImVector_ImGuiID>): Unit
 
-@C
 foreign func igDockBuilderCopyWindowSettings(src_name: CString, dst_name: CString): Unit
 
-@C
 foreign func igDockBuilderDockWindow(window_name: CString, node_id: ImGuiID): Unit
 
-@C
 foreign func igDockBuilderFinish(node_id: ImGuiID): Unit
 
-@C
 foreign func igDockBuilderGetCentralNode(node_id: ImGuiID): CPointer<ImGuiDockNode>
 
-@C
 foreign func igDockBuilderGetNode(node_id: ImGuiID): CPointer<ImGuiDockNode>
 
-@C
 foreign func igDockBuilderRemoveNode(node_id: ImGuiID): Unit
 
-@C
 foreign func igDockBuilderRemoveNodeChildNodes(node_id: ImGuiID): Unit
 
-@C
 foreign func igDockBuilderRemoveNodeDockedWindows(node_id: ImGuiID, clear_settings_refs: Bool): Unit
 
-@C
 foreign func igDockBuilderSetNodePos(node_id: ImGuiID, pos: ImVec2): Unit
 
-@C
 foreign func igDockBuilderSetNodeSize(node_id: ImGuiID, size: ImVec2): Unit
 
-@C
 foreign func igDockBuilderSplitNode(node_id: ImGuiID, split_dir: ImGuiDir, size_ratio_for_node_at_dir: Float32, out_id_at_dir: CPointer<ImGuiID>, out_id_at_opposite_dir: CPointer<ImGuiID>): ImGuiID
 
-@C
 foreign func igDockContextCalcDropPosForDocking(target: CPointer<ImGuiWindow>, target_node: CPointer<ImGuiDockNode>, payload_window: CPointer<ImGuiWindow>, payload_node: CPointer<ImGuiDockNode>, split_dir: ImGuiDir, split_outer: Bool, out_pos: CPointer<ImVec2>): Bool
 
-@C
 foreign func igDockContextClearNodes(ctx: CPointer<ImGuiContext>, root_id: ImGuiID, clear_settings_refs: Bool): Unit
 
-@C
 foreign func igDockContextEndFrame(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockContextFindNodeByID(ctx: CPointer<ImGuiContext>, id: ImGuiID): CPointer<ImGuiDockNode>
 
-@C
 foreign func igDockContextGenNodeID(ctx: CPointer<ImGuiContext>): ImGuiID
 
-@C
 foreign func igDockContextInitialize(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockContextNewFrameUpdateDocking(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockContextNewFrameUpdateUndocking(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockContextProcessUndockNode(ctx: CPointer<ImGuiContext>, node: CPointer<ImGuiDockNode>): Unit
 
-@C
 foreign func igDockContextProcessUndockWindow(ctx: CPointer<ImGuiContext>, window: CPointer<ImGuiWindow>, clear_persistent_docking_ref: Bool): Unit
 
-@C
 foreign func igDockContextQueueDock(ctx: CPointer<ImGuiContext>, target: CPointer<ImGuiWindow>, target_node: CPointer<ImGuiDockNode>, payload: CPointer<ImGuiWindow>, split_dir: ImGuiDir, split_ratio: Float32, split_outer: Bool): Unit
 
-@C
 foreign func igDockContextQueueUndockNode(ctx: CPointer<ImGuiContext>, node: CPointer<ImGuiDockNode>): Unit
 
-@C
 foreign func igDockContextQueueUndockWindow(ctx: CPointer<ImGuiContext>, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igDockContextRebuildNodes(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockContextShutdown(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igDockNodeBeginAmendTabBar(node: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func igDockNodeEndAmendTabBar(): Unit
 
-@C
 foreign func igDockNodeGetDepth(node: CPointer<ImGuiDockNode>): Int32
 
-@C
 foreign func igDockNodeGetRootNode(node: CPointer<ImGuiDockNode>): CPointer<ImGuiDockNode>
 
-@C
 foreign func igDockNodeGetWindowMenuButtonId(node: CPointer<ImGuiDockNode>): ImGuiID
 
-@C
 foreign func igDockNodeIsInHierarchyOf(node: CPointer<ImGuiDockNode>, parent: CPointer<ImGuiDockNode>): Bool
 
-@C
 foreign func igDockNodeWindowMenuHandler_Default(ctx: CPointer<ImGuiContext>, node: CPointer<ImGuiDockNode>, tab_bar: CPointer<ImGuiTabBar>): Unit
 
-@C
 foreign func igDockSpace(dockspace_id: ImGuiID, size: ImVec2, flags: ImGuiDockNodeFlags, window_class: CPointer<ImGuiWindowClass>): ImGuiID
 
-@C
 foreign func igDockSpaceOverViewport(dockspace_id: ImGuiID, viewport: CPointer<ImGuiViewport>, flags: ImGuiDockNodeFlags, window_class: CPointer<ImGuiWindowClass>): ImGuiID
 
-@C
 foreign func igDragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragFloat(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragFloat2(label: CString, v: VArray<Float32, $2>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragFloat3(label: CString, v: VArray<Float32, $3>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragFloat4(label: CString, v: VArray<Float32, $4>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragFloatRange2(label: CString, v_current_min: CPointer<Float32>, v_current_max: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragInt(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragInt2(label: CString, v: VArray<Int32, $2>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragInt3(label: CString, v: VArray<Int32, $3>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragInt4(label: CString, v: VArray<Int32, $4>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragIntRange2(label: CString, v_current_min: CPointer<Int32>, v_current_max: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDragScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igDummy(size: ImVec2): Unit
 
-@C
 foreign func igEnd(): Unit
 
-@C
 foreign func igEndChild(): Unit
 
-@C
 foreign func igEndColumns(): Unit
 
-@C
 foreign func igEndCombo(): Unit
 
-@C
 foreign func igEndComboPreview(): Unit
 
-@C
 foreign func igEndDisabled(): Unit
 
-@C
 foreign func igEndDisabledOverrideReenable(): Unit
 
-@C
 foreign func igEndDragDropSource(): Unit
 
-@C
 foreign func igEndDragDropTarget(): Unit
 
-@C
 foreign func igEndFrame(): Unit
 
-@C
 foreign func igEndGroup(): Unit
 
-@C
 foreign func igEndListBox(): Unit
 
-@C
 foreign func igEndMainMenuBar(): Unit
 
-@C
 foreign func igEndMenu(): Unit
 
-@C
 foreign func igEndMenuBar(): Unit
 
-@C
 foreign func igEndPopup(): Unit
 
-@C
 foreign func igEndTabBar(): Unit
 
-@C
 foreign func igEndTabItem(): Unit
 
-@C
 foreign func igEndTable(): Unit
 
-@C
 foreign func igEndTooltip(): Unit
 
-@C
 foreign func igErrorCheckEndFrameRecover(log_callback: ImGuiErrorLogCallback, user_data: CPointer<Unit>): Unit
 
-@C
 foreign func igErrorCheckEndWindowRecover(log_callback: ImGuiErrorLogCallback, user_data: CPointer<Unit>): Unit
 
-@C
 foreign func igErrorCheckUsingSetCursorPosToExtendParentBoundaries(): Unit
 
-@C
 foreign func igFindBestWindowPosForPopup(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igFindBestWindowPosForPopupEx(pOut: CPointer<ImVec2>, ref_pos: ImVec2, size: ImVec2, last_dir: CPointer<ImGuiDir>, r_outer: ImRect, r_avoid: ImRect, policy: ImGuiPopupPositionPolicy): Unit
 
-@C
 foreign func igFindBlockingModal(window: CPointer<ImGuiWindow>): CPointer<ImGuiWindow>
 
-@C
 foreign func igFindBottomMostVisibleWindowWithinBeginStack(window: CPointer<ImGuiWindow>): CPointer<ImGuiWindow>
 
-@C
 foreign func igFindHoveredViewportFromPlatformWindowStack(mouse_platform_pos: ImVec2): CPointer<ImGuiViewportP>
 
-@C
 foreign func igFindHoveredWindowEx(pos: ImVec2, find_first_and_in_any_viewport: Bool, out_hovered_window: CPointer<CPointer<ImGuiWindow>>, out_hovered_window_under_moving_window: CPointer<CPointer<ImGuiWindow>>): Unit
 
-@C
 foreign func igFindOrCreateColumns(window: CPointer<ImGuiWindow>, id: ImGuiID): CPointer<ImGuiOldColumns>
 
-@C
 foreign func igFindRenderedTextEnd(text: CString, text_end: CString): CString
 
-@C
 foreign func igFindSettingsHandler(type_name: CString): CPointer<ImGuiSettingsHandler>
 
-@C
 foreign func igFindViewportByID(id: ImGuiID): CPointer<ImGuiViewport>
 
-@C
 foreign func igFindViewportByPlatformHandle(platform_handle: CPointer<Unit>): CPointer<ImGuiViewport>
 
-@C
 foreign func igFindWindowByID(id: ImGuiID): CPointer<ImGuiWindow>
 
-@C
 foreign func igFindWindowByName(name: CString): CPointer<ImGuiWindow>
 
-@C
 foreign func igFindWindowDisplayIndex(window: CPointer<ImGuiWindow>): Int32
 
-@C
 foreign func igFindWindowSettingsByID(id: ImGuiID): CPointer<ImGuiWindowSettings>
 
-@C
 foreign func igFindWindowSettingsByWindow(window: CPointer<ImGuiWindow>): CPointer<ImGuiWindowSettings>
 
-@C
 foreign func igFixupKeyChord(key_chord: ImGuiKeyChord): ImGuiKeyChord
 
-@C
 foreign func igFocusItem(): Unit
 
-@C
 foreign func igFocusTopMostWindowUnderOne(under_this_window: CPointer<ImGuiWindow>, ignore_window: CPointer<ImGuiWindow>, filter_viewport: CPointer<ImGuiViewport>, flags: ImGuiFocusRequestFlags): Unit
 
-@C
 foreign func igFocusWindow(window: CPointer<ImGuiWindow>, flags: ImGuiFocusRequestFlags): Unit
 
-@C
 foreign func igGcAwakeTransientWindowBuffers(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igGcCompactTransientMiscBuffers(): Unit
 
-@C
 foreign func igGcCompactTransientWindowBuffers(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igGetActiveID(): ImGuiID
 
-@C
 foreign func igGetAllocatorFunctions(p_alloc_func: CPointer<ImGuiMemAllocFunc>, p_free_func: CPointer<ImGuiMemFreeFunc>, p_user_data: CPointer<CPointer<Unit>>): Unit
 
-@C
 foreign func igGetBackgroundDrawList_Nil(): CPointer<ImDrawList>
 
-@C
 foreign func igGetBackgroundDrawList_ViewportPtr(viewport: CPointer<ImGuiViewport>): CPointer<ImDrawList>
 
-@C
 foreign func igGetClipboardText(): CString
 
-@C
 foreign func igGetColorU32_Col(idx: ImGuiCol, alpha_mul: Float32): ImU32
 
-@C
 foreign func igGetColorU32_Vec4(col: ImVec4): ImU32
 
-@C
 foreign func igGetColorU32_U32(col: ImU32, alpha_mul: Float32): ImU32
 
-@C
 foreign func igGetColumnIndex(): Int32
 
-@C
 foreign func igGetColumnNormFromOffset(columns: CPointer<ImGuiOldColumns>, offset: Float32): Float32
 
-@C
 foreign func igGetColumnOffset(column_index: Int32): Float32
 
-@C
 foreign func igGetColumnOffsetFromNorm(columns: CPointer<ImGuiOldColumns>, offset_norm: Float32): Float32
 
-@C
 foreign func igGetColumnWidth(column_index: Int32): Float32
 
-@C
 foreign func igGetColumnsCount(): Int32
 
-@C
 foreign func igGetColumnsID(str_id: CString, count: Int32): ImGuiID
 
-@C
 foreign func igGetContentRegionAvail(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetContentRegionMax(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetContentRegionMaxAbs(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetCurrentContext(): CPointer<ImGuiContext>
 
-@C
 foreign func igGetCurrentFocusScope(): ImGuiID
 
-@C
 foreign func igGetCurrentTabBar(): CPointer<ImGuiTabBar>
 
-@C
 foreign func igGetCurrentTable(): CPointer<ImGuiTable>
 
-@C
 foreign func igGetCurrentWindow(): CPointer<ImGuiWindow>
 
-@C
 foreign func igGetCurrentWindowRead(): CPointer<ImGuiWindow>
 
-@C
 foreign func igGetCursorPos(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetCursorPosX(): Float32
 
-@C
 foreign func igGetCursorPosY(): Float32
 
-@C
 foreign func igGetCursorScreenPos(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetCursorStartPos(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetDefaultFont(): CPointer<ImFont>
 
-@C
 foreign func igGetDragDropPayload(): CPointer<ImGuiPayload>
 
-@C
 foreign func igGetDrawData(): CPointer<ImDrawData>
 
-@C
 foreign func igGetDrawListSharedData(): CPointer<ImDrawListSharedData>
 
-@C
 foreign func igGetFocusID(): ImGuiID
 
-@C
 foreign func igGetFont(): CPointer<ImFont>
 
-@C
 foreign func igGetFontSize(): Float32
 
-@C
 foreign func igGetFontTexUvWhitePixel(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetForegroundDrawList_Nil(): CPointer<ImDrawList>
 
-@C
 foreign func igGetForegroundDrawList_ViewportPtr(viewport: CPointer<ImGuiViewport>): CPointer<ImDrawList>
 
-@C
 foreign func igGetForegroundDrawList_WindowPtr(window: CPointer<ImGuiWindow>): CPointer<ImDrawList>
 
-@C
 foreign func igGetFrameCount(): Int32
 
-@C
 foreign func igGetFrameHeight(): Float32
 
-@C
 foreign func igGetFrameHeightWithSpacing(): Float32
 
-@C
 foreign func igGetHoveredID(): ImGuiID
 
-@C
 foreign func igGetID_Str(str_id: CString): ImGuiID
 
-@C
 foreign func igGetID_StrStr(str_id_begin: CString, str_id_end: CString): ImGuiID
 
-@C
 foreign func igGetID_Ptr(ptr_id: CPointer<Unit>): ImGuiID
 
-@C
 foreign func igGetIDWithSeed_Str(str_id_begin: CString, str_id_end: CString, seed: ImGuiID): ImGuiID
 
-@C
 foreign func igGetIDWithSeed_Int(n: Int32, seed: ImGuiID): ImGuiID
 
-@C
 foreign func igGetIO(): CPointer<ImGuiIO>
 
-@C
 foreign func igGetInputTextState(id: ImGuiID): CPointer<ImGuiInputTextState>
 
-@C
 foreign func igGetItemFlags(): ImGuiItemFlags
 
-@C
 foreign func igGetItemID(): ImGuiID
 
-@C
 foreign func igGetItemRectMax(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetItemRectMin(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetItemRectSize(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetItemStatusFlags(): ImGuiItemStatusFlags
 
-@C
 foreign func igGetKeyChordName(key_chord: ImGuiKeyChord): CString
 
-@C
 foreign func igGetKeyData_ContextPtr(ctx: CPointer<ImGuiContext>, key: ImGuiKey): CPointer<ImGuiKeyData>
 
-@C
 foreign func igGetKeyData_Key(key: ImGuiKey): CPointer<ImGuiKeyData>
 
-@C
 foreign func igGetKeyMagnitude2d(pOut: CPointer<ImVec2>, key_left: ImGuiKey, key_right: ImGuiKey, key_up: ImGuiKey, key_down: ImGuiKey): Unit
 
-@C
 foreign func igGetKeyName(key: ImGuiKey): CString
 
-@C
 foreign func igGetKeyOwner(key: ImGuiKey): ImGuiID
 
-@C
 foreign func igGetKeyOwnerData(ctx: CPointer<ImGuiContext>, key: ImGuiKey): CPointer<ImGuiKeyOwnerData>
 
-@C
 foreign func igGetKeyPressedAmount(key: ImGuiKey, repeat_delay: Float32, rate: Float32): Int32
 
-@C
 foreign func igGetMainViewport(): CPointer<ImGuiViewport>
 
-@C
 foreign func igGetMouseClickedCount(button: ImGuiMouseButton): Int32
 
-@C
 foreign func igGetMouseCursor(): ImGuiMouseCursor
 
-@C
 foreign func igGetMouseDragDelta(pOut: CPointer<ImVec2>, button: ImGuiMouseButton, lock_threshold: Float32): Unit
 
-@C
 foreign func igGetMousePos(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetMousePosOnOpeningCurrentPopup(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetNavTweakPressedAmount(axis: ImGuiAxis): Float32
 
-@C
 foreign func igGetPlatformIO(): CPointer<ImGuiPlatformIO>
 
-@C
 foreign func igGetPopupAllowedExtentRect(pOut: CPointer<ImRect>, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igGetScrollMaxX(): Float32
 
-@C
 foreign func igGetScrollMaxY(): Float32
 
-@C
 foreign func igGetScrollX(): Float32
 
-@C
 foreign func igGetScrollY(): Float32
 
-@C
 foreign func igGetShortcutRoutingData(key_chord: ImGuiKeyChord): CPointer<ImGuiKeyRoutingData>
 
-@C
 foreign func igGetStateStorage(): CPointer<ImGuiStorage>
 
-@C
 foreign func igGetStyle(): CPointer<ImGuiStyle>
 
-@C
 foreign func igGetStyleColorName(idx: ImGuiCol): CString
 
-@C
 foreign func igGetStyleColorVec4(idx: ImGuiCol): CPointer<ImVec4>
 
-@C
 foreign func igGetStyleVarInfo(idx: ImGuiStyleVar): CPointer<ImGuiDataVarInfo>
 
-@C
 foreign func igGetTextLineHeight(): Float32
 
-@C
 foreign func igGetTextLineHeightWithSpacing(): Float32
 
-@C
 foreign func igGetTime(): Float64
 
-@C
 foreign func igGetTopMostAndVisiblePopupModal(): CPointer<ImGuiWindow>
 
-@C
 foreign func igGetTopMostPopupModal(): CPointer<ImGuiWindow>
 
-@C
 foreign func igGetTreeNodeToLabelSpacing(): Float32
 
-@C
 foreign func igGetTypematicRepeatRate(flags: ImGuiInputFlags, repeat_delay: CPointer<Float32>, repeat_rate: CPointer<Float32>): Unit
 
-@C
 foreign func igGetTypingSelectRequest(flags: ImGuiTypingSelectFlags): CPointer<ImGuiTypingSelectRequest>
 
-@C
 foreign func igGetVersion(): CString
 
-@C
 foreign func igGetViewportPlatformMonitor(viewport: CPointer<ImGuiViewport>): CPointer<ImGuiPlatformMonitor>
 
-@C
 foreign func igGetWindowAlwaysWantOwnTabBar(window: CPointer<ImGuiWindow>): Bool
 
-@C
 foreign func igGetWindowContentRegionMax(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetWindowContentRegionMin(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetWindowDockID(): ImGuiID
 
-@C
 foreign func igGetWindowDockNode(): CPointer<ImGuiDockNode>
 
-@C
 foreign func igGetWindowDpiScale(): Float32
 
-@C
 foreign func igGetWindowDrawList(): CPointer<ImDrawList>
 
-@C
 foreign func igGetWindowHeight(): Float32
 
-@C
 foreign func igGetWindowPos(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetWindowResizeBorderID(window: CPointer<ImGuiWindow>, dir: ImGuiDir): ImGuiID
 
-@C
 foreign func igGetWindowResizeCornerID(window: CPointer<ImGuiWindow>, n: Int32): ImGuiID
 
-@C
 foreign func igGetWindowScrollbarID(window: CPointer<ImGuiWindow>, axis: ImGuiAxis): ImGuiID
 
-@C
 foreign func igGetWindowScrollbarRect(pOut: CPointer<ImRect>, window: CPointer<ImGuiWindow>, axis: ImGuiAxis): Unit
 
-@C
 foreign func igGetWindowSize(pOut: CPointer<ImVec2>): Unit
 
-@C
 foreign func igGetWindowViewport(): CPointer<ImGuiViewport>
 
-@C
 foreign func igGetWindowWidth(): Float32
 
-@C
 foreign func igImAbs_Int(x: Int32): Int32
 
-@C
 foreign func igImAbs_Float(x: Float32): Float32
 
-@C
 foreign func igImAbs_double(x: Float64): Float64
 
-@C
 foreign func igImAlphaBlendColors(col_a: ImU32, col_b: ImU32): ImU32
 
-@C
 foreign func igImBezierCubicCalc(pOut: CPointer<ImVec2>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, t: Float32): Unit
 
-@C
 foreign func igImBezierCubicClosestPoint(pOut: CPointer<ImVec2>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, p: ImVec2, num_segments: Int32): Unit
 
-@C
 foreign func igImBezierCubicClosestPointCasteljau(pOut: CPointer<ImVec2>, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, p: ImVec2, tess_tol: Float32): Unit
 
-@C
 foreign func igImBezierQuadraticCalc(pOut: CPointer<ImVec2>, p1: ImVec2, p2: ImVec2, p3: ImVec2, t: Float32): Unit
 
-@C
 foreign func igImBitArrayClearAllBits(arr: CPointer<ImU32>, bitcount: Int32): Unit
 
-@C
 foreign func igImBitArrayClearBit(arr: CPointer<ImU32>, n: Int32): Unit
 
-@C
 foreign func igImBitArrayGetStorageSizeInBytes(bitcount: Int32): UIntNative
 
-@C
 foreign func igImBitArraySetBit(arr: CPointer<ImU32>, n: Int32): Unit
 
-@C
 foreign func igImBitArraySetBitRange(arr: CPointer<ImU32>, n: Int32, n2: Int32): Unit
 
-@C
 foreign func igImBitArrayTestBit(arr: CPointer<ImU32>, n: Int32): Bool
 
-@C
 foreign func igImCharIsBlankA(c: UInt8): Bool
 
-@C
 foreign func igImCharIsBlankW(c: Int32): Bool
 
-@C
 foreign func igImClamp(pOut: CPointer<ImVec2>, v: ImVec2, mn: ImVec2, mx: ImVec2): Unit
 
-@C
 foreign func igImDot(a: ImVec2, b: ImVec2): Float32
 
-@C
 foreign func igImExponentialMovingAverage(avg: Float32, sample: Float32, n: Int32): Float32
 
-@C
 foreign func igImFileClose(file: ImFileHandle): Bool
 
-@C
 foreign func igImFileGetSize(file: ImFileHandle): ImU64
 
-@C
 foreign func igImFileLoadToMemory(filename: CString, mode: CString, out_file_size: CPointer<UIntNative>, padding_bytes: Int32): CPointer<Unit>
 
-@C
 foreign func igImFileOpen(filename: CString, mode: CString): ImFileHandle
 
-@C
 foreign func igImFileRead(data: CPointer<Unit>, size: ImU64, count: ImU64, file: ImFileHandle): ImU64
 
-@C
 foreign func igImFileWrite(data: CPointer<Unit>, size: ImU64, count: ImU64, file: ImFileHandle): ImU64
 
-@C
 foreign func igImFloor_Float(f: Float32): Float32
 
-@C
 foreign func igImFloor_Vec2(pOut: CPointer<ImVec2>, v: ImVec2): Unit
 
-@C
 foreign func igImFontAtlasBuildFinish(atlas: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func igImFontAtlasBuildInit(atlas: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func igImFontAtlasBuildMultiplyCalcLookupTable(out_table: VArray<UInt8, $256>, in_multiply_factor: Float32): Unit
 
-@C
 foreign func igImFontAtlasBuildMultiplyRectAlpha8(table: VArray<UInt8, $256>, pixels: CPointer<UInt8>, x: Int32, y: Int32, w: Int32, h: Int32, stride: Int32): Unit
 
-@C
 foreign func igImFontAtlasBuildPackCustomRects(atlas: CPointer<ImFontAtlas>, stbrp_context_opaque: CPointer<Unit>): Unit
 
-@C
 foreign func igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit
 
-@C
 foreign func igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit
 
-@C
 foreign func igImFontAtlasBuildSetupFont(atlas: CPointer<ImFontAtlas>, font: CPointer<ImFont>, font_config: CPointer<ImFontConfig>, ascent: Float32, descent: Float32): Unit
 
-@C
 foreign func igImFontAtlasGetBuilderForStbTruetype(): CPointer<ImFontBuilderIO>
 
-@C
 foreign func igImFontAtlasUpdateConfigDataPointers(atlas: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func igImFormatString(buf: CString, buf_size: UIntNative, fmt: CString, ...): Int32
 
-@C
 foreign func igImFormatStringToTempBuffer(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, ...): Unit
 
-@C
-foreign func igImFormatStringToTempBufferV(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igImFormatStringToTempBufferV(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, args: va_list): Unit
 
-@C
-foreign func igImFormatStringV(buf: CString, buf_size: UIntNative, fmt: CString, ...): Int32
+// Cangjie does not support `va_list`
+// foreign func igImFormatStringV(buf: CString, buf_size: UIntNative, fmt: CString, args: va_list): Int32
 
-@C
 foreign func igImHashData(data: CPointer<Unit>, data_size: UIntNative, seed: ImGuiID): ImGuiID
 
-@C
 foreign func igImHashStr(data: CString, data_size: UIntNative, seed: ImGuiID): ImGuiID
 
-@C
 foreign func igImInvLength(lhs: ImVec2, fail_value: Float32): Float32
 
-@C
 foreign func igImIsFloatAboveGuaranteedIntegerPrecision(f: Float32): Bool
 
-@C
 foreign func igImIsPowerOfTwo_Int(v: Int32): Bool
 
-@C
 foreign func igImIsPowerOfTwo_U64(v: ImU64): Bool
 
-@C
 foreign func igImLengthSqr_Vec2(lhs: ImVec2): Float32
 
-@C
 foreign func igImLengthSqr_Vec4(lhs: ImVec4): Float32
 
-@C
 foreign func igImLerp_Vec2Float(pOut: CPointer<ImVec2>, a: ImVec2, b: ImVec2, t: Float32): Unit
 
-@C
 foreign func igImLerp_Vec2Vec2(pOut: CPointer<ImVec2>, a: ImVec2, b: ImVec2, t: ImVec2): Unit
 
-@C
 foreign func igImLerp_Vec4(pOut: CPointer<ImVec4>, a: ImVec4, b: ImVec4, t: Float32): Unit
 
-@C
 foreign func igImLineClosestPoint(pOut: CPointer<ImVec2>, a: ImVec2, b: ImVec2, p: ImVec2): Unit
 
-@C
 foreign func igImLinearSweep(current: Float32, target: Float32, speed: Float32): Float32
 
-@C
 foreign func igImLog_Float(x: Float32): Float32
 
-@C
 foreign func igImLog_double(x: Float64): Float64
 
-@C
 foreign func igImMax(pOut: CPointer<ImVec2>, lhs: ImVec2, rhs: ImVec2): Unit
 
-@C
 foreign func igImMin(pOut: CPointer<ImVec2>, lhs: ImVec2, rhs: ImVec2): Unit
 
-@C
 foreign func igImModPositive(a: Int32, b: Int32): Int32
 
-@C
 foreign func igImMul(pOut: CPointer<ImVec2>, lhs: ImVec2, rhs: ImVec2): Unit
 
-@C
 foreign func igImParseFormatFindEnd(format: CString): CString
 
-@C
 foreign func igImParseFormatFindStart(format: CString): CString
 
-@C
 foreign func igImParseFormatPrecision(format: CString, default_value: Int32): Int32
 
-@C
 foreign func igImParseFormatSanitizeForPrinting(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): Unit
 
-@C
 foreign func igImParseFormatSanitizeForScanning(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): CString
 
-@C
 foreign func igImParseFormatTrimDecorations(format: CString, buf: CString, buf_size: UIntNative): CString
 
-@C
 foreign func igImPow_Float(x: Float32, y: Float32): Float32
 
-@C
 foreign func igImPow_double(x: Float64, y: Float64): Float64
 
-@C
 foreign func igImQsort(base: CPointer<Unit>, count: UIntNative, size_of_element: UIntNative, compare_func: CFunc<(arg1: CPointer<Unit>, arg2: CPointer<Unit>) -> Int32>): Unit
 
-@C
 foreign func igImRotate(pOut: CPointer<ImVec2>, v: ImVec2, cos_a: Float32, sin_a: Float32): Unit
 
-@C
 foreign func igImRsqrt_Float(x: Float32): Float32
 
-@C
 foreign func igImRsqrt_double(x: Float64): Float64
 
-@C
 foreign func igImSaturate(f: Float32): Float32
 
-@C
 foreign func igImSign_Float(x: Float32): Float32
 
-@C
 foreign func igImSign_double(x: Float64): Float64
 
-@C
 foreign func igImStrSkipBlank(str: CString): CString
 
-@C
 foreign func igImStrTrimBlanks(str: CString): Unit
 
-@C
 foreign func igImStrbolW(buf_mid_line: CPointer<ImWchar>, buf_begin: CPointer<ImWchar>): CPointer<ImWchar>
 
-@C
 foreign func igImStrchrRange(str_begin: CString, str_end: CString, c: UInt8): CString
 
-@C
 foreign func igImStrdup(str: CString): CString
 
-@C
 foreign func igImStrdupcpy(dst: CString, p_dst_size: CPointer<UIntNative>, str: CString): CString
 
-@C
 foreign func igImStreolRange(str: CString, str_end: CString): CString
 
-@C
 foreign func igImStricmp(str1: CString, str2: CString): Int32
 
-@C
 foreign func igImStristr(haystack: CString, haystack_end: CString, needle: CString, needle_end: CString): CString
 
-@C
 foreign func igImStrlenW(str: CPointer<ImWchar>): Int32
 
-@C
 foreign func igImStrncpy(dst: CString, src: CString, count: UIntNative): Unit
 
-@C
 foreign func igImStrnicmp(str1: CString, str2: CString, count: UIntNative): Int32
 
-@C
 foreign func igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CString, in_text_end: CString): Int32
 
-@C
 foreign func igImTextCharToUtf8(out_buf: VArray<UInt8, $5>, c: Int32): CString
 
-@C
 foreign func igImTextCountCharsFromUtf8(in_text: CString, in_text_end: CString): Int32
 
-@C
 foreign func igImTextCountLines(in_text: CString, in_text_end: CString): Int32
 
-@C
 foreign func igImTextCountUtf8BytesFromChar(in_text: CString, in_text_end: CString): Int32
 
-@C
 foreign func igImTextCountUtf8BytesFromStr(in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32
 
-@C
 foreign func igImTextFindPreviousUtf8Codepoint(in_text_start: CString, in_text_curr: CString): CString
 
-@C
 foreign func igImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CString, in_text_end: CString, in_remaining: CPointer<CString>): Int32
 
-@C
 foreign func igImTextStrToUtf8(out_buf: CString, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32
 
-@C
 foreign func igImToUpper(c: UInt8): UInt8
 
-@C
 foreign func igImTriangleArea(a: ImVec2, b: ImVec2, c: ImVec2): Float32
 
-@C
 foreign func igImTriangleBarycentricCoords(a: ImVec2, b: ImVec2, c: ImVec2, p: ImVec2, out_u: CPointer<Float32>, out_v: CPointer<Float32>, out_w: CPointer<Float32>): Unit
 
-@C
 foreign func igImTriangleClosestPoint(pOut: CPointer<ImVec2>, a: ImVec2, b: ImVec2, c: ImVec2, p: ImVec2): Unit
 
-@C
 foreign func igImTriangleContainsPoint(a: ImVec2, b: ImVec2, c: ImVec2, p: ImVec2): Bool
 
-@C
 foreign func igImTriangleIsClockwise(a: ImVec2, b: ImVec2, c: ImVec2): Bool
 
-@C
 foreign func igImTrunc_Float(f: Float32): Float32
 
-@C
 foreign func igImTrunc_Vec2(pOut: CPointer<ImVec2>, v: ImVec2): Unit
 
-@C
 foreign func igImUpperPowerOfTwo(v: Int32): Int32
 
-@C
 foreign func igImage(user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, tint_col: ImVec4, border_col: ImVec4): Unit
 
-@C
 foreign func igImageButton(str_id: CString, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool
 
-@C
 foreign func igImageButtonEx(id: ImGuiID, texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4, flags: ImGuiButtonFlags): Bool
 
-@C
 foreign func igIndent(indent_w: Float32): Unit
 
-@C
 foreign func igInitialize(): Unit
 
-@C
 foreign func igInputDouble(label: CString, v: CPointer<Float64>, step: Float64, step_fast: Float64, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputFloat(label: CString, v: CPointer<Float32>, step: Float32, step_fast: Float32, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputFloat2(label: CString, v: VArray<Float32, $2>, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputFloat3(label: CString, v: VArray<Float32, $3>, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputFloat4(label: CString, v: VArray<Float32, $4>, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputInt(label: CString, v: CPointer<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputInt2(label: CString, v: VArray<Int32, $2>, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputInt3(label: CString, v: VArray<Int32, $3>, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputInt4(label: CString, v: VArray<Int32, $4>, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igInputText(label: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-@C
 foreign func igInputTextDeactivateHook(id: ImGuiID): Unit
 
-@C
 foreign func igInputTextEx(label: CString, hint: CString, buf: CString, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-@C
 foreign func igInputTextMultiline(label: CString, buf: CString, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-@C
 foreign func igInputTextWithHint(label: CString, hint: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-@C
 foreign func igInvisibleButton(str_id: CString, size: ImVec2, flags: ImGuiButtonFlags): Bool
 
-@C
 foreign func igIsActiveIdUsingNavDir(dir: ImGuiDir): Bool
 
-@C
 foreign func igIsAliasKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsAnyItemActive(): Bool
 
-@C
 foreign func igIsAnyItemFocused(): Bool
 
-@C
 foreign func igIsAnyItemHovered(): Bool
 
-@C
 foreign func igIsAnyMouseDown(): Bool
 
-@C
 foreign func igIsClippedEx(bb: ImRect, id: ImGuiID): Bool
 
-@C
 foreign func igIsDragDropActive(): Bool
 
-@C
 foreign func igIsDragDropPayloadBeingAccepted(): Bool
 
-@C
 foreign func igIsGamepadKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsItemActivated(): Bool
 
-@C
 foreign func igIsItemActive(): Bool
 
-@C
 foreign func igIsItemClicked(mouse_button: ImGuiMouseButton): Bool
 
-@C
 foreign func igIsItemDeactivated(): Bool
 
-@C
 foreign func igIsItemDeactivatedAfterEdit(): Bool
 
-@C
 foreign func igIsItemEdited(): Bool
 
-@C
 foreign func igIsItemFocused(): Bool
 
-@C
 foreign func igIsItemHovered(flags: ImGuiHoveredFlags): Bool
 
-@C
 foreign func igIsItemToggledOpen(): Bool
 
-@C
 foreign func igIsItemToggledSelection(): Bool
 
-@C
 foreign func igIsItemVisible(): Bool
 
-@C
 foreign func igIsKeyChordPressed_Nil(key_chord: ImGuiKeyChord): Bool
 
-@C
 foreign func igIsKeyChordPressed_InputFlags(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsKeyDown_Nil(key: ImGuiKey): Bool
 
-@C
 foreign func igIsKeyDown_ID(key: ImGuiKey, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsKeyPressed_Bool(key: ImGuiKey, repeat: Bool): Bool
 
-@C
 foreign func igIsKeyPressed_InputFlags(key: ImGuiKey, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsKeyReleased_Nil(key: ImGuiKey): Bool
 
-@C
 foreign func igIsKeyReleased_ID(key: ImGuiKey, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsKeyboardKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsLegacyKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsModKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsMouseClicked_Bool(button: ImGuiMouseButton, repeat: Bool): Bool
 
-@C
 foreign func igIsMouseClicked_InputFlags(button: ImGuiMouseButton, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsMouseDoubleClicked_Nil(button: ImGuiMouseButton): Bool
 
-@C
 foreign func igIsMouseDoubleClicked_ID(button: ImGuiMouseButton, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsMouseDown_Nil(button: ImGuiMouseButton): Bool
 
-@C
 foreign func igIsMouseDown_ID(button: ImGuiMouseButton, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsMouseDragPastThreshold(button: ImGuiMouseButton, lock_threshold: Float32): Bool
 
-@C
 foreign func igIsMouseDragging(button: ImGuiMouseButton, lock_threshold: Float32): Bool
 
-@C
 foreign func igIsMouseHoveringRect(r_min: ImVec2, r_max: ImVec2, clip: Bool): Bool
 
-@C
 foreign func igIsMouseKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsMousePosValid(mouse_pos: CPointer<ImVec2>): Bool
 
-@C
 foreign func igIsMouseReleased_Nil(button: ImGuiMouseButton): Bool
 
-@C
 foreign func igIsMouseReleased_ID(button: ImGuiMouseButton, owner_id: ImGuiID): Bool
 
-@C
 foreign func igIsNamedKey(key: ImGuiKey): Bool
 
-@C
 foreign func igIsNamedKeyOrMod(key: ImGuiKey): Bool
 
-@C
 foreign func igIsPopupOpen_Str(str_id: CString, flags: ImGuiPopupFlags): Bool
 
-@C
 foreign func igIsPopupOpen_ID(id: ImGuiID, popup_flags: ImGuiPopupFlags): Bool
 
-@C
 foreign func igIsRectVisible_Nil(size: ImVec2): Bool
 
-@C
 foreign func igIsRectVisible_Vec2(rect_min: ImVec2, rect_max: ImVec2): Bool
 
-@C
 foreign func igIsWindowAbove(potential_above: CPointer<ImGuiWindow>, potential_below: CPointer<ImGuiWindow>): Bool
 
-@C
 foreign func igIsWindowAppearing(): Bool
 
-@C
 foreign func igIsWindowChildOf(window: CPointer<ImGuiWindow>, potential_parent: CPointer<ImGuiWindow>, popup_hierarchy: Bool, dock_hierarchy: Bool): Bool
 
-@C
 foreign func igIsWindowCollapsed(): Bool
 
-@C
 foreign func igIsWindowContentHoverable(window: CPointer<ImGuiWindow>, flags: ImGuiHoveredFlags): Bool
 
-@C
 foreign func igIsWindowDocked(): Bool
 
-@C
 foreign func igIsWindowFocused(flags: ImGuiFocusedFlags): Bool
 
-@C
 foreign func igIsWindowHovered(flags: ImGuiHoveredFlags): Bool
 
-@C
 foreign func igIsWindowNavFocusable(window: CPointer<ImGuiWindow>): Bool
 
-@C
 foreign func igIsWindowWithinBeginStackOf(window: CPointer<ImGuiWindow>, potential_parent: CPointer<ImGuiWindow>): Bool
 
-@C
 foreign func igItemAdd(bb: ImRect, id: ImGuiID, nav_bb: CPointer<ImRect>, extra_flags: ImGuiItemFlags): Bool
 
-@C
 foreign func igItemHoverable(bb: ImRect, id: ImGuiID, item_flags: ImGuiItemFlags): Bool
 
-@C
 foreign func igItemSize_Vec2(size: ImVec2, text_baseline_y: Float32): Unit
 
-@C
 foreign func igItemSize_Rect(bb: ImRect, text_baseline_y: Float32): Unit
 
-@C
 foreign func igKeepAliveID(id: ImGuiID): Unit
 
-@C
 foreign func igLabelText(label: CString, fmt: CString, ...): Unit
 
-@C
-foreign func igLabelTextV(label: CString, fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igLabelTextV(label: CString, fmt: CString, args: va_list): Unit
 
-@C
 foreign func igListBox_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, height_in_items: Int32): Bool
 
-@C
 foreign func igListBox_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, height_in_items: Int32): Bool
 
-@C
 foreign func igLoadIniSettingsFromDisk(ini_filename: CString): Unit
 
-@C
 foreign func igLoadIniSettingsFromMemory(ini_data: CString, ini_size: UIntNative): Unit
 
-@C
 foreign func igLocalizeGetMsg(key: ImGuiLocKey): CString
 
-@C
 foreign func igLocalizeRegisterEntries(entries: CPointer<ImGuiLocEntry>, count: Int32): Unit
 
-@C
 foreign func igLogBegin(`type`: ImGuiLogType, auto_open_depth: Int32): Unit
 
-@C
 foreign func igLogButtons(): Unit
 
-@C
 foreign func igLogFinish(): Unit
 
-@C
 foreign func igLogRenderedText(ref_pos: CPointer<ImVec2>, text: CString, text_end: CString): Unit
 
-@C
 foreign func igLogSetNextTextDecoration(prefix: CString, suffix: CString): Unit
 
-@C
 foreign func igLogText(fmt: CString, ...): Unit
 
-@C
-foreign func igLogTextV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igLogTextV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igLogToBuffer(auto_open_depth: Int32): Unit
 
-@C
 foreign func igLogToClipboard(auto_open_depth: Int32): Unit
 
-@C
 foreign func igLogToFile(auto_open_depth: Int32, filename: CString): Unit
 
-@C
 foreign func igLogToTTY(auto_open_depth: Int32): Unit
 
-@C
 foreign func igMarkIniSettingsDirty_Nil(): Unit
 
-@C
 foreign func igMarkIniSettingsDirty_WindowPtr(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igMarkItemEdited(id: ImGuiID): Unit
 
-@C
 foreign func igMemAlloc(size: UIntNative): CPointer<Unit>
 
-@C
 foreign func igMemFree(ptr: CPointer<Unit>): Unit
 
-@C
 foreign func igMenuItem_Bool(label: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool
 
-@C
 foreign func igMenuItem_BoolPtr(label: CString, shortcut: CString, p_selected: CPointer<Bool>, enabled: Bool): Bool
 
-@C
 foreign func igMenuItemEx(label: CString, icon: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool
 
-@C
 foreign func igMouseButtonToKey(button: ImGuiMouseButton): ImGuiKey
 
-@C
 foreign func igNavClearPreferredPosForAxis(axis: ImGuiAxis): Unit
 
-@C
 foreign func igNavHighlightActivated(id: ImGuiID): Unit
 
-@C
 foreign func igNavInitRequestApplyResult(): Unit
 
-@C
 foreign func igNavInitWindow(window: CPointer<ImGuiWindow>, force_reinit: Bool): Unit
 
-@C
 foreign func igNavMoveRequestApplyResult(): Unit
 
-@C
 foreign func igNavMoveRequestButNoResultYet(): Bool
 
-@C
 foreign func igNavMoveRequestCancel(): Unit
 
-@C
 foreign func igNavMoveRequestForward(move_dir: ImGuiDir, clip_dir: ImGuiDir, move_flags: ImGuiNavMoveFlags, scroll_flags: ImGuiScrollFlags): Unit
 
-@C
 foreign func igNavMoveRequestResolveWithLastItem(result: CPointer<ImGuiNavItemData>): Unit
 
-@C
 foreign func igNavMoveRequestResolveWithPastTreeNode(result: CPointer<ImGuiNavItemData>, tree_node_data: CPointer<ImGuiNavTreeNodeData>): Unit
 
-@C
 foreign func igNavMoveRequestSubmit(move_dir: ImGuiDir, clip_dir: ImGuiDir, move_flags: ImGuiNavMoveFlags, scroll_flags: ImGuiScrollFlags): Unit
 
-@C
 foreign func igNavMoveRequestTryWrapping(window: CPointer<ImGuiWindow>, move_flags: ImGuiNavMoveFlags): Unit
 
-@C
 foreign func igNavRestoreHighlightAfterMove(): Unit
 
-@C
 foreign func igNavUpdateCurrentWindowIsScrollPushableX(): Unit
 
-@C
 foreign func igNewFrame(): Unit
 
-@C
 foreign func igNewLine(): Unit
 
-@C
 foreign func igNextColumn(): Unit
 
-@C
 foreign func igOpenPopup_Str(str_id: CString, popup_flags: ImGuiPopupFlags): Unit
 
-@C
 foreign func igOpenPopup_ID(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit
 
-@C
 foreign func igOpenPopupEx(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit
 
-@C
 foreign func igOpenPopupOnItemClick(str_id: CString, popup_flags: ImGuiPopupFlags): Unit
 
-@C
 foreign func igPlotEx(plot_type: ImGuiPlotType, label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, size_arg: ImVec2): Int32
 
-@C
 foreign func igPlotHistogram_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
 
-@C
 foreign func igPlotHistogram_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
 
-@C
 foreign func igPlotLines_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
 
-@C
 foreign func igPlotLines_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
 
-@C
 foreign func igPopButtonRepeat(): Unit
 
-@C
 foreign func igPopClipRect(): Unit
 
-@C
 foreign func igPopColumnsBackground(): Unit
 
-@C
 foreign func igPopFocusScope(): Unit
 
-@C
 foreign func igPopFont(): Unit
 
-@C
 foreign func igPopID(): Unit
 
-@C
 foreign func igPopItemFlag(): Unit
 
-@C
 foreign func igPopItemWidth(): Unit
 
-@C
 foreign func igPopStyleColor(count: Int32): Unit
 
-@C
 foreign func igPopStyleVar(count: Int32): Unit
 
-@C
 foreign func igPopTabStop(): Unit
 
-@C
 foreign func igPopTextWrapPos(): Unit
 
-@C
 foreign func igProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CString): Unit
 
-@C
 foreign func igPushButtonRepeat(repeat: Bool): Unit
 
-@C
 foreign func igPushClipRect(clip_rect_min: ImVec2, clip_rect_max: ImVec2, intersect_with_current_clip_rect: Bool): Unit
 
-@C
 foreign func igPushColumnClipRect(column_index: Int32): Unit
 
-@C
 foreign func igPushColumnsBackground(): Unit
 
-@C
 foreign func igPushFocusScope(id: ImGuiID): Unit
 
-@C
 foreign func igPushFont(font: CPointer<ImFont>): Unit
 
-@C
 foreign func igPushID_Str(str_id: CString): Unit
 
-@C
 foreign func igPushID_StrStr(str_id_begin: CString, str_id_end: CString): Unit
 
-@C
 foreign func igPushID_Ptr(ptr_id: CPointer<Unit>): Unit
 
-@C
 foreign func igPushID_Int(int_id: Int32): Unit
 
-@C
 foreign func igPushItemFlag(option: ImGuiItemFlags, enabled: Bool): Unit
 
-@C
 foreign func igPushItemWidth(item_width: Float32): Unit
 
-@C
 foreign func igPushMultiItemsWidths(components: Int32, width_full: Float32): Unit
 
-@C
 foreign func igPushOverrideID(id: ImGuiID): Unit
 
-@C
 foreign func igPushStyleColor_U32(idx: ImGuiCol, col: ImU32): Unit
 
-@C
 foreign func igPushStyleColor_Vec4(idx: ImGuiCol, col: ImVec4): Unit
 
-@C
 foreign func igPushStyleVar_Float(idx: ImGuiStyleVar, val: Float32): Unit
 
-@C
 foreign func igPushStyleVar_Vec2(idx: ImGuiStyleVar, val: ImVec2): Unit
 
-@C
 foreign func igPushTabStop(tab_stop: Bool): Unit
 
-@C
 foreign func igPushTextWrapPos(wrap_local_pos_x: Float32): Unit
 
-@C
 foreign func igRadioButton_Bool(label: CString, active: Bool): Bool
 
-@C
 foreign func igRadioButton_IntPtr(label: CString, v: CPointer<Int32>, v_button: Int32): Bool
 
-@C
 foreign func igRemoveContextHook(context: CPointer<ImGuiContext>, hook_to_remove: ImGuiID): Unit
 
-@C
 foreign func igRemoveSettingsHandler(type_name: CString): Unit
 
-@C
 foreign func igRender(): Unit
 
-@C
 foreign func igRenderArrow(draw_list: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, dir: ImGuiDir, scale: Float32): Unit
 
-@C
 foreign func igRenderArrowDockMenu(draw_list: CPointer<ImDrawList>, p_min: ImVec2, sz: Float32, col: ImU32): Unit
 
-@C
 foreign func igRenderArrowPointingAt(draw_list: CPointer<ImDrawList>, pos: ImVec2, half_sz: ImVec2, direction: ImGuiDir, col: ImU32): Unit
 
-@C
 foreign func igRenderBullet(draw_list: CPointer<ImDrawList>, pos: ImVec2, col: ImU32): Unit
 
-@C
 foreign func igRenderCheckMark(draw_list: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, sz: Float32): Unit
 
-@C
 foreign func igRenderColorRectWithAlphaCheckerboard(draw_list: CPointer<ImDrawList>, p_min: ImVec2, p_max: ImVec2, fill_col: ImU32, grid_step: Float32, grid_off: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit
 
-@C
 foreign func igRenderDragDropTargetRect(bb: ImRect, item_clip_rect: ImRect): Unit
 
-@C
 foreign func igRenderFrame(p_min: ImVec2, p_max: ImVec2, fill_col: ImU32, border: Bool, rounding: Float32): Unit
 
-@C
 foreign func igRenderFrameBorder(p_min: ImVec2, p_max: ImVec2, rounding: Float32): Unit
 
-@C
 foreign func igRenderMouseCursor(pos: ImVec2, scale: Float32, mouse_cursor: ImGuiMouseCursor, col_fill: ImU32, col_border: ImU32, col_shadow: ImU32): Unit
 
-@C
 foreign func igRenderNavHighlight(bb: ImRect, id: ImGuiID, flags: ImGuiNavHighlightFlags): Unit
 
-@C
 foreign func igRenderPlatformWindowsDefault(platform_render_arg: CPointer<Unit>, renderer_render_arg: CPointer<Unit>): Unit
 
-@C
 foreign func igRenderRectFilledRangeH(draw_list: CPointer<ImDrawList>, rect: ImRect, col: ImU32, x_start_norm: Float32, x_end_norm: Float32, rounding: Float32): Unit
 
-@C
 foreign func igRenderRectFilledWithHole(draw_list: CPointer<ImDrawList>, outer: ImRect, inner: ImRect, col: ImU32, rounding: Float32): Unit
 
-@C
 foreign func igRenderText(pos: ImVec2, text: CString, text_end: CString, hide_text_after_hash: Bool): Unit
 
-@C
 foreign func igRenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
 
-@C
 foreign func igRenderTextClippedEx(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
 
-@C
 foreign func igRenderTextEllipsis(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, clip_max_x: Float32, ellipsis_max_x: Float32, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>): Unit
 
-@C
 foreign func igRenderTextWrapped(pos: ImVec2, text: CString, text_end: CString, wrap_width: Float32): Unit
 
-@C
 foreign func igResetMouseDragDelta(button: ImGuiMouseButton): Unit
 
-@C
 foreign func igSameLine(offset_from_start_x: Float32, spacing: Float32): Unit
 
-@C
 foreign func igSaveIniSettingsToDisk(ini_filename: CString): Unit
 
-@C
 foreign func igSaveIniSettingsToMemory(out_ini_size: CPointer<UIntNative>): CString
 
-@C
 foreign func igScaleWindowsInViewport(viewport: CPointer<ImGuiViewportP>, scale: Float32): Unit
 
-@C
 foreign func igScrollToBringRectIntoView(window: CPointer<ImGuiWindow>, rect: ImRect): Unit
 
-@C
 foreign func igScrollToItem(flags: ImGuiScrollFlags): Unit
 
-@C
 foreign func igScrollToRect(window: CPointer<ImGuiWindow>, rect: ImRect, flags: ImGuiScrollFlags): Unit
 
-@C
 foreign func igScrollToRectEx(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>, rect: ImRect, flags: ImGuiScrollFlags): Unit
 
-@C
 foreign func igScrollbar(axis: ImGuiAxis): Unit
 
-@C
 foreign func igScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scroll_v: CPointer<ImS64>, avail_v: ImS64, contents_v: ImS64, flags: ImDrawFlags): Bool
 
-@C
 foreign func igSelectable_Bool(label: CString, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool
 
-@C
 foreign func igSelectable_BoolPtr(label: CString, p_selected: CPointer<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool
 
-@C
 foreign func igSeparator(): Unit
 
-@C
 foreign func igSeparatorEx(flags: ImGuiSeparatorFlags, thickness: Float32): Unit
 
-@C
 foreign func igSeparatorText(label: CString): Unit
 
-@C
 foreign func igSeparatorTextEx(id: ImGuiID, label: CString, label_end: CString, extra_width: Float32): Unit
 
-@C
 foreign func igSetActiveID(id: ImGuiID, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igSetActiveIdUsingAllKeyboardKeys(): Unit
 
-@C
 foreign func igSetAllocatorFunctions(alloc_func: ImGuiMemAllocFunc, free_func: ImGuiMemFreeFunc, user_data: CPointer<Unit>): Unit
 
-@C
 foreign func igSetClipboardText(text: CString): Unit
 
-@C
 foreign func igSetColorEditOptions(flags: ImGuiColorEditFlags): Unit
 
-@C
 foreign func igSetColumnOffset(column_index: Int32, offset_x: Float32): Unit
 
-@C
 foreign func igSetColumnWidth(column_index: Int32, width: Float32): Unit
 
-@C
 foreign func igSetCurrentContext(ctx: CPointer<ImGuiContext>): Unit
 
-@C
 foreign func igSetCurrentFont(font: CPointer<ImFont>): Unit
 
-@C
 foreign func igSetCurrentViewport(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func igSetCursorPos(local_pos: ImVec2): Unit
 
-@C
 foreign func igSetCursorPosX(local_x: Float32): Unit
 
-@C
 foreign func igSetCursorPosY(local_y: Float32): Unit
 
-@C
 foreign func igSetCursorScreenPos(pos: ImVec2): Unit
 
-@C
 foreign func igSetDragDropPayload(`type`: CString, data: CPointer<Unit>, sz: UIntNative, cond: ImGuiCond): Bool
 
-@C
 foreign func igSetFocusID(id: ImGuiID, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igSetHoveredID(id: ImGuiID): Unit
 
-@C
 foreign func igSetItemDefaultFocus(): Unit
 
-@C
 foreign func igSetItemKeyOwner(key: ImGuiKey, flags: ImGuiInputFlags): Unit
 
-@C
 foreign func igSetItemTooltip(fmt: CString, ...): Unit
 
-@C
-foreign func igSetItemTooltipV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igSetItemTooltipV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igSetKeyOwner(key: ImGuiKey, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit
 
-@C
 foreign func igSetKeyOwnersForKeyChord(key: ImGuiKeyChord, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit
 
-@C
 foreign func igSetKeyboardFocusHere(offset: Int32): Unit
 
-@C
 foreign func igSetLastItemData(item_id: ImGuiID, in_flags: ImGuiItemFlags, status_flags: ImGuiItemStatusFlags, item_rect: ImRect): Unit
 
-@C
 foreign func igSetMouseCursor(cursor_type: ImGuiMouseCursor): Unit
 
-@C
 foreign func igSetNavFocusScope(focus_scope_id: ImGuiID): Unit
 
-@C
 foreign func igSetNavID(id: ImGuiID, nav_layer: ImGuiNavLayer, focus_scope_id: ImGuiID, rect_rel: ImRect): Unit
 
-@C
 foreign func igSetNavWindow(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igSetNextFrameWantCaptureKeyboard(want_capture_keyboard: Bool): Unit
 
-@C
 foreign func igSetNextFrameWantCaptureMouse(want_capture_mouse: Bool): Unit
 
-@C
 foreign func igSetNextItemAllowOverlap(): Unit
 
-@C
 foreign func igSetNextItemOpen(is_open: Bool, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetNextItemRefVal(data_type: ImGuiDataType, p_data: CPointer<Unit>): Unit
 
-@C
 foreign func igSetNextItemSelectionUserData(selection_user_data: ImGuiSelectionUserData): Unit
 
-@C
 foreign func igSetNextItemShortcut(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags): Unit
 
-@C
 foreign func igSetNextItemWidth(item_width: Float32): Unit
 
-@C
 foreign func igSetNextWindowBgAlpha(alpha: Float32): Unit
 
-@C
 foreign func igSetNextWindowClass(window_class: CPointer<ImGuiWindowClass>): Unit
 
-@C
 foreign func igSetNextWindowCollapsed(collapsed: Bool, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetNextWindowContentSize(size: ImVec2): Unit
 
-@C
 foreign func igSetNextWindowDockID(dock_id: ImGuiID, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetNextWindowFocus(): Unit
 
-@C
 foreign func igSetNextWindowPos(pos: ImVec2, cond: ImGuiCond, pivot: ImVec2): Unit
 
-@C
 foreign func igSetNextWindowRefreshPolicy(flags: ImGuiWindowRefreshFlags): Unit
 
-@C
 foreign func igSetNextWindowScroll(scroll: ImVec2): Unit
 
-@C
 foreign func igSetNextWindowSize(size: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetNextWindowSizeConstraints(size_min: ImVec2, size_max: ImVec2, custom_callback: ImGuiSizeCallback, custom_callback_data: CPointer<Unit>): Unit
 
-@C
 foreign func igSetNextWindowViewport(viewport_id: ImGuiID): Unit
 
-@C
 foreign func igSetScrollFromPosX_Float(local_x: Float32, center_x_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollFromPosX_WindowPtr(window: CPointer<ImGuiWindow>, local_x: Float32, center_x_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollFromPosY_Float(local_y: Float32, center_y_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollFromPosY_WindowPtr(window: CPointer<ImGuiWindow>, local_y: Float32, center_y_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollHereX(center_x_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollHereY(center_y_ratio: Float32): Unit
 
-@C
 foreign func igSetScrollX_Float(scroll_x: Float32): Unit
 
-@C
 foreign func igSetScrollX_WindowPtr(window: CPointer<ImGuiWindow>, scroll_x: Float32): Unit
 
-@C
 foreign func igSetScrollY_Float(scroll_y: Float32): Unit
 
-@C
 foreign func igSetScrollY_WindowPtr(window: CPointer<ImGuiWindow>, scroll_y: Float32): Unit
 
-@C
 foreign func igSetShortcutRouting(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool
 
-@C
 foreign func igSetStateStorage(storage: CPointer<ImGuiStorage>): Unit
 
-@C
 foreign func igSetTabItemClosed(tab_or_docked_window_label: CString): Unit
 
-@C
 foreign func igSetTooltip(fmt: CString, ...): Unit
 
-@C
-foreign func igSetTooltipV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igSetTooltipV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igSetWindowClipRectBeforeSetChannel(window: CPointer<ImGuiWindow>, clip_rect: ImRect): Unit
 
-@C
 foreign func igSetWindowCollapsed_Bool(collapsed: Bool, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowCollapsed_Str(name: CString, collapsed: Bool, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowCollapsed_WindowPtr(window: CPointer<ImGuiWindow>, collapsed: Bool, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowDock(window: CPointer<ImGuiWindow>, dock_id: ImGuiID, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowFocus_Nil(): Unit
 
-@C
 foreign func igSetWindowFocus_Str(name: CString): Unit
 
-@C
 foreign func igSetWindowFontScale(scale: Float32): Unit
 
-@C
 foreign func igSetWindowHiddenAndSkipItemsForCurrentFrame(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igSetWindowHitTestHole(window: CPointer<ImGuiWindow>, pos: ImVec2, size: ImVec2): Unit
 
-@C
 foreign func igSetWindowParentWindowForFocusRoute(window: CPointer<ImGuiWindow>, parent_window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igSetWindowPos_Vec2(pos: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowPos_Str(name: CString, pos: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowPos_WindowPtr(window: CPointer<ImGuiWindow>, pos: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowSize_Vec2(size: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowSize_Str(name: CString, size: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowSize_WindowPtr(window: CPointer<ImGuiWindow>, size: ImVec2, cond: ImGuiCond): Unit
 
-@C
 foreign func igSetWindowViewport(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>): Unit
 
-@C
 foreign func igShadeVertsLinearColorGradientKeepAlpha(draw_list: CPointer<ImDrawList>, vert_start_idx: Int32, vert_end_idx: Int32, gradient_p0: ImVec2, gradient_p1: ImVec2, col0: ImU32, col1: ImU32): Unit
 
-@C
 foreign func igShadeVertsLinearUV(draw_list: CPointer<ImDrawList>, vert_start_idx: Int32, vert_end_idx: Int32, a: ImVec2, b: ImVec2, uv_a: ImVec2, uv_b: ImVec2, clamp: Bool): Unit
 
-@C
 foreign func igShadeVertsTransformPos(draw_list: CPointer<ImDrawList>, vert_start_idx: Int32, vert_end_idx: Int32, pivot_in: ImVec2, cos_a: Float32, sin_a: Float32, pivot_out: ImVec2): Unit
 
-@C
 foreign func igShortcut_Nil(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags): Bool
 
-@C
 foreign func igShortcut_ID(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool
 
-@C
 foreign func igShowAboutWindow(p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igShowDebugLogWindow(p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igShowDemoWindow(p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igShowFontAtlas(atlas: CPointer<ImFontAtlas>): Unit
 
-@C
 foreign func igShowFontSelector(label: CString): Unit
 
-@C
 foreign func igShowIDStackToolWindow(p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igShowMetricsWindow(p_open: CPointer<Bool>): Unit
 
-@C
 foreign func igShowStyleEditor(ref: CPointer<ImGuiStyle>): Unit
 
-@C
 foreign func igShowStyleSelector(label: CString): Bool
 
-@C
 foreign func igShowUserGuide(): Unit
 
-@C
 foreign func igShrinkWidths(items: CPointer<ImGuiShrinkWidthItem>, count: Int32, width_excess: Float32): Unit
 
-@C
 foreign func igShutdown(): Unit
 
-@C
 foreign func igSliderAngle(label: CString, v_rad: CPointer<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags, out_grab_bb: CPointer<ImRect>): Bool
 
-@C
 foreign func igSliderFloat(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderFloat2(label: CString, v: VArray<Float32, $2>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderFloat3(label: CString, v: VArray<Float32, $3>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderFloat4(label: CString, v: VArray<Float32, $4>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderInt(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderInt2(label: CString, v: VArray<Int32, $2>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderInt3(label: CString, v: VArray<Int32, $3>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderInt4(label: CString, v: VArray<Int32, $4>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSliderScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igSmallButton(label: CString): Bool
 
-@C
 foreign func igSpacing(): Unit
 
-@C
 foreign func igSplitterBehavior(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, size1: CPointer<Float32>, size2: CPointer<Float32>, min_size1: Float32, min_size2: Float32, hover_extend: Float32, hover_visibility_delay: Float32, bg_col: ImU32): Bool
 
-@C
 foreign func igStartMouseMovingWindow(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igStartMouseMovingWindowOrNode(window: CPointer<ImGuiWindow>, node: CPointer<ImGuiDockNode>, undock: Bool): Unit
 
-@C
 foreign func igStyleColorsClassic(dst: CPointer<ImGuiStyle>): Unit
 
-@C
 foreign func igStyleColorsDark(dst: CPointer<ImGuiStyle>): Unit
 
-@C
 foreign func igStyleColorsLight(dst: CPointer<ImGuiStyle>): Unit
 
-@C
 foreign func igTabBarAddTab(tab_bar: CPointer<ImGuiTabBar>, tab_flags: ImGuiTabItemFlags, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igTabBarCloseTab(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): Unit
 
-@C
 foreign func igTabBarFindMostRecentlySelectedTabForActiveWindow(tab_bar: CPointer<ImGuiTabBar>): CPointer<ImGuiTabItem>
 
-@C
 foreign func igTabBarFindTabByID(tab_bar: CPointer<ImGuiTabBar>, tab_id: ImGuiID): CPointer<ImGuiTabItem>
 
-@C
 foreign func igTabBarFindTabByOrder(tab_bar: CPointer<ImGuiTabBar>, order: Int32): CPointer<ImGuiTabItem>
 
-@C
 foreign func igTabBarGetCurrentTab(tab_bar: CPointer<ImGuiTabBar>): CPointer<ImGuiTabItem>
 
-@C
 foreign func igTabBarGetTabName(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): CString
 
-@C
 foreign func igTabBarGetTabOrder(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): Int32
 
-@C
 foreign func igTabBarProcessReorder(tab_bar: CPointer<ImGuiTabBar>): Bool
 
-@C
 foreign func igTabBarQueueFocus(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): Unit
 
-@C
 foreign func igTabBarQueueReorder(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>, offset: Int32): Unit
 
-@C
 foreign func igTabBarQueueReorderFromMousePos(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>, mouse_pos: ImVec2): Unit
 
-@C
 foreign func igTabBarRemoveTab(tab_bar: CPointer<ImGuiTabBar>, tab_id: ImGuiID): Unit
 
-@C
 foreign func igTabItemBackground(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, col: ImU32): Unit
 
-@C
 foreign func igTabItemButton(label: CString, flags: ImGuiTabItemFlags): Bool
 
-@C
 foreign func igTabItemCalcSize_Str(pOut: CPointer<ImVec2>, label: CString, has_close_button_or_unsaved_marker: Bool): Unit
 
-@C
 foreign func igTabItemCalcSize_WindowPtr(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igTabItemEx(tab_bar: CPointer<ImGuiTabBar>, label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags, docked_window: CPointer<ImGuiWindow>): Bool
 
-@C
 foreign func igTabItemLabelAndCloseButton(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, frame_padding: ImVec2, label: CString, tab_id: ImGuiID, close_button_id: ImGuiID, is_contents_visible: Bool, out_just_closed: CPointer<Bool>, out_text_clipped: CPointer<Bool>): Unit
 
-@C
 foreign func igTableAngledHeadersRow(): Unit
 
-@C
 foreign func igTableAngledHeadersRowEx(row_id: ImGuiID, angle: Float32, max_label_width: Float32, data: CPointer<ImGuiTableHeaderData>, data_count: Int32): Unit
 
-@C
 foreign func igTableBeginApplyRequests(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableBeginCell(table: CPointer<ImGuiTable>, column_n: Int32): Unit
 
-@C
 foreign func igTableBeginContextMenuPopup(table: CPointer<ImGuiTable>): Bool
 
-@C
 foreign func igTableBeginInitMemory(table: CPointer<ImGuiTable>, columns_count: Int32): Unit
 
-@C
 foreign func igTableBeginRow(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableDrawBorders(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableDrawDefaultContextMenu(table: CPointer<ImGuiTable>, flags_for_section_to_display: ImGuiTableFlags): Unit
 
-@C
 foreign func igTableEndCell(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableEndRow(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableFindByID(id: ImGuiID): CPointer<ImGuiTable>
 
-@C
 foreign func igTableFixColumnSortDirection(table: CPointer<ImGuiTable>, column: CPointer<ImGuiTableColumn>): Unit
 
-@C
 foreign func igTableGcCompactSettings(): Unit
 
-@C
 foreign func igTableGcCompactTransientBuffers_TablePtr(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableGcCompactTransientBuffers_TableTempDataPtr(table: CPointer<ImGuiTableTempData>): Unit
 
-@C
 foreign func igTableGetBoundSettings(table: CPointer<ImGuiTable>): CPointer<ImGuiTableSettings>
 
-@C
 foreign func igTableGetCellBgRect(pOut: CPointer<ImRect>, table: CPointer<ImGuiTable>, column_n: Int32): Unit
 
-@C
 foreign func igTableGetColumnCount(): Int32
 
-@C
 foreign func igTableGetColumnFlags(column_n: Int32): ImGuiTableColumnFlags
 
-@C
 foreign func igTableGetColumnIndex(): Int32
 
-@C
 foreign func igTableGetColumnName_Int(column_n: Int32): CString
 
-@C
 foreign func igTableGetColumnName_TablePtr(table: CPointer<ImGuiTable>, column_n: Int32): CString
 
-@C
 foreign func igTableGetColumnNextSortDirection(column: CPointer<ImGuiTableColumn>): ImGuiSortDirection
 
-@C
 foreign func igTableGetColumnResizeID(table: CPointer<ImGuiTable>, column_n: Int32, instance_no: Int32): ImGuiID
 
-@C
 foreign func igTableGetColumnWidthAuto(table: CPointer<ImGuiTable>, column: CPointer<ImGuiTableColumn>): Float32
 
-@C
 foreign func igTableGetHeaderAngledMaxLabelWidth(): Float32
 
-@C
 foreign func igTableGetHeaderRowHeight(): Float32
 
-@C
 foreign func igTableGetHoveredColumn(): Int32
 
-@C
 foreign func igTableGetHoveredRow(): Int32
 
-@C
 foreign func igTableGetInstanceData(table: CPointer<ImGuiTable>, instance_no: Int32): CPointer<ImGuiTableInstanceData>
 
-@C
 foreign func igTableGetInstanceID(table: CPointer<ImGuiTable>, instance_no: Int32): ImGuiID
 
-@C
 foreign func igTableGetMaxColumnWidth(table: CPointer<ImGuiTable>, column_n: Int32): Float32
 
-@C
 foreign func igTableGetRowIndex(): Int32
 
-@C
 foreign func igTableGetSortSpecs(): CPointer<ImGuiTableSortSpecs>
 
-@C
 foreign func igTableHeader(label: CString): Unit
 
-@C
 foreign func igTableHeadersRow(): Unit
 
-@C
 foreign func igTableLoadSettings(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableMergeDrawChannels(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableNextColumn(): Bool
 
-@C
 foreign func igTableNextRow(row_flags: ImGuiTableRowFlags, min_row_height: Float32): Unit
 
-@C
 foreign func igTableOpenContextMenu(column_n: Int32): Unit
 
-@C
 foreign func igTablePopBackgroundChannel(): Unit
 
-@C
 foreign func igTablePushBackgroundChannel(): Unit
 
-@C
 foreign func igTableRemove(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableResetSettings(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableSaveSettings(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableSetBgColor(target: ImGuiTableBgTarget, color: ImU32, column_n: Int32): Unit
 
-@C
 foreign func igTableSetColumnEnabled(column_n: Int32, v: Bool): Unit
 
-@C
 foreign func igTableSetColumnIndex(column_n: Int32): Bool
 
-@C
 foreign func igTableSetColumnSortDirection(column_n: Int32, sort_direction: ImGuiSortDirection, append_to_sort_specs: Bool): Unit
 
-@C
 foreign func igTableSetColumnWidth(column_n: Int32, width: Float32): Unit
 
-@C
 foreign func igTableSetColumnWidthAutoAll(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableSetColumnWidthAutoSingle(table: CPointer<ImGuiTable>, column_n: Int32): Unit
 
-@C
 foreign func igTableSettingsAddSettingsHandler(): Unit
 
-@C
 foreign func igTableSettingsCreate(id: ImGuiID, columns_count: Int32): CPointer<ImGuiTableSettings>
 
-@C
 foreign func igTableSettingsFindByID(id: ImGuiID): CPointer<ImGuiTableSettings>
 
-@C
 foreign func igTableSetupColumn(label: CString, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit
 
-@C
 foreign func igTableSetupDrawChannels(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableSetupScrollFreeze(cols: Int32, rows: Int32): Unit
 
-@C
 foreign func igTableSortSpecsBuild(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableSortSpecsSanitize(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableUpdateBorders(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableUpdateColumnsWeightFromWidth(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTableUpdateLayout(table: CPointer<ImGuiTable>): Unit
 
-@C
 foreign func igTeleportMousePos(pos: ImVec2): Unit
 
-@C
 foreign func igTempInputIsActive(id: ImGuiID): Bool
 
-@C
 foreign func igTempInputScalar(bb: ImRect, id: ImGuiID, label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_clamp_min: CPointer<Unit>, p_clamp_max: CPointer<Unit>): Bool
 
-@C
 foreign func igTempInputText(bb: ImRect, id: ImGuiID, label: CString, buf: CString, buf_size: Int32, flags: ImGuiInputTextFlags): Bool
 
-@C
 foreign func igTestKeyOwner(key: ImGuiKey, owner_id: ImGuiID): Bool
 
-@C
 foreign func igTestShortcutRouting(key_chord: ImGuiKeyChord, owner_id: ImGuiID): Bool
 
-@C
 foreign func igText(fmt: CString, ...): Unit
 
-@C
 foreign func igTextColored(col: ImVec4, fmt: CString, ...): Unit
 
-@C
-foreign func igTextColoredV(col: ImVec4, fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igTextColoredV(col: ImVec4, fmt: CString, args: va_list): Unit
 
-@C
 foreign func igTextDisabled(fmt: CString, ...): Unit
 
-@C
-foreign func igTextDisabledV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igTextDisabledV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igTextEx(text: CString, text_end: CString, flags: ImGuiTextFlags): Unit
 
-@C
 foreign func igTextUnformatted(text: CString, text_end: CString): Unit
 
-@C
-foreign func igTextV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igTextV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igTextWrapped(fmt: CString, ...): Unit
 
-@C
-foreign func igTextWrappedV(fmt: CString, ...): Unit
+// Cangjie does not support `va_list`
+// foreign func igTextWrappedV(fmt: CString, args: va_list): Unit
 
-@C
 foreign func igTranslateWindowsInViewport(viewport: CPointer<ImGuiViewportP>, old_pos: ImVec2, new_pos: ImVec2): Unit
 
-@C
 foreign func igTreeNode_Str(label: CString): Bool
 
-@C
 foreign func igTreeNode_StrStr(str_id: CString, fmt: CString, ...): Bool
 
-@C
 foreign func igTreeNode_Ptr(ptr_id: CPointer<Unit>, fmt: CString, ...): Bool
 
-@C
 foreign func igTreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CString, label_end: CString): Bool
 
-@C
 foreign func igTreeNodeEx_Str(label: CString, flags: ImGuiTreeNodeFlags): Bool
 
-@C
 foreign func igTreeNodeEx_StrStr(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
 
-@C
 foreign func igTreeNodeEx_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
 
-@C
-foreign func igTreeNodeExV_Str(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
+// Cangjie does not support `va_list`
+// foreign func igTreeNodeExV_Str(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool
 
-@C
-foreign func igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
+// Cangjie does not support `va_list`
+// foreign func igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool
 
-@C
 foreign func igTreeNodeSetOpen(id: ImGuiID, `open`: Bool): Unit
 
-@C
 foreign func igTreeNodeUpdateNextOpen(id: ImGuiID, flags: ImGuiTreeNodeFlags): Bool
 
-@C
-foreign func igTreeNodeV_Str(str_id: CString, fmt: CString, ...): Bool
+// Cangjie does not support `va_list`
+// foreign func igTreeNodeV_Str(str_id: CString, fmt: CString, args: va_list): Bool
 
-@C
-foreign func igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CString, ...): Bool
+// Cangjie does not support `va_list`
+// foreign func igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CString, args: va_list): Bool
 
-@C
 foreign func igTreePop(): Unit
 
-@C
 foreign func igTreePush_Str(str_id: CString): Unit
 
-@C
 foreign func igTreePush_Ptr(ptr_id: CPointer<Unit>): Unit
 
-@C
 foreign func igTreePushOverrideID(id: ImGuiID): Unit
 
-@C
 foreign func igTypingSelectFindBestLeadingMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>): Int32
 
-@C
 foreign func igTypingSelectFindMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
 
-@C
 foreign func igTypingSelectFindNextSingleCharMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
 
-@C
 foreign func igUnindent(indent_w: Float32): Unit
 
-@C
 foreign func igUpdateHoveredWindowAndCaptureFlags(): Unit
 
-@C
 foreign func igUpdateInputEvents(trickle_fast_inputs: Bool): Unit
 
-@C
 foreign func igUpdateMouseMovingWindowEndFrame(): Unit
 
-@C
 foreign func igUpdateMouseMovingWindowNewFrame(): Unit
 
-@C
 foreign func igUpdatePlatformWindows(): Unit
 
-@C
 foreign func igUpdateWindowParentAndRootLinks(window: CPointer<ImGuiWindow>, flags: ImGuiWindowFlags, parent_window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igUpdateWindowSkipRefresh(window: CPointer<ImGuiWindow>): Unit
 
-@C
 foreign func igVSliderFloat(label: CString, size: ImVec2, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igVSliderInt(label: CString, size: ImVec2, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igVSliderScalar(label: CString, size: ImVec2, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
 
-@C
 foreign func igValue_Bool(prefix: CString, b: Bool): Unit
 
-@C
 foreign func igValue_Int(prefix: CString, v: Int32): Unit
 
-@C
 foreign func igValue_Uint(prefix: CString, v: Int32): Unit
 
-@C
 foreign func igValue_Float(prefix: CString, v: Float32, float_format: CString): Unit
 
-@C
 foreign func igWindowPosRelToAbs(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>, p: ImVec2): Unit
 
-@C
 foreign func igWindowRectAbsToRel(pOut: CPointer<ImRect>, window: CPointer<ImGuiWindow>, r: ImRect): Unit
 
-@C
 foreign func igWindowRectRelToAbs(pOut: CPointer<ImRect>, window: CPointer<ImGuiWindow>, r: ImRect): Unit
