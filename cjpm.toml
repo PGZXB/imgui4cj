@@ -5,7 +5,7 @@
   compile-option = ""
   description = "nothing here"
   link-option = ""
-  name = "imgui"
+  name = "imgui4cj"
   output-type = "dynamic"
   src-dir = ""
   target-dir = ""
