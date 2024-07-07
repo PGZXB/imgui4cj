@@ -3,7 +3,7 @@
 // +      FROM: https://github.com/PGZXB/imgui.cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package capi
+package _capi
 
 // enum ImDrawFlags_
 public type ImDrawFlags_ = Int32

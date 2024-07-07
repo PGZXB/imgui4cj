@@ -21,6 +21,8 @@ main(args: Array<String>): Int64 {
             "--impl-definitions-json=",
             "--structs-and-enums-json=",
             "--typedefs-dict-json=",
+            "--capi-impl-pkg-path=",
+            "--capi-impl-pkg-name=",
             "--capi-pkg-path=",
             "--capi-pkg-name="
         ]
@@ -30,21 +32,23 @@ main(args: Array<String>): Int64 {
     // let implDefinitionsJson = readJsonFile(argopt.getArg("impl-definitions-json").getOrThrow()).asObject()
     let structsAndEnumsJson = readJsonFile(argopt.getArg("structs-and-enums-json").getOrThrow()).asObject()
     let typedefsDictJson = readJsonFile(argopt.getArg("typedefs-dict-json").getOrThrow()).asObject()
-    let outputDir = argopt.getArg("capi-pkg-path").getOrThrow()
-    let pkgName = argopt.getArg("capi-pkg-name") ?? "capi"
+    let capiImplOutputDir = argopt.getArg("capi-impl-pkg-path").getOrThrow()
+    let capiImplPkgName = argopt.getArg("capi-impl-pkg-name").getOrThrow()
+    let capiOutputDir = argopt.getArg("capi-pkg-path").getOrThrow()
+    let capiPkgName = argopt.getArg("capi-pkg-name").getOrThrow()
 
     // Generate cimgui typedefs -> src/capi/typedefs.cj
-    let typedefsCodeFilename = "${outputDir}/typedefs.cj"
+    let typedefsCodeFilename = "${capiImplOutputDir}/typedefs.cj"
     println("Generating cimgui typedefs -> ${typedefsCodeFilename} ...")
     let typedefs = parseTypeDefsJson(typedefsDictJson)
-    genTypeDefsCode(typedefsCodeFilename, pkgName, typedefs)
+    let typeDefSymbols = genTypeDefsCode(typedefsCodeFilename, capiImplPkgName, typedefs)
     println("Generated cimgui typedefs -> ${typedefsCodeFilename}")
 
     // Generate cimgui enums -> src/capi/enums.cj
-    let enumsCodeFilename = "${outputDir}/enums.cj"
+    let enumsCodeFilename = "${capiImplOutputDir}/enums.cj"
     println("Generating cimgui enums -> ${enumsCodeFilename} ...")
     let enumDefs = parseEnumsJson(structsAndEnumsJson["enums"])
-    genEnumsCode(enumsCodeFilename, pkgName, enumDefs)
+    let enumSymbols = genEnumsCode(enumsCodeFilename, capiImplPkgName, enumDefs)
     println("Generated cimgui enums -> ${enumsCodeFilename}")
 
     // Construct global constant table (only from enum now)
@@ -90,10 +94,11 @@ main(args: Array<String>): Int64 {
     }
 
     // Generate cimgui structs -> src/capi/structs.cj
-    let structsCodeFilename = "${outputDir}/structs.cj"
+    let structsCodeFilename = "${capiImplOutputDir}/structs.cj"
     println("Generating cimgui structs -> ${structsCodeFilename} ...")
     let structDefs = parseStructsJson(structsAndEnumsJson["structs"]) + templateSpecOneStructDefs
-    genStructsCode(structsCodeFilename, pkgName, structDefs, typeAlias: typeAlias, globalConstants: globalConstants)
+    let structSymbols = genStructsCode(structsCodeFilename, capiImplPkgName, structDefs, typeAlias: typeAlias,
+        globalConstants: globalConstants)
     println("Generated cimgui structs -> ${structsCodeFilename}")
 
     // Check all types & Construct typedefs for undefined cimgui structs
@@ -109,17 +114,24 @@ main(args: Array<String>): Int64 {
     }
 
     // Generate cimgui undefined structs -> src/capi/undef_structs.cj
-    let undefStructsCodeFilename = "${outputDir}/undef_structs.cj"
+    let undefStructsCodeFilename = "${capiImplOutputDir}/undef_structs.cj"
     println("Generating cimgui undefined structs -> ${undefStructsCodeFilename} ...")
-    genTypeDefsCode(undefStructsCodeFilename, pkgName, undefStructTypedefs)
+    let undefStructSymbols = genTypeDefsCode(undefStructsCodeFilename, capiImplPkgName, undefStructTypedefs)
     println("Generated cimgui undefined structs -> ${undefStructsCodeFilename}")
 
     // Generate cimgui functions(only decl) -> src/capi/cimgui.cj
-    let funcsCodeFilename = "${outputDir}/cimgui.cj"
+    let funcsCodeFilename = "${capiImplOutputDir}/cimgui.cj"
     println("Generating cimgui functions(only decl) -> ${funcsCodeFilename} ...")
     let funcsSigs = parseFuncsJson(definitionsJson)
-    genFuncsCode(funcsCodeFilename, pkgName, funcsSigs)
+    let funcSymbols = genFuncsCode(funcsCodeFilename, capiImplPkgName, funcsSigs)
     println("Generated cimgui functions(only decl) -> ${funcsCodeFilename}")
+
+    // Generate capi package (public import _capi.xxx as xxx ...)
+    let capiCodeFilename = "${capiOutputDir}/capi.cj"
+    println("Generating capi package -> ${capiCodeFilename} ...")
+    genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
+        typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols)
+    println("Generated capi package -> ${capiCodeFilename}")
 
     return 0
 }
