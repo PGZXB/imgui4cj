@@ -21,6 +21,9 @@ public const GLFW_INPUT_MODE_RAWMOUSEMOTION: GLFWFlags = 0x00033005 // GLFW_RAW_
 public const GLFW_SWAP_INTERVAL_IMMEDIATE: GLFWFlags = 0
 public const GLFW_SWAP_INTERVAL_VSYNC: GLFWFlags = 1
 
+// int imgui4cj_initGLFW();
+foreign func imgui4cj_initGLFW(): Int32
+
 // void imgui4cj_glfwSetWindowPos(GLFWwindow *window, int x, int y);
 foreign func imgui4cj_glfwSetWindowPos(win: CPointer<Unit>, x: Int32, y: Int32): Unit
 
@@ -88,8 +91,8 @@ foreign func imgui4cj_glfwSetInputMode(win: CPointer<Unit>, mode: Int32, value: 
 foreign func imgui4cj_createGLFWOpenGL3Window(title: CString, width: Int32, height: Int32,
     afterCreateContextCallback: CFunc<() -> Unit>): CPointer<Unit>
 
-// void imgui4cj_glfwSetWindowUserPointer(GLFWwindow *window, void *pointer);
-foreign func imgui4cj_glfwSetWindowUserPointer(win: CPointer<Unit>, ptr: CPointer<GLFWWindowContext>): Unit
+// void imgui4cj_setGLFWWindowContext(GLFWwindow *window, GLFWWindowContext *pointer);
+foreign func imgui4cj_setGLFWWindowContext(win: CPointer<Unit>, ptr: CPointer<GLFWWindowContext>): Unit
 
 // void igGLFWRunLoop(GLFWwindow *window, VoidCallback loop, VoidCallback beforeRender, VoidCallback afterRender, VoidCallback beforeDestroyContext);
 foreign func imgui4cj_glfwOpenGL3MainLoop(
@@ -170,6 +173,7 @@ func loopCallbackForGLFWOpenGL3Backend(): Unit {
 struct GLFWWindowContext {
     var backgraoudColor: ImVec4 = ImVec4()
     var targetFPS: UInt32 = 30
+    var loopCallbck: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
 }
 
 public class GLFWOpenGL3Backend <: Backend {
@@ -189,12 +193,17 @@ public class GLFWOpenGL3Backend <: Backend {
     private init() {
         // `glfwWindowContext` won't be free: memory leak but OK here
         glfwWindowContext = unsafe { LibC.malloc<GLFWWindowContext>() }
+        // Init GLFW
+
     }
 
     public static func getInstance(): GLFWOpenGL3Backend {
         // TODO: Thread safe
         if (glfwOpenGL3BackendInstance.isNone()) {
             glfwOpenGL3BackendInstance = GLFWOpenGL3Backend()
+            if (unsafe { imgui4cj_initGLFW() } != 0) {
+                throw IllegalStateException("failed to init glfw")
+            }
         }
         return checkAndGetGLFWOpenGL3BackendInstance()
     }
@@ -342,7 +351,7 @@ public class GLFWOpenGL3Backend <: Backend {
             throw IllegalStateException("failed to create GLFW-OpenGL3 window")
         }
         unsafe {
-            imgui4cj_glfwSetWindowUserPointer(glfwWindowInstance, glfwWindowContext)
+            imgui4cj_setGLFWWindowContext(glfwWindowInstance, glfwWindowContext)
         }
     }
 

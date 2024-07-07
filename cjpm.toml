@@ -13,4 +13,4 @@
   package-configuration = {}
 
 [ffi.c]
-  cimgui = { path = "src/libs" }
+  imgui4cj = { path = "src/libs" }
