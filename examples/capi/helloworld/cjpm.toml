@@ -1,0 +1,14 @@
+[dependencies]
+  imgui4cj = { path = "../../../", version = "1.0.0"}
+
+[package]
+  cjc-version = "0.51.4"
+  compile-option = ""
+  description = "nothing here"
+  link-option = ""
+  name = "helloworld"
+  output-type = "executable"
+  src-dir = ""
+  target-dir = ""
+  version = "1.0.0"
+  package-configuration = {}
