@@ -5,18 +5,18 @@
 
 package capi
 
-type ImFontGlyph = Unit
-type ImGuiContext = Unit
-type ImGuiDockNode = Unit
-type ImGuiDockNodeSettings = Unit
-type ImGuiDockRequest = Unit
-type ImGuiInputEvent = Unit
-type ImGuiInputTextDeactivateData = Unit
-type ImGuiStackLevelInfo = Unit
-type ImGuiStoragePair = Unit
-type ImGuiStyleMod = Unit
-type ImGuiTable = Unit
-type ImGuiTableColumn = Unit
-type ImGuiTableColumnSettings = Unit
-type ImGuiTableColumnsSettings = Unit
-type ImGuiWindow = Unit
+public type ImFontGlyph = Unit
+public type ImGuiContext = Unit
+public type ImGuiDockNode = Unit
+public type ImGuiDockNodeSettings = Unit
+public type ImGuiDockRequest = Unit
+public type ImGuiInputEvent = Unit
+public type ImGuiInputTextDeactivateData = Unit
+public type ImGuiStackLevelInfo = Unit
+public type ImGuiStoragePair = Unit
+public type ImGuiStyleMod = Unit
+public type ImGuiTable = Unit
+public type ImGuiTableColumn = Unit
+public type ImGuiTableColumnSettings = Unit
+public type ImGuiTableColumnsSettings = Unit
+public type ImGuiWindow = Unit
