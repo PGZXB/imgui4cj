@@ -3,7 +3,7 @@
 // +      FROM: https://github.com/PGZXB/imgui.cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package _capi
+package capi_impl
 
 foreign func ImBitVector_Clear(self: CPointer<ImBitVector>): Unit
 
