@@ -208,30 +208,36 @@ public class GLFWOpenGL3Backend <: Backend {
         return checkAndGetGLFWOpenGL3BackendInstance()
     }
 
-    public func setAfterCreateContextHook(fn: VoidCallback): Unit {
+    public func setAfterCreateContextHook(fn: VoidCallback): This {
         afterCreateContextCallback = fn
+        return this
     }
 
-    public func setBeforeDestroyContextHook(fn: VoidCallback): Unit {
+    public func setBeforeDestroyContextHook(fn: VoidCallback): This {
         beforeDestoryContextCallback = fn
+        return this
     }
 
-    public func setBeforeRenderHook(fn: VoidCallback): Unit {
+    public func setBeforeRenderHook(fn: VoidCallback): This {
         beforeRenderCallback = fn
+        return this
     }
 
-    public func setAfterRenderHook(fn: VoidCallback): Unit {
+    public func setAfterRenderHook(fn: VoidCallback): This {
         afterCreateContextCallback = fn
+        return this
     }
 
-    public func setBgColor(color: ImVec4): Unit {
+    public func setBgColor(color: ImVec4): This {
         var ctx = unsafe { glfwWindowContext.read() }
         ctx.backgraoudColor = color
         unsafe { glfwWindowContext.write(ctx) }
+        return this
     }
 
-    public func setWindowPos(x: Int32, y: Int32): Unit {
+    public func setWindowPos(x: Int32, y: Int32): This {
         unsafe { imgui4cj_glfwSetWindowPos(glfwWindowInstance, x, y) }
+        return this
     }
 
     public func getWindowPos(): (Int32, Int32) {
@@ -241,18 +247,21 @@ public class GLFWOpenGL3Backend <: Backend {
         return (x, y)
     }
 
-    public func setWindowSize(width: Int32, height: Int32): Unit {
+    public func setWindowSize(width: Int32, height: Int32): This {
         unsafe { imgui4cj_glfwSetWindowSize(glfwWindowInstance, width, height) }
+        return this
     }
 
-    public func setWindowSizeLimits(minWidth: Int32, minHeight: Int32, maxWidth: Int32, maxHeight: Int32): Unit {
+    public func setWindowSizeLimits(minWidth: Int32, minHeight: Int32, maxWidth: Int32, maxHeight: Int32): This {
         unsafe { imgui4cj_glfwSetWindowSizeLimits(glfwWindowInstance, minWidth, minHeight, maxWidth, maxHeight) }
+        return this
     }
 
-    public func setWindowTitle(title: String): Unit {
+    public func setWindowTitle(title: String): This {
         try (r = unsafe { LibC.mallocCString(title) }.asResource()) {
             unsafe { imgui4cj_glfwSetWindowTitle(glfwWindowInstance, r.value) }
         }
+        return this
     }
 
     public func getDisplaySize(): (Int32, Int32) {
@@ -282,41 +291,47 @@ public class GLFWOpenGL3Backend <: Backend {
         return (width, height)
     }
 
-    public func setTargetFPS(fps: UInt32): Unit {
+    public func setTargetFPS(fps: UInt32): This {
         var ctx = unsafe { glfwWindowContext.read() }
         ctx.targetFPS = fps
         unsafe { glfwWindowContext.write(ctx) }
+        return this
     }
 
-    public func setDropCallback(fn: DropCallback): Unit {
+    public func setDropCallback(fn: DropCallback): This {
         dropCallback = fn
         unsafe { imgui4cj_glfwSetDropCallback(glfwWindowInstance, dropCallbackForGLFWOpenGL3Backend) }
+        return this
     }
 
-    public func setCloseCallback(fn: WindowCloseCallback): Unit {
+    public func setCloseCallback(fn: WindowCloseCallback): This {
         closeCallback = fn
         unsafe { imgui4cj_glfwSetWindowCloseCallback(glfwWindowInstance, windowCloseCallbackForGLFWOpenGL3Backend) }
+        return this
     }
 
-    public func setKeyCallback(callback: KeyCallback): Unit {
+    public func setKeyCallback(callback: KeyCallback): This {
         keyCallback = {
             k, s, a, m =>
             unsafe { imgui4cj_ImGui_ImplGlfw_KeyCallback(glfwWindowInstance, k, s, a, m) }
             callback(k, s, a, m)
         }
         unsafe { imgui4cj_glfwSetKeyCallback(glfwWindowInstance, keyCallbackForGLFWOpenGL3Backend) }
+        return this
     }
 
-    public func setSizeChangeCallback(fn: SizeChangeCallback): Unit {
+    public func setSizeChangeCallback(fn: SizeChangeCallback): This {
         sizeChangeCallback = fn
         unsafe { imgui4cj_glfwSetWindowSizeCallback(glfwWindowInstance, sizeChangeCallbackForGLFWOpenGL3Backend) }
+        return this
     }
 
-    public func setWindowFlags(flag: Int32, value: Int32): Unit {
+    public func setWindowFlags(flag: Int32, value: Int32): This {
         unsafe { imgui4cj_glfwWindowHint(flag, value) }
+        return this
     }
 
-    public func setIcons(icons: Array<Image>): Unit {
+    public func setIcons(icons: Array<Image>): This {
         unsafe {
             try (r = LibC.malloc<CImage>(count: icons.size).asResource()) {
                 let pCImage = r.value
@@ -326,21 +341,25 @@ public class GLFWOpenGL3Backend <: Backend {
                 imgui4cj_glfwSetWindowIcon(glfwWindowInstance, Int32(icons.size), r.value)
             }
         }
+        return this
     }
 
-    public func setSwapInterval(interval: Int32): Unit {
+    public func setSwapInterval(interval: Int32): This {
         unsafe { imgui4cj_glfwSwapInterval(interval) }
+        return this
     }
 
-    public func setCursorPos(x: Float64, y: Float64): Unit {
+    public func setCursorPos(x: Float64, y: Float64): This {
         unsafe { imgui4cj_glfwSetCursorPos(glfwWindowInstance, x, y) }
+        return this
     }
 
-    public func setInputMode(mode: Int32, value: Int32): Unit {
+    public func setInputMode(mode: Int32, value: Int32): This {
         unsafe { imgui4cj_glfwSetInputMode(glfwWindowInstance, mode, value) }
+        return this
     }
 
-    public func createWindow(title: String, width: Int32, height: Int32): Unit {
+    public func createWindow(title: String, width: Int32, height: Int32): This {
         unsafe {
             try (rTitle = LibC.mallocCString(title).asResource()) {
                 glfwWindowInstance = imgui4cj_createGLFWOpenGL3Window(rTitle.value, width, height,
@@ -353,6 +372,7 @@ public class GLFWOpenGL3Backend <: Backend {
         unsafe {
             imgui4cj_setGLFWWindowContext(glfwWindowInstance, glfwWindowContext)
         }
+        return this
     }
 
     public func run(fn: VoidCallback): Unit {
