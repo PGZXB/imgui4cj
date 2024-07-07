@@ -201,7 +201,7 @@ public class GLFWOpenGL3Backend <: Backend {
         // TODO: Thread safe
         if (glfwOpenGL3BackendInstance.isNone()) {
             glfwOpenGL3BackendInstance = GLFWOpenGL3Backend()
-            if (unsafe { imgui4cj_initGLFW() } != 0) {
+            if (unsafe { imgui4cj_initGLFW() } == 0) {
                 throw IllegalStateException("failed to init glfw")
             }
         }
