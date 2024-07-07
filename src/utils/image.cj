@@ -40,7 +40,8 @@ public struct Image {
     }
 }
 
-public func tryLoadImage(stream: InputStream): ?Image {
+public func tryLoadImage(_: InputStream): ?Image {
+    // TODO: Impt it: read many image formats as pixels
     throw UnsupportedException("to be implemented")
 }
 
