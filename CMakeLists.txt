@@ -5,7 +5,7 @@ project(cimgui4cj)
 set(CMAKE_CXX_STANDARD 11)
 
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_tables.cpp)
-	set(TABLES_SOURCE "imgui/imgui_tables.cpp")
+	set(TABLES_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_tables.cpp)
 else()
 	set(TABLES_SOURCE "")
 endif()
@@ -96,6 +96,7 @@ target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ex
 if (IMGUI4CJ_GLFW_OPENGL3_BACKEND)
     target_compile_definitions(${IMGUI4CJ_LIB} PUBLIC IMGUI4CJ_GLFW_OPENGL3_BACKEND=1)
     target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${glfw_SOURCE_DIR}/include)
+    list(APPEND IMGUI_LIBRARIES glfw)
 endif (IMGUI4CJ_GLFW_OPENGL3_BACKEND)
 
 set_target_properties(${IMGUI4CJ_LIB} PROPERTIES PREFIX "")
