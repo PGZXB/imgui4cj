@@ -8,20 +8,28 @@ class Ref<T> {
 
 main(): Int64 {
     let clickCount = Ref<Int64>(0)
+    let windowTitle = unsafe { LibC.mallocCString("Hello World") }
+    let pOpen: CPointer<Bool> = unsafe { LibC.malloc<Bool>() }
+    unsafe { pOpen.write(true) }
 
-    getBackend(GLFWOpenGL3).createWindow("Hello IMGUI4CJ", 800, 600).run {
+    let backend = getBackend(GLFWOpenGL3)
+    backend.createWindow("Hello IMGUI4CJ", 800, 600).run {
         unsafe {
-            try (r = LibC.mallocCString("Hello, I'm a label; Click Count: ${clickCount.value}").asResource()) {
-                igBegin(r.value, CPointer<Bool>(), 0)
-                
-                igText(r.value)
-                if (igButton(r.value, ImVec2(x: 0.0, y: 0.0))) {
+            let text = LibC.mallocCString("Hello, I'm a label; Click Count: ${clickCount.value}")
+            if (pOpen.read()) {
+                igBegin(windowTitle, pOpen, 0)
+                igText(text)
+                if (igButton(text, ImVec2(x: 0.0, y: 0.0))) {
                     clickCount.value++
                 }
                 igEnd()
             }
+            LibC.free(text)
         }
     }
+
+    unsafe { LibC.free(windowTitle) }
+    unsafe { LibC.free(pOpen) }
 
     return 0
 }
