@@ -224,7 +224,7 @@ public class GLFWOpenGL3Backend <: Backend {
     }
 
     public func setAfterRenderHook(fn: VoidCallback): This {
-        afterCreateContextCallback = fn
+        afterRenderCallback = fn
         return this
     }
 
