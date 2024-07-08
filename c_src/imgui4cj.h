@@ -33,6 +33,9 @@ typedef void (*SizeChangeCallback)(int, int);
 
 #if defined(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
 
+typedef struct GLFWWindowContext GLFWWindowContext;
+
+IMGUI4CJ_API int imgui4cj_initGLFW();
 IMGUI4CJ_API void imgui4cj_glfwSetWindowPos(GLFWwindow *window, int x, int y);
 IMGUI4CJ_API void imgui4cj_glfwGetWindowPos(GLFWwindow *window, int *x, int *y);
 IMGUI4CJ_API void imgui4cj_glfwSetWindowSize(GLFWwindow *window, int width, int height);
@@ -52,8 +55,8 @@ IMGUI4CJ_API void imgui4cj_glfwSwapInterval(int interval);
 IMGUI4CJ_API void imgui4cj_glfwSetCursorPos(GLFWwindow *window, double x, double y);
 IMGUI4CJ_API void imgui4cj_glfwSetInputMode(GLFWwindow *window, int mode, int value);
 IMGUI4CJ_API GLFWwindow *imgui4cj_createGLFWOpenGL3Window(const char *title, int width, int height, VoidCallback afterCreateContext);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowUserPointer(GLFWwindow *window, void *pointer);
-IMGUI4CJ_API void igGLFWRunLoop(GLFWwindow *window, VoidCallback loop, VoidCallback beforeRender, VoidCallback afterRender, VoidCallback beforeDestroyContext);
+IMGUI4CJ_API void imgui4cj_setGLFWWindowContext(GLFWwindow *window, GLFWWindowContext *pointer);
+IMGUI4CJ_API void imgui4cj_glfwOpenGL3MainLoop(GLFWwindow *window, VoidCallback loop, VoidCallback beforeRender, VoidCallback afterRender, VoidCallback beforeDestroyContext);
 IMGUI4CJ_API void imgui4cj_glfwPostEmptyEvent();
 
 #endif
