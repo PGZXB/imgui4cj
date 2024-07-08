@@ -191,10 +191,11 @@ public class GLFWOpenGL3Backend <: Backend {
     private var glfwWindowContext: CPointer<GLFWWindowContext>
 
     private init() {
-        // `glfwWindowContext` won't be free: memory leak but OK here
         glfwWindowContext = unsafe { LibC.malloc<GLFWWindowContext>() }
-        // Init GLFW
+    }
 
+    ~init() {
+        unsafe { LibC.free(glfwWindowContext) }
     }
 
     public static func getInstance(): GLFWOpenGL3Backend {
