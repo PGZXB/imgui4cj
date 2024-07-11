@@ -25,40 +25,4 @@ typedef struct CImage {
     unsigned char *pixels;
 } CImage;
 
-typedef void (*VoidCallback)();
-typedef void (*DropCallback)(GLFWwindow*, int, const char **);
-typedef void (*WindowCloseCallback)(GLFWwindow*);
-typedef void (*KeyCallback)(int, int, int, int);
-typedef void (*SizeChangeCallback)(int, int);
-
-#if defined(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
-
-typedef struct GLFWWindowContext GLFWWindowContext;
-
-IMGUI4CJ_API int imgui4cj_initGLFW();
-IMGUI4CJ_API void imgui4cj_glfwSetWindowPos(GLFWwindow *window, int x, int y);
-IMGUI4CJ_API void imgui4cj_glfwGetWindowPos(GLFWwindow *window, int *x, int *y);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowSize(GLFWwindow *window, int width, int height);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowSizeLimits(GLFWwindow *window, int minWidth, int minHeight, int maxWidth, int maxHeight);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowTitle(GLFWwindow *window, const char *title);
-IMGUI4CJ_API void imgui4cj_glfwGetWindowSize(GLFWwindow *window, int *width, int *height);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowShouldClose(GLFWwindow *window, int value);
-IMGUI4CJ_API void imgui4cj_glfwGetWindowContentScale(GLFWwindow *window, float *width, float *height);
-IMGUI4CJ_API void imgui4cj_glfwSetDropCallback(GLFWwindow *window, DropCallback fn);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowCloseCallback(GLFWwindow *window, WindowCloseCallback cb);
-IMGUI4CJ_API void imgui4cj_ImGui_ImplGlfw_KeyCallback(GLFWwindow* w, int k, int s, int a, int m);
-IMGUI4CJ_API void imgui4cj_glfwSetKeyCallback(GLFWwindow *window, KeyCallback cb);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowSizeCallback(GLFWwindow *window, SizeChangeCallback cb);
-IMGUI4CJ_API void imgui4cj_glfwWindowHint(int hint, int value);
-IMGUI4CJ_API void imgui4cj_glfwSetWindowIcon(GLFWwindow *window, int count, CImage *images);
-IMGUI4CJ_API void imgui4cj_glfwSwapInterval(int interval);
-IMGUI4CJ_API void imgui4cj_glfwSetCursorPos(GLFWwindow *window, double x, double y);
-IMGUI4CJ_API void imgui4cj_glfwSetInputMode(GLFWwindow *window, int mode, int value);
-IMGUI4CJ_API GLFWwindow *imgui4cj_createGLFWOpenGL3Window(const char *title, int width, int height, VoidCallback afterCreateContext);
-IMGUI4CJ_API void imgui4cj_setGLFWWindowContext(GLFWwindow *window, GLFWWindowContext *pointer);
-IMGUI4CJ_API void imgui4cj_glfwOpenGL3MainLoop(GLFWwindow *window, VoidCallback loop, VoidCallback beforeRender, VoidCallback afterRender, VoidCallback beforeDestroyContext);
-IMGUI4CJ_API void imgui4cj_glfwPostEmptyEvent();
-
-#endif
-
 #endif // !IMGUI4CJ_IMGUI4CJ_H

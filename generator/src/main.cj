@@ -24,7 +24,8 @@ main(args: Array<String>): Int64 {
             "--capi-impl-pkg-path=",
             "--capi-impl-pkg-name=",
             "--capi-pkg-path=",
-            "--capi-pkg-name="
+            "--capi-pkg-name=",
+            "--c-src-path="
         ]
     )
 
@@ -36,6 +37,7 @@ main(args: Array<String>): Int64 {
     let capiImplPkgName = argopt.getArg("capi-impl-pkg-name").getOrThrow()
     let capiOutputDir = argopt.getArg("capi-pkg-path").getOrThrow()
     let capiPkgName = argopt.getArg("capi-pkg-name").getOrThrow()
+    let cSrcOutputDir = argopt.getArg("c-src-path").getOrThrow()
 
     // Generate cimgui typedefs -> src/capi/typedefs.cj
     let typedefsCodeFilename = "${capiImplOutputDir}/typedefs.cj"
@@ -132,6 +134,12 @@ main(args: Array<String>): Int64 {
     genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
         typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols)
     println("Generated capi package -> ${capiCodeFilename}")
+
+    // Generate cimgui struct accessor c wrappers
+    let structAccessorCWrappersFilename = "${cSrcOutputDir}/cimgui_struct_accessors.c"
+    println("Generating cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename} ...")
+    genStructAccessorCWrapperCode(structAccessorCWrappersFilename, structDefs)
+    println("Generated cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename}")
 
     return 0
 }

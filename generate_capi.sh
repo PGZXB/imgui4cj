@@ -11,6 +11,7 @@ run_args="$run_args --capi-impl-pkg-path='$path/src/capi_impl'"
 run_args="$run_args --capi-impl-pkg-name='capi_impl'"
 run_args="$run_args --capi-pkg-path='$path/src/capi'"
 run_args="$run_args --capi-pkg-name='capi'"
+run_args="$run_args --c-src-path='$path/c_src'"
 
 cd "$path/generator" && \
     cjpm build && \

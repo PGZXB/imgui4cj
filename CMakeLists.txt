@@ -11,12 +11,16 @@ else()
 endif()
 
 file(GLOB IMGUI_SOURCES
+    # cimgui
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/cimgui.cpp
+    # imgui
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_draw.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_demo.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_widgets.cpp
 	${TABLES_SOURCE}
+    # cimgui struct accessor wrappers
+    ${CMAKE_CURRENT_SOURCE_DIR}/c_src/cimgui_struct_accessors.c
 )
 
 set(IMGUI_STATIC "no" CACHE STRING "Build as a static library")

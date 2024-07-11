@@ -6,6 +6,9 @@ class Ref<T> {
     }
 }
 
+// IMGUI4CJ_API float* imgui4cj_access_ImGuiIO_FontGlobalScale(ImGuiIO *self);
+foreign func imgui4cj_access_ImGuiIO_FontGlobalScale(self: CPointer<ImGuiIO>): CPointer<Float32>
+
 main(): Int64 {
     let clickCount = Ref<Int64>(0)
     let windowTitle = unsafe { LibC.mallocCString("Hello World") }
@@ -13,11 +16,16 @@ main(): Int64 {
     unsafe { pOpen.write(true) }
 
     let backend = getBackend(GLFWOpenGL3)
-    backend.createWindow("Hello IMGUI4CJ", 800, 600).run {
+    backend.createWindow("Hello IMGUI4CJ", 800, 600).setBeforeRenderHook {
+        let pIO = igGetIO()
+        let pFontGlobalScale = unsafe { imgui4cj_access_ImGuiIO_FontGlobalScale(pIO) }
+        let fontGlobalScale = unsafe { pFontGlobalScale.read() }
+        unsafe { pFontGlobalScale.write(2.0) }
+    }.run {
         unsafe {
             let text = LibC.mallocCString("Hello, I'm a label; Click Count: ${clickCount.value}")
             if (pOpen.read()) {
-                igBegin(windowTitle, pOpen, 0)
+                igBegin(windowTitle, pOpen, ImGuiWindowFlags_AlwaysAutoResize)
                 igText(text)
                 if (igButton(text, ImVec2(x: 0.0, y: 0.0))) {
                     clickCount.value++
