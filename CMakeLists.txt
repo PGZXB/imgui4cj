@@ -5,9 +5,9 @@ project(cimgui4cj)
 set(CMAKE_CXX_STANDARD 11)
 
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_tables.cpp)
-	set(TABLES_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_tables.cpp)
+	set(IMGUI_TABLES_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_tables.cpp)
 else()
-	set(TABLES_SOURCE "")
+	set(IMGUI_TABLES_SOURCE "")
 endif()
 
 file(GLOB IMGUI_SOURCES
@@ -18,7 +18,7 @@ file(GLOB IMGUI_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_draw.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_demo.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/imgui_widgets.cpp
-	${TABLES_SOURCE}
+	${IMGUI_TABLES_SOURCE}
     # cimgui struct accessor wrappers
     ${CMAKE_CURRENT_SOURCE_DIR}/c_src/cimgui_struct_accessors.c
 )
