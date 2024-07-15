@@ -292,7 +292,7 @@ func genStructsCode(filename: String, pkgName: String, structDefs: ArrayList<Str
     throw IllegalStateException("illegal state")
 }
 
-func genStructAccessorCWrapperCode<T>(os: StringWriter<T>, structDefs: ArrayList<StructDef>) where T <: OutputStream {
+func genStructAccessorCWrappersCode<T>(os: StringWriter<T>, structDefs: ArrayList<StructDef>) where T <: OutputStream {
     // SOME COMMENTS ....
     //
     // #define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
@@ -353,10 +353,10 @@ func genStructAccessorCWrapperCode<T>(os: StringWriter<T>, structDefs: ArrayList
     }
 }
 
-func genStructAccessorCWrapperCode(filename: String, structDefs: ArrayList<StructDef>) {
+func genStructAccessorCWrappersCode(filename: String, structDefs: ArrayList<StructDef>) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genStructAccessorCWrapperCode(sw, structDefs)
+            genStructAccessorCWrappersCode(sw, structDefs)
         }
     }
 }

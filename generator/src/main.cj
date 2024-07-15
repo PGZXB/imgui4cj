@@ -131,7 +131,7 @@ main(args: Array<String>): Int64 {
     // Generate cimgui struct accessor c wrappers -> c_src/cimgui_struct_accessors.c
     let structAccessorCWrappersFilename = "${cSrcOutputDir}/cimgui_struct_accessors.c"
     println("Generating cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename} ...")
-    genStructAccessorCWrapperCode(structAccessorCWrappersFilename, structDefs)
+    genStructAccessorCWrappersCode(structAccessorCWrappersFilename, structDefs)
     println("Generated cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename}")
 
     // Generate cimgui struct accessor functions -> src/capi/struct_accessors.cj
