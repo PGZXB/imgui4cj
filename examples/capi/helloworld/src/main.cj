@@ -6,9 +6,6 @@ class Ref<T> {
     }
 }
 
-// IMGUI4CJ_API float* imgui4cj_access_ImGuiIO_FontGlobalScale(ImGuiIO *self);
-foreign func imgui4cj_access_ImGuiIO_FontGlobalScale(self: CPointer<ImGuiIO>): CPointer<Float32>
-
 main(): Int64 {
     let clickCount = Ref<Int64>(0)
     let windowTitle = unsafe { LibC.mallocCString("Hello World") }
@@ -18,8 +15,9 @@ main(): Int64 {
     let backend = getBackend(GLFWOpenGL3)
     backend.createWindow("Hello IMGUI4CJ", 800, 600).setBeforeRenderHook {
         let pIO = igGetIO()
-        let pFontGlobalScale = unsafe { imgui4cj_access_ImGuiIO_FontGlobalScale(pIO) }
+        let pFontGlobalScale = access_ImGuiIO_FontGlobalScale(pIO)
         let fontGlobalScale = unsafe { pFontGlobalScale.read() }
+        println("Font global scale: ${fontGlobalScale}")
         unsafe { pFontGlobalScale.write(2.0) }
     }.run {
         unsafe {

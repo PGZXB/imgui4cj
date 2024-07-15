@@ -128,18 +128,25 @@ main(args: Array<String>): Int64 {
     let funcSymbols = genFuncsCode(funcsCodeFilename, capiImplPkgName, funcsSigs)
     println("Generated cimgui functions(only decl) -> ${funcsCodeFilename}")
 
-    // Generate capi package (public import _capi.xxx as xxx ...)
-    let capiCodeFilename = "${capiOutputDir}/capi.cj"
-    println("Generating capi package -> ${capiCodeFilename} ...")
-    genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
-        typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols)
-    println("Generated capi package -> ${capiCodeFilename}")
-
-    // Generate cimgui struct accessor c wrappers
+    // Generate cimgui struct accessor c wrappers -> c_src/cimgui_struct_accessors.c
     let structAccessorCWrappersFilename = "${cSrcOutputDir}/cimgui_struct_accessors.c"
     println("Generating cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename} ...")
     genStructAccessorCWrapperCode(structAccessorCWrappersFilename, structDefs)
     println("Generated cimgui struct accessor c wrappers -> ${structAccessorCWrappersFilename}")
+
+    // Generate cimgui struct accessor functions -> src/capi/struct_accessors.cj
+    let structAccessorFuncsFilename = "${capiImplOutputDir}/struct_accessors.cj"
+    println("Generating cimgui struct accessor functions -> ${structAccessorFuncsFilename} ...")
+    let structAccessorSymbols = genStructAccessorFuncsCode(structAccessorFuncsFilename, capiImplPkgName, structDefs,
+        typeAlias: typeAlias, globalConstants: globalConstants)
+    println("Generated cimgui struct accessor functions -> ${structAccessorFuncsFilename}")
+
+    // Generate capi package (public import _capi.xxx as xxx ...)
+    let capiCodeFilename = "${capiOutputDir}/capi.cj"
+    println("Generating capi package -> ${capiCodeFilename} ...")
+    genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
+        typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols + structAccessorSymbols)
+    println("Generated capi package -> ${capiCodeFilename}")
 
     return 0
 }
