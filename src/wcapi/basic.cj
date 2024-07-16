@@ -1,37 +1,35 @@
 package wcapi
 
-struct CStringResource <: Resource {
-    CStringResource(public let value: CString, private let releaseFunc: (CString) -> Unit) {
-    }
+from std import collection.*
 
-    public func isClosed(): Bool {
-        throw UnsupportedException()
-    }
+let STRING_POOL = HashMap<String, CString>()
 
-    public func close(): Unit {
-        releaseFunc(value)
+func getCStringFromPool(string: String): CString {
+    if (!STRING_POOL.contains(string)) {
+        STRING_POOL.put(string, unsafe { LibC.mallocCString(string) })
+    }
+    return STRING_POOL.get(string).getOrThrow()
+}
+
+interface CStringConvertable {
+    func asCString(): CString
+}
+
+extend String <: CStringConvertable {
+    public func asCString(): CString {
+        return getCStringFromPool(this)
     }
 }
 
-interface AsCStringResource {
-    func asCStringResource(): CStringResource
-}
-
-extend String <: AsCStringResource {
-    public func asCStringResource(): CStringResource {
-        return CStringResource(unsafe { LibC.mallocCString(this) }, {s => unsafe { LibC.free(s) }})
+extend CString <: CStringConvertable {
+    public func asCString(): CString {
+        return this
     }
 }
 
-extend CString <: AsCStringResource {
-    public func asCStringResource(): CStringResource {
-        return CStringResource(this, {s =>})
-    }
-}
-
-extend CPointer<T> <: AsCStringResource where T <: UInt8 {
-    public func asCStringResource(): CStringResource {
-        return CStringResource(CString(CPointer<UInt8>(this)), {s =>})
+extend CPointer<T> <: CStringConvertable where T <: UInt8 {
+    public func asCString(): CString {
+        return CString(CPointer<UInt8>(this))
     }
 }
 
