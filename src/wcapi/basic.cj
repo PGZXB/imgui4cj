@@ -11,7 +11,7 @@ func getCStringFromPool(string: String): CString {
     return STRING_POOL.get(string).getOrThrow()
 }
 
-interface CStringConvertable {
+public interface CStringConvertable {
     func asCString(): CString
 }
 

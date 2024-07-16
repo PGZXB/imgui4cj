@@ -25,7 +25,9 @@ main(args: Array<String>): Int64 {
             "--capi-impl-pkg-name=",
             "--capi-pkg-path=",
             "--capi-pkg-name=",
-            "--c-src-path="
+            "--c-src-path=",
+            "--wcapi-pkg-path=",
+            "--wcapi-pkg-name="
         ]
     )
 
@@ -38,6 +40,8 @@ main(args: Array<String>): Int64 {
     let capiOutputDir = argopt.getArg("capi-pkg-path").getOrThrow()
     let capiPkgName = argopt.getArg("capi-pkg-name").getOrThrow()
     let cSrcOutputDir = argopt.getArg("c-src-path").getOrThrow()
+    let wcapiOutputDir = argopt.getArg("wcapi-pkg-path").getOrThrow()
+    let wcapiPkgName = argopt.getArg("wcapi-pkg-name").getOrThrow()
 
     // Generate cimgui typedefs -> src/capi/typedefs.cj
     let typedefsCodeFilename = "${capiImplOutputDir}/typedefs.cj"
@@ -147,6 +151,14 @@ main(args: Array<String>): Int64 {
     genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
         typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols + structAccessorSymbols)
     println("Generated capi package -> ${capiCodeFilename}")
+
+    // Generate cimgui funcs wcapi -> src/wcapi/funcs.cj
+    let funcsWCAPICodeFilename = "${wcapiOutputDir}/funcs.cj"
+    println("Generating cimgui funcs wcapi -> ${funcsWCAPICodeFilename} ...")
+    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias)
+    println("Generated cimgui funcs wcapi -> ${funcsWCAPICodeFilename}")
+
+    // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj
 
     return 0
 }
