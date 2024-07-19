@@ -447,20 +447,20 @@ func ImFontAtlas_AddFontDefault(self: CPointer<ImFontAtlas>, font_cfg: CPointer<
     return capi.ImFontAtlas_AddFontDefault(self, font_cfg)
 }
 
-func ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CStringConvertable, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>) {
-    return capi.ImFontAtlas_AddFontFromFileTTF(self, filename.asCString(), size_pixels, font_cfg, glyph_ranges)
+func ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CStringConvertable, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: Value<ImWchar>) {
+    return capi.ImFontAtlas_AddFontFromFileTTF(self, filename.asCString(), size_pixels, font_cfg, glyph_ranges.getCPointer())
 }
 
-func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>) {
-    return capi.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85.asCString(), size_pixels, font_cfg, glyph_ranges)
+func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: Value<ImWchar>) {
+    return capi.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85.asCString(), size_pixels, font_cfg, glyph_ranges.getCPointer())
 }
 
-func ImFontAtlas_AddFontFromMemoryCompressedTTF(self: CPointer<ImFontAtlas>, compressed_font_data: Value<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>) {
-    return capi.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data.getCPointer(), compressed_font_data_size, size_pixels, font_cfg, glyph_ranges)
+func ImFontAtlas_AddFontFromMemoryCompressedTTF(self: CPointer<ImFontAtlas>, compressed_font_data: Value<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: Value<ImWchar>) {
+    return capi.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data.getCPointer(), compressed_font_data_size, size_pixels, font_cfg, glyph_ranges.getCPointer())
 }
 
-func ImFontAtlas_AddFontFromMemoryTTF(self: CPointer<ImFontAtlas>, font_data: Value<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>) {
-    return capi.ImFontAtlas_AddFontFromMemoryTTF(self, font_data.getCPointer(), font_data_size, size_pixels, font_cfg, glyph_ranges)
+func ImFontAtlas_AddFontFromMemoryTTF(self: CPointer<ImFontAtlas>, font_data: Value<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: Value<ImWchar>) {
+    return capi.ImFontAtlas_AddFontFromMemoryTTF(self, font_data.getCPointer(), font_data_size, size_pixels, font_cfg, glyph_ranges.getCPointer())
 }
 
 func ImFontAtlas_Build(self: CPointer<ImFontAtlas>) {
@@ -567,8 +567,8 @@ func ImFontGlyphRangesBuilder_AddChar(self: CPointer<ImFontGlyphRangesBuilder>, 
     return capi.ImFontGlyphRangesBuilder_AddChar(self, c)
 }
 
-func ImFontGlyphRangesBuilder_AddRanges(self: CPointer<ImFontGlyphRangesBuilder>, ranges: CPointer<ImWchar>) {
-    return capi.ImFontGlyphRangesBuilder_AddRanges(self, ranges)
+func ImFontGlyphRangesBuilder_AddRanges(self: CPointer<ImFontGlyphRangesBuilder>, ranges: Value<ImWchar>) {
+    return capi.ImFontGlyphRangesBuilder_AddRanges(self, ranges.getCPointer())
 }
 
 func ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CStringConvertable, text_end: CStringConvertable) {
@@ -2097,12 +2097,12 @@ public func CheckboxFlags_UintPtr(label: CStringConvertable, flags: Value<Int32>
     return capi.igCheckboxFlags_UintPtr(label.asCString(), flags.getCPointer(), flags_value)
 }
 
-public func CheckboxFlags_S64Ptr(label: CStringConvertable, flags: CPointer<ImS64>, flags_value: ImS64) {
-    return capi.igCheckboxFlags_S64Ptr(label.asCString(), flags, flags_value)
+public func CheckboxFlags_S64Ptr(label: CStringConvertable, flags: Value<ImS64>, flags_value: ImS64) {
+    return capi.igCheckboxFlags_S64Ptr(label.asCString(), flags.getCPointer(), flags_value)
 }
 
-public func CheckboxFlags_U64Ptr(label: CStringConvertable, flags: CPointer<ImU64>, flags_value: ImU64) {
-    return capi.igCheckboxFlags_U64Ptr(label.asCString(), flags, flags_value)
+public func CheckboxFlags_U64Ptr(label: CStringConvertable, flags: Value<ImU64>, flags_value: ImU64) {
+    return capi.igCheckboxFlags_U64Ptr(label.asCString(), flags.getCPointer(), flags_value)
 }
 
 public func ClearActiveID() {
@@ -2464,8 +2464,8 @@ public func DockBuilderSetNodeSize(node_id: ImGuiID, size: ImVec2) {
     return capi.igDockBuilderSetNodeSize(node_id, size)
 }
 
-public func DockBuilderSplitNode(node_id: ImGuiID, split_dir: ImGuiDir, size_ratio_for_node_at_dir: Float32, out_id_at_dir: CPointer<ImGuiID>, out_id_at_opposite_dir: CPointer<ImGuiID>) {
-    return capi.igDockBuilderSplitNode(node_id, split_dir, size_ratio_for_node_at_dir, out_id_at_dir, out_id_at_opposite_dir)
+public func DockBuilderSplitNode(node_id: ImGuiID, split_dir: ImGuiDir, size_ratio_for_node_at_dir: Float32, out_id_at_dir: Value<ImGuiID>, out_id_at_opposite_dir: Value<ImGuiID>) {
+    return capi.igDockBuilderSplitNode(node_id, split_dir, size_ratio_for_node_at_dir, out_id_at_dir.getCPointer(), out_id_at_opposite_dir.getCPointer())
 }
 
 public func DockContextCalcDropPosForDocking(target: CPointer<ImGuiWindow>, target_node: CPointer<ImGuiDockNode>, payload_window: CPointer<ImGuiWindow>, payload_node: CPointer<ImGuiDockNode>, split_dir: ImGuiDir, split_outer: Bool, out_pos: CPointer<ImVec2>) {
@@ -2716,8 +2716,8 @@ public func FindBestWindowPosForPopup(pOut: CPointer<ImVec2>, window: CPointer<I
     return capi.igFindBestWindowPosForPopup(pOut, window)
 }
 
-public func FindBestWindowPosForPopupEx(pOut: CPointer<ImVec2>, ref_pos: ImVec2, size: ImVec2, last_dir: CPointer<ImGuiDir>, r_outer: ImRect, r_avoid: ImRect, policy: ImGuiPopupPositionPolicy) {
-    return capi.igFindBestWindowPosForPopupEx(pOut, ref_pos, size, last_dir, r_outer, r_avoid, policy)
+public func FindBestWindowPosForPopupEx(pOut: CPointer<ImVec2>, ref_pos: ImVec2, size: ImVec2, last_dir: Value<ImGuiDir>, r_outer: ImRect, r_avoid: ImRect, policy: ImGuiPopupPositionPolicy) {
+    return capi.igFindBestWindowPosForPopupEx(pOut, ref_pos, size, last_dir.getCPointer(), r_outer, r_avoid, policy)
 }
 
 public func FindBlockingModal(window: CPointer<ImGuiWindow>) {
@@ -2808,8 +2808,8 @@ public func GetActiveID() {
     return capi.igGetActiveID()
 }
 
-public func GetAllocatorFunctions(p_alloc_func: CPointer<ImGuiMemAllocFunc>, p_free_func: CPointer<ImGuiMemFreeFunc>, p_user_data: CPointer<CPointer<Unit>>) {
-    return capi.igGetAllocatorFunctions(p_alloc_func, p_free_func, p_user_data)
+public func GetAllocatorFunctions(p_alloc_func: Value<ImGuiMemAllocFunc>, p_free_func: Value<ImGuiMemFreeFunc>, p_user_data: CPointer<CPointer<Unit>>) {
+    return capi.igGetAllocatorFunctions(p_alloc_func.getCPointer(), p_free_func.getCPointer(), p_user_data)
 }
 
 public func GetBackgroundDrawList_Nil() {
@@ -3276,28 +3276,28 @@ public func ImBezierQuadraticCalc(pOut: CPointer<ImVec2>, p1: ImVec2, p2: ImVec2
     return capi.igImBezierQuadraticCalc(pOut, p1, p2, p3, t)
 }
 
-public func ImBitArrayClearAllBits(arr: CPointer<ImU32>, bitcount: Int32) {
-    return capi.igImBitArrayClearAllBits(arr, bitcount)
+public func ImBitArrayClearAllBits(arr: Value<ImU32>, bitcount: Int32) {
+    return capi.igImBitArrayClearAllBits(arr.getCPointer(), bitcount)
 }
 
-public func ImBitArrayClearBit(arr: CPointer<ImU32>, n: Int32) {
-    return capi.igImBitArrayClearBit(arr, n)
+public func ImBitArrayClearBit(arr: Value<ImU32>, n: Int32) {
+    return capi.igImBitArrayClearBit(arr.getCPointer(), n)
 }
 
 public func ImBitArrayGetStorageSizeInBytes(bitcount: Int32) {
     return capi.igImBitArrayGetStorageSizeInBytes(bitcount)
 }
 
-public func ImBitArraySetBit(arr: CPointer<ImU32>, n: Int32) {
-    return capi.igImBitArraySetBit(arr, n)
+public func ImBitArraySetBit(arr: Value<ImU32>, n: Int32) {
+    return capi.igImBitArraySetBit(arr.getCPointer(), n)
 }
 
-public func ImBitArraySetBitRange(arr: CPointer<ImU32>, n: Int32, n2: Int32) {
-    return capi.igImBitArraySetBitRange(arr, n, n2)
+public func ImBitArraySetBitRange(arr: Value<ImU32>, n: Int32, n2: Int32) {
+    return capi.igImBitArraySetBitRange(arr.getCPointer(), n, n2)
 }
 
-public func ImBitArrayTestBit(arr: CPointer<ImU32>, n: Int32) {
-    return capi.igImBitArrayTestBit(arr, n)
+public func ImBitArrayTestBit(arr: Value<ImU32>, n: Int32) {
+    return capi.igImBitArrayTestBit(arr.getCPointer(), n)
 }
 
 public func ImCharIsBlankA(c: UInt8) {
@@ -3550,8 +3550,8 @@ public func ImStrTrimBlanks(str: CStringConvertable) {
     return capi.igImStrTrimBlanks(str.asCString())
 }
 
-public func ImStrbolW(buf_mid_line: CPointer<ImWchar>, buf_begin: CPointer<ImWchar>) {
-    return capi.igImStrbolW(buf_mid_line, buf_begin)
+public func ImStrbolW(buf_mid_line: Value<ImWchar>, buf_begin: Value<ImWchar>) {
+    return capi.igImStrbolW(buf_mid_line.getCPointer(), buf_begin.getCPointer())
 }
 
 public func ImStrchrRange(str_begin: CStringConvertable, str_end: CStringConvertable, c: UInt8) {
@@ -3578,8 +3578,8 @@ public func ImStristr(haystack: CStringConvertable, haystack_end: CStringConvert
     return capi.igImStristr(haystack.asCString(), haystack_end.asCString(), needle.asCString(), needle_end.asCString())
 }
 
-public func ImStrlenW(str: CPointer<ImWchar>) {
-    return capi.igImStrlenW(str)
+public func ImStrlenW(str: Value<ImWchar>) {
+    return capi.igImStrlenW(str.getCPointer())
 }
 
 public func ImStrncpy(dst: CStringConvertable, src: CStringConvertable, count: UIntNative) {
@@ -3610,20 +3610,20 @@ public func ImTextCountUtf8BytesFromChar(in_text: CStringConvertable, in_text_en
     return capi.igImTextCountUtf8BytesFromChar(in_text.asCString(), in_text_end.asCString())
 }
 
-public func ImTextCountUtf8BytesFromStr(in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>) {
-    return capi.igImTextCountUtf8BytesFromStr(in_text, in_text_end)
+public func ImTextCountUtf8BytesFromStr(in_text: Value<ImWchar>, in_text_end: Value<ImWchar>) {
+    return capi.igImTextCountUtf8BytesFromStr(in_text.getCPointer(), in_text_end.getCPointer())
 }
 
 public func ImTextFindPreviousUtf8Codepoint(in_text_start: CStringConvertable, in_text_curr: CStringConvertable) {
     return capi.igImTextFindPreviousUtf8Codepoint(in_text_start.asCString(), in_text_curr.asCString())
 }
 
-public func ImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CStringConvertable, in_text_end: CStringConvertable, in_remaining: Value<CString>) {
-    return capi.igImTextStrFromUtf8(out_buf, out_buf_size, in_text.asCString(), in_text_end.asCString(), in_remaining.getCPointer())
+public func ImTextStrFromUtf8(out_buf: Value<ImWchar>, out_buf_size: Int32, in_text: CStringConvertable, in_text_end: CStringConvertable, in_remaining: Value<CString>) {
+    return capi.igImTextStrFromUtf8(out_buf.getCPointer(), out_buf_size, in_text.asCString(), in_text_end.asCString(), in_remaining.getCPointer())
 }
 
-public func ImTextStrToUtf8(out_buf: CStringConvertable, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>) {
-    return capi.igImTextStrToUtf8(out_buf.asCString(), out_buf_size, in_text, in_text_end)
+public func ImTextStrToUtf8(out_buf: CStringConvertable, out_buf_size: Int32, in_text: Value<ImWchar>, in_text_end: Value<ImWchar>) {
+    return capi.igImTextStrToUtf8(out_buf.asCString(), out_buf_size, in_text.getCPointer(), in_text_end.getCPointer())
 }
 
 public func ImToUpper(c: UInt8) {
@@ -4496,8 +4496,8 @@ public func Scrollbar(axis: ImGuiAxis) {
     return capi.igScrollbar(axis)
 }
 
-public func ScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scroll_v: CPointer<ImS64>, avail_v: ImS64, contents_v: ImS64, flags: ImDrawFlags) {
-    return capi.igScrollbarEx(bb, id, axis, p_scroll_v, avail_v, contents_v, flags)
+public func ScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scroll_v: Value<ImS64>, avail_v: ImS64, contents_v: ImS64, flags: ImDrawFlags) {
+    return capi.igScrollbarEx(bb, id, axis, p_scroll_v.getCPointer(), avail_v, contents_v, flags)
 }
 
 public func Selectable_Bool(label: CStringConvertable, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2) {
