@@ -41,6 +41,10 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
         unsafe { LibC.free(pointer) }
     }
 
+    public static func null(): Value<T> {
+        return Value<T>(CPointer<T>(), None)
+    }
+
     public static func make(): Value<T> {
         let pointer = unsafe { LibC.malloc<T>() }
         return Value<T>(pointer, None)
@@ -146,6 +150,10 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
 
 public func vaule<T>(val: T) where T <: CType {
     return Value<T>.make(val)
+}
+
+public func null<T>() where T <: CType {
+    return Value<T>.null()
 }
 
 public let bool = vaule<Bool>

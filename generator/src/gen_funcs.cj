@@ -8,7 +8,8 @@ struct FuncParameter {
 }
 
 struct FuncSignature {
-    FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String) {
+    FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String, let structName: ?String,
+        let isConstructor: Bool, let isDestructor: Bool) {
     }
 }
 
@@ -43,7 +44,10 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
                             return FuncParameter(obj["name"].asString().getValue(), ty)
                         }
                     )),
-                    fnSig["ret"].asString().getValue() // retType
+                    fnSig["ret"].asString().getValue(), // retType
+                    fnSig.get("stname")?.asString().getValue() ?? "", // structName
+                    fnSig.get("constructor")?.asBool().getValue() ?? false, // isConstructor
+                    fnSig.get("destructor")?.asBool().getValue() ?? false // isDestructor
                 )
             )
         }
@@ -179,7 +183,11 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             fn.params |> filter {
             item => !(item.name == "..." && item.ty == "...")
         })
-        fnSb.append("public func ${fn.name}(")
+        if (fn.structName == "") {
+            fnSb.append("public func ${fn.name[2..]}(")
+        } else {
+            fnSb.append("func ${fn.name}(")
+        }
         let callArgs = ArrayList<String>()
         for ((i, p) in withIndex(params)) {
             if (p.ty == "va_list") {
@@ -199,7 +207,7 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             os.writeln("// ${fnSb.toString()} ...")
         } else {
             os.writeln(fnSb.toString())
-            os.write("    ${capiPkgName}.${fn.name}(")
+            os.write("    return ${capiPkgName}.${fn.name}(")
             for ((i, arg) in withIndex(callArgs)) {
                 os.write(arg)
                 if (i != callArgs.size - 1) {
