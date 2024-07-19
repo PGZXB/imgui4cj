@@ -442,13 +442,11 @@ func getWCAPIArgument(ty: CjType, argName_: String, typeAlias: HashMap<String, C
         case VArrayType(_, _) => throw IllegalStateException()
         case StructType(_) => (ty.toString(), argName)
         // case StructType(_) => (ty.toString(), "${argName}.getPointer()")
-        case TypeAlias(name) =>
-            let alias = typeAlias.get(name) ?? StructType(name)
-            var (newTy, argName) = getWCAPIArgument(alias, argName, typeAlias)
-            if (newTy == alias.toString()) {
-                newTy = name
-            }
-            (newTy.toString(), argName)
+        case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+            getWCAPIArgument(StructType(sname), argName, typeAlias)
+        } else {
+            (ty.toString(), argName)
+        }
         case TemplateType(template, typenames) => match (template) {
             case CPointerType => match (typenames[0]) {
                 case UnitType => ("Value<${typenames[0]}>", "${argName}.getCPointer()")
@@ -470,10 +468,11 @@ func getWCAPIArgument(ty: CjType, argName_: String, typeAlias: HashMap<String, C
                 case VArrayType(_, _) => throw IllegalStateException()
                 case StructType(_) => (ty.toString(), argName)
                 // case StructType(_) => (typenames[0].toString(), "${argName}.getCPointer()")
-                case TypeAlias(name) =>
-                    let alias = typeAlias.get(name) ?? StructType(name)
-                    var (newTy, argName) = getWCAPIArgument(TemplateType(CPointerType, [alias]), argName, typeAlias)
-                    (newTy.replace(alias.toString(), name), argName)
+                case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+                    getWCAPIArgument(TemplateType(CPointerType, [StructType(sname)]), argName, typeAlias)
+                } else {
+                    (ty.toString(), argName)
+                }
                 case TemplateType(template, typenames) => match (template) {
                     case CPointerType => (ty.toString(), argName)
                 }
