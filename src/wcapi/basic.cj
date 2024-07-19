@@ -33,7 +33,7 @@ extend CPointer<T> <: CStringConvertable where T <: UInt8 {
     }
 }
 
-public class Value<T> where T <: CType { // For int*, float*, ... arguments
+public class Value<T> <: ToString where T <: CType { // For int*, float*, ... arguments
     private Value(private let pointer: CPointer<T>, private let count: ?Int64) {
     }
 
@@ -118,4 +118,40 @@ public class Value<T> where T <: CType { // For int*, float*, ... arguments
         }
         unsafe { (pointer + index).write(value) }
     }
+
+    private static func valueToString(value: T): String {
+        // I know `return (value as ToString)?.toString() ?? "..."` but get warnings
+        var tostr: ?ToString = value as ToString
+        var str: ?String = tostr?.toString()
+        return str.getOrDefault {
+            "<T does not impl ToString>"
+        }
+    }
+
+    public func toString(): String {
+        return match (count) {
+            case Some(size) =>
+                let sb = StringBuilder()
+                sb.append("[")
+                for (i in 0..size) {
+                    sb.append(valueToString(this[i]))
+                    sb.append(", ")
+                }
+                sb.append("]")
+                sb.toString()
+            case None => valueToString(value)
+        }
+    }
 }
+
+public func vaule<T>(val: T) where T <: CType {
+    return Value<T>.make(val)
+}
+
+public let bool = vaule<Bool>
+public let i32 = vaule<Int32>
+public let u32 = vaule<UInt32>
+public let i64 = vaule<Int64>
+public let u64 = vaule<UInt64>
+public let f32 = vaule<Float32>
+public let f64 = vaule<Float64>

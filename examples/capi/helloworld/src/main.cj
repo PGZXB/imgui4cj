@@ -8,11 +8,9 @@ class Ref<T> {
 }
 
 main(): Int64 {
-    let clickCount = Ref<Int64>(0)
-    let windowTitle = unsafe { LibC.mallocCString("Hello World") }
-    let pOpen: CPointer<Bool> = unsafe { LibC.malloc<Bool>() }
-    unsafe { pOpen.write(true) }
-    let value = Value<Int32>.make(100)
+    let clickCount = i64(0)
+    let pOpen = bool(true)
+    let value = i32(100i32)
 
     let backend = getBackend(GLFWOpenGL3)
     backend.createWindow("Hello IMGUI4CJ", 800, 600).setBeforeRenderHook {
@@ -22,25 +20,19 @@ main(): Int64 {
         println("Font global scale: ${fontGlobalScale}")
         unsafe { pFontGlobalScale.write(2.0) }
     }.run {
-        unsafe {
-            let text = LibC.mallocCString("Hello, I'm a label; Click Count: ${clickCount.value}")
-            if (pOpen.read()) {
-                capi.igBegin(windowTitle, pOpen, ImGuiWindowFlags_AlwaysAutoResize)
-                capi.igText(text)
-                if (capi.igButton(text, ImVec2(x: 0.0, y: 0.0))) {
-                    clickCount.value++
-                }
-                wcapi.igText("Int Value: ${value.value}")
-                wcapi.igSliderInt("Int Value", value, 0, 200, "%d", 0)
-                wcapi.igDragInt("Int Value", value, 1.0, 0, 200, "%d", 0)
-                capi.igEnd()
+        let text = "Hello, I'm a label; Click Count: ${clickCount}"
+        if (pOpen.value) {
+            wcapi.igBegin("Hello World", pOpen, ImGuiWindowFlags_AlwaysAutoResize)
+            wcapi.igText(text)
+            if (wcapi.igButton(text, ImVec2(x: 0.0, y: 0.0))) {
+                clickCount.value += 1
             }
-            LibC.free(text)
+            wcapi.igText("Int Value: ${value}")
+            wcapi.igSliderInt("Int Value", value, 0, 200, "%d", 0)
+            wcapi.igDragInt("Int Value", value, 1.0, 0, 200, "%d", 0)
+            wcapi.igEnd()
         }
     }
-
-    unsafe { LibC.free(windowTitle) }
-    unsafe { LibC.free(pOpen) }
 
     return 0
 }
