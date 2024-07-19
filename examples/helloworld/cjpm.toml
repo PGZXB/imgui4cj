@@ -1,5 +1,5 @@
 [dependencies]
-  imgui4cj = { path = "../../../", version = "1.0.0"}
+  imgui4cj = { path = "../../", version = "1.0.0"}
 
 [package]
   cjc-version = "0.51.4"
