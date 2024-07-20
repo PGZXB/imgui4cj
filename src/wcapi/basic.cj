@@ -34,15 +34,21 @@ extend CPointer<T> <: CStringConvertable where T <: UInt8 {
 }
 
 public class Value<T> <: ToString where T <: CType { // For int*, float*, ... arguments
-    private Value(private let pointer: CPointer<T>, private let count: ?Int64) {
+    private Value(private let pointer: CPointer<T>, private let count: ?Int64, private let owned!: Bool = true) {
     }
 
     ~init() {
-        unsafe { LibC.free(pointer) }
+        if (owned) {
+            unsafe { LibC.free(pointer) }
+        }
+    }
+
+    public static func unsafeMake(pointer: CPointer<T>, count!: ?Int64 = None, owned!: Bool = true): Value<T> {
+        return Value<T>(pointer, -1, owned: owned)
     }
 
     public static func null(): Value<T> {
-        return Value<T>(CPointer<T>(), None)
+        return Value<T>(CPointer<T>(), None, owned: false)
     }
 
     public static func make(): Value<T> {

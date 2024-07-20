@@ -479,3 +479,78 @@ func getWCAPIArgument(ty: CjType, argName_: String, typeAlias: HashMap<String, C
         }
     }
 }
+
+func getWCAPIReturn(ty: CjType, originalReturn: String, typeAlias: HashMap<String, CjType>): (String, String) {
+    return match (ty) {
+        case UnitType => (ty.toString(), originalReturn)
+        case BoolType => (ty.toString(), originalReturn)
+        case Int8Type => (ty.toString(), originalReturn)
+        case UInt8Type => (ty.toString(), originalReturn)
+        case Int16Type => (ty.toString(), originalReturn)
+        case UInt16Type => (ty.toString(), originalReturn)
+        case Int32Type => (ty.toString(), originalReturn)
+        case UInt32Type => (ty.toString(), originalReturn)
+        case Int64Type => (ty.toString(), originalReturn)
+        case UInt64Type => (ty.toString(), originalReturn)
+        case IntNativeType => (ty.toString(), originalReturn)
+        case UIntNativeType => (ty.toString(), originalReturn)
+        case Float32Type => (ty.toString(), originalReturn)
+        case Float64Type => (ty.toString(), originalReturn)
+        case CStringType => ("String", "${originalReturn}.toString()")
+        case CFuncType(_, _) => (ty.toString(), originalReturn)
+        case VArrayType(_, _) => throw IllegalStateException()
+        case StructType(_) => (ty.toString(), originalReturn)
+        // case StructType(_) => (ty.toString(), "${typenames[0]}.make(${originalReturn})")
+        case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+            getWCAPIReturn(StructType(sname), originalReturn, typeAlias)
+        } else {
+            (ty.toString(), originalReturn)
+        }
+        case TemplateType(template, typenames) => match (template) {
+            case CPointerType => match (typenames[0]) {
+                case UnitType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case BoolType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Int8Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case UInt8Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Int16Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case UInt16Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Int32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case UInt32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Int64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case UInt64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case IntNativeType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case UIntNativeType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Float32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case Float64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case CStringType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case CFuncType(_, _) => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                case VArrayType(_, _) => throw IllegalStateException()
+                case StructType(_) => (ty.toString(), originalReturn)
+                // case StructType(_) => (typenames[0].toString(), "${typenames[0]}.make(${originalReturn}, owned: false)")
+                case TypeAlias(name) =>
+                    let alias = typeAlias.get(name) ?? StructType(name)
+                    var (newTy, newRet) = getWCAPIReturn(TemplateType(CPointerType, [alias]), originalReturn, typeAlias)
+                    (newTy.replace(alias.toString(), name), newRet)
+                case TemplateType(template, typenames) => match (template) {
+                    case CPointerType => (ty.toString(), originalReturn)
+                }
+            }
+        }
+    }
+}

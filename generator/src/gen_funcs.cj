@@ -183,7 +183,7 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             fn.params |> filter {
             item => !(item.name == "..." && item.ty == "...")
         })
-        if (fn.structName == "") {
+        if (fn.structName == "") { // global function
             fnSb.append("public func ${fn.name[2..]}(")
         } else {
             fnSb.append("func ${fn.name}(")
@@ -201,20 +201,27 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
                 fnSb.append(", ")
             }
         }
-        fnSb.append(") {")
+        fnSb.append(")")
+
         if (hasVaList) {
             os.writeln("// Cangjie does not support `va_list`")
             os.writeln("// ${fnSb.toString()} ...")
         } else {
-            os.writeln(fnSb.toString())
-            os.write("    return ${capiPkgName}.${fn.name}(")
+            let capiCall = StringBuilder()
+            capiCall.append("${capiPkgName}.${fn.name}(")
             for ((i, arg) in withIndex(callArgs)) {
-                os.write(arg)
+                capiCall.append(arg)
                 if (i != callArgs.size - 1) {
-                    os.write(", ")
+                    capiCall.append(", ")
                 }
             }
-            os.writeln(")")
+            capiCall.append(")")
+
+            let retTy = CjType.fromCType(fn.retType, cArrayAsPointer: true)
+            let (wcapiRetTy, wcapiRet) = getWCAPIReturn(retTy, capiCall.toString(), typeAlias)
+
+            os.writeln("${fnSb.toString()}: ${wcapiRetTy} {")
+            os.writeln("    return ${wcapiRet}")
             os.writeln("}")
         }
         os.writeln()
