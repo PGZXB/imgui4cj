@@ -611,12 +611,12 @@ func ImFont_BuildLookupTable(self: ImFont): Unit {
     return capi.ImFont_BuildLookupTable(self.getCPointer())
 }
 
-func ImFont_CalcTextSizeA(pOut: ImVec2, self: ImFont, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Value<CString>): Unit {
+func ImFont_CalcTextSizeA(pOut: ImVec2, self: ImFont, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Value<CPointer<UInt8>>): Unit {
     return capi.ImFont_CalcTextSizeA(pOut.getCPointer(), self.getCPointer(), size, max_width, wrap_width, text_begin.asCString(), text_end.asCString(), remaining.getCPointer())
 }
 
 func ImFont_CalcWordWrapPositionA(self: ImFont, scale: Float32, text: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32): String {
-    return capi.ImFont_CalcWordWrapPositionA(self.getCPointer(), scale, text.asCString(), text_end.asCString(), wrap_width).toString()
+    return CString(capi.ImFont_CalcWordWrapPositionA(self.getCPointer(), scale, text.asCString(), text_end.asCString(), wrap_width)).toString()
 }
 
 func ImFont_ClearOutputData(self: ImFont): Unit {
@@ -636,7 +636,7 @@ func ImFont_GetCharAdvance(self: ImFont, c: ImWchar): Float32 {
 }
 
 func ImFont_GetDebugName(self: ImFont): String {
-    return capi.ImFont_GetDebugName(self.getCPointer()).toString()
+    return CString(capi.ImFont_GetDebugName(self.getCPointer())).toString()
 }
 
 func ImFont_GrowIndex(self: ImFont, new_size: Int32): Unit {
@@ -1435,11 +1435,11 @@ func ImGuiTextBuffer_appendf(self: ImGuiTextBuffer, fmt: CStringConvertable): Un
 // func ImGuiTextBuffer_appendfv(self: ImGuiTextBuffer, fmt: CStringConvertable, args: va_list) ...
 
 func ImGuiTextBuffer_begin(self: ImGuiTextBuffer): String {
-    return capi.ImGuiTextBuffer_begin(self.getCPointer()).toString()
+    return CString(capi.ImGuiTextBuffer_begin(self.getCPointer())).toString()
 }
 
 func ImGuiTextBuffer_c_str(self: ImGuiTextBuffer): String {
-    return capi.ImGuiTextBuffer_c_str(self.getCPointer()).toString()
+    return CString(capi.ImGuiTextBuffer_c_str(self.getCPointer())).toString()
 }
 
 func ImGuiTextBuffer_clear(self: ImGuiTextBuffer): Unit {
@@ -1455,7 +1455,7 @@ func ImGuiTextBuffer_empty(self: ImGuiTextBuffer): Bool {
 }
 
 func ImGuiTextBuffer_end(self: ImGuiTextBuffer): String {
-    return capi.ImGuiTextBuffer_end(self.getCPointer()).toString()
+    return CString(capi.ImGuiTextBuffer_end(self.getCPointer())).toString()
 }
 
 func ImGuiTextBuffer_reserve(self: ImGuiTextBuffer, capacity: Int32): Unit {
@@ -1503,11 +1503,11 @@ func ImGuiTextIndex_clear(self: ImGuiTextIndex): Unit {
 }
 
 func ImGuiTextIndex_get_line_begin(self: ImGuiTextIndex, base: CStringConvertable, n: Int32): String {
-    return capi.ImGuiTextIndex_get_line_begin(self.getCPointer(), base.asCString(), n).toString()
+    return CString(capi.ImGuiTextIndex_get_line_begin(self.getCPointer(), base.asCString(), n)).toString()
 }
 
 func ImGuiTextIndex_get_line_end(self: ImGuiTextIndex, base: CStringConvertable, n: Int32): String {
-    return capi.ImGuiTextIndex_get_line_end(self.getCPointer(), base.asCString(), n).toString()
+    return CString(capi.ImGuiTextIndex_get_line_end(self.getCPointer(), base.asCString(), n)).toString()
 }
 
 func ImGuiTextIndex_size(self: ImGuiTextIndex): Int32 {
@@ -1607,7 +1607,7 @@ func ImGuiWindowClass_destroy(self: ImGuiWindowClass): Unit {
 }
 
 func ImGuiWindowSettings_GetName(self: ImGuiWindowSettings): String {
-    return capi.ImGuiWindowSettings_GetName(self.getCPointer()).toString()
+    return CString(capi.ImGuiWindowSettings_GetName(self.getCPointer())).toString()
 }
 
 func ImGuiWindowSettings_ImGuiWindowSettings(): ImGuiWindowSettings {
@@ -2205,7 +2205,7 @@ public func Columns(count: Int32, id: CStringConvertable, border: Bool): Unit {
     return capi.igColumns(count, id.asCString(), border)
 }
 
-public func Combo_Str_arr(label: CStringConvertable, current_item: Value<Int32>, items: Value<CString>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
+public func Combo_Str_arr(label: CStringConvertable, current_item: Value<Int32>, items: Value<CPointer<UInt8>>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return capi.igCombo_Str_arr(label.asCString(), current_item.getCPointer(), items.getCPointer(), items_count, popup_max_height_in_items)
 }
 
@@ -2213,7 +2213,7 @@ public func Combo_Str(label: CStringConvertable, current_item: Value<Int32>, ite
     return capi.igCombo_Str(label.asCString(), current_item.getCPointer(), items_separated_by_zeros.asCString(), popup_max_height_in_items)
 }
 
-public func Combo_FnStrPtr(label: CStringConvertable, current_item: Value<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: Value<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
+public func Combo_FnStrPtr(label: CStringConvertable, current_item: Value<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: Value<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return capi.igCombo_FnStrPtr(label.asCString(), current_item.getCPointer(), getter, user_data.getCPointer(), items_count, popup_max_height_in_items)
 }
 
@@ -2741,7 +2741,7 @@ public func FindOrCreateColumns(window: Value<ImGuiWindow>, id: ImGuiID): ImGuiO
 }
 
 public func FindRenderedTextEnd(text: CStringConvertable, text_end: CStringConvertable): String {
-    return capi.igFindRenderedTextEnd(text.asCString(), text_end.asCString()).toString()
+    return CString(capi.igFindRenderedTextEnd(text.asCString(), text_end.asCString())).toString()
 }
 
 public func FindSettingsHandler(type_name: CStringConvertable): ImGuiSettingsHandler {
@@ -2821,7 +2821,7 @@ public func GetBackgroundDrawList_ViewportPtr(viewport: ImGuiViewport): ImDrawLi
 }
 
 public func GetClipboardText(): String {
-    return capi.igGetClipboardText().toString()
+    return CString(capi.igGetClipboardText()).toString()
 }
 
 public func GetColorU32_Col(idx: ImGuiCol, alpha_mul: Float32): ImU32 {
@@ -3033,7 +3033,7 @@ public func GetItemStatusFlags(): ImGuiItemStatusFlags {
 }
 
 public func GetKeyChordName(key_chord: ImGuiKeyChord): String {
-    return capi.igGetKeyChordName(key_chord).toString()
+    return CString(capi.igGetKeyChordName(key_chord)).toString()
 }
 
 public func GetKeyData_ContextPtr(ctx: Value<ImGuiContext>, key: ImGuiKey): ImGuiKeyData {
@@ -3049,7 +3049,7 @@ public func GetKeyMagnitude2d(pOut: ImVec2, key_left: ImGuiKey, key_right: ImGui
 }
 
 public func GetKeyName(key: ImGuiKey): String {
-    return capi.igGetKeyName(key).toString()
+    return CString(capi.igGetKeyName(key)).toString()
 }
 
 public func GetKeyOwner(key: ImGuiKey): ImGuiID {
@@ -3129,7 +3129,7 @@ public func GetStyle(): ImGuiStyle {
 }
 
 public func GetStyleColorName(idx: ImGuiCol): String {
-    return capi.igGetStyleColorName(idx).toString()
+    return CString(capi.igGetStyleColorName(idx)).toString()
 }
 
 public func GetStyleColorVec4(idx: ImGuiCol): ImVec4 {
@@ -3173,7 +3173,7 @@ public func GetTypingSelectRequest(flags: ImGuiTypingSelectFlags): ImGuiTypingSe
 }
 
 public func GetVersion(): String {
-    return capi.igGetVersion().toString()
+    return CString(capi.igGetVersion()).toString()
 }
 
 public func GetViewportPlatformMonitor(viewport: ImGuiViewport): ImGuiPlatformMonitor {
@@ -3396,12 +3396,12 @@ public func ImFormatString(buf: CStringConvertable, buf_size: UIntNative, fmt: C
     return capi.igImFormatString(buf.asCString(), buf_size, fmt.asCString())
 }
 
-public func ImFormatStringToTempBuffer(out_buf: Value<CString>, out_buf_end: Value<CString>, fmt: CStringConvertable): Unit {
+public func ImFormatStringToTempBuffer(out_buf: Value<CPointer<UInt8>>, out_buf_end: Value<CPointer<UInt8>>, fmt: CStringConvertable): Unit {
     return capi.igImFormatStringToTempBuffer(out_buf.getCPointer(), out_buf_end.getCPointer(), fmt.asCString())
 }
 
 // Cangjie does not support `va_list`
-// public func ImFormatStringToTempBufferV(out_buf: Value<CString>, out_buf_end: Value<CString>, fmt: CStringConvertable, args: va_list) ...
+// public func ImFormatStringToTempBufferV(out_buf: Value<CPointer<UInt8>>, out_buf_end: Value<CPointer<UInt8>>, fmt: CStringConvertable, args: va_list) ...
 
 // Cangjie does not support `va_list`
 // public func ImFormatStringV(buf: CStringConvertable, buf_size: UIntNative, fmt: CStringConvertable, args: va_list) ...
@@ -3483,11 +3483,11 @@ public func ImMul(pOut: ImVec2, lhs: ImVec2, rhs: ImVec2): Unit {
 }
 
 public func ImParseFormatFindEnd(format: CStringConvertable): String {
-    return capi.igImParseFormatFindEnd(format.asCString()).toString()
+    return CString(capi.igImParseFormatFindEnd(format.asCString())).toString()
 }
 
 public func ImParseFormatFindStart(format: CStringConvertable): String {
-    return capi.igImParseFormatFindStart(format.asCString()).toString()
+    return CString(capi.igImParseFormatFindStart(format.asCString())).toString()
 }
 
 public func ImParseFormatPrecision(format: CStringConvertable, default_value: Int32): Int32 {
@@ -3499,11 +3499,11 @@ public func ImParseFormatSanitizeForPrinting(fmt_in: CStringConvertable, fmt_out
 }
 
 public func ImParseFormatSanitizeForScanning(fmt_in: CStringConvertable, fmt_out: CStringConvertable, fmt_out_size: UIntNative): String {
-    return capi.igImParseFormatSanitizeForScanning(fmt_in.asCString(), fmt_out.asCString(), fmt_out_size).toString()
+    return CString(capi.igImParseFormatSanitizeForScanning(fmt_in.asCString(), fmt_out.asCString(), fmt_out_size)).toString()
 }
 
 public func ImParseFormatTrimDecorations(format: CStringConvertable, buf: CStringConvertable, buf_size: UIntNative): String {
-    return capi.igImParseFormatTrimDecorations(format.asCString(), buf.asCString(), buf_size).toString()
+    return CString(capi.igImParseFormatTrimDecorations(format.asCString(), buf.asCString(), buf_size)).toString()
 }
 
 public func ImPow_Float(x: Float32, y: Float32): Float32 {
@@ -3543,7 +3543,7 @@ public func ImSign_double(x: Float64): Float64 {
 }
 
 public func ImStrSkipBlank(str: CStringConvertable): String {
-    return capi.igImStrSkipBlank(str.asCString()).toString()
+    return CString(capi.igImStrSkipBlank(str.asCString())).toString()
 }
 
 public func ImStrTrimBlanks(str: CStringConvertable): Unit {
@@ -3555,19 +3555,19 @@ public func ImStrbolW(buf_mid_line: Value<ImWchar>, buf_begin: Value<ImWchar>): 
 }
 
 public func ImStrchrRange(str_begin: CStringConvertable, str_end: CStringConvertable, c: UInt8): String {
-    return capi.igImStrchrRange(str_begin.asCString(), str_end.asCString(), c).toString()
+    return CString(capi.igImStrchrRange(str_begin.asCString(), str_end.asCString(), c)).toString()
 }
 
 public func ImStrdup(str: CStringConvertable): String {
-    return capi.igImStrdup(str.asCString()).toString()
+    return CString(capi.igImStrdup(str.asCString())).toString()
 }
 
 public func ImStrdupcpy(dst: CStringConvertable, p_dst_size: Value<UIntNative>, str: CStringConvertable): String {
-    return capi.igImStrdupcpy(dst.asCString(), p_dst_size.getCPointer(), str.asCString()).toString()
+    return CString(capi.igImStrdupcpy(dst.asCString(), p_dst_size.getCPointer(), str.asCString())).toString()
 }
 
 public func ImStreolRange(str: CStringConvertable, str_end: CStringConvertable): String {
-    return capi.igImStreolRange(str.asCString(), str_end.asCString()).toString()
+    return CString(capi.igImStreolRange(str.asCString(), str_end.asCString())).toString()
 }
 
 public func ImStricmp(str1: CStringConvertable, str2: CStringConvertable): Int32 {
@@ -3575,7 +3575,7 @@ public func ImStricmp(str1: CStringConvertable, str2: CStringConvertable): Int32
 }
 
 public func ImStristr(haystack: CStringConvertable, haystack_end: CStringConvertable, needle: CStringConvertable, needle_end: CStringConvertable): String {
-    return capi.igImStristr(haystack.asCString(), haystack_end.asCString(), needle.asCString(), needle_end.asCString()).toString()
+    return CString(capi.igImStristr(haystack.asCString(), haystack_end.asCString(), needle.asCString(), needle_end.asCString())).toString()
 }
 
 public func ImStrlenW(str: Value<ImWchar>): Int32 {
@@ -3595,7 +3595,7 @@ public func ImTextCharFromUtf8(out_char: Value<Int32>, in_text: CStringConvertab
 }
 
 public func ImTextCharToUtf8(out_buf: Value<UInt8>, c: Int32): String {
-    return capi.igImTextCharToUtf8(out_buf.getCPointer(), c).toString()
+    return CString(capi.igImTextCharToUtf8(out_buf.getCPointer(), c)).toString()
 }
 
 public func ImTextCountCharsFromUtf8(in_text: CStringConvertable, in_text_end: CStringConvertable): Int32 {
@@ -3615,10 +3615,10 @@ public func ImTextCountUtf8BytesFromStr(in_text: Value<ImWchar>, in_text_end: Va
 }
 
 public func ImTextFindPreviousUtf8Codepoint(in_text_start: CStringConvertable, in_text_curr: CStringConvertable): String {
-    return capi.igImTextFindPreviousUtf8Codepoint(in_text_start.asCString(), in_text_curr.asCString()).toString()
+    return CString(capi.igImTextFindPreviousUtf8Codepoint(in_text_start.asCString(), in_text_curr.asCString())).toString()
 }
 
-public func ImTextStrFromUtf8(out_buf: Value<ImWchar>, out_buf_size: Int32, in_text: CStringConvertable, in_text_end: CStringConvertable, in_remaining: Value<CString>): Int32 {
+public func ImTextStrFromUtf8(out_buf: Value<ImWchar>, out_buf_size: Int32, in_text: CStringConvertable, in_text_end: CStringConvertable, in_remaining: Value<CPointer<UInt8>>): Int32 {
     return capi.igImTextStrFromUtf8(out_buf.getCPointer(), out_buf_size, in_text.asCString(), in_text_end.asCString(), in_remaining.getCPointer())
 }
 
@@ -4021,11 +4021,11 @@ public func LabelText(label: CStringConvertable, fmt: CStringConvertable): Unit 
 // Cangjie does not support `va_list`
 // public func LabelTextV(label: CStringConvertable, fmt: CStringConvertable, args: va_list) ...
 
-public func ListBox_Str_arr(label: CStringConvertable, current_item: Value<Int32>, items: Value<CString>, items_count: Int32, height_in_items: Int32): Bool {
+public func ListBox_Str_arr(label: CStringConvertable, current_item: Value<Int32>, items: Value<CPointer<UInt8>>, items_count: Int32, height_in_items: Int32): Bool {
     return capi.igListBox_Str_arr(label.asCString(), current_item.getCPointer(), items.getCPointer(), items_count, height_in_items)
 }
 
-public func ListBox_FnStrPtr(label: CStringConvertable, current_item: Value<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: Value<Unit>, items_count: Int32, height_in_items: Int32): Bool {
+public func ListBox_FnStrPtr(label: CStringConvertable, current_item: Value<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: Value<Unit>, items_count: Int32, height_in_items: Int32): Bool {
     return capi.igListBox_FnStrPtr(label.asCString(), current_item.getCPointer(), getter, user_data.getCPointer(), items_count, height_in_items)
 }
 
@@ -4038,7 +4038,7 @@ public func LoadIniSettingsFromMemory(ini_data: CStringConvertable, ini_size: UI
 }
 
 public func LocalizeGetMsg(key: ImGuiLocKey): String {
-    return capi.igLocalizeGetMsg(key).toString()
+    return CString(capi.igLocalizeGetMsg(key)).toString()
 }
 
 public func LocalizeRegisterEntries(entries: ImGuiLocEntry, count: Int32): Unit {
@@ -4469,7 +4469,7 @@ public func SaveIniSettingsToDisk(ini_filename: CStringConvertable): Unit {
 }
 
 public func SaveIniSettingsToMemory(out_ini_size: Value<UIntNative>): String {
-    return capi.igSaveIniSettingsToMemory(out_ini_size.getCPointer()).toString()
+    return CString(capi.igSaveIniSettingsToMemory(out_ini_size.getCPointer())).toString()
 }
 
 public func ScaleWindowsInViewport(viewport: ImGuiViewportP, scale: Float32): Unit {
@@ -5023,7 +5023,7 @@ public func TabBarGetCurrentTab(tab_bar: ImGuiTabBar): ImGuiTabItem {
 }
 
 public func TabBarGetTabName(tab_bar: ImGuiTabBar, tab: ImGuiTabItem): String {
-    return capi.igTabBarGetTabName(tab_bar.getCPointer(), tab.getCPointer()).toString()
+    return CString(capi.igTabBarGetTabName(tab_bar.getCPointer(), tab.getCPointer())).toString()
 }
 
 public func TabBarGetTabOrder(tab_bar: ImGuiTabBar, tab: ImGuiTabItem): Int32 {
@@ -5159,11 +5159,11 @@ public func TableGetColumnIndex(): Int32 {
 }
 
 public func TableGetColumnName_Int(column_n: Int32): String {
-    return capi.igTableGetColumnName_Int(column_n).toString()
+    return CString(capi.igTableGetColumnName_Int(column_n)).toString()
 }
 
 public func TableGetColumnName_TablePtr(table: Value<ImGuiTable>, column_n: Int32): String {
-    return capi.igTableGetColumnName_TablePtr(table.getCPointer(), column_n).toString()
+    return CString(capi.igTableGetColumnName_TablePtr(table.getCPointer(), column_n)).toString()
 }
 
 public func TableGetColumnNextSortDirection(column: Value<ImGuiTableColumn>): ImGuiSortDirection {
@@ -5462,15 +5462,15 @@ public func TreePushOverrideID(id: ImGuiID): Unit {
     return capi.igTreePushOverrideID(id)
 }
 
-public func TypingSelectFindBestLeadingMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: Value<Unit>): Int32 {
+public func TypingSelectFindBestLeadingMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: Value<Unit>): Int32 {
     return capi.igTypingSelectFindBestLeadingMatch(req.getCPointer(), items_count, get_item_name_func, user_data.getCPointer())
 }
 
-public func TypingSelectFindMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: Value<Unit>, nav_item_idx: Int32): Int32 {
+public func TypingSelectFindMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: Value<Unit>, nav_item_idx: Int32): Int32 {
     return capi.igTypingSelectFindMatch(req.getCPointer(), items_count, get_item_name_func, user_data.getCPointer(), nav_item_idx)
 }
 
-public func TypingSelectFindNextSingleCharMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: Value<Unit>, nav_item_idx: Int32): Int32 {
+public func TypingSelectFindNextSingleCharMatch(req: ImGuiTypingSelectRequest, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: Value<Unit>, nav_item_idx: Int32): Int32 {
     return capi.igTypingSelectFindNextSingleCharMatch(req.getCPointer(), items_count, get_item_name_func, user_data.getCPointer(), nav_item_idx)
 }
 

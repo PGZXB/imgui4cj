@@ -229,9 +229,9 @@ public class GLFWOpenGL3Backend <: Backend {
         return this
     }
 
-    public func setBgColor(color: ImVec4): This {
+    public func setBgColor(r: Float32, g: Float32, b: Float32, a: Float32): This {
         var ctx = unsafe { glfwWindowContext.read() }
-        ctx.backgraoudColor = color
+        ctx.backgraoudColor = ImVec4(x: r, y: g, z: b, w: a)
         unsafe { glfwWindowContext.write(ctx) }
         return this
     }

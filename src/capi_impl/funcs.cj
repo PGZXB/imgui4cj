@@ -117,9 +117,9 @@ foreign func ImDrawList_AddRectFilled(self: CPointer<ImDrawList>, p_min: ImVec2,
 
 foreign func ImDrawList_AddRectFilledMultiColor(self: CPointer<ImDrawList>, p_min: ImVec2, p_max: ImVec2, col_upr_left: ImU32, col_upr_right: ImU32, col_bot_right: ImU32, col_bot_left: ImU32): Unit
 
-foreign func ImDrawList_AddText_Vec2(self: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString): Unit
+foreign func ImDrawList_AddText_Vec2(self: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit
 
-foreign func ImDrawList_AddText_FontPtr(self: CPointer<ImDrawList>, font: CPointer<ImFont>, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip_rect: CPointer<ImVec4>): Unit
+foreign func ImDrawList_AddText_FontPtr(self: CPointer<ImDrawList>, font: CPointer<ImFont>, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32, cpu_fine_clip_rect: CPointer<ImVec4>): Unit
 
 foreign func ImDrawList_AddTriangle(self: CPointer<ImDrawList>, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32): Unit
 
@@ -225,9 +225,9 @@ foreign func ImFontAtlas_AddFont(self: CPointer<ImFontAtlas>, font_cfg: CPointer
 
 foreign func ImFontAtlas_AddFontDefault(self: CPointer<ImFontAtlas>, font_cfg: CPointer<ImFontConfig>): CPointer<ImFont>
 
-foreign func ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
+foreign func ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CPointer<UInt8>, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
-foreign func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
+foreign func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CPointer<UInt8>, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
 foreign func ImFontAtlas_AddFontFromMemoryCompressedTTF(self: CPointer<ImFontAtlas>, compressed_font_data: CPointer<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont>
 
@@ -287,7 +287,7 @@ foreign func ImFontGlyphRangesBuilder_AddChar(self: CPointer<ImFontGlyphRangesBu
 
 foreign func ImFontGlyphRangesBuilder_AddRanges(self: CPointer<ImFontGlyphRangesBuilder>, ranges: CPointer<ImWchar>): Unit
 
-foreign func ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CString, text_end: CString): Unit
+foreign func ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit
 
 foreign func ImFontGlyphRangesBuilder_BuildRanges(self: CPointer<ImFontGlyphRangesBuilder>, out_ranges: CPointer<ImVector_ImWchar>): Unit
 
@@ -307,9 +307,9 @@ foreign func ImFont_AddRemapChar(self: CPointer<ImFont>, dst: ImWchar, src: ImWc
 
 foreign func ImFont_BuildLookupTable(self: CPointer<ImFont>): Unit
 
-foreign func ImFont_CalcTextSizeA(pOut: CPointer<ImVec2>, self: CPointer<ImFont>, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CString, text_end: CString, remaining: CPointer<CString>): Unit
+foreign func ImFont_CalcTextSizeA(pOut: CPointer<ImVec2>, self: CPointer<ImFont>, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, remaining: CPointer<CPointer<UInt8>>): Unit
 
-foreign func ImFont_CalcWordWrapPositionA(self: CPointer<ImFont>, scale: Float32, text: CString, text_end: CString, wrap_width: Float32): CString
+foreign func ImFont_CalcWordWrapPositionA(self: CPointer<ImFont>, scale: Float32, text: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32): CPointer<UInt8>
 
 foreign func ImFont_ClearOutputData(self: CPointer<ImFont>): Unit
 
@@ -319,7 +319,7 @@ foreign func ImFont_FindGlyphNoFallback(self: CPointer<ImFont>, c: ImWchar): CPo
 
 foreign func ImFont_GetCharAdvance(self: CPointer<ImFont>, c: ImWchar): Float32
 
-foreign func ImFont_GetDebugName(self: CPointer<ImFont>): CString
+foreign func ImFont_GetDebugName(self: CPointer<ImFont>): CPointer<UInt8>
 
 foreign func ImFont_GrowIndex(self: CPointer<ImFont>, new_size: Int32): Unit
 
@@ -331,7 +331,7 @@ foreign func ImFont_IsLoaded(self: CPointer<ImFont>): Bool
 
 foreign func ImFont_RenderChar(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, c: ImWchar): Unit
 
-foreign func ImFont_RenderText(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip: Bool): Unit
+foreign func ImFont_RenderText(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32, cpu_fine_clip: Bool): Unit
 
 foreign func ImFont_SetGlyphVisible(self: CPointer<ImFont>, c: ImWchar, visible: Bool): Unit
 
@@ -397,7 +397,7 @@ foreign func ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: Int32): Unit
 
 foreign func ImGuiIO_AddInputCharacterUTF16(self: CPointer<ImGuiIO>, c: ImWchar16): Unit
 
-foreign func ImGuiIO_AddInputCharactersUTF8(self: CPointer<ImGuiIO>, str: CString): Unit
+foreign func ImGuiIO_AddInputCharactersUTF8(self: CPointer<ImGuiIO>, str: CPointer<UInt8>): Unit
 
 foreign func ImGuiIO_AddKeyAnalogEvent(self: CPointer<ImGuiIO>, key: ImGuiKey, down: Bool, v: Float32): Unit
 
@@ -437,7 +437,7 @@ foreign func ImGuiInputTextCallbackData_HasSelection(self: CPointer<ImGuiInputTe
 
 foreign func ImGuiInputTextCallbackData_ImGuiInputTextCallbackData(): CPointer<ImGuiInputTextCallbackData>
 
-foreign func ImGuiInputTextCallbackData_InsertChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, text: CString, text_end: CString): Unit
+foreign func ImGuiInputTextCallbackData_InsertChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit
 
 foreign func ImGuiInputTextCallbackData_SelectAll(self: CPointer<ImGuiInputTextCallbackData>): Unit
 
@@ -571,7 +571,7 @@ foreign func ImGuiPayload_Clear(self: CPointer<ImGuiPayload>): Unit
 
 foreign func ImGuiPayload_ImGuiPayload(): CPointer<ImGuiPayload>
 
-foreign func ImGuiPayload_IsDataType(self: CPointer<ImGuiPayload>, `type`: CString): Bool
+foreign func ImGuiPayload_IsDataType(self: CPointer<ImGuiPayload>, `type`: CPointer<UInt8>): Bool
 
 foreign func ImGuiPayload_IsDelivery(self: CPointer<ImGuiPayload>): Bool
 
@@ -713,16 +713,16 @@ foreign func ImGuiTable_destroy(self: CPointer<ImGuiTable>): Unit
 
 foreign func ImGuiTextBuffer_ImGuiTextBuffer(): CPointer<ImGuiTextBuffer>
 
-foreign func ImGuiTextBuffer_append(self: CPointer<ImGuiTextBuffer>, str: CString, str_end: CString): Unit
+foreign func ImGuiTextBuffer_append(self: CPointer<ImGuiTextBuffer>, str: CPointer<UInt8>, str_end: CPointer<UInt8>): Unit
 
-foreign func ImGuiTextBuffer_appendf(self: CPointer<ImGuiTextBuffer>, fmt: CString, ...): Unit
+foreign func ImGuiTextBuffer_appendf(self: CPointer<ImGuiTextBuffer>, fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CString, args: va_list): Unit
+// foreign func ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CPointer<UInt8>, args: va_list): Unit
 
-foreign func ImGuiTextBuffer_begin(self: CPointer<ImGuiTextBuffer>): CString
+foreign func ImGuiTextBuffer_begin(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8>
 
-foreign func ImGuiTextBuffer_c_str(self: CPointer<ImGuiTextBuffer>): CString
+foreign func ImGuiTextBuffer_c_str(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8>
 
 foreign func ImGuiTextBuffer_clear(self: CPointer<ImGuiTextBuffer>): Unit
 
@@ -730,7 +730,7 @@ foreign func ImGuiTextBuffer_destroy(self: CPointer<ImGuiTextBuffer>): Unit
 
 foreign func ImGuiTextBuffer_empty(self: CPointer<ImGuiTextBuffer>): Bool
 
-foreign func ImGuiTextBuffer_end(self: CPointer<ImGuiTextBuffer>): CString
+foreign func ImGuiTextBuffer_end(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8>
 
 foreign func ImGuiTextBuffer_reserve(self: CPointer<ImGuiTextBuffer>, capacity: Int32): Unit
 
@@ -740,29 +740,29 @@ foreign func ImGuiTextFilter_Build(self: CPointer<ImGuiTextFilter>): Unit
 
 foreign func ImGuiTextFilter_Clear(self: CPointer<ImGuiTextFilter>): Unit
 
-foreign func ImGuiTextFilter_Draw(self: CPointer<ImGuiTextFilter>, label: CString, width: Float32): Bool
+foreign func ImGuiTextFilter_Draw(self: CPointer<ImGuiTextFilter>, label: CPointer<UInt8>, width: Float32): Bool
 
-foreign func ImGuiTextFilter_ImGuiTextFilter(default_filter: CString): CPointer<ImGuiTextFilter>
+foreign func ImGuiTextFilter_ImGuiTextFilter(default_filter: CPointer<UInt8>): CPointer<ImGuiTextFilter>
 
 foreign func ImGuiTextFilter_IsActive(self: CPointer<ImGuiTextFilter>): Bool
 
-foreign func ImGuiTextFilter_PassFilter(self: CPointer<ImGuiTextFilter>, text: CString, text_end: CString): Bool
+foreign func ImGuiTextFilter_PassFilter(self: CPointer<ImGuiTextFilter>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Bool
 
 foreign func ImGuiTextFilter_destroy(self: CPointer<ImGuiTextFilter>): Unit
 
-foreign func ImGuiTextIndex_append(self: CPointer<ImGuiTextIndex>, base: CString, old_size: Int32, new_size: Int32): Unit
+foreign func ImGuiTextIndex_append(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, old_size: Int32, new_size: Int32): Unit
 
 foreign func ImGuiTextIndex_clear(self: CPointer<ImGuiTextIndex>): Unit
 
-foreign func ImGuiTextIndex_get_line_begin(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString
+foreign func ImGuiTextIndex_get_line_begin(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, n: Int32): CPointer<UInt8>
 
-foreign func ImGuiTextIndex_get_line_end(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString
+foreign func ImGuiTextIndex_get_line_end(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, n: Int32): CPointer<UInt8>
 
 foreign func ImGuiTextIndex_size(self: CPointer<ImGuiTextIndex>): Int32
 
 foreign func ImGuiTextRange_ImGuiTextRange_Nil(): CPointer<ImGuiTextRange>
 
-foreign func ImGuiTextRange_ImGuiTextRange_Str(_b: CString, _e: CString): CPointer<ImGuiTextRange>
+foreign func ImGuiTextRange_ImGuiTextRange_Str(_b: CPointer<UInt8>, _e: CPointer<UInt8>): CPointer<ImGuiTextRange>
 
 foreign func ImGuiTextRange_destroy(self: CPointer<ImGuiTextRange>): Unit
 
@@ -806,7 +806,7 @@ foreign func ImGuiWindowClass_ImGuiWindowClass(): CPointer<ImGuiWindowClass>
 
 foreign func ImGuiWindowClass_destroy(self: CPointer<ImGuiWindowClass>): Unit
 
-foreign func ImGuiWindowSettings_GetName(self: CPointer<ImGuiWindowSettings>): CString
+foreign func ImGuiWindowSettings_GetName(self: CPointer<ImGuiWindowSettings>): CPointer<UInt8>
 
 foreign func ImGuiWindowSettings_ImGuiWindowSettings(): CPointer<ImGuiWindowSettings>
 
@@ -814,7 +814,7 @@ foreign func ImGuiWindowSettings_destroy(self: CPointer<ImGuiWindowSettings>): U
 
 foreign func ImGuiWindow_CalcFontSize(self: CPointer<ImGuiWindow>): Float32
 
-foreign func ImGuiWindow_GetID_Str(self: CPointer<ImGuiWindow>, str: CString, str_end: CString): ImGuiID
+foreign func ImGuiWindow_GetID_Str(self: CPointer<ImGuiWindow>, str: CPointer<UInt8>, str_end: CPointer<UInt8>): ImGuiID
 
 foreign func ImGuiWindow_GetID_Ptr(self: CPointer<ImGuiWindow>, ptr: CPointer<Unit>): ImGuiID
 
@@ -822,7 +822,7 @@ foreign func ImGuiWindow_GetID_Int(self: CPointer<ImGuiWindow>, n: Int32): ImGui
 
 foreign func ImGuiWindow_GetIDFromRectangle(self: CPointer<ImGuiWindow>, r_abs: ImRect): ImGuiID
 
-foreign func ImGuiWindow_ImGuiWindow(context: CPointer<ImGuiContext>, name: CString): CPointer<ImGuiWindow>
+foreign func ImGuiWindow_ImGuiWindow(context: CPointer<ImGuiContext>, name: CPointer<UInt8>): CPointer<ImGuiWindow>
 
 foreign func ImGuiWindow_MenuBarRect(pOut: CPointer<ImRect>, self: CPointer<ImGuiWindow>): Unit
 
@@ -918,7 +918,7 @@ foreign func ImVec4_ImVec4_Float(_x: Float32, _y: Float32, _z: Float32, _w: Floa
 
 foreign func ImVec4_destroy(self: CPointer<ImVec4>): Unit
 
-foreign func igAcceptDragDropPayload(`type`: CString, flags: ImGuiDragDropFlags): CPointer<ImGuiPayload>
+foreign func igAcceptDragDropPayload(`type`: CPointer<UInt8>, flags: ImGuiDragDropFlags): CPointer<ImGuiPayload>
 
 foreign func igActivateItemByID(id: ImGuiID): Unit
 
@@ -930,21 +930,21 @@ foreign func igAddSettingsHandler(handler: CPointer<ImGuiSettingsHandler>): Unit
 
 foreign func igAlignTextToFramePadding(): Unit
 
-foreign func igArrowButton(str_id: CString, dir: ImGuiDir): Bool
+foreign func igArrowButton(str_id: CPointer<UInt8>, dir: ImGuiDir): Bool
 
-foreign func igArrowButtonEx(str_id: CString, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
+foreign func igArrowButtonEx(str_id: CPointer<UInt8>, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
 
-foreign func igBegin(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
+foreign func igBegin(name: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginChild_Str(str_id: CString, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
+foreign func igBeginChild_Str(str_id: CPointer<UInt8>, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
 foreign func igBeginChild_ID(id: ImGuiID, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginChildEx(name: CString, id: ImGuiID, size_arg: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
+foreign func igBeginChildEx(name: CPointer<UInt8>, id: ImGuiID, size_arg: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginColumns(str_id: CString, count: Int32, flags: ImGuiOldColumnFlags): Unit
+foreign func igBeginColumns(str_id: CPointer<UInt8>, count: Int32, flags: ImGuiOldColumnFlags): Unit
 
-foreign func igBeginCombo(label: CString, preview_value: CString, flags: ImGuiComboFlags): Bool
+foreign func igBeginCombo(label: CPointer<UInt8>, preview_value: CPointer<UInt8>, flags: ImGuiComboFlags): Bool
 
 foreign func igBeginComboPopup(popup_id: ImGuiID, bb: ImRect, flags: ImGuiComboFlags): Bool
 
@@ -970,37 +970,37 @@ foreign func igBeginGroup(): Unit
 
 foreign func igBeginItemTooltip(): Bool
 
-foreign func igBeginListBox(label: CString, size: ImVec2): Bool
+foreign func igBeginListBox(label: CPointer<UInt8>, size: ImVec2): Bool
 
 foreign func igBeginMainMenuBar(): Bool
 
-foreign func igBeginMenu(label: CString, enabled: Bool): Bool
+foreign func igBeginMenu(label: CPointer<UInt8>, enabled: Bool): Bool
 
 foreign func igBeginMenuBar(): Bool
 
-foreign func igBeginMenuEx(label: CString, icon: CString, enabled: Bool): Bool
+foreign func igBeginMenuEx(label: CPointer<UInt8>, icon: CPointer<UInt8>, enabled: Bool): Bool
 
-foreign func igBeginPopup(str_id: CString, flags: ImGuiWindowFlags): Bool
+foreign func igBeginPopup(str_id: CPointer<UInt8>, flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginPopupContextItem(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
+foreign func igBeginPopupContextItem(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool
 
-foreign func igBeginPopupContextVoid(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
+foreign func igBeginPopupContextVoid(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool
 
-foreign func igBeginPopupContextWindow(str_id: CString, popup_flags: ImGuiPopupFlags): Bool
+foreign func igBeginPopupContextWindow(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool
 
 foreign func igBeginPopupEx(id: ImGuiID, extra_flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginPopupModal(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
+foreign func igBeginPopupModal(name: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool
 
-foreign func igBeginTabBar(str_id: CString, flags: ImGuiTabBarFlags): Bool
+foreign func igBeginTabBar(str_id: CPointer<UInt8>, flags: ImGuiTabBarFlags): Bool
 
 foreign func igBeginTabBarEx(tab_bar: CPointer<ImGuiTabBar>, bb: ImRect, flags: ImGuiTabBarFlags): Bool
 
-foreign func igBeginTabItem(label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags): Bool
+foreign func igBeginTabItem(label: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags): Bool
 
-foreign func igBeginTable(str_id: CString, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
+foreign func igBeginTable(str_id: CPointer<UInt8>, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
 
-foreign func igBeginTableEx(name: CString, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
+foreign func igBeginTableEx(name: CPointer<UInt8>, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool
 
 foreign func igBeginTooltip(): Bool
 
@@ -1008,7 +1008,7 @@ foreign func igBeginTooltipEx(tooltip_flags: ImGuiTooltipFlags, extra_window_fla
 
 foreign func igBeginTooltipHidden(): Bool
 
-foreign func igBeginViewportSideBar(name: CString, viewport: CPointer<ImGuiViewport>, dir: ImGuiDir, size: Float32, window_flags: ImGuiWindowFlags): Bool
+foreign func igBeginViewportSideBar(name: CPointer<UInt8>, viewport: CPointer<ImGuiViewport>, dir: ImGuiDir, size: Float32, window_flags: ImGuiWindowFlags): Bool
 
 foreign func igBringWindowToDisplayBack(window: CPointer<ImGuiWindow>): Unit
 
@@ -1020,16 +1020,16 @@ foreign func igBringWindowToFocusFront(window: CPointer<ImGuiWindow>): Unit
 
 foreign func igBullet(): Unit
 
-foreign func igBulletText(fmt: CString, ...): Unit
+foreign func igBulletText(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igBulletTextV(fmt: CString, args: va_list): Unit
+// foreign func igBulletTextV(fmt: CPointer<UInt8>, args: va_list): Unit
 
-foreign func igButton(label: CString, size: ImVec2): Bool
+foreign func igButton(label: CPointer<UInt8>, size: ImVec2): Bool
 
 foreign func igButtonBehavior(bb: ImRect, id: ImGuiID, out_hovered: CPointer<Bool>, out_held: CPointer<Bool>, flags: ImGuiButtonFlags): Bool
 
-foreign func igButtonEx(label: CString, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
+foreign func igButtonEx(label: CPointer<UInt8>, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool
 
 foreign func igCalcItemSize(pOut: CPointer<ImVec2>, size: ImVec2, default_w: Float32, default_h: Float32): Unit
 
@@ -1037,7 +1037,7 @@ foreign func igCalcItemWidth(): Float32
 
 foreign func igCalcRoundingFlagsForRectInRect(r_in: ImRect, r_outer: ImRect, threshold: Float32): ImDrawFlags
 
-foreign func igCalcTextSize(pOut: CPointer<ImVec2>, text: CString, text_end: CString, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit
+foreign func igCalcTextSize(pOut: CPointer<ImVec2>, text: CPointer<UInt8>, text_end: CPointer<UInt8>, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit
 
 foreign func igCalcTypematicRepeatAmount(t0: Float32, t1: Float32, repeat_delay: Float32, repeat_rate: Float32): Int32
 
@@ -1047,15 +1047,15 @@ foreign func igCalcWrapWidthForPos(pos: ImVec2, wrap_pos_x: Float32): Float32
 
 foreign func igCallContextHooks(context: CPointer<ImGuiContext>, `type`: ImGuiContextHookType): Unit
 
-foreign func igCheckbox(label: CString, v: CPointer<Bool>): Bool
+foreign func igCheckbox(label: CPointer<UInt8>, v: CPointer<Bool>): Bool
 
-foreign func igCheckboxFlags_IntPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool
+foreign func igCheckboxFlags_IntPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool
 
-foreign func igCheckboxFlags_UintPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool
+foreign func igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool
 
-foreign func igCheckboxFlags_S64Ptr(label: CString, flags: CPointer<ImS64>, flags_value: ImS64): Bool
+foreign func igCheckboxFlags_S64Ptr(label: CPointer<UInt8>, flags: CPointer<ImS64>, flags_value: ImS64): Bool
 
-foreign func igCheckboxFlags_U64Ptr(label: CString, flags: CPointer<ImU64>, flags_value: ImU64): Bool
+foreign func igCheckboxFlags_U64Ptr(label: CPointer<UInt8>, flags: CPointer<ImU64>, flags_value: ImU64): Bool
 
 foreign func igClearActiveID(): Unit
 
@@ -1063,7 +1063,7 @@ foreign func igClearDragDrop(): Unit
 
 foreign func igClearIniSettings(): Unit
 
-foreign func igClearWindowSettings(name: CString): Unit
+foreign func igClearWindowSettings(name: CPointer<UInt8>): Unit
 
 foreign func igCloseButton(id: ImGuiID, pos: ImVec2): Bool
 
@@ -1077,11 +1077,11 @@ foreign func igClosePopupsOverWindow(ref_window: CPointer<ImGuiWindow>, restore_
 
 foreign func igCollapseButton(id: ImGuiID, pos: ImVec2, dock_node: CPointer<ImGuiDockNode>): Bool
 
-foreign func igCollapsingHeader_TreeNodeFlags(label: CString, flags: ImGuiTreeNodeFlags): Bool
+foreign func igCollapsingHeader_TreeNodeFlags(label: CPointer<UInt8>, flags: ImGuiTreeNodeFlags): Bool
 
-foreign func igCollapsingHeader_BoolPtr(label: CString, p_visible: CPointer<Bool>, flags: ImGuiTreeNodeFlags): Bool
+foreign func igCollapsingHeader_BoolPtr(label: CPointer<UInt8>, p_visible: CPointer<Bool>, flags: ImGuiTreeNodeFlags): Bool
 
-foreign func igColorButton(desc_id: CString, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool
+foreign func igColorButton(desc_id: CPointer<UInt8>, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool
 
 foreign func igColorConvertFloat4ToU32(`in`: ImVec4): ImU32
 
@@ -1091,35 +1091,35 @@ foreign func igColorConvertRGBtoHSV(r: Float32, g: Float32, b: Float32, out_h: C
 
 foreign func igColorConvertU32ToFloat4(pOut: CPointer<ImVec4>, `in`: ImU32): Unit
 
-foreign func igColorEdit3(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
+foreign func igColorEdit3(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
 
-foreign func igColorEdit4(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
+foreign func igColorEdit4(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
 
 foreign func igColorEditOptionsPopup(col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-foreign func igColorPicker3(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
+foreign func igColorPicker3(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool
 
-foreign func igColorPicker4(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags, ref_col: CPointer<Float32>): Bool
+foreign func igColorPicker4(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags, ref_col: CPointer<Float32>): Bool
 
 foreign func igColorPickerOptionsPopup(ref_col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-foreign func igColorTooltip(text: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
+foreign func igColorTooltip(text: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit
 
-foreign func igColumns(count: Int32, id: CString, border: Bool): Unit
+foreign func igColumns(count: Int32, id: CPointer<UInt8>, border: Bool): Unit
 
-foreign func igCombo_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, popup_max_height_in_items: Int32): Bool
+foreign func igCombo_Str_arr(label: CPointer<UInt8>, current_item: CPointer<Int32>, items: CPointer<CPointer<UInt8>>, items_count: Int32, popup_max_height_in_items: Int32): Bool
 
-foreign func igCombo_Str(label: CString, current_item: CPointer<Int32>, items_separated_by_zeros: CString, popup_max_height_in_items: Int32): Bool
+foreign func igCombo_Str(label: CPointer<UInt8>, current_item: CPointer<Int32>, items_separated_by_zeros: CPointer<UInt8>, popup_max_height_in_items: Int32): Bool
 
-foreign func igCombo_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool
+foreign func igCombo_FnStrPtr(label: CPointer<UInt8>, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool
 
 foreign func igConvertSingleModFlagToKey(key: ImGuiKey): ImGuiKey
 
 foreign func igCreateContext(shared_font_atlas: CPointer<ImFontAtlas>): CPointer<ImGuiContext>
 
-foreign func igCreateNewWindowSettings(name: CString): CPointer<ImGuiWindowSettings>
+foreign func igCreateNewWindowSettings(name: CPointer<UInt8>): CPointer<ImGuiWindowSettings>
 
-foreign func igDataTypeApplyFromText(buf: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_data_when_empty: CPointer<Unit>): Bool
+foreign func igDataTypeApplyFromText(buf: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>, p_data_when_empty: CPointer<Unit>): Bool
 
 foreign func igDataTypeApplyOp(data_type: ImGuiDataType, op: Int32, output: CPointer<Unit>, arg_1: CPointer<Unit>, arg_2: CPointer<Unit>): Unit
 
@@ -1127,19 +1127,19 @@ foreign func igDataTypeClamp(data_type: ImGuiDataType, p_data: CPointer<Unit>, p
 
 foreign func igDataTypeCompare(data_type: ImGuiDataType, arg_1: CPointer<Unit>, arg_2: CPointer<Unit>): Int32
 
-foreign func igDataTypeFormatString(buf: CString, buf_size: Int32, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString): Int32
+foreign func igDataTypeFormatString(buf: CPointer<UInt8>, buf_size: Int32, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>): Int32
 
 foreign func igDataTypeGetInfo(data_type: ImGuiDataType): CPointer<ImGuiDataTypeInfo>
 
 foreign func igDebugAllocHook(info: CPointer<ImGuiDebugAllocInfo>, frame_count: Int32, ptr: CPointer<Unit>, size: UIntNative): Unit
 
-foreign func igDebugBreakButton(label: CString, description_of_location: CString): Bool
+foreign func igDebugBreakButton(label: CPointer<UInt8>, description_of_location: CPointer<UInt8>): Bool
 
-foreign func igDebugBreakButtonTooltip(keyboard_only: Bool, description_of_location: CString): Unit
+foreign func igDebugBreakButtonTooltip(keyboard_only: Bool, description_of_location: CPointer<UInt8>): Unit
 
 foreign func igDebugBreakClearData(): Unit
 
-foreign func igDebugCheckVersionAndDataLayout(version_str: CString, sz_io: UIntNative, sz_style: UIntNative, sz_vec2: UIntNative, sz_vec4: UIntNative, sz_drawvert: UIntNative, sz_drawidx: UIntNative): Bool
+foreign func igDebugCheckVersionAndDataLayout(version_str: CPointer<UInt8>, sz_io: UIntNative, sz_style: UIntNative, sz_vec2: UIntNative, sz_vec4: UIntNative, sz_drawvert: UIntNative, sz_drawidx: UIntNative): Bool
 
 foreign func igDebugDrawCursorPos(col: ImU32): Unit
 
@@ -1157,18 +1157,18 @@ foreign func igDebugLocateItemOnHover(target_id: ImGuiID): Unit
 
 foreign func igDebugLocateItemResolveWithLastItem(): Unit
 
-foreign func igDebugLog(fmt: CString, ...): Unit
+foreign func igDebugLog(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igDebugLogV(fmt: CString, args: va_list): Unit
+// foreign func igDebugLogV(fmt: CPointer<UInt8>, args: va_list): Unit
 
 foreign func igDebugNodeColumns(columns: CPointer<ImGuiOldColumns>): Unit
 
-foreign func igDebugNodeDockNode(node: CPointer<ImGuiDockNode>, label: CString): Unit
+foreign func igDebugNodeDockNode(node: CPointer<ImGuiDockNode>, label: CPointer<UInt8>): Unit
 
 foreign func igDebugNodeDrawCmdShowMeshAndBoundingBox(out_draw_list: CPointer<ImDrawList>, draw_list: CPointer<ImDrawList>, draw_cmd: CPointer<ImDrawCmd>, show_mesh: Bool, show_aabb: Bool): Unit
 
-foreign func igDebugNodeDrawList(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>, draw_list: CPointer<ImDrawList>, label: CString): Unit
+foreign func igDebugNodeDrawList(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>, draw_list: CPointer<ImDrawList>, label: CPointer<UInt8>): Unit
 
 foreign func igDebugNodeFont(font: CPointer<ImFont>): Unit
 
@@ -1176,9 +1176,9 @@ foreign func igDebugNodeFontGlyph(font: CPointer<ImFont>, glyph: CPointer<ImFont
 
 foreign func igDebugNodeInputTextState(state: CPointer<ImGuiInputTextState>): Unit
 
-foreign func igDebugNodeStorage(storage: CPointer<ImGuiStorage>, label: CString): Unit
+foreign func igDebugNodeStorage(storage: CPointer<ImGuiStorage>, label: CPointer<UInt8>): Unit
 
-foreign func igDebugNodeTabBar(tab_bar: CPointer<ImGuiTabBar>, label: CString): Unit
+foreign func igDebugNodeTabBar(tab_bar: CPointer<ImGuiTabBar>, label: CPointer<UInt8>): Unit
 
 foreign func igDebugNodeTable(table: CPointer<ImGuiTable>): Unit
 
@@ -1188,11 +1188,11 @@ foreign func igDebugNodeTypingSelectState(state: CPointer<ImGuiTypingSelectState
 
 foreign func igDebugNodeViewport(viewport: CPointer<ImGuiViewportP>): Unit
 
-foreign func igDebugNodeWindow(window: CPointer<ImGuiWindow>, label: CString): Unit
+foreign func igDebugNodeWindow(window: CPointer<ImGuiWindow>, label: CPointer<UInt8>): Unit
 
 foreign func igDebugNodeWindowSettings(settings: CPointer<ImGuiWindowSettings>): Unit
 
-foreign func igDebugNodeWindowsList(windows: CPointer<ImVector_ImGuiWindowPtr>, label: CString): Unit
+foreign func igDebugNodeWindowsList(windows: CPointer<ImVector_ImGuiWindowPtr>, label: CPointer<UInt8>): Unit
 
 foreign func igDebugNodeWindowsListByBeginStackParent(windows: CPointer<CPointer<ImGuiWindow>>, windows_size: Int32, parent_in_begin_stack: CPointer<ImGuiWindow>): Unit
 
@@ -1202,9 +1202,9 @@ foreign func igDebugRenderViewportThumbnail(draw_list: CPointer<ImDrawList>, vie
 
 foreign func igDebugStartItemPicker(): Unit
 
-foreign func igDebugTextEncoding(text: CString): Unit
+foreign func igDebugTextEncoding(text: CPointer<UInt8>): Unit
 
-foreign func igDebugTextUnformattedWithLocateItem(line_begin: CString, line_end: CString): Unit
+foreign func igDebugTextUnformattedWithLocateItem(line_begin: CPointer<UInt8>, line_end: CPointer<UInt8>): Unit
 
 foreign func igDestroyContext(ctx: CPointer<ImGuiContext>): Unit
 
@@ -1218,9 +1218,9 @@ foreign func igDockBuilderCopyDockSpace(src_dockspace_id: ImGuiID, dst_dockspace
 
 foreign func igDockBuilderCopyNode(src_node_id: ImGuiID, dst_node_id: ImGuiID, out_node_remap_pairs: CPointer<ImVector_ImGuiID>): Unit
 
-foreign func igDockBuilderCopyWindowSettings(src_name: CString, dst_name: CString): Unit
+foreign func igDockBuilderCopyWindowSettings(src_name: CPointer<UInt8>, dst_name: CPointer<UInt8>): Unit
 
-foreign func igDockBuilderDockWindow(window_name: CString, node_id: ImGuiID): Unit
+foreign func igDockBuilderDockWindow(window_name: CPointer<UInt8>, node_id: ImGuiID): Unit
 
 foreign func igDockBuilderFinish(node_id: ImGuiID): Unit
 
@@ -1288,31 +1288,31 @@ foreign func igDockSpace(dockspace_id: ImGuiID, size: ImVec2, flags: ImGuiDockNo
 
 foreign func igDockSpaceOverViewport(dockspace_id: ImGuiID, viewport: CPointer<ImGuiViewport>, flags: ImGuiDockNodeFlags, window_class: CPointer<ImGuiWindowClass>): ImGuiID
 
-foreign func igDragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragFloat(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragFloat(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragFloat2(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragFloat3(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragFloat4(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragFloatRange2(label: CString, v_current_min: CPointer<Float32>, v_current_max: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragFloatRange2(label: CPointer<UInt8>, v_current_min: CPointer<Float32>, v_current_max: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, format_max: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragInt(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragInt(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragInt2(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragInt2(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragInt3(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragInt3(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragInt4(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragInt4(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragIntRange2(label: CString, v_current_min: CPointer<Int32>, v_current_max: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragIntRange2(label: CPointer<UInt8>, v_current_min: CPointer<Int32>, v_current_max: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, format_max: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igDragScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igDragScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
 foreign func igDummy(size: ImVec2): Unit
 
@@ -1376,9 +1376,9 @@ foreign func igFindHoveredWindowEx(pos: ImVec2, find_first_and_in_any_viewport: 
 
 foreign func igFindOrCreateColumns(window: CPointer<ImGuiWindow>, id: ImGuiID): CPointer<ImGuiOldColumns>
 
-foreign func igFindRenderedTextEnd(text: CString, text_end: CString): CString
+foreign func igFindRenderedTextEnd(text: CPointer<UInt8>, text_end: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igFindSettingsHandler(type_name: CString): CPointer<ImGuiSettingsHandler>
+foreign func igFindSettingsHandler(type_name: CPointer<UInt8>): CPointer<ImGuiSettingsHandler>
 
 foreign func igFindViewportByID(id: ImGuiID): CPointer<ImGuiViewport>
 
@@ -1386,7 +1386,7 @@ foreign func igFindViewportByPlatformHandle(platform_handle: CPointer<Unit>): CP
 
 foreign func igFindWindowByID(id: ImGuiID): CPointer<ImGuiWindow>
 
-foreign func igFindWindowByName(name: CString): CPointer<ImGuiWindow>
+foreign func igFindWindowByName(name: CPointer<UInt8>): CPointer<ImGuiWindow>
 
 foreign func igFindWindowDisplayIndex(window: CPointer<ImGuiWindow>): Int32
 
@@ -1416,7 +1416,7 @@ foreign func igGetBackgroundDrawList_Nil(): CPointer<ImDrawList>
 
 foreign func igGetBackgroundDrawList_ViewportPtr(viewport: CPointer<ImGuiViewport>): CPointer<ImDrawList>
 
-foreign func igGetClipboardText(): CString
+foreign func igGetClipboardText(): CPointer<UInt8>
 
 foreign func igGetColorU32_Col(idx: ImGuiCol, alpha_mul: Float32): ImU32
 
@@ -1436,7 +1436,7 @@ foreign func igGetColumnWidth(column_index: Int32): Float32
 
 foreign func igGetColumnsCount(): Int32
 
-foreign func igGetColumnsID(str_id: CString, count: Int32): ImGuiID
+foreign func igGetColumnsID(str_id: CPointer<UInt8>, count: Int32): ImGuiID
 
 foreign func igGetContentRegionAvail(pOut: CPointer<ImVec2>): Unit
 
@@ -1496,13 +1496,13 @@ foreign func igGetFrameHeightWithSpacing(): Float32
 
 foreign func igGetHoveredID(): ImGuiID
 
-foreign func igGetID_Str(str_id: CString): ImGuiID
+foreign func igGetID_Str(str_id: CPointer<UInt8>): ImGuiID
 
-foreign func igGetID_StrStr(str_id_begin: CString, str_id_end: CString): ImGuiID
+foreign func igGetID_StrStr(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>): ImGuiID
 
 foreign func igGetID_Ptr(ptr_id: CPointer<Unit>): ImGuiID
 
-foreign func igGetIDWithSeed_Str(str_id_begin: CString, str_id_end: CString, seed: ImGuiID): ImGuiID
+foreign func igGetIDWithSeed_Str(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>, seed: ImGuiID): ImGuiID
 
 foreign func igGetIDWithSeed_Int(n: Int32, seed: ImGuiID): ImGuiID
 
@@ -1522,7 +1522,7 @@ foreign func igGetItemRectSize(pOut: CPointer<ImVec2>): Unit
 
 foreign func igGetItemStatusFlags(): ImGuiItemStatusFlags
 
-foreign func igGetKeyChordName(key_chord: ImGuiKeyChord): CString
+foreign func igGetKeyChordName(key_chord: ImGuiKeyChord): CPointer<UInt8>
 
 foreign func igGetKeyData_ContextPtr(ctx: CPointer<ImGuiContext>, key: ImGuiKey): CPointer<ImGuiKeyData>
 
@@ -1530,7 +1530,7 @@ foreign func igGetKeyData_Key(key: ImGuiKey): CPointer<ImGuiKeyData>
 
 foreign func igGetKeyMagnitude2d(pOut: CPointer<ImVec2>, key_left: ImGuiKey, key_right: ImGuiKey, key_up: ImGuiKey, key_down: ImGuiKey): Unit
 
-foreign func igGetKeyName(key: ImGuiKey): CString
+foreign func igGetKeyName(key: ImGuiKey): CPointer<UInt8>
 
 foreign func igGetKeyOwner(key: ImGuiKey): ImGuiID
 
@@ -1570,7 +1570,7 @@ foreign func igGetStateStorage(): CPointer<ImGuiStorage>
 
 foreign func igGetStyle(): CPointer<ImGuiStyle>
 
-foreign func igGetStyleColorName(idx: ImGuiCol): CString
+foreign func igGetStyleColorName(idx: ImGuiCol): CPointer<UInt8>
 
 foreign func igGetStyleColorVec4(idx: ImGuiCol): CPointer<ImVec4>
 
@@ -1592,7 +1592,7 @@ foreign func igGetTypematicRepeatRate(flags: ImGuiInputFlags, repeat_delay: CPoi
 
 foreign func igGetTypingSelectRequest(flags: ImGuiTypingSelectFlags): CPointer<ImGuiTypingSelectRequest>
 
-foreign func igGetVersion(): CString
+foreign func igGetVersion(): CPointer<UInt8>
 
 foreign func igGetViewportPlatformMonitor(viewport: CPointer<ImGuiViewport>): CPointer<ImGuiPlatformMonitor>
 
@@ -1670,9 +1670,9 @@ foreign func igImFileClose(file: ImFileHandle): Bool
 
 foreign func igImFileGetSize(file: ImFileHandle): ImU64
 
-foreign func igImFileLoadToMemory(filename: CString, mode: CString, out_file_size: CPointer<UIntNative>, padding_bytes: Int32): CPointer<Unit>
+foreign func igImFileLoadToMemory(filename: CPointer<UInt8>, mode: CPointer<UInt8>, out_file_size: CPointer<UIntNative>, padding_bytes: Int32): CPointer<Unit>
 
-foreign func igImFileOpen(filename: CString, mode: CString): ImFileHandle
+foreign func igImFileOpen(filename: CPointer<UInt8>, mode: CPointer<UInt8>): ImFileHandle
 
 foreign func igImFileRead(data: CPointer<Unit>, size: ImU64, count: ImU64, file: ImFileHandle): ImU64
 
@@ -1692,9 +1692,9 @@ foreign func igImFontAtlasBuildMultiplyRectAlpha8(table: CPointer<UInt8>, pixels
 
 foreign func igImFontAtlasBuildPackCustomRects(atlas: CPointer<ImFontAtlas>, stbrp_context_opaque: CPointer<Unit>): Unit
 
-foreign func igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit
+foreign func igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit
 
-foreign func igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit
+foreign func igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit
 
 foreign func igImFontAtlasBuildSetupFont(atlas: CPointer<ImFontAtlas>, font: CPointer<ImFont>, font_config: CPointer<ImFontConfig>, ascent: Float32, descent: Float32): Unit
 
@@ -1702,19 +1702,19 @@ foreign func igImFontAtlasGetBuilderForStbTruetype(): CPointer<ImFontBuilderIO>
 
 foreign func igImFontAtlasUpdateConfigDataPointers(atlas: CPointer<ImFontAtlas>): Unit
 
-foreign func igImFormatString(buf: CString, buf_size: UIntNative, fmt: CString, ...): Int32
+foreign func igImFormatString(buf: CPointer<UInt8>, buf_size: UIntNative, fmt: CPointer<UInt8>, ...): Int32
 
-foreign func igImFormatStringToTempBuffer(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, ...): Unit
-
-// Cangjie does not support `va_list`
-// foreign func igImFormatStringToTempBufferV(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, args: va_list): Unit
+foreign func igImFormatStringToTempBuffer(out_buf: CPointer<CPointer<UInt8>>, out_buf_end: CPointer<CPointer<UInt8>>, fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igImFormatStringV(buf: CString, buf_size: UIntNative, fmt: CString, args: va_list): Int32
+// foreign func igImFormatStringToTempBufferV(out_buf: CPointer<CPointer<UInt8>>, out_buf_end: CPointer<CPointer<UInt8>>, fmt: CPointer<UInt8>, args: va_list): Unit
+
+// Cangjie does not support `va_list`
+// foreign func igImFormatStringV(buf: CPointer<UInt8>, buf_size: UIntNative, fmt: CPointer<UInt8>, args: va_list): Int32
 
 foreign func igImHashData(data: CPointer<Unit>, data_size: UIntNative, seed: ImGuiID): ImGuiID
 
-foreign func igImHashStr(data: CString, data_size: UIntNative, seed: ImGuiID): ImGuiID
+foreign func igImHashStr(data: CPointer<UInt8>, data_size: UIntNative, seed: ImGuiID): ImGuiID
 
 foreign func igImInvLength(lhs: ImVec2, fail_value: Float32): Float32
 
@@ -1750,17 +1750,17 @@ foreign func igImModPositive(a: Int32, b: Int32): Int32
 
 foreign func igImMul(pOut: CPointer<ImVec2>, lhs: ImVec2, rhs: ImVec2): Unit
 
-foreign func igImParseFormatFindEnd(format: CString): CString
+foreign func igImParseFormatFindEnd(format: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImParseFormatFindStart(format: CString): CString
+foreign func igImParseFormatFindStart(format: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImParseFormatPrecision(format: CString, default_value: Int32): Int32
+foreign func igImParseFormatPrecision(format: CPointer<UInt8>, default_value: Int32): Int32
 
-foreign func igImParseFormatSanitizeForPrinting(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): Unit
+foreign func igImParseFormatSanitizeForPrinting(fmt_in: CPointer<UInt8>, fmt_out: CPointer<UInt8>, fmt_out_size: UIntNative): Unit
 
-foreign func igImParseFormatSanitizeForScanning(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): CString
+foreign func igImParseFormatSanitizeForScanning(fmt_in: CPointer<UInt8>, fmt_out: CPointer<UInt8>, fmt_out_size: UIntNative): CPointer<UInt8>
 
-foreign func igImParseFormatTrimDecorations(format: CString, buf: CString, buf_size: UIntNative): CString
+foreign func igImParseFormatTrimDecorations(format: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative): CPointer<UInt8>
 
 foreign func igImPow_Float(x: Float32, y: Float32): Float32
 
@@ -1780,47 +1780,47 @@ foreign func igImSign_Float(x: Float32): Float32
 
 foreign func igImSign_double(x: Float64): Float64
 
-foreign func igImStrSkipBlank(str: CString): CString
+foreign func igImStrSkipBlank(str: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImStrTrimBlanks(str: CString): Unit
+foreign func igImStrTrimBlanks(str: CPointer<UInt8>): Unit
 
 foreign func igImStrbolW(buf_mid_line: CPointer<ImWchar>, buf_begin: CPointer<ImWchar>): CPointer<ImWchar>
 
-foreign func igImStrchrRange(str_begin: CString, str_end: CString, c: UInt8): CString
+foreign func igImStrchrRange(str_begin: CPointer<UInt8>, str_end: CPointer<UInt8>, c: UInt8): CPointer<UInt8>
 
-foreign func igImStrdup(str: CString): CString
+foreign func igImStrdup(str: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImStrdupcpy(dst: CString, p_dst_size: CPointer<UIntNative>, str: CString): CString
+foreign func igImStrdupcpy(dst: CPointer<UInt8>, p_dst_size: CPointer<UIntNative>, str: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImStreolRange(str: CString, str_end: CString): CString
+foreign func igImStreolRange(str: CPointer<UInt8>, str_end: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImStricmp(str1: CString, str2: CString): Int32
+foreign func igImStricmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>): Int32
 
-foreign func igImStristr(haystack: CString, haystack_end: CString, needle: CString, needle_end: CString): CString
+foreign func igImStristr(haystack: CPointer<UInt8>, haystack_end: CPointer<UInt8>, needle: CPointer<UInt8>, needle_end: CPointer<UInt8>): CPointer<UInt8>
 
 foreign func igImStrlenW(str: CPointer<ImWchar>): Int32
 
-foreign func igImStrncpy(dst: CString, src: CString, count: UIntNative): Unit
+foreign func igImStrncpy(dst: CPointer<UInt8>, src: CPointer<UInt8>, count: UIntNative): Unit
 
-foreign func igImStrnicmp(str1: CString, str2: CString, count: UIntNative): Int32
+foreign func igImStrnicmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>, count: UIntNative): Int32
 
-foreign func igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CString, in_text_end: CString): Int32
+foreign func igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
-foreign func igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CString
+foreign func igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CPointer<UInt8>
 
-foreign func igImTextCountCharsFromUtf8(in_text: CString, in_text_end: CString): Int32
+foreign func igImTextCountCharsFromUtf8(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
-foreign func igImTextCountLines(in_text: CString, in_text_end: CString): Int32
+foreign func igImTextCountLines(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
-foreign func igImTextCountUtf8BytesFromChar(in_text: CString, in_text_end: CString): Int32
+foreign func igImTextCountUtf8BytesFromChar(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
 foreign func igImTextCountUtf8BytesFromStr(in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32
 
-foreign func igImTextFindPreviousUtf8Codepoint(in_text_start: CString, in_text_curr: CString): CString
+foreign func igImTextFindPreviousUtf8Codepoint(in_text_start: CPointer<UInt8>, in_text_curr: CPointer<UInt8>): CPointer<UInt8>
 
-foreign func igImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CString, in_text_end: CString, in_remaining: CPointer<CString>): Int32
+foreign func igImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>, in_remaining: CPointer<CPointer<UInt8>>): Int32
 
-foreign func igImTextStrToUtf8(out_buf: CString, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32
+foreign func igImTextStrToUtf8(out_buf: CPointer<UInt8>, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32
 
 foreign func igImToUpper(c: UInt8): UInt8
 
@@ -1842,7 +1842,7 @@ foreign func igImUpperPowerOfTwo(v: Int32): Int32
 
 foreign func igImage(user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, tint_col: ImVec4, border_col: ImVec4): Unit
 
-foreign func igImageButton(str_id: CString, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool
+foreign func igImageButton(str_id: CPointer<UInt8>, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool
 
 foreign func igImageButtonEx(id: ImGuiID, texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4, flags: ImGuiButtonFlags): Bool
 
@@ -1850,39 +1850,39 @@ foreign func igIndent(indent_w: Float32): Unit
 
 foreign func igInitialize(): Unit
 
-foreign func igInputDouble(label: CString, v: CPointer<Float64>, step: Float64, step_fast: Float64, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputDouble(label: CPointer<UInt8>, v: CPointer<Float64>, step: Float64, step_fast: Float64, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputFloat(label: CString, v: CPointer<Float32>, step: Float32, step_fast: Float32, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputFloat(label: CPointer<UInt8>, v: CPointer<Float32>, step: Float32, step_fast: Float32, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputFloat2(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputFloat3(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputFloat4(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputInt(label: CString, v: CPointer<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool
+foreign func igInputInt(label: CPointer<UInt8>, v: CPointer<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputInt2(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
+foreign func igInputInt2(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputInt3(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
+foreign func igInputInt3(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputInt4(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
+foreign func igInputInt4(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool
+foreign func igInputScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool
 
-foreign func igInputText(label: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
+foreign func igInputText(label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
 foreign func igInputTextDeactivateHook(id: ImGuiID): Unit
 
-foreign func igInputTextEx(label: CString, hint: CString, buf: CString, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
+foreign func igInputTextEx(label: CPointer<UInt8>, hint: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-foreign func igInputTextMultiline(label: CString, buf: CString, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
+foreign func igInputTextMultiline(label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-foreign func igInputTextWithHint(label: CString, hint: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
+foreign func igInputTextWithHint(label: CPointer<UInt8>, hint: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool
 
-foreign func igInvisibleButton(str_id: CString, size: ImVec2, flags: ImGuiButtonFlags): Bool
+foreign func igInvisibleButton(str_id: CPointer<UInt8>, size: ImVec2, flags: ImGuiButtonFlags): Bool
 
 foreign func igIsActiveIdUsingNavDir(dir: ImGuiDir): Bool
 
@@ -1978,7 +1978,7 @@ foreign func igIsNamedKey(key: ImGuiKey): Bool
 
 foreign func igIsNamedKeyOrMod(key: ImGuiKey): Bool
 
-foreign func igIsPopupOpen_Str(str_id: CString, flags: ImGuiPopupFlags): Bool
+foreign func igIsPopupOpen_Str(str_id: CPointer<UInt8>, flags: ImGuiPopupFlags): Bool
 
 foreign func igIsPopupOpen_ID(id: ImGuiID, popup_flags: ImGuiPopupFlags): Bool
 
@@ -2016,20 +2016,20 @@ foreign func igItemSize_Rect(bb: ImRect, text_baseline_y: Float32): Unit
 
 foreign func igKeepAliveID(id: ImGuiID): Unit
 
-foreign func igLabelText(label: CString, fmt: CString, ...): Unit
+foreign func igLabelText(label: CPointer<UInt8>, fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igLabelTextV(label: CString, fmt: CString, args: va_list): Unit
+// foreign func igLabelTextV(label: CPointer<UInt8>, fmt: CPointer<UInt8>, args: va_list): Unit
 
-foreign func igListBox_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, height_in_items: Int32): Bool
+foreign func igListBox_Str_arr(label: CPointer<UInt8>, current_item: CPointer<Int32>, items: CPointer<CPointer<UInt8>>, items_count: Int32, height_in_items: Int32): Bool
 
-foreign func igListBox_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, height_in_items: Int32): Bool
+foreign func igListBox_FnStrPtr(label: CPointer<UInt8>, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, items_count: Int32, height_in_items: Int32): Bool
 
-foreign func igLoadIniSettingsFromDisk(ini_filename: CString): Unit
+foreign func igLoadIniSettingsFromDisk(ini_filename: CPointer<UInt8>): Unit
 
-foreign func igLoadIniSettingsFromMemory(ini_data: CString, ini_size: UIntNative): Unit
+foreign func igLoadIniSettingsFromMemory(ini_data: CPointer<UInt8>, ini_size: UIntNative): Unit
 
-foreign func igLocalizeGetMsg(key: ImGuiLocKey): CString
+foreign func igLocalizeGetMsg(key: ImGuiLocKey): CPointer<UInt8>
 
 foreign func igLocalizeRegisterEntries(entries: CPointer<ImGuiLocEntry>, count: Int32): Unit
 
@@ -2039,20 +2039,20 @@ foreign func igLogButtons(): Unit
 
 foreign func igLogFinish(): Unit
 
-foreign func igLogRenderedText(ref_pos: CPointer<ImVec2>, text: CString, text_end: CString): Unit
+foreign func igLogRenderedText(ref_pos: CPointer<ImVec2>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit
 
-foreign func igLogSetNextTextDecoration(prefix: CString, suffix: CString): Unit
+foreign func igLogSetNextTextDecoration(prefix: CPointer<UInt8>, suffix: CPointer<UInt8>): Unit
 
-foreign func igLogText(fmt: CString, ...): Unit
+foreign func igLogText(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igLogTextV(fmt: CString, args: va_list): Unit
+// foreign func igLogTextV(fmt: CPointer<UInt8>, args: va_list): Unit
 
 foreign func igLogToBuffer(auto_open_depth: Int32): Unit
 
 foreign func igLogToClipboard(auto_open_depth: Int32): Unit
 
-foreign func igLogToFile(auto_open_depth: Int32, filename: CString): Unit
+foreign func igLogToFile(auto_open_depth: Int32, filename: CPointer<UInt8>): Unit
 
 foreign func igLogToTTY(auto_open_depth: Int32): Unit
 
@@ -2066,11 +2066,11 @@ foreign func igMemAlloc(size: UIntNative): CPointer<Unit>
 
 foreign func igMemFree(ptr: CPointer<Unit>): Unit
 
-foreign func igMenuItem_Bool(label: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool
+foreign func igMenuItem_Bool(label: CPointer<UInt8>, shortcut: CPointer<UInt8>, selected: Bool, enabled: Bool): Bool
 
-foreign func igMenuItem_BoolPtr(label: CString, shortcut: CString, p_selected: CPointer<Bool>, enabled: Bool): Bool
+foreign func igMenuItem_BoolPtr(label: CPointer<UInt8>, shortcut: CPointer<UInt8>, p_selected: CPointer<Bool>, enabled: Bool): Bool
 
-foreign func igMenuItemEx(label: CString, icon: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool
+foreign func igMenuItemEx(label: CPointer<UInt8>, icon: CPointer<UInt8>, shortcut: CPointer<UInt8>, selected: Bool, enabled: Bool): Bool
 
 foreign func igMouseButtonToKey(button: ImGuiMouseButton): ImGuiKey
 
@@ -2108,23 +2108,23 @@ foreign func igNewLine(): Unit
 
 foreign func igNextColumn(): Unit
 
-foreign func igOpenPopup_Str(str_id: CString, popup_flags: ImGuiPopupFlags): Unit
+foreign func igOpenPopup_Str(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Unit
 
 foreign func igOpenPopup_ID(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit
 
 foreign func igOpenPopupEx(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit
 
-foreign func igOpenPopupOnItemClick(str_id: CString, popup_flags: ImGuiPopupFlags): Unit
+foreign func igOpenPopupOnItemClick(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Unit
 
-foreign func igPlotEx(plot_type: ImGuiPlotType, label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, size_arg: ImVec2): Int32
+foreign func igPlotEx(plot_type: ImGuiPlotType, label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, size_arg: ImVec2): Int32
 
-foreign func igPlotHistogram_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
+foreign func igPlotHistogram_FloatPtr(label: CPointer<UInt8>, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
 
-foreign func igPlotHistogram_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
+foreign func igPlotHistogram_FnFloatPtr(label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
 
-foreign func igPlotLines_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
+foreign func igPlotLines_FloatPtr(label: CPointer<UInt8>, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit
 
-foreign func igPlotLines_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
+foreign func igPlotLines_FnFloatPtr(label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit
 
 foreign func igPopButtonRepeat(): Unit
 
@@ -2150,7 +2150,7 @@ foreign func igPopTabStop(): Unit
 
 foreign func igPopTextWrapPos(): Unit
 
-foreign func igProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CString): Unit
+foreign func igProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CPointer<UInt8>): Unit
 
 foreign func igPushButtonRepeat(repeat: Bool): Unit
 
@@ -2164,9 +2164,9 @@ foreign func igPushFocusScope(id: ImGuiID): Unit
 
 foreign func igPushFont(font: CPointer<ImFont>): Unit
 
-foreign func igPushID_Str(str_id: CString): Unit
+foreign func igPushID_Str(str_id: CPointer<UInt8>): Unit
 
-foreign func igPushID_StrStr(str_id_begin: CString, str_id_end: CString): Unit
+foreign func igPushID_StrStr(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>): Unit
 
 foreign func igPushID_Ptr(ptr_id: CPointer<Unit>): Unit
 
@@ -2192,13 +2192,13 @@ foreign func igPushTabStop(tab_stop: Bool): Unit
 
 foreign func igPushTextWrapPos(wrap_local_pos_x: Float32): Unit
 
-foreign func igRadioButton_Bool(label: CString, active: Bool): Bool
+foreign func igRadioButton_Bool(label: CPointer<UInt8>, active: Bool): Bool
 
-foreign func igRadioButton_IntPtr(label: CString, v: CPointer<Int32>, v_button: Int32): Bool
+foreign func igRadioButton_IntPtr(label: CPointer<UInt8>, v: CPointer<Int32>, v_button: Int32): Bool
 
 foreign func igRemoveContextHook(context: CPointer<ImGuiContext>, hook_to_remove: ImGuiID): Unit
 
-foreign func igRemoveSettingsHandler(type_name: CString): Unit
+foreign func igRemoveSettingsHandler(type_name: CPointer<UInt8>): Unit
 
 foreign func igRender(): Unit
 
@@ -2230,23 +2230,23 @@ foreign func igRenderRectFilledRangeH(draw_list: CPointer<ImDrawList>, rect: ImR
 
 foreign func igRenderRectFilledWithHole(draw_list: CPointer<ImDrawList>, outer: ImRect, inner: ImRect, col: ImU32, rounding: Float32): Unit
 
-foreign func igRenderText(pos: ImVec2, text: CString, text_end: CString, hide_text_after_hash: Bool): Unit
+foreign func igRenderText(pos: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, hide_text_after_hash: Bool): Unit
 
-foreign func igRenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
+foreign func igRenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
 
-foreign func igRenderTextClippedEx(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
+foreign func igRenderTextClippedEx(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit
 
-foreign func igRenderTextEllipsis(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, clip_max_x: Float32, ellipsis_max_x: Float32, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>): Unit
+foreign func igRenderTextEllipsis(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, clip_max_x: Float32, ellipsis_max_x: Float32, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>): Unit
 
-foreign func igRenderTextWrapped(pos: ImVec2, text: CString, text_end: CString, wrap_width: Float32): Unit
+foreign func igRenderTextWrapped(pos: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32): Unit
 
 foreign func igResetMouseDragDelta(button: ImGuiMouseButton): Unit
 
 foreign func igSameLine(offset_from_start_x: Float32, spacing: Float32): Unit
 
-foreign func igSaveIniSettingsToDisk(ini_filename: CString): Unit
+foreign func igSaveIniSettingsToDisk(ini_filename: CPointer<UInt8>): Unit
 
-foreign func igSaveIniSettingsToMemory(out_ini_size: CPointer<UIntNative>): CString
+foreign func igSaveIniSettingsToMemory(out_ini_size: CPointer<UIntNative>): CPointer<UInt8>
 
 foreign func igScaleWindowsInViewport(viewport: CPointer<ImGuiViewportP>, scale: Float32): Unit
 
@@ -2262,17 +2262,17 @@ foreign func igScrollbar(axis: ImGuiAxis): Unit
 
 foreign func igScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scroll_v: CPointer<ImS64>, avail_v: ImS64, contents_v: ImS64, flags: ImDrawFlags): Bool
 
-foreign func igSelectable_Bool(label: CString, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool
+foreign func igSelectable_Bool(label: CPointer<UInt8>, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool
 
-foreign func igSelectable_BoolPtr(label: CString, p_selected: CPointer<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool
+foreign func igSelectable_BoolPtr(label: CPointer<UInt8>, p_selected: CPointer<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool
 
 foreign func igSeparator(): Unit
 
 foreign func igSeparatorEx(flags: ImGuiSeparatorFlags, thickness: Float32): Unit
 
-foreign func igSeparatorText(label: CString): Unit
+foreign func igSeparatorText(label: CPointer<UInt8>): Unit
 
-foreign func igSeparatorTextEx(id: ImGuiID, label: CString, label_end: CString, extra_width: Float32): Unit
+foreign func igSeparatorTextEx(id: ImGuiID, label: CPointer<UInt8>, label_end: CPointer<UInt8>, extra_width: Float32): Unit
 
 foreign func igSetActiveID(id: ImGuiID, window: CPointer<ImGuiWindow>): Unit
 
@@ -2280,7 +2280,7 @@ foreign func igSetActiveIdUsingAllKeyboardKeys(): Unit
 
 foreign func igSetAllocatorFunctions(alloc_func: ImGuiMemAllocFunc, free_func: ImGuiMemFreeFunc, user_data: CPointer<Unit>): Unit
 
-foreign func igSetClipboardText(text: CString): Unit
+foreign func igSetClipboardText(text: CPointer<UInt8>): Unit
 
 foreign func igSetColorEditOptions(flags: ImGuiColorEditFlags): Unit
 
@@ -2302,7 +2302,7 @@ foreign func igSetCursorPosY(local_y: Float32): Unit
 
 foreign func igSetCursorScreenPos(pos: ImVec2): Unit
 
-foreign func igSetDragDropPayload(`type`: CString, data: CPointer<Unit>, sz: UIntNative, cond: ImGuiCond): Bool
+foreign func igSetDragDropPayload(`type`: CPointer<UInt8>, data: CPointer<Unit>, sz: UIntNative, cond: ImGuiCond): Bool
 
 foreign func igSetFocusID(id: ImGuiID, window: CPointer<ImGuiWindow>): Unit
 
@@ -2312,10 +2312,10 @@ foreign func igSetItemDefaultFocus(): Unit
 
 foreign func igSetItemKeyOwner(key: ImGuiKey, flags: ImGuiInputFlags): Unit
 
-foreign func igSetItemTooltip(fmt: CString, ...): Unit
+foreign func igSetItemTooltip(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igSetItemTooltipV(fmt: CString, args: va_list): Unit
+// foreign func igSetItemTooltipV(fmt: CPointer<UInt8>, args: va_list): Unit
 
 foreign func igSetKeyOwner(key: ImGuiKey, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit
 
@@ -2397,18 +2397,18 @@ foreign func igSetShortcutRouting(key_chord: ImGuiKeyChord, flags: ImGuiInputFla
 
 foreign func igSetStateStorage(storage: CPointer<ImGuiStorage>): Unit
 
-foreign func igSetTabItemClosed(tab_or_docked_window_label: CString): Unit
+foreign func igSetTabItemClosed(tab_or_docked_window_label: CPointer<UInt8>): Unit
 
-foreign func igSetTooltip(fmt: CString, ...): Unit
+foreign func igSetTooltip(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igSetTooltipV(fmt: CString, args: va_list): Unit
+// foreign func igSetTooltipV(fmt: CPointer<UInt8>, args: va_list): Unit
 
 foreign func igSetWindowClipRectBeforeSetChannel(window: CPointer<ImGuiWindow>, clip_rect: ImRect): Unit
 
 foreign func igSetWindowCollapsed_Bool(collapsed: Bool, cond: ImGuiCond): Unit
 
-foreign func igSetWindowCollapsed_Str(name: CString, collapsed: Bool, cond: ImGuiCond): Unit
+foreign func igSetWindowCollapsed_Str(name: CPointer<UInt8>, collapsed: Bool, cond: ImGuiCond): Unit
 
 foreign func igSetWindowCollapsed_WindowPtr(window: CPointer<ImGuiWindow>, collapsed: Bool, cond: ImGuiCond): Unit
 
@@ -2416,7 +2416,7 @@ foreign func igSetWindowDock(window: CPointer<ImGuiWindow>, dock_id: ImGuiID, co
 
 foreign func igSetWindowFocus_Nil(): Unit
 
-foreign func igSetWindowFocus_Str(name: CString): Unit
+foreign func igSetWindowFocus_Str(name: CPointer<UInt8>): Unit
 
 foreign func igSetWindowFontScale(scale: Float32): Unit
 
@@ -2428,13 +2428,13 @@ foreign func igSetWindowParentWindowForFocusRoute(window: CPointer<ImGuiWindow>,
 
 foreign func igSetWindowPos_Vec2(pos: ImVec2, cond: ImGuiCond): Unit
 
-foreign func igSetWindowPos_Str(name: CString, pos: ImVec2, cond: ImGuiCond): Unit
+foreign func igSetWindowPos_Str(name: CPointer<UInt8>, pos: ImVec2, cond: ImGuiCond): Unit
 
 foreign func igSetWindowPos_WindowPtr(window: CPointer<ImGuiWindow>, pos: ImVec2, cond: ImGuiCond): Unit
 
 foreign func igSetWindowSize_Vec2(size: ImVec2, cond: ImGuiCond): Unit
 
-foreign func igSetWindowSize_Str(name: CString, size: ImVec2, cond: ImGuiCond): Unit
+foreign func igSetWindowSize_Str(name: CPointer<UInt8>, size: ImVec2, cond: ImGuiCond): Unit
 
 foreign func igSetWindowSize_WindowPtr(window: CPointer<ImGuiWindow>, size: ImVec2, cond: ImGuiCond): Unit
 
@@ -2458,7 +2458,7 @@ foreign func igShowDemoWindow(p_open: CPointer<Bool>): Unit
 
 foreign func igShowFontAtlas(atlas: CPointer<ImFontAtlas>): Unit
 
-foreign func igShowFontSelector(label: CString): Unit
+foreign func igShowFontSelector(label: CPointer<UInt8>): Unit
 
 foreign func igShowIDStackToolWindow(p_open: CPointer<Bool>): Unit
 
@@ -2466,7 +2466,7 @@ foreign func igShowMetricsWindow(p_open: CPointer<Bool>): Unit
 
 foreign func igShowStyleEditor(ref: CPointer<ImGuiStyle>): Unit
 
-foreign func igShowStyleSelector(label: CString): Bool
+foreign func igShowStyleSelector(label: CPointer<UInt8>): Bool
 
 foreign func igShowUserGuide(): Unit
 
@@ -2474,31 +2474,31 @@ foreign func igShrinkWidths(items: CPointer<ImGuiShrinkWidthItem>, count: Int32,
 
 foreign func igShutdown(): Unit
 
-foreign func igSliderAngle(label: CString, v_rad: CPointer<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderAngle(label: CPointer<UInt8>, v_rad: CPointer<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags, out_grab_bb: CPointer<ImRect>): Bool
+foreign func igSliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags, out_grab_bb: CPointer<ImRect>): Bool
 
-foreign func igSliderFloat(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderFloat(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderFloat2(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderFloat3(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderFloat4(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderInt(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderInt(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderInt2(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderInt2(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderInt3(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderInt3(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderInt4(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderInt4(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSliderScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igSliderScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igSmallButton(label: CString): Bool
+foreign func igSmallButton(label: CPointer<UInt8>): Bool
 
 foreign func igSpacing(): Unit
 
@@ -2526,7 +2526,7 @@ foreign func igTabBarFindTabByOrder(tab_bar: CPointer<ImGuiTabBar>, order: Int32
 
 foreign func igTabBarGetCurrentTab(tab_bar: CPointer<ImGuiTabBar>): CPointer<ImGuiTabItem>
 
-foreign func igTabBarGetTabName(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): CString
+foreign func igTabBarGetTabName(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): CPointer<UInt8>
 
 foreign func igTabBarGetTabOrder(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): Int32
 
@@ -2542,15 +2542,15 @@ foreign func igTabBarRemoveTab(tab_bar: CPointer<ImGuiTabBar>, tab_id: ImGuiID):
 
 foreign func igTabItemBackground(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, col: ImU32): Unit
 
-foreign func igTabItemButton(label: CString, flags: ImGuiTabItemFlags): Bool
+foreign func igTabItemButton(label: CPointer<UInt8>, flags: ImGuiTabItemFlags): Bool
 
-foreign func igTabItemCalcSize_Str(pOut: CPointer<ImVec2>, label: CString, has_close_button_or_unsaved_marker: Bool): Unit
+foreign func igTabItemCalcSize_Str(pOut: CPointer<ImVec2>, label: CPointer<UInt8>, has_close_button_or_unsaved_marker: Bool): Unit
 
 foreign func igTabItemCalcSize_WindowPtr(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>): Unit
 
-foreign func igTabItemEx(tab_bar: CPointer<ImGuiTabBar>, label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags, docked_window: CPointer<ImGuiWindow>): Bool
+foreign func igTabItemEx(tab_bar: CPointer<ImGuiTabBar>, label: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags, docked_window: CPointer<ImGuiWindow>): Bool
 
-foreign func igTabItemLabelAndCloseButton(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, frame_padding: ImVec2, label: CString, tab_id: ImGuiID, close_button_id: ImGuiID, is_contents_visible: Bool, out_just_closed: CPointer<Bool>, out_text_clipped: CPointer<Bool>): Unit
+foreign func igTabItemLabelAndCloseButton(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, frame_padding: ImVec2, label: CPointer<UInt8>, tab_id: ImGuiID, close_button_id: ImGuiID, is_contents_visible: Bool, out_just_closed: CPointer<Bool>, out_text_clipped: CPointer<Bool>): Unit
 
 foreign func igTableAngledHeadersRow(): Unit
 
@@ -2594,9 +2594,9 @@ foreign func igTableGetColumnFlags(column_n: Int32): ImGuiTableColumnFlags
 
 foreign func igTableGetColumnIndex(): Int32
 
-foreign func igTableGetColumnName_Int(column_n: Int32): CString
+foreign func igTableGetColumnName_Int(column_n: Int32): CPointer<UInt8>
 
-foreign func igTableGetColumnName_TablePtr(table: CPointer<ImGuiTable>, column_n: Int32): CString
+foreign func igTableGetColumnName_TablePtr(table: CPointer<ImGuiTable>, column_n: Int32): CPointer<UInt8>
 
 foreign func igTableGetColumnNextSortDirection(column: CPointer<ImGuiTableColumn>): ImGuiSortDirection
 
@@ -2622,7 +2622,7 @@ foreign func igTableGetRowIndex(): Int32
 
 foreign func igTableGetSortSpecs(): CPointer<ImGuiTableSortSpecs>
 
-foreign func igTableHeader(label: CString): Unit
+foreign func igTableHeader(label: CPointer<UInt8>): Unit
 
 foreign func igTableHeadersRow(): Unit
 
@@ -2666,7 +2666,7 @@ foreign func igTableSettingsCreate(id: ImGuiID, columns_count: Int32): CPointer<
 
 foreign func igTableSettingsFindByID(id: ImGuiID): CPointer<ImGuiTableSettings>
 
-foreign func igTableSetupColumn(label: CString, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit
+foreign func igTableSetupColumn(label: CPointer<UInt8>, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit
 
 foreign func igTableSetupDrawChannels(table: CPointer<ImGuiTable>): Unit
 
@@ -2686,83 +2686,83 @@ foreign func igTeleportMousePos(pos: ImVec2): Unit
 
 foreign func igTempInputIsActive(id: ImGuiID): Bool
 
-foreign func igTempInputScalar(bb: ImRect, id: ImGuiID, label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_clamp_min: CPointer<Unit>, p_clamp_max: CPointer<Unit>): Bool
+foreign func igTempInputScalar(bb: ImRect, id: ImGuiID, label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>, p_clamp_min: CPointer<Unit>, p_clamp_max: CPointer<Unit>): Bool
 
-foreign func igTempInputText(bb: ImRect, id: ImGuiID, label: CString, buf: CString, buf_size: Int32, flags: ImGuiInputTextFlags): Bool
+foreign func igTempInputText(bb: ImRect, id: ImGuiID, label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: Int32, flags: ImGuiInputTextFlags): Bool
 
 foreign func igTestKeyOwner(key: ImGuiKey, owner_id: ImGuiID): Bool
 
 foreign func igTestShortcutRouting(key_chord: ImGuiKeyChord, owner_id: ImGuiID): Bool
 
-foreign func igText(fmt: CString, ...): Unit
+foreign func igText(fmt: CPointer<UInt8>, ...): Unit
 
-foreign func igTextColored(col: ImVec4, fmt: CString, ...): Unit
-
-// Cangjie does not support `va_list`
-// foreign func igTextColoredV(col: ImVec4, fmt: CString, args: va_list): Unit
-
-foreign func igTextDisabled(fmt: CString, ...): Unit
+foreign func igTextColored(col: ImVec4, fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igTextDisabledV(fmt: CString, args: va_list): Unit
+// foreign func igTextColoredV(col: ImVec4, fmt: CPointer<UInt8>, args: va_list): Unit
 
-foreign func igTextEx(text: CString, text_end: CString, flags: ImGuiTextFlags): Unit
-
-foreign func igTextUnformatted(text: CString, text_end: CString): Unit
+foreign func igTextDisabled(fmt: CPointer<UInt8>, ...): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igTextV(fmt: CString, args: va_list): Unit
+// foreign func igTextDisabledV(fmt: CPointer<UInt8>, args: va_list): Unit
 
-foreign func igTextWrapped(fmt: CString, ...): Unit
+foreign func igTextEx(text: CPointer<UInt8>, text_end: CPointer<UInt8>, flags: ImGuiTextFlags): Unit
+
+foreign func igTextUnformatted(text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit
 
 // Cangjie does not support `va_list`
-// foreign func igTextWrappedV(fmt: CString, args: va_list): Unit
+// foreign func igTextV(fmt: CPointer<UInt8>, args: va_list): Unit
+
+foreign func igTextWrapped(fmt: CPointer<UInt8>, ...): Unit
+
+// Cangjie does not support `va_list`
+// foreign func igTextWrappedV(fmt: CPointer<UInt8>, args: va_list): Unit
 
 foreign func igTranslateWindowsInViewport(viewport: CPointer<ImGuiViewportP>, old_pos: ImVec2, new_pos: ImVec2): Unit
 
-foreign func igTreeNode_Str(label: CString): Bool
+foreign func igTreeNode_Str(label: CPointer<UInt8>): Bool
 
-foreign func igTreeNode_StrStr(str_id: CString, fmt: CString, ...): Bool
+foreign func igTreeNode_StrStr(str_id: CPointer<UInt8>, fmt: CPointer<UInt8>, ...): Bool
 
-foreign func igTreeNode_Ptr(ptr_id: CPointer<Unit>, fmt: CString, ...): Bool
+foreign func igTreeNode_Ptr(ptr_id: CPointer<Unit>, fmt: CPointer<UInt8>, ...): Bool
 
-foreign func igTreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CString, label_end: CString): Bool
+foreign func igTreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CPointer<UInt8>, label_end: CPointer<UInt8>): Bool
 
-foreign func igTreeNodeEx_Str(label: CString, flags: ImGuiTreeNodeFlags): Bool
+foreign func igTreeNodeEx_Str(label: CPointer<UInt8>, flags: ImGuiTreeNodeFlags): Bool
 
-foreign func igTreeNodeEx_StrStr(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
+foreign func igTreeNodeEx_StrStr(str_id: CPointer<UInt8>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, ...): Bool
 
-foreign func igTreeNodeEx_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, ...): Bool
-
-// Cangjie does not support `va_list`
-// foreign func igTreeNodeExV_Str(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool
+foreign func igTreeNodeEx_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, ...): Bool
 
 // Cangjie does not support `va_list`
-// foreign func igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool
+// foreign func igTreeNodeExV_Str(str_id: CPointer<UInt8>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, args: va_list): Bool
+
+// Cangjie does not support `va_list`
+// foreign func igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, args: va_list): Bool
 
 foreign func igTreeNodeSetOpen(id: ImGuiID, `open`: Bool): Unit
 
 foreign func igTreeNodeUpdateNextOpen(id: ImGuiID, flags: ImGuiTreeNodeFlags): Bool
 
 // Cangjie does not support `va_list`
-// foreign func igTreeNodeV_Str(str_id: CString, fmt: CString, args: va_list): Bool
+// foreign func igTreeNodeV_Str(str_id: CPointer<UInt8>, fmt: CPointer<UInt8>, args: va_list): Bool
 
 // Cangjie does not support `va_list`
-// foreign func igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CString, args: va_list): Bool
+// foreign func igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CPointer<UInt8>, args: va_list): Bool
 
 foreign func igTreePop(): Unit
 
-foreign func igTreePush_Str(str_id: CString): Unit
+foreign func igTreePush_Str(str_id: CPointer<UInt8>): Unit
 
 foreign func igTreePush_Ptr(ptr_id: CPointer<Unit>): Unit
 
 foreign func igTreePushOverrideID(id: ImGuiID): Unit
 
-foreign func igTypingSelectFindBestLeadingMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>): Int32
+foreign func igTypingSelectFindBestLeadingMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>): Int32
 
-foreign func igTypingSelectFindMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
+foreign func igTypingSelectFindMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
 
-foreign func igTypingSelectFindNextSingleCharMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
+foreign func igTypingSelectFindNextSingleCharMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32
 
 foreign func igUnindent(indent_w: Float32): Unit
 
@@ -2780,19 +2780,19 @@ foreign func igUpdateWindowParentAndRootLinks(window: CPointer<ImGuiWindow>, fla
 
 foreign func igUpdateWindowSkipRefresh(window: CPointer<ImGuiWindow>): Unit
 
-foreign func igVSliderFloat(label: CString, size: ImVec2, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igVSliderFloat(label: CPointer<UInt8>, size: ImVec2, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igVSliderInt(label: CString, size: ImVec2, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igVSliderInt(label: CPointer<UInt8>, size: ImVec2, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igVSliderScalar(label: CString, size: ImVec2, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool
+foreign func igVSliderScalar(label: CPointer<UInt8>, size: ImVec2, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool
 
-foreign func igValue_Bool(prefix: CString, b: Bool): Unit
+foreign func igValue_Bool(prefix: CPointer<UInt8>, b: Bool): Unit
 
-foreign func igValue_Int(prefix: CString, v: Int32): Unit
+foreign func igValue_Int(prefix: CPointer<UInt8>, v: Int32): Unit
 
-foreign func igValue_Uint(prefix: CString, v: Int32): Unit
+foreign func igValue_Uint(prefix: CPointer<UInt8>, v: Int32): Unit
 
-foreign func igValue_Float(prefix: CString, v: Float32, float_format: CString): Unit
+foreign func igValue_Float(prefix: CPointer<UInt8>, v: Float32, float_format: CPointer<UInt8>): Unit
 
 foreign func igWindowPosRelToAbs(pOut: CPointer<ImVec2>, window: CPointer<ImGuiWindow>, p: ImVec2): Unit
 
@@ -3024,11 +3024,11 @@ public func _capi_ImDrawList_AddRectFilledMultiColor(self: CPointer<ImDrawList>,
     return unsafe { ImDrawList_AddRectFilledMultiColor(self, p_min, p_max, col_upr_left, col_upr_right, col_bot_right, col_bot_left) }
 }
 
-public func _capi_ImDrawList_AddText_Vec2(self: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString): Unit {
+public func _capi_ImDrawList_AddText_Vec2(self: CPointer<ImDrawList>, pos: ImVec2, col: ImU32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit {
     return unsafe { ImDrawList_AddText_Vec2(self, pos, col, text_begin, text_end) }
 }
 
-public func _capi_ImDrawList_AddText_FontPtr(self: CPointer<ImDrawList>, font: CPointer<ImFont>, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip_rect: CPointer<ImVec4>): Unit {
+public func _capi_ImDrawList_AddText_FontPtr(self: CPointer<ImDrawList>, font: CPointer<ImFont>, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32, cpu_fine_clip_rect: CPointer<ImVec4>): Unit {
     return unsafe { ImDrawList_AddText_FontPtr(self, font, font_size, pos, col, text_begin, text_end, wrap_width, cpu_fine_clip_rect) }
 }
 
@@ -3240,11 +3240,11 @@ public func _capi_ImFontAtlas_AddFontDefault(self: CPointer<ImFontAtlas>, font_c
     return unsafe { ImFontAtlas_AddFontDefault(self, font_cfg) }
 }
 
-public func _capi_ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont> {
+public func _capi_ImFontAtlas_AddFontFromFileTTF(self: CPointer<ImFontAtlas>, filename: CPointer<UInt8>, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont> {
     return unsafe { ImFontAtlas_AddFontFromFileTTF(self, filename, size_pixels, font_cfg, glyph_ranges) }
 }
 
-public func _capi_ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CString, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont> {
+public func _capi_ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: CPointer<ImFontAtlas>, compressed_font_data_base85: CPointer<UInt8>, size_pixels: Float32, font_cfg: CPointer<ImFontConfig>, glyph_ranges: CPointer<ImWchar>): CPointer<ImFont> {
     return unsafe { ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges) }
 }
 
@@ -3364,7 +3364,7 @@ public func _capi_ImFontGlyphRangesBuilder_AddRanges(self: CPointer<ImFontGlyphR
     return unsafe { ImFontGlyphRangesBuilder_AddRanges(self, ranges) }
 }
 
-public func _capi_ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CString, text_end: CString): Unit {
+public func _capi_ImFontGlyphRangesBuilder_AddText(self: CPointer<ImFontGlyphRangesBuilder>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit {
     return unsafe { ImFontGlyphRangesBuilder_AddText(self, text, text_end) }
 }
 
@@ -3404,11 +3404,11 @@ public func _capi_ImFont_BuildLookupTable(self: CPointer<ImFont>): Unit {
     return unsafe { ImFont_BuildLookupTable(self) }
 }
 
-public func _capi_ImFont_CalcTextSizeA(pOut: CPointer<ImVec2>, self: CPointer<ImFont>, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CString, text_end: CString, remaining: CPointer<CString>): Unit {
+public func _capi_ImFont_CalcTextSizeA(pOut: CPointer<ImVec2>, self: CPointer<ImFont>, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, remaining: CPointer<CPointer<UInt8>>): Unit {
     return unsafe { ImFont_CalcTextSizeA(pOut, self, size, max_width, wrap_width, text_begin, text_end, remaining) }
 }
 
-public func _capi_ImFont_CalcWordWrapPositionA(self: CPointer<ImFont>, scale: Float32, text: CString, text_end: CString, wrap_width: Float32): CString {
+public func _capi_ImFont_CalcWordWrapPositionA(self: CPointer<ImFont>, scale: Float32, text: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32): CPointer<UInt8> {
     return unsafe { ImFont_CalcWordWrapPositionA(self, scale, text, text_end, wrap_width) }
 }
 
@@ -3428,7 +3428,7 @@ public func _capi_ImFont_GetCharAdvance(self: CPointer<ImFont>, c: ImWchar): Flo
     return unsafe { ImFont_GetCharAdvance(self, c) }
 }
 
-public func _capi_ImFont_GetDebugName(self: CPointer<ImFont>): CString {
+public func _capi_ImFont_GetDebugName(self: CPointer<ImFont>): CPointer<UInt8> {
     return unsafe { ImFont_GetDebugName(self) }
 }
 
@@ -3452,7 +3452,7 @@ public func _capi_ImFont_RenderChar(self: CPointer<ImFont>, draw_list: CPointer<
     return unsafe { ImFont_RenderChar(self, draw_list, size, pos, col, c) }
 }
 
-public func _capi_ImFont_RenderText(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CString, text_end: CString, wrap_width: Float32, cpu_fine_clip: Bool): Unit {
+public func _capi_ImFont_RenderText(self: CPointer<ImFont>, draw_list: CPointer<ImDrawList>, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32, cpu_fine_clip: Bool): Unit {
     return unsafe { ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip) }
 }
 
@@ -3584,7 +3584,7 @@ public func _capi_ImGuiIO_AddInputCharacterUTF16(self: CPointer<ImGuiIO>, c: ImW
     return unsafe { ImGuiIO_AddInputCharacterUTF16(self, c) }
 }
 
-public func _capi_ImGuiIO_AddInputCharactersUTF8(self: CPointer<ImGuiIO>, str: CString): Unit {
+public func _capi_ImGuiIO_AddInputCharactersUTF8(self: CPointer<ImGuiIO>, str: CPointer<UInt8>): Unit {
     return unsafe { ImGuiIO_AddInputCharactersUTF8(self, str) }
 }
 
@@ -3664,7 +3664,7 @@ public func _capi_ImGuiInputTextCallbackData_ImGuiInputTextCallbackData(): CPoin
     return unsafe { ImGuiInputTextCallbackData_ImGuiInputTextCallbackData() }
 }
 
-public func _capi_ImGuiInputTextCallbackData_InsertChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, text: CString, text_end: CString): Unit {
+public func _capi_ImGuiInputTextCallbackData_InsertChars(self: CPointer<ImGuiInputTextCallbackData>, pos: Int32, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit {
     return unsafe { ImGuiInputTextCallbackData_InsertChars(self, pos, text, text_end) }
 }
 
@@ -3932,7 +3932,7 @@ public func _capi_ImGuiPayload_ImGuiPayload(): CPointer<ImGuiPayload> {
     return unsafe { ImGuiPayload_ImGuiPayload() }
 }
 
-public func _capi_ImGuiPayload_IsDataType(self: CPointer<ImGuiPayload>, `type`: CString): Bool {
+public func _capi_ImGuiPayload_IsDataType(self: CPointer<ImGuiPayload>, `type`: CPointer<UInt8>): Bool {
     return unsafe { ImGuiPayload_IsDataType(self, `type`) }
 }
 
@@ -4216,22 +4216,22 @@ public func _capi_ImGuiTextBuffer_ImGuiTextBuffer(): CPointer<ImGuiTextBuffer> {
     return unsafe { ImGuiTextBuffer_ImGuiTextBuffer() }
 }
 
-public func _capi_ImGuiTextBuffer_append(self: CPointer<ImGuiTextBuffer>, str: CString, str_end: CString): Unit {
+public func _capi_ImGuiTextBuffer_append(self: CPointer<ImGuiTextBuffer>, str: CPointer<UInt8>, str_end: CPointer<UInt8>): Unit {
     return unsafe { ImGuiTextBuffer_append(self, str, str_end) }
 }
 
-public func _capi_ImGuiTextBuffer_appendf(self: CPointer<ImGuiTextBuffer>, fmt: CString): Unit {
+public func _capi_ImGuiTextBuffer_appendf(self: CPointer<ImGuiTextBuffer>, fmt: CPointer<UInt8>): Unit {
     return unsafe { ImGuiTextBuffer_appendf(self, fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CString, args: va_list): Unit { ...
+// public func _capi_ImGuiTextBuffer_appendfv(self: CPointer<ImGuiTextBuffer>, fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_ImGuiTextBuffer_begin(self: CPointer<ImGuiTextBuffer>): CString {
+public func _capi_ImGuiTextBuffer_begin(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8> {
     return unsafe { ImGuiTextBuffer_begin(self) }
 }
 
-public func _capi_ImGuiTextBuffer_c_str(self: CPointer<ImGuiTextBuffer>): CString {
+public func _capi_ImGuiTextBuffer_c_str(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8> {
     return unsafe { ImGuiTextBuffer_c_str(self) }
 }
 
@@ -4247,7 +4247,7 @@ public func _capi_ImGuiTextBuffer_empty(self: CPointer<ImGuiTextBuffer>): Bool {
     return unsafe { ImGuiTextBuffer_empty(self) }
 }
 
-public func _capi_ImGuiTextBuffer_end(self: CPointer<ImGuiTextBuffer>): CString {
+public func _capi_ImGuiTextBuffer_end(self: CPointer<ImGuiTextBuffer>): CPointer<UInt8> {
     return unsafe { ImGuiTextBuffer_end(self) }
 }
 
@@ -4267,11 +4267,11 @@ public func _capi_ImGuiTextFilter_Clear(self: CPointer<ImGuiTextFilter>): Unit {
     return unsafe { ImGuiTextFilter_Clear(self) }
 }
 
-public func _capi_ImGuiTextFilter_Draw(self: CPointer<ImGuiTextFilter>, label: CString, width: Float32): Bool {
+public func _capi_ImGuiTextFilter_Draw(self: CPointer<ImGuiTextFilter>, label: CPointer<UInt8>, width: Float32): Bool {
     return unsafe { ImGuiTextFilter_Draw(self, label, width) }
 }
 
-public func _capi_ImGuiTextFilter_ImGuiTextFilter(default_filter: CString): CPointer<ImGuiTextFilter> {
+public func _capi_ImGuiTextFilter_ImGuiTextFilter(default_filter: CPointer<UInt8>): CPointer<ImGuiTextFilter> {
     return unsafe { ImGuiTextFilter_ImGuiTextFilter(default_filter) }
 }
 
@@ -4279,7 +4279,7 @@ public func _capi_ImGuiTextFilter_IsActive(self: CPointer<ImGuiTextFilter>): Boo
     return unsafe { ImGuiTextFilter_IsActive(self) }
 }
 
-public func _capi_ImGuiTextFilter_PassFilter(self: CPointer<ImGuiTextFilter>, text: CString, text_end: CString): Bool {
+public func _capi_ImGuiTextFilter_PassFilter(self: CPointer<ImGuiTextFilter>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Bool {
     return unsafe { ImGuiTextFilter_PassFilter(self, text, text_end) }
 }
 
@@ -4287,7 +4287,7 @@ public func _capi_ImGuiTextFilter_destroy(self: CPointer<ImGuiTextFilter>): Unit
     return unsafe { ImGuiTextFilter_destroy(self) }
 }
 
-public func _capi_ImGuiTextIndex_append(self: CPointer<ImGuiTextIndex>, base: CString, old_size: Int32, new_size: Int32): Unit {
+public func _capi_ImGuiTextIndex_append(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, old_size: Int32, new_size: Int32): Unit {
     return unsafe { ImGuiTextIndex_append(self, base, old_size, new_size) }
 }
 
@@ -4295,11 +4295,11 @@ public func _capi_ImGuiTextIndex_clear(self: CPointer<ImGuiTextIndex>): Unit {
     return unsafe { ImGuiTextIndex_clear(self) }
 }
 
-public func _capi_ImGuiTextIndex_get_line_begin(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString {
+public func _capi_ImGuiTextIndex_get_line_begin(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, n: Int32): CPointer<UInt8> {
     return unsafe { ImGuiTextIndex_get_line_begin(self, base, n) }
 }
 
-public func _capi_ImGuiTextIndex_get_line_end(self: CPointer<ImGuiTextIndex>, base: CString, n: Int32): CString {
+public func _capi_ImGuiTextIndex_get_line_end(self: CPointer<ImGuiTextIndex>, base: CPointer<UInt8>, n: Int32): CPointer<UInt8> {
     return unsafe { ImGuiTextIndex_get_line_end(self, base, n) }
 }
 
@@ -4311,7 +4311,7 @@ public func _capi_ImGuiTextRange_ImGuiTextRange_Nil(): CPointer<ImGuiTextRange> 
     return unsafe { ImGuiTextRange_ImGuiTextRange_Nil() }
 }
 
-public func _capi_ImGuiTextRange_ImGuiTextRange_Str(_b: CString, _e: CString): CPointer<ImGuiTextRange> {
+public func _capi_ImGuiTextRange_ImGuiTextRange_Str(_b: CPointer<UInt8>, _e: CPointer<UInt8>): CPointer<ImGuiTextRange> {
     return unsafe { ImGuiTextRange_ImGuiTextRange_Str(_b, _e) }
 }
 
@@ -4399,7 +4399,7 @@ public func _capi_ImGuiWindowClass_destroy(self: CPointer<ImGuiWindowClass>): Un
     return unsafe { ImGuiWindowClass_destroy(self) }
 }
 
-public func _capi_ImGuiWindowSettings_GetName(self: CPointer<ImGuiWindowSettings>): CString {
+public func _capi_ImGuiWindowSettings_GetName(self: CPointer<ImGuiWindowSettings>): CPointer<UInt8> {
     return unsafe { ImGuiWindowSettings_GetName(self) }
 }
 
@@ -4415,7 +4415,7 @@ public func _capi_ImGuiWindow_CalcFontSize(self: CPointer<ImGuiWindow>): Float32
     return unsafe { ImGuiWindow_CalcFontSize(self) }
 }
 
-public func _capi_ImGuiWindow_GetID_Str(self: CPointer<ImGuiWindow>, str: CString, str_end: CString): ImGuiID {
+public func _capi_ImGuiWindow_GetID_Str(self: CPointer<ImGuiWindow>, str: CPointer<UInt8>, str_end: CPointer<UInt8>): ImGuiID {
     return unsafe { ImGuiWindow_GetID_Str(self, str, str_end) }
 }
 
@@ -4431,7 +4431,7 @@ public func _capi_ImGuiWindow_GetIDFromRectangle(self: CPointer<ImGuiWindow>, r_
     return unsafe { ImGuiWindow_GetIDFromRectangle(self, r_abs) }
 }
 
-public func _capi_ImGuiWindow_ImGuiWindow(context: CPointer<ImGuiContext>, name: CString): CPointer<ImGuiWindow> {
+public func _capi_ImGuiWindow_ImGuiWindow(context: CPointer<ImGuiContext>, name: CPointer<UInt8>): CPointer<ImGuiWindow> {
     return unsafe { ImGuiWindow_ImGuiWindow(context, name) }
 }
 
@@ -4623,7 +4623,7 @@ public func _capi_ImVec4_destroy(self: CPointer<ImVec4>): Unit {
     return unsafe { ImVec4_destroy(self) }
 }
 
-public func _capi_igAcceptDragDropPayload(`type`: CString, flags: ImGuiDragDropFlags): CPointer<ImGuiPayload> {
+public func _capi_igAcceptDragDropPayload(`type`: CPointer<UInt8>, flags: ImGuiDragDropFlags): CPointer<ImGuiPayload> {
     return unsafe { igAcceptDragDropPayload(`type`, flags) }
 }
 
@@ -4647,19 +4647,19 @@ public func _capi_igAlignTextToFramePadding(): Unit {
     return unsafe { igAlignTextToFramePadding() }
 }
 
-public func _capi_igArrowButton(str_id: CString, dir: ImGuiDir): Bool {
+public func _capi_igArrowButton(str_id: CPointer<UInt8>, dir: ImGuiDir): Bool {
     return unsafe { igArrowButton(str_id, dir) }
 }
 
-public func _capi_igArrowButtonEx(str_id: CString, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
+public func _capi_igArrowButtonEx(str_id: CPointer<UInt8>, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
     return unsafe { igArrowButtonEx(str_id, dir, size_arg, flags) }
 }
 
-public func _capi_igBegin(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool {
+public func _capi_igBegin(name: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool {
     return unsafe { igBegin(name, p_open, flags) }
 }
 
-public func _capi_igBeginChild_Str(str_id: CString, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
+public func _capi_igBeginChild_Str(str_id: CPointer<UInt8>, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
     return unsafe { igBeginChild_Str(str_id, size, child_flags, window_flags) }
 }
 
@@ -4667,15 +4667,15 @@ public func _capi_igBeginChild_ID(id: ImGuiID, size: ImVec2, child_flags: ImGuiC
     return unsafe { igBeginChild_ID(id, size, child_flags, window_flags) }
 }
 
-public func _capi_igBeginChildEx(name: CString, id: ImGuiID, size_arg: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
+public func _capi_igBeginChildEx(name: CPointer<UInt8>, id: ImGuiID, size_arg: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
     return unsafe { igBeginChildEx(name, id, size_arg, child_flags, window_flags) }
 }
 
-public func _capi_igBeginColumns(str_id: CString, count: Int32, flags: ImGuiOldColumnFlags): Unit {
+public func _capi_igBeginColumns(str_id: CPointer<UInt8>, count: Int32, flags: ImGuiOldColumnFlags): Unit {
     return unsafe { igBeginColumns(str_id, count, flags) }
 }
 
-public func _capi_igBeginCombo(label: CString, preview_value: CString, flags: ImGuiComboFlags): Bool {
+public func _capi_igBeginCombo(label: CPointer<UInt8>, preview_value: CPointer<UInt8>, flags: ImGuiComboFlags): Bool {
     return unsafe { igBeginCombo(label, preview_value, flags) }
 }
 
@@ -4727,7 +4727,7 @@ public func _capi_igBeginItemTooltip(): Bool {
     return unsafe { igBeginItemTooltip() }
 }
 
-public func _capi_igBeginListBox(label: CString, size: ImVec2): Bool {
+public func _capi_igBeginListBox(label: CPointer<UInt8>, size: ImVec2): Bool {
     return unsafe { igBeginListBox(label, size) }
 }
 
@@ -4735,7 +4735,7 @@ public func _capi_igBeginMainMenuBar(): Bool {
     return unsafe { igBeginMainMenuBar() }
 }
 
-public func _capi_igBeginMenu(label: CString, enabled: Bool): Bool {
+public func _capi_igBeginMenu(label: CPointer<UInt8>, enabled: Bool): Bool {
     return unsafe { igBeginMenu(label, enabled) }
 }
 
@@ -4743,23 +4743,23 @@ public func _capi_igBeginMenuBar(): Bool {
     return unsafe { igBeginMenuBar() }
 }
 
-public func _capi_igBeginMenuEx(label: CString, icon: CString, enabled: Bool): Bool {
+public func _capi_igBeginMenuEx(label: CPointer<UInt8>, icon: CPointer<UInt8>, enabled: Bool): Bool {
     return unsafe { igBeginMenuEx(label, icon, enabled) }
 }
 
-public func _capi_igBeginPopup(str_id: CString, flags: ImGuiWindowFlags): Bool {
+public func _capi_igBeginPopup(str_id: CPointer<UInt8>, flags: ImGuiWindowFlags): Bool {
     return unsafe { igBeginPopup(str_id, flags) }
 }
 
-public func _capi_igBeginPopupContextItem(str_id: CString, popup_flags: ImGuiPopupFlags): Bool {
+public func _capi_igBeginPopupContextItem(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool {
     return unsafe { igBeginPopupContextItem(str_id, popup_flags) }
 }
 
-public func _capi_igBeginPopupContextVoid(str_id: CString, popup_flags: ImGuiPopupFlags): Bool {
+public func _capi_igBeginPopupContextVoid(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool {
     return unsafe { igBeginPopupContextVoid(str_id, popup_flags) }
 }
 
-public func _capi_igBeginPopupContextWindow(str_id: CString, popup_flags: ImGuiPopupFlags): Bool {
+public func _capi_igBeginPopupContextWindow(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Bool {
     return unsafe { igBeginPopupContextWindow(str_id, popup_flags) }
 }
 
@@ -4767,11 +4767,11 @@ public func _capi_igBeginPopupEx(id: ImGuiID, extra_flags: ImGuiWindowFlags): Bo
     return unsafe { igBeginPopupEx(id, extra_flags) }
 }
 
-public func _capi_igBeginPopupModal(name: CString, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool {
+public func _capi_igBeginPopupModal(name: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiWindowFlags): Bool {
     return unsafe { igBeginPopupModal(name, p_open, flags) }
 }
 
-public func _capi_igBeginTabBar(str_id: CString, flags: ImGuiTabBarFlags): Bool {
+public func _capi_igBeginTabBar(str_id: CPointer<UInt8>, flags: ImGuiTabBarFlags): Bool {
     return unsafe { igBeginTabBar(str_id, flags) }
 }
 
@@ -4779,15 +4779,15 @@ public func _capi_igBeginTabBarEx(tab_bar: CPointer<ImGuiTabBar>, bb: ImRect, fl
     return unsafe { igBeginTabBarEx(tab_bar, bb, flags) }
 }
 
-public func _capi_igBeginTabItem(label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags): Bool {
+public func _capi_igBeginTabItem(label: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags): Bool {
     return unsafe { igBeginTabItem(label, p_open, flags) }
 }
 
-public func _capi_igBeginTable(str_id: CString, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
+public func _capi_igBeginTable(str_id: CPointer<UInt8>, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
     return unsafe { igBeginTable(str_id, column, flags, outer_size, inner_width) }
 }
 
-public func _capi_igBeginTableEx(name: CString, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
+public func _capi_igBeginTableEx(name: CPointer<UInt8>, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
     return unsafe { igBeginTableEx(name, id, columns_count, flags, outer_size, inner_width) }
 }
 
@@ -4803,7 +4803,7 @@ public func _capi_igBeginTooltipHidden(): Bool {
     return unsafe { igBeginTooltipHidden() }
 }
 
-public func _capi_igBeginViewportSideBar(name: CString, viewport: CPointer<ImGuiViewport>, dir: ImGuiDir, size: Float32, window_flags: ImGuiWindowFlags): Bool {
+public func _capi_igBeginViewportSideBar(name: CPointer<UInt8>, viewport: CPointer<ImGuiViewport>, dir: ImGuiDir, size: Float32, window_flags: ImGuiWindowFlags): Bool {
     return unsafe { igBeginViewportSideBar(name, viewport, dir, size, window_flags) }
 }
 
@@ -4827,14 +4827,14 @@ public func _capi_igBullet(): Unit {
     return unsafe { igBullet() }
 }
 
-public func _capi_igBulletText(fmt: CString): Unit {
+public func _capi_igBulletText(fmt: CPointer<UInt8>): Unit {
     return unsafe { igBulletText(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igBulletTextV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igBulletTextV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_igButton(label: CString, size: ImVec2): Bool {
+public func _capi_igButton(label: CPointer<UInt8>, size: ImVec2): Bool {
     return unsafe { igButton(label, size) }
 }
 
@@ -4842,7 +4842,7 @@ public func _capi_igButtonBehavior(bb: ImRect, id: ImGuiID, out_hovered: CPointe
     return unsafe { igButtonBehavior(bb, id, out_hovered, out_held, flags) }
 }
 
-public func _capi_igButtonEx(label: CString, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
+public func _capi_igButtonEx(label: CPointer<UInt8>, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
     return unsafe { igButtonEx(label, size_arg, flags) }
 }
 
@@ -4858,7 +4858,7 @@ public func _capi_igCalcRoundingFlagsForRectInRect(r_in: ImRect, r_outer: ImRect
     return unsafe { igCalcRoundingFlagsForRectInRect(r_in, r_outer, threshold) }
 }
 
-public func _capi_igCalcTextSize(pOut: CPointer<ImVec2>, text: CString, text_end: CString, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit {
+public func _capi_igCalcTextSize(pOut: CPointer<ImVec2>, text: CPointer<UInt8>, text_end: CPointer<UInt8>, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit {
     return unsafe { igCalcTextSize(pOut, text, text_end, hide_text_after_double_hash, wrap_width) }
 }
 
@@ -4878,23 +4878,23 @@ public func _capi_igCallContextHooks(context: CPointer<ImGuiContext>, `type`: Im
     return unsafe { igCallContextHooks(context, `type`) }
 }
 
-public func _capi_igCheckbox(label: CString, v: CPointer<Bool>): Bool {
+public func _capi_igCheckbox(label: CPointer<UInt8>, v: CPointer<Bool>): Bool {
     return unsafe { igCheckbox(label, v) }
 }
 
-public func _capi_igCheckboxFlags_IntPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool {
+public func _capi_igCheckboxFlags_IntPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool {
     return unsafe { igCheckboxFlags_IntPtr(label, flags, flags_value) }
 }
 
-public func _capi_igCheckboxFlags_UintPtr(label: CString, flags: CPointer<Int32>, flags_value: Int32): Bool {
+public func _capi_igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool {
     return unsafe { igCheckboxFlags_UintPtr(label, flags, flags_value) }
 }
 
-public func _capi_igCheckboxFlags_S64Ptr(label: CString, flags: CPointer<ImS64>, flags_value: ImS64): Bool {
+public func _capi_igCheckboxFlags_S64Ptr(label: CPointer<UInt8>, flags: CPointer<ImS64>, flags_value: ImS64): Bool {
     return unsafe { igCheckboxFlags_S64Ptr(label, flags, flags_value) }
 }
 
-public func _capi_igCheckboxFlags_U64Ptr(label: CString, flags: CPointer<ImU64>, flags_value: ImU64): Bool {
+public func _capi_igCheckboxFlags_U64Ptr(label: CPointer<UInt8>, flags: CPointer<ImU64>, flags_value: ImU64): Bool {
     return unsafe { igCheckboxFlags_U64Ptr(label, flags, flags_value) }
 }
 
@@ -4910,7 +4910,7 @@ public func _capi_igClearIniSettings(): Unit {
     return unsafe { igClearIniSettings() }
 }
 
-public func _capi_igClearWindowSettings(name: CString): Unit {
+public func _capi_igClearWindowSettings(name: CPointer<UInt8>): Unit {
     return unsafe { igClearWindowSettings(name) }
 }
 
@@ -4938,15 +4938,15 @@ public func _capi_igCollapseButton(id: ImGuiID, pos: ImVec2, dock_node: CPointer
     return unsafe { igCollapseButton(id, pos, dock_node) }
 }
 
-public func _capi_igCollapsingHeader_TreeNodeFlags(label: CString, flags: ImGuiTreeNodeFlags): Bool {
+public func _capi_igCollapsingHeader_TreeNodeFlags(label: CPointer<UInt8>, flags: ImGuiTreeNodeFlags): Bool {
     return unsafe { igCollapsingHeader_TreeNodeFlags(label, flags) }
 }
 
-public func _capi_igCollapsingHeader_BoolPtr(label: CString, p_visible: CPointer<Bool>, flags: ImGuiTreeNodeFlags): Bool {
+public func _capi_igCollapsingHeader_BoolPtr(label: CPointer<UInt8>, p_visible: CPointer<Bool>, flags: ImGuiTreeNodeFlags): Bool {
     return unsafe { igCollapsingHeader_BoolPtr(label, p_visible, flags) }
 }
 
-public func _capi_igColorButton(desc_id: CString, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool {
+public func _capi_igColorButton(desc_id: CPointer<UInt8>, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool {
     return unsafe { igColorButton(desc_id, col, flags, size) }
 }
 
@@ -4966,11 +4966,11 @@ public func _capi_igColorConvertU32ToFloat4(pOut: CPointer<ImVec4>, `in`: ImU32)
     return unsafe { igColorConvertU32ToFloat4(pOut, `in`) }
 }
 
-public func _capi_igColorEdit3(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
+public func _capi_igColorEdit3(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
     return unsafe { igColorEdit3(label, col, flags) }
 }
 
-public func _capi_igColorEdit4(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
+public func _capi_igColorEdit4(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
     return unsafe { igColorEdit4(label, col, flags) }
 }
 
@@ -4978,11 +4978,11 @@ public func _capi_igColorEditOptionsPopup(col: CPointer<Float32>, flags: ImGuiCo
     return unsafe { igColorEditOptionsPopup(col, flags) }
 }
 
-public func _capi_igColorPicker3(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
+public func _capi_igColorPicker3(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Bool {
     return unsafe { igColorPicker3(label, col, flags) }
 }
 
-public func _capi_igColorPicker4(label: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags, ref_col: CPointer<Float32>): Bool {
+public func _capi_igColorPicker4(label: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags, ref_col: CPointer<Float32>): Bool {
     return unsafe { igColorPicker4(label, col, flags, ref_col) }
 }
 
@@ -4990,23 +4990,23 @@ public func _capi_igColorPickerOptionsPopup(ref_col: CPointer<Float32>, flags: I
     return unsafe { igColorPickerOptionsPopup(ref_col, flags) }
 }
 
-public func _capi_igColorTooltip(text: CString, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit {
+public func _capi_igColorTooltip(text: CPointer<UInt8>, col: CPointer<Float32>, flags: ImGuiColorEditFlags): Unit {
     return unsafe { igColorTooltip(text, col, flags) }
 }
 
-public func _capi_igColumns(count: Int32, id: CString, border: Bool): Unit {
+public func _capi_igColumns(count: Int32, id: CPointer<UInt8>, border: Bool): Unit {
     return unsafe { igColumns(count, id, border) }
 }
 
-public func _capi_igCombo_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
+public func _capi_igCombo_Str_arr(label: CPointer<UInt8>, current_item: CPointer<Int32>, items: CPointer<CPointer<UInt8>>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return unsafe { igCombo_Str_arr(label, current_item, items, items_count, popup_max_height_in_items) }
 }
 
-public func _capi_igCombo_Str(label: CString, current_item: CPointer<Int32>, items_separated_by_zeros: CString, popup_max_height_in_items: Int32): Bool {
+public func _capi_igCombo_Str(label: CPointer<UInt8>, current_item: CPointer<Int32>, items_separated_by_zeros: CPointer<UInt8>, popup_max_height_in_items: Int32): Bool {
     return unsafe { igCombo_Str(label, current_item, items_separated_by_zeros, popup_max_height_in_items) }
 }
 
-public func _capi_igCombo_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
+public func _capi_igCombo_FnStrPtr(label: CPointer<UInt8>, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return unsafe { igCombo_FnStrPtr(label, current_item, getter, user_data, items_count, popup_max_height_in_items) }
 }
 
@@ -5018,11 +5018,11 @@ public func _capi_igCreateContext(shared_font_atlas: CPointer<ImFontAtlas>): CPo
     return unsafe { igCreateContext(shared_font_atlas) }
 }
 
-public func _capi_igCreateNewWindowSettings(name: CString): CPointer<ImGuiWindowSettings> {
+public func _capi_igCreateNewWindowSettings(name: CPointer<UInt8>): CPointer<ImGuiWindowSettings> {
     return unsafe { igCreateNewWindowSettings(name) }
 }
 
-public func _capi_igDataTypeApplyFromText(buf: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_data_when_empty: CPointer<Unit>): Bool {
+public func _capi_igDataTypeApplyFromText(buf: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>, p_data_when_empty: CPointer<Unit>): Bool {
     return unsafe { igDataTypeApplyFromText(buf, data_type, p_data, format, p_data_when_empty) }
 }
 
@@ -5038,7 +5038,7 @@ public func _capi_igDataTypeCompare(data_type: ImGuiDataType, arg_1: CPointer<Un
     return unsafe { igDataTypeCompare(data_type, arg_1, arg_2) }
 }
 
-public func _capi_igDataTypeFormatString(buf: CString, buf_size: Int32, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString): Int32 {
+public func _capi_igDataTypeFormatString(buf: CPointer<UInt8>, buf_size: Int32, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>): Int32 {
     return unsafe { igDataTypeFormatString(buf, buf_size, data_type, p_data, format) }
 }
 
@@ -5050,11 +5050,11 @@ public func _capi_igDebugAllocHook(info: CPointer<ImGuiDebugAllocInfo>, frame_co
     return unsafe { igDebugAllocHook(info, frame_count, ptr, size) }
 }
 
-public func _capi_igDebugBreakButton(label: CString, description_of_location: CString): Bool {
+public func _capi_igDebugBreakButton(label: CPointer<UInt8>, description_of_location: CPointer<UInt8>): Bool {
     return unsafe { igDebugBreakButton(label, description_of_location) }
 }
 
-public func _capi_igDebugBreakButtonTooltip(keyboard_only: Bool, description_of_location: CString): Unit {
+public func _capi_igDebugBreakButtonTooltip(keyboard_only: Bool, description_of_location: CPointer<UInt8>): Unit {
     return unsafe { igDebugBreakButtonTooltip(keyboard_only, description_of_location) }
 }
 
@@ -5062,7 +5062,7 @@ public func _capi_igDebugBreakClearData(): Unit {
     return unsafe { igDebugBreakClearData() }
 }
 
-public func _capi_igDebugCheckVersionAndDataLayout(version_str: CString, sz_io: UIntNative, sz_style: UIntNative, sz_vec2: UIntNative, sz_vec4: UIntNative, sz_drawvert: UIntNative, sz_drawidx: UIntNative): Bool {
+public func _capi_igDebugCheckVersionAndDataLayout(version_str: CPointer<UInt8>, sz_io: UIntNative, sz_style: UIntNative, sz_vec2: UIntNative, sz_vec4: UIntNative, sz_drawvert: UIntNative, sz_drawidx: UIntNative): Bool {
     return unsafe { igDebugCheckVersionAndDataLayout(version_str, sz_io, sz_style, sz_vec2, sz_vec4, sz_drawvert, sz_drawidx) }
 }
 
@@ -5098,18 +5098,18 @@ public func _capi_igDebugLocateItemResolveWithLastItem(): Unit {
     return unsafe { igDebugLocateItemResolveWithLastItem() }
 }
 
-public func _capi_igDebugLog(fmt: CString): Unit {
+public func _capi_igDebugLog(fmt: CPointer<UInt8>): Unit {
     return unsafe { igDebugLog(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igDebugLogV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igDebugLogV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 public func _capi_igDebugNodeColumns(columns: CPointer<ImGuiOldColumns>): Unit {
     return unsafe { igDebugNodeColumns(columns) }
 }
 
-public func _capi_igDebugNodeDockNode(node: CPointer<ImGuiDockNode>, label: CString): Unit {
+public func _capi_igDebugNodeDockNode(node: CPointer<ImGuiDockNode>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeDockNode(node, label) }
 }
 
@@ -5117,7 +5117,7 @@ public func _capi_igDebugNodeDrawCmdShowMeshAndBoundingBox(out_draw_list: CPoint
     return unsafe { igDebugNodeDrawCmdShowMeshAndBoundingBox(out_draw_list, draw_list, draw_cmd, show_mesh, show_aabb) }
 }
 
-public func _capi_igDebugNodeDrawList(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>, draw_list: CPointer<ImDrawList>, label: CString): Unit {
+public func _capi_igDebugNodeDrawList(window: CPointer<ImGuiWindow>, viewport: CPointer<ImGuiViewportP>, draw_list: CPointer<ImDrawList>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeDrawList(window, viewport, draw_list, label) }
 }
 
@@ -5133,11 +5133,11 @@ public func _capi_igDebugNodeInputTextState(state: CPointer<ImGuiInputTextState>
     return unsafe { igDebugNodeInputTextState(state) }
 }
 
-public func _capi_igDebugNodeStorage(storage: CPointer<ImGuiStorage>, label: CString): Unit {
+public func _capi_igDebugNodeStorage(storage: CPointer<ImGuiStorage>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeStorage(storage, label) }
 }
 
-public func _capi_igDebugNodeTabBar(tab_bar: CPointer<ImGuiTabBar>, label: CString): Unit {
+public func _capi_igDebugNodeTabBar(tab_bar: CPointer<ImGuiTabBar>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeTabBar(tab_bar, label) }
 }
 
@@ -5157,7 +5157,7 @@ public func _capi_igDebugNodeViewport(viewport: CPointer<ImGuiViewportP>): Unit 
     return unsafe { igDebugNodeViewport(viewport) }
 }
 
-public func _capi_igDebugNodeWindow(window: CPointer<ImGuiWindow>, label: CString): Unit {
+public func _capi_igDebugNodeWindow(window: CPointer<ImGuiWindow>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeWindow(window, label) }
 }
 
@@ -5165,7 +5165,7 @@ public func _capi_igDebugNodeWindowSettings(settings: CPointer<ImGuiWindowSettin
     return unsafe { igDebugNodeWindowSettings(settings) }
 }
 
-public func _capi_igDebugNodeWindowsList(windows: CPointer<ImVector_ImGuiWindowPtr>, label: CString): Unit {
+public func _capi_igDebugNodeWindowsList(windows: CPointer<ImVector_ImGuiWindowPtr>, label: CPointer<UInt8>): Unit {
     return unsafe { igDebugNodeWindowsList(windows, label) }
 }
 
@@ -5185,11 +5185,11 @@ public func _capi_igDebugStartItemPicker(): Unit {
     return unsafe { igDebugStartItemPicker() }
 }
 
-public func _capi_igDebugTextEncoding(text: CString): Unit {
+public func _capi_igDebugTextEncoding(text: CPointer<UInt8>): Unit {
     return unsafe { igDebugTextEncoding(text) }
 }
 
-public func _capi_igDebugTextUnformattedWithLocateItem(line_begin: CString, line_end: CString): Unit {
+public func _capi_igDebugTextUnformattedWithLocateItem(line_begin: CPointer<UInt8>, line_end: CPointer<UInt8>): Unit {
     return unsafe { igDebugTextUnformattedWithLocateItem(line_begin, line_end) }
 }
 
@@ -5217,11 +5217,11 @@ public func _capi_igDockBuilderCopyNode(src_node_id: ImGuiID, dst_node_id: ImGui
     return unsafe { igDockBuilderCopyNode(src_node_id, dst_node_id, out_node_remap_pairs) }
 }
 
-public func _capi_igDockBuilderCopyWindowSettings(src_name: CString, dst_name: CString): Unit {
+public func _capi_igDockBuilderCopyWindowSettings(src_name: CPointer<UInt8>, dst_name: CPointer<UInt8>): Unit {
     return unsafe { igDockBuilderCopyWindowSettings(src_name, dst_name) }
 }
 
-public func _capi_igDockBuilderDockWindow(window_name: CString, node_id: ImGuiID): Unit {
+public func _capi_igDockBuilderDockWindow(window_name: CPointer<UInt8>, node_id: ImGuiID): Unit {
     return unsafe { igDockBuilderDockWindow(window_name, node_id) }
 }
 
@@ -5357,55 +5357,55 @@ public func _capi_igDockSpaceOverViewport(dockspace_id: ImGuiID, viewport: CPoin
     return unsafe { igDockSpaceOverViewport(dockspace_id, viewport, flags, window_class) }
 }
 
-public func _capi_igDragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragBehavior(id, data_type, p_v, v_speed, p_min, p_max, format, flags) }
 }
 
-public func _capi_igDragFloat(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragFloat(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragFloat(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragFloat2(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragFloat2(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragFloat3(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragFloat3(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragFloat4(label: CString, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragFloat4(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragFloatRange2(label: CString, v_current_min: CPointer<Float32>, v_current_max: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragFloatRange2(label: CPointer<UInt8>, v_current_min: CPointer<Float32>, v_current_max: CPointer<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, format_max: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragFloatRange2(label, v_current_min, v_current_max, v_speed, v_min, v_max, format, format_max, flags) }
 }
 
-public func _capi_igDragInt(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragInt(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragInt(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragInt2(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragInt2(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragInt2(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragInt3(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragInt3(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragInt3(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragInt4(label: CString, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragInt4(label: CPointer<UInt8>, v: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragInt4(label, v, v_speed, v_min, v_max, format, flags) }
 }
 
-public func _capi_igDragIntRange2(label: CString, v_current_min: CPointer<Int32>, v_current_max: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CString, format_max: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragIntRange2(label: CPointer<UInt8>, v_current_min: CPointer<Int32>, v_current_max: CPointer<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, format_max: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragIntRange2(label, v_current_min, v_current_max, v_speed, v_min, v_max, format, format_max, flags) }
 }
 
-public func _capi_igDragScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragScalar(label, data_type, p_data, v_speed, p_min, p_max, format, flags) }
 }
 
-public func _capi_igDragScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igDragScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, v_speed: Float32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igDragScalarN(label, data_type, p_data, components, v_speed, p_min, p_max, format, flags) }
 }
 
@@ -5533,11 +5533,11 @@ public func _capi_igFindOrCreateColumns(window: CPointer<ImGuiWindow>, id: ImGui
     return unsafe { igFindOrCreateColumns(window, id) }
 }
 
-public func _capi_igFindRenderedTextEnd(text: CString, text_end: CString): CString {
+public func _capi_igFindRenderedTextEnd(text: CPointer<UInt8>, text_end: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igFindRenderedTextEnd(text, text_end) }
 }
 
-public func _capi_igFindSettingsHandler(type_name: CString): CPointer<ImGuiSettingsHandler> {
+public func _capi_igFindSettingsHandler(type_name: CPointer<UInt8>): CPointer<ImGuiSettingsHandler> {
     return unsafe { igFindSettingsHandler(type_name) }
 }
 
@@ -5553,7 +5553,7 @@ public func _capi_igFindWindowByID(id: ImGuiID): CPointer<ImGuiWindow> {
     return unsafe { igFindWindowByID(id) }
 }
 
-public func _capi_igFindWindowByName(name: CString): CPointer<ImGuiWindow> {
+public func _capi_igFindWindowByName(name: CPointer<UInt8>): CPointer<ImGuiWindow> {
     return unsafe { igFindWindowByName(name) }
 }
 
@@ -5613,7 +5613,7 @@ public func _capi_igGetBackgroundDrawList_ViewportPtr(viewport: CPointer<ImGuiVi
     return unsafe { igGetBackgroundDrawList_ViewportPtr(viewport) }
 }
 
-public func _capi_igGetClipboardText(): CString {
+public func _capi_igGetClipboardText(): CPointer<UInt8> {
     return unsafe { igGetClipboardText() }
 }
 
@@ -5653,7 +5653,7 @@ public func _capi_igGetColumnsCount(): Int32 {
     return unsafe { igGetColumnsCount() }
 }
 
-public func _capi_igGetColumnsID(str_id: CString, count: Int32): ImGuiID {
+public func _capi_igGetColumnsID(str_id: CPointer<UInt8>, count: Int32): ImGuiID {
     return unsafe { igGetColumnsID(str_id, count) }
 }
 
@@ -5773,11 +5773,11 @@ public func _capi_igGetHoveredID(): ImGuiID {
     return unsafe { igGetHoveredID() }
 }
 
-public func _capi_igGetID_Str(str_id: CString): ImGuiID {
+public func _capi_igGetID_Str(str_id: CPointer<UInt8>): ImGuiID {
     return unsafe { igGetID_Str(str_id) }
 }
 
-public func _capi_igGetID_StrStr(str_id_begin: CString, str_id_end: CString): ImGuiID {
+public func _capi_igGetID_StrStr(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>): ImGuiID {
     return unsafe { igGetID_StrStr(str_id_begin, str_id_end) }
 }
 
@@ -5785,7 +5785,7 @@ public func _capi_igGetID_Ptr(ptr_id: CPointer<Unit>): ImGuiID {
     return unsafe { igGetID_Ptr(ptr_id) }
 }
 
-public func _capi_igGetIDWithSeed_Str(str_id_begin: CString, str_id_end: CString, seed: ImGuiID): ImGuiID {
+public func _capi_igGetIDWithSeed_Str(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>, seed: ImGuiID): ImGuiID {
     return unsafe { igGetIDWithSeed_Str(str_id_begin, str_id_end, seed) }
 }
 
@@ -5825,7 +5825,7 @@ public func _capi_igGetItemStatusFlags(): ImGuiItemStatusFlags {
     return unsafe { igGetItemStatusFlags() }
 }
 
-public func _capi_igGetKeyChordName(key_chord: ImGuiKeyChord): CString {
+public func _capi_igGetKeyChordName(key_chord: ImGuiKeyChord): CPointer<UInt8> {
     return unsafe { igGetKeyChordName(key_chord) }
 }
 
@@ -5841,7 +5841,7 @@ public func _capi_igGetKeyMagnitude2d(pOut: CPointer<ImVec2>, key_left: ImGuiKey
     return unsafe { igGetKeyMagnitude2d(pOut, key_left, key_right, key_up, key_down) }
 }
 
-public func _capi_igGetKeyName(key: ImGuiKey): CString {
+public func _capi_igGetKeyName(key: ImGuiKey): CPointer<UInt8> {
     return unsafe { igGetKeyName(key) }
 }
 
@@ -5921,7 +5921,7 @@ public func _capi_igGetStyle(): CPointer<ImGuiStyle> {
     return unsafe { igGetStyle() }
 }
 
-public func _capi_igGetStyleColorName(idx: ImGuiCol): CString {
+public func _capi_igGetStyleColorName(idx: ImGuiCol): CPointer<UInt8> {
     return unsafe { igGetStyleColorName(idx) }
 }
 
@@ -5965,7 +5965,7 @@ public func _capi_igGetTypingSelectRequest(flags: ImGuiTypingSelectFlags): CPoin
     return unsafe { igGetTypingSelectRequest(flags) }
 }
 
-public func _capi_igGetVersion(): CString {
+public func _capi_igGetVersion(): CPointer<UInt8> {
     return unsafe { igGetVersion() }
 }
 
@@ -6121,11 +6121,11 @@ public func _capi_igImFileGetSize(file: ImFileHandle): ImU64 {
     return unsafe { igImFileGetSize(file) }
 }
 
-public func _capi_igImFileLoadToMemory(filename: CString, mode: CString, out_file_size: CPointer<UIntNative>, padding_bytes: Int32): CPointer<Unit> {
+public func _capi_igImFileLoadToMemory(filename: CPointer<UInt8>, mode: CPointer<UInt8>, out_file_size: CPointer<UIntNative>, padding_bytes: Int32): CPointer<Unit> {
     return unsafe { igImFileLoadToMemory(filename, mode, out_file_size, padding_bytes) }
 }
 
-public func _capi_igImFileOpen(filename: CString, mode: CString): ImFileHandle {
+public func _capi_igImFileOpen(filename: CPointer<UInt8>, mode: CPointer<UInt8>): ImFileHandle {
     return unsafe { igImFileOpen(filename, mode) }
 }
 
@@ -6165,11 +6165,11 @@ public func _capi_igImFontAtlasBuildPackCustomRects(atlas: CPointer<ImFontAtlas>
     return unsafe { igImFontAtlasBuildPackCustomRects(atlas, stbrp_context_opaque) }
 }
 
-public func _capi_igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit {
+public func _capi_igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit {
     return unsafe { igImFontAtlasBuildRender32bppRectFromString(atlas, x, y, w, h, in_str, in_marker_char, in_marker_pixel_value) }
 }
 
-public func _capi_igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CString, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit {
+public func _capi_igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit {
     return unsafe { igImFontAtlasBuildRender8bppRectFromString(atlas, x, y, w, h, in_str, in_marker_char, in_marker_pixel_value) }
 }
 
@@ -6185,25 +6185,25 @@ public func _capi_igImFontAtlasUpdateConfigDataPointers(atlas: CPointer<ImFontAt
     return unsafe { igImFontAtlasUpdateConfigDataPointers(atlas) }
 }
 
-public func _capi_igImFormatString(buf: CString, buf_size: UIntNative, fmt: CString): Int32 {
+public func _capi_igImFormatString(buf: CPointer<UInt8>, buf_size: UIntNative, fmt: CPointer<UInt8>): Int32 {
     return unsafe { igImFormatString(buf, buf_size, fmt) }
 }
 
-public func _capi_igImFormatStringToTempBuffer(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString): Unit {
+public func _capi_igImFormatStringToTempBuffer(out_buf: CPointer<CPointer<UInt8>>, out_buf_end: CPointer<CPointer<UInt8>>, fmt: CPointer<UInt8>): Unit {
     return unsafe { igImFormatStringToTempBuffer(out_buf, out_buf_end, fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igImFormatStringToTempBufferV(out_buf: CPointer<CString>, out_buf_end: CPointer<CString>, fmt: CString, args: va_list): Unit { ...
+// public func _capi_igImFormatStringToTempBufferV(out_buf: CPointer<CPointer<UInt8>>, out_buf_end: CPointer<CPointer<UInt8>>, fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 // Cangjie does not support `va_list`
-// public func _capi_igImFormatStringV(buf: CString, buf_size: UIntNative, fmt: CString, args: va_list): Int32 { ...
+// public func _capi_igImFormatStringV(buf: CPointer<UInt8>, buf_size: UIntNative, fmt: CPointer<UInt8>, args: va_list): Int32 { ...
 
 public func _capi_igImHashData(data: CPointer<Unit>, data_size: UIntNative, seed: ImGuiID): ImGuiID {
     return unsafe { igImHashData(data, data_size, seed) }
 }
 
-public func _capi_igImHashStr(data: CString, data_size: UIntNative, seed: ImGuiID): ImGuiID {
+public func _capi_igImHashStr(data: CPointer<UInt8>, data_size: UIntNative, seed: ImGuiID): ImGuiID {
     return unsafe { igImHashStr(data, data_size, seed) }
 }
 
@@ -6275,27 +6275,27 @@ public func _capi_igImMul(pOut: CPointer<ImVec2>, lhs: ImVec2, rhs: ImVec2): Uni
     return unsafe { igImMul(pOut, lhs, rhs) }
 }
 
-public func _capi_igImParseFormatFindEnd(format: CString): CString {
+public func _capi_igImParseFormatFindEnd(format: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImParseFormatFindEnd(format) }
 }
 
-public func _capi_igImParseFormatFindStart(format: CString): CString {
+public func _capi_igImParseFormatFindStart(format: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImParseFormatFindStart(format) }
 }
 
-public func _capi_igImParseFormatPrecision(format: CString, default_value: Int32): Int32 {
+public func _capi_igImParseFormatPrecision(format: CPointer<UInt8>, default_value: Int32): Int32 {
     return unsafe { igImParseFormatPrecision(format, default_value) }
 }
 
-public func _capi_igImParseFormatSanitizeForPrinting(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): Unit {
+public func _capi_igImParseFormatSanitizeForPrinting(fmt_in: CPointer<UInt8>, fmt_out: CPointer<UInt8>, fmt_out_size: UIntNative): Unit {
     return unsafe { igImParseFormatSanitizeForPrinting(fmt_in, fmt_out, fmt_out_size) }
 }
 
-public func _capi_igImParseFormatSanitizeForScanning(fmt_in: CString, fmt_out: CString, fmt_out_size: UIntNative): CString {
+public func _capi_igImParseFormatSanitizeForScanning(fmt_in: CPointer<UInt8>, fmt_out: CPointer<UInt8>, fmt_out_size: UIntNative): CPointer<UInt8> {
     return unsafe { igImParseFormatSanitizeForScanning(fmt_in, fmt_out, fmt_out_size) }
 }
 
-public func _capi_igImParseFormatTrimDecorations(format: CString, buf: CString, buf_size: UIntNative): CString {
+public func _capi_igImParseFormatTrimDecorations(format: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative): CPointer<UInt8> {
     return unsafe { igImParseFormatTrimDecorations(format, buf, buf_size) }
 }
 
@@ -6335,11 +6335,11 @@ public func _capi_igImSign_double(x: Float64): Float64 {
     return unsafe { igImSign_double(x) }
 }
 
-public func _capi_igImStrSkipBlank(str: CString): CString {
+public func _capi_igImStrSkipBlank(str: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImStrSkipBlank(str) }
 }
 
-public func _capi_igImStrTrimBlanks(str: CString): Unit {
+public func _capi_igImStrTrimBlanks(str: CPointer<UInt8>): Unit {
     return unsafe { igImStrTrimBlanks(str) }
 }
 
@@ -6347,27 +6347,27 @@ public func _capi_igImStrbolW(buf_mid_line: CPointer<ImWchar>, buf_begin: CPoint
     return unsafe { igImStrbolW(buf_mid_line, buf_begin) }
 }
 
-public func _capi_igImStrchrRange(str_begin: CString, str_end: CString, c: UInt8): CString {
+public func _capi_igImStrchrRange(str_begin: CPointer<UInt8>, str_end: CPointer<UInt8>, c: UInt8): CPointer<UInt8> {
     return unsafe { igImStrchrRange(str_begin, str_end, c) }
 }
 
-public func _capi_igImStrdup(str: CString): CString {
+public func _capi_igImStrdup(str: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImStrdup(str) }
 }
 
-public func _capi_igImStrdupcpy(dst: CString, p_dst_size: CPointer<UIntNative>, str: CString): CString {
+public func _capi_igImStrdupcpy(dst: CPointer<UInt8>, p_dst_size: CPointer<UIntNative>, str: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImStrdupcpy(dst, p_dst_size, str) }
 }
 
-public func _capi_igImStreolRange(str: CString, str_end: CString): CString {
+public func _capi_igImStreolRange(str: CPointer<UInt8>, str_end: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImStreolRange(str, str_end) }
 }
 
-public func _capi_igImStricmp(str1: CString, str2: CString): Int32 {
+public func _capi_igImStricmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>): Int32 {
     return unsafe { igImStricmp(str1, str2) }
 }
 
-public func _capi_igImStristr(haystack: CString, haystack_end: CString, needle: CString, needle_end: CString): CString {
+public func _capi_igImStristr(haystack: CPointer<UInt8>, haystack_end: CPointer<UInt8>, needle: CPointer<UInt8>, needle_end: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImStristr(haystack, haystack_end, needle, needle_end) }
 }
 
@@ -6375,31 +6375,31 @@ public func _capi_igImStrlenW(str: CPointer<ImWchar>): Int32 {
     return unsafe { igImStrlenW(str) }
 }
 
-public func _capi_igImStrncpy(dst: CString, src: CString, count: UIntNative): Unit {
+public func _capi_igImStrncpy(dst: CPointer<UInt8>, src: CPointer<UInt8>, count: UIntNative): Unit {
     return unsafe { igImStrncpy(dst, src, count) }
 }
 
-public func _capi_igImStrnicmp(str1: CString, str2: CString, count: UIntNative): Int32 {
+public func _capi_igImStrnicmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>, count: UIntNative): Int32 {
     return unsafe { igImStrnicmp(str1, str2, count) }
 }
 
-public func _capi_igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CString, in_text_end: CString): Int32 {
+public func _capi_igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
     return unsafe { igImTextCharFromUtf8(out_char, in_text, in_text_end) }
 }
 
-public func _capi_igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CString {
+public func _capi_igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CPointer<UInt8> {
     return unsafe { igImTextCharToUtf8(out_buf, c) }
 }
 
-public func _capi_igImTextCountCharsFromUtf8(in_text: CString, in_text_end: CString): Int32 {
+public func _capi_igImTextCountCharsFromUtf8(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
     return unsafe { igImTextCountCharsFromUtf8(in_text, in_text_end) }
 }
 
-public func _capi_igImTextCountLines(in_text: CString, in_text_end: CString): Int32 {
+public func _capi_igImTextCountLines(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
     return unsafe { igImTextCountLines(in_text, in_text_end) }
 }
 
-public func _capi_igImTextCountUtf8BytesFromChar(in_text: CString, in_text_end: CString): Int32 {
+public func _capi_igImTextCountUtf8BytesFromChar(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
     return unsafe { igImTextCountUtf8BytesFromChar(in_text, in_text_end) }
 }
 
@@ -6407,15 +6407,15 @@ public func _capi_igImTextCountUtf8BytesFromStr(in_text: CPointer<ImWchar>, in_t
     return unsafe { igImTextCountUtf8BytesFromStr(in_text, in_text_end) }
 }
 
-public func _capi_igImTextFindPreviousUtf8Codepoint(in_text_start: CString, in_text_curr: CString): CString {
+public func _capi_igImTextFindPreviousUtf8Codepoint(in_text_start: CPointer<UInt8>, in_text_curr: CPointer<UInt8>): CPointer<UInt8> {
     return unsafe { igImTextFindPreviousUtf8Codepoint(in_text_start, in_text_curr) }
 }
 
-public func _capi_igImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CString, in_text_end: CString, in_remaining: CPointer<CString>): Int32 {
+public func _capi_igImTextStrFromUtf8(out_buf: CPointer<ImWchar>, out_buf_size: Int32, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>, in_remaining: CPointer<CPointer<UInt8>>): Int32 {
     return unsafe { igImTextStrFromUtf8(out_buf, out_buf_size, in_text, in_text_end, in_remaining) }
 }
 
-public func _capi_igImTextStrToUtf8(out_buf: CString, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32 {
+public func _capi_igImTextStrToUtf8(out_buf: CPointer<UInt8>, out_buf_size: Int32, in_text: CPointer<ImWchar>, in_text_end: CPointer<ImWchar>): Int32 {
     return unsafe { igImTextStrToUtf8(out_buf, out_buf_size, in_text, in_text_end) }
 }
 
@@ -6459,7 +6459,7 @@ public func _capi_igImage(user_texture_id: ImTextureID, image_size: ImVec2, uv0:
     return unsafe { igImage(user_texture_id, image_size, uv0, uv1, tint_col, border_col) }
 }
 
-public func _capi_igImageButton(str_id: CString, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool {
+public func _capi_igImageButton(str_id: CPointer<UInt8>, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool {
     return unsafe { igImageButton(str_id, user_texture_id, image_size, uv0, uv1, bg_col, tint_col) }
 }
 
@@ -6475,51 +6475,51 @@ public func _capi_igInitialize(): Unit {
     return unsafe { igInitialize() }
 }
 
-public func _capi_igInputDouble(label: CString, v: CPointer<Float64>, step: Float64, step_fast: Float64, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputDouble(label: CPointer<UInt8>, v: CPointer<Float64>, step: Float64, step_fast: Float64, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputDouble(label, v, step, step_fast, format, flags) }
 }
 
-public func _capi_igInputFloat(label: CString, v: CPointer<Float32>, step: Float32, step_fast: Float32, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputFloat(label: CPointer<UInt8>, v: CPointer<Float32>, step: Float32, step_fast: Float32, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputFloat(label, v, step, step_fast, format, flags) }
 }
 
-public func _capi_igInputFloat2(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputFloat2(label, v, format, flags) }
 }
 
-public func _capi_igInputFloat3(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputFloat3(label, v, format, flags) }
 }
 
-public func _capi_igInputFloat4(label: CString, v: CPointer<Float32>, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputFloat4(label, v, format, flags) }
 }
 
-public func _capi_igInputInt(label: CString, v: CPointer<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputInt(label: CPointer<UInt8>, v: CPointer<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputInt(label, v, step, step_fast, flags) }
 }
 
-public func _capi_igInputInt2(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputInt2(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputInt2(label, v, flags) }
 }
 
-public func _capi_igInputInt3(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputInt3(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputInt3(label, v, flags) }
 }
 
-public func _capi_igInputInt4(label: CString, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputInt4(label: CPointer<UInt8>, v: CPointer<Int32>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputInt4(label, v, flags) }
 }
 
-public func _capi_igInputScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputScalar(label, data_type, p_data, p_step, p_step_fast, format, flags) }
 }
 
-public func _capi_igInputScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CString, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igInputScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_step: CPointer<Unit>, p_step_fast: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igInputScalarN(label, data_type, p_data, components, p_step, p_step_fast, format, flags) }
 }
 
-public func _capi_igInputText(label: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
+public func _capi_igInputText(label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
     return unsafe { igInputText(label, buf, buf_size, flags, callback, user_data) }
 }
 
@@ -6527,19 +6527,19 @@ public func _capi_igInputTextDeactivateHook(id: ImGuiID): Unit {
     return unsafe { igInputTextDeactivateHook(id) }
 }
 
-public func _capi_igInputTextEx(label: CString, hint: CString, buf: CString, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
+public func _capi_igInputTextEx(label: CPointer<UInt8>, hint: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
     return unsafe { igInputTextEx(label, hint, buf, buf_size, size_arg, flags, callback, user_data) }
 }
 
-public func _capi_igInputTextMultiline(label: CString, buf: CString, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
+public func _capi_igInputTextMultiline(label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
     return unsafe { igInputTextMultiline(label, buf, buf_size, size, flags, callback, user_data) }
 }
 
-public func _capi_igInputTextWithHint(label: CString, hint: CString, buf: CString, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
+public func _capi_igInputTextWithHint(label: CPointer<UInt8>, hint: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: CPointer<Unit>): Bool {
     return unsafe { igInputTextWithHint(label, hint, buf, buf_size, flags, callback, user_data) }
 }
 
-public func _capi_igInvisibleButton(str_id: CString, size: ImVec2, flags: ImGuiButtonFlags): Bool {
+public func _capi_igInvisibleButton(str_id: CPointer<UInt8>, size: ImVec2, flags: ImGuiButtonFlags): Bool {
     return unsafe { igInvisibleButton(str_id, size, flags) }
 }
 
@@ -6731,7 +6731,7 @@ public func _capi_igIsNamedKeyOrMod(key: ImGuiKey): Bool {
     return unsafe { igIsNamedKeyOrMod(key) }
 }
 
-public func _capi_igIsPopupOpen_Str(str_id: CString, flags: ImGuiPopupFlags): Bool {
+public func _capi_igIsPopupOpen_Str(str_id: CPointer<UInt8>, flags: ImGuiPopupFlags): Bool {
     return unsafe { igIsPopupOpen_Str(str_id, flags) }
 }
 
@@ -6807,30 +6807,30 @@ public func _capi_igKeepAliveID(id: ImGuiID): Unit {
     return unsafe { igKeepAliveID(id) }
 }
 
-public func _capi_igLabelText(label: CString, fmt: CString): Unit {
+public func _capi_igLabelText(label: CPointer<UInt8>, fmt: CPointer<UInt8>): Unit {
     return unsafe { igLabelText(label, fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igLabelTextV(label: CString, fmt: CString, args: va_list): Unit { ...
+// public func _capi_igLabelTextV(label: CPointer<UInt8>, fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_igListBox_Str_arr(label: CString, current_item: CPointer<Int32>, items: CPointer<CString>, items_count: Int32, height_in_items: Int32): Bool {
+public func _capi_igListBox_Str_arr(label: CPointer<UInt8>, current_item: CPointer<Int32>, items: CPointer<CPointer<UInt8>>, items_count: Int32, height_in_items: Int32): Bool {
     return unsafe { igListBox_Str_arr(label, current_item, items, items_count, height_in_items) }
 }
 
-public func _capi_igListBox_FnStrPtr(label: CString, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CString>, user_data: CPointer<Unit>, items_count: Int32, height_in_items: Int32): Bool {
+public func _capi_igListBox_FnStrPtr(label: CPointer<UInt8>, current_item: CPointer<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, items_count: Int32, height_in_items: Int32): Bool {
     return unsafe { igListBox_FnStrPtr(label, current_item, getter, user_data, items_count, height_in_items) }
 }
 
-public func _capi_igLoadIniSettingsFromDisk(ini_filename: CString): Unit {
+public func _capi_igLoadIniSettingsFromDisk(ini_filename: CPointer<UInt8>): Unit {
     return unsafe { igLoadIniSettingsFromDisk(ini_filename) }
 }
 
-public func _capi_igLoadIniSettingsFromMemory(ini_data: CString, ini_size: UIntNative): Unit {
+public func _capi_igLoadIniSettingsFromMemory(ini_data: CPointer<UInt8>, ini_size: UIntNative): Unit {
     return unsafe { igLoadIniSettingsFromMemory(ini_data, ini_size) }
 }
 
-public func _capi_igLocalizeGetMsg(key: ImGuiLocKey): CString {
+public func _capi_igLocalizeGetMsg(key: ImGuiLocKey): CPointer<UInt8> {
     return unsafe { igLocalizeGetMsg(key) }
 }
 
@@ -6850,20 +6850,20 @@ public func _capi_igLogFinish(): Unit {
     return unsafe { igLogFinish() }
 }
 
-public func _capi_igLogRenderedText(ref_pos: CPointer<ImVec2>, text: CString, text_end: CString): Unit {
+public func _capi_igLogRenderedText(ref_pos: CPointer<ImVec2>, text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit {
     return unsafe { igLogRenderedText(ref_pos, text, text_end) }
 }
 
-public func _capi_igLogSetNextTextDecoration(prefix: CString, suffix: CString): Unit {
+public func _capi_igLogSetNextTextDecoration(prefix: CPointer<UInt8>, suffix: CPointer<UInt8>): Unit {
     return unsafe { igLogSetNextTextDecoration(prefix, suffix) }
 }
 
-public func _capi_igLogText(fmt: CString): Unit {
+public func _capi_igLogText(fmt: CPointer<UInt8>): Unit {
     return unsafe { igLogText(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igLogTextV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igLogTextV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 public func _capi_igLogToBuffer(auto_open_depth: Int32): Unit {
     return unsafe { igLogToBuffer(auto_open_depth) }
@@ -6873,7 +6873,7 @@ public func _capi_igLogToClipboard(auto_open_depth: Int32): Unit {
     return unsafe { igLogToClipboard(auto_open_depth) }
 }
 
-public func _capi_igLogToFile(auto_open_depth: Int32, filename: CString): Unit {
+public func _capi_igLogToFile(auto_open_depth: Int32, filename: CPointer<UInt8>): Unit {
     return unsafe { igLogToFile(auto_open_depth, filename) }
 }
 
@@ -6901,15 +6901,15 @@ public func _capi_igMemFree(ptr: CPointer<Unit>): Unit {
     return unsafe { igMemFree(ptr) }
 }
 
-public func _capi_igMenuItem_Bool(label: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool {
+public func _capi_igMenuItem_Bool(label: CPointer<UInt8>, shortcut: CPointer<UInt8>, selected: Bool, enabled: Bool): Bool {
     return unsafe { igMenuItem_Bool(label, shortcut, selected, enabled) }
 }
 
-public func _capi_igMenuItem_BoolPtr(label: CString, shortcut: CString, p_selected: CPointer<Bool>, enabled: Bool): Bool {
+public func _capi_igMenuItem_BoolPtr(label: CPointer<UInt8>, shortcut: CPointer<UInt8>, p_selected: CPointer<Bool>, enabled: Bool): Bool {
     return unsafe { igMenuItem_BoolPtr(label, shortcut, p_selected, enabled) }
 }
 
-public func _capi_igMenuItemEx(label: CString, icon: CString, shortcut: CString, selected: Bool, enabled: Bool): Bool {
+public func _capi_igMenuItemEx(label: CPointer<UInt8>, icon: CPointer<UInt8>, shortcut: CPointer<UInt8>, selected: Bool, enabled: Bool): Bool {
     return unsafe { igMenuItemEx(label, icon, shortcut, selected, enabled) }
 }
 
@@ -6985,7 +6985,7 @@ public func _capi_igNextColumn(): Unit {
     return unsafe { igNextColumn() }
 }
 
-public func _capi_igOpenPopup_Str(str_id: CString, popup_flags: ImGuiPopupFlags): Unit {
+public func _capi_igOpenPopup_Str(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Unit {
     return unsafe { igOpenPopup_Str(str_id, popup_flags) }
 }
 
@@ -6997,27 +6997,27 @@ public func _capi_igOpenPopupEx(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit
     return unsafe { igOpenPopupEx(id, popup_flags) }
 }
 
-public func _capi_igOpenPopupOnItemClick(str_id: CString, popup_flags: ImGuiPopupFlags): Unit {
+public func _capi_igOpenPopupOnItemClick(str_id: CPointer<UInt8>, popup_flags: ImGuiPopupFlags): Unit {
     return unsafe { igOpenPopupOnItemClick(str_id, popup_flags) }
 }
 
-public func _capi_igPlotEx(plot_type: ImGuiPlotType, label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, size_arg: ImVec2): Int32 {
+public func _capi_igPlotEx(plot_type: ImGuiPlotType, label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, size_arg: ImVec2): Int32 {
     return unsafe { igPlotEx(plot_type, label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, size_arg) }
 }
 
-public func _capi_igPlotHistogram_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
+public func _capi_igPlotHistogram_FloatPtr(label: CPointer<UInt8>, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
     return unsafe { igPlotHistogram_FloatPtr(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size, stride) }
 }
 
-public func _capi_igPlotHistogram_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
+public func _capi_igPlotHistogram_FnFloatPtr(label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
     return unsafe { igPlotHistogram_FnFloatPtr(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size) }
 }
 
-public func _capi_igPlotLines_FloatPtr(label: CString, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
+public func _capi_igPlotLines_FloatPtr(label: CPointer<UInt8>, values: CPointer<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
     return unsafe { igPlotLines_FloatPtr(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size, stride) }
 }
 
-public func _capi_igPlotLines_FnFloatPtr(label: CString, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CString, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
+public func _capi_igPlotLines_FnFloatPtr(label: CPointer<UInt8>, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: CPointer<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CPointer<UInt8>, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
     return unsafe { igPlotLines_FnFloatPtr(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size) }
 }
 
@@ -7069,7 +7069,7 @@ public func _capi_igPopTextWrapPos(): Unit {
     return unsafe { igPopTextWrapPos() }
 }
 
-public func _capi_igProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CString): Unit {
+public func _capi_igProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CPointer<UInt8>): Unit {
     return unsafe { igProgressBar(fraction, size_arg, overlay) }
 }
 
@@ -7097,11 +7097,11 @@ public func _capi_igPushFont(font: CPointer<ImFont>): Unit {
     return unsafe { igPushFont(font) }
 }
 
-public func _capi_igPushID_Str(str_id: CString): Unit {
+public func _capi_igPushID_Str(str_id: CPointer<UInt8>): Unit {
     return unsafe { igPushID_Str(str_id) }
 }
 
-public func _capi_igPushID_StrStr(str_id_begin: CString, str_id_end: CString): Unit {
+public func _capi_igPushID_StrStr(str_id_begin: CPointer<UInt8>, str_id_end: CPointer<UInt8>): Unit {
     return unsafe { igPushID_StrStr(str_id_begin, str_id_end) }
 }
 
@@ -7153,11 +7153,11 @@ public func _capi_igPushTextWrapPos(wrap_local_pos_x: Float32): Unit {
     return unsafe { igPushTextWrapPos(wrap_local_pos_x) }
 }
 
-public func _capi_igRadioButton_Bool(label: CString, active: Bool): Bool {
+public func _capi_igRadioButton_Bool(label: CPointer<UInt8>, active: Bool): Bool {
     return unsafe { igRadioButton_Bool(label, active) }
 }
 
-public func _capi_igRadioButton_IntPtr(label: CString, v: CPointer<Int32>, v_button: Int32): Bool {
+public func _capi_igRadioButton_IntPtr(label: CPointer<UInt8>, v: CPointer<Int32>, v_button: Int32): Bool {
     return unsafe { igRadioButton_IntPtr(label, v, v_button) }
 }
 
@@ -7165,7 +7165,7 @@ public func _capi_igRemoveContextHook(context: CPointer<ImGuiContext>, hook_to_r
     return unsafe { igRemoveContextHook(context, hook_to_remove) }
 }
 
-public func _capi_igRemoveSettingsHandler(type_name: CString): Unit {
+public func _capi_igRemoveSettingsHandler(type_name: CPointer<UInt8>): Unit {
     return unsafe { igRemoveSettingsHandler(type_name) }
 }
 
@@ -7229,23 +7229,23 @@ public func _capi_igRenderRectFilledWithHole(draw_list: CPointer<ImDrawList>, ou
     return unsafe { igRenderRectFilledWithHole(draw_list, outer, inner, col, rounding) }
 }
 
-public func _capi_igRenderText(pos: ImVec2, text: CString, text_end: CString, hide_text_after_hash: Bool): Unit {
+public func _capi_igRenderText(pos: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, hide_text_after_hash: Bool): Unit {
     return unsafe { igRenderText(pos, text, text_end, hide_text_after_hash) }
 }
 
-public func _capi_igRenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit {
+public func _capi_igRenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit {
     return unsafe { igRenderTextClipped(pos_min, pos_max, text, text_end, text_size_if_known, align, clip_rect) }
 }
 
-public func _capi_igRenderTextClippedEx(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit {
+public func _capi_igRenderTextClippedEx(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>, align: ImVec2, clip_rect: CPointer<ImRect>): Unit {
     return unsafe { igRenderTextClippedEx(draw_list, pos_min, pos_max, text, text_end, text_size_if_known, align, clip_rect) }
 }
 
-public func _capi_igRenderTextEllipsis(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, clip_max_x: Float32, ellipsis_max_x: Float32, text: CString, text_end: CString, text_size_if_known: CPointer<ImVec2>): Unit {
+public func _capi_igRenderTextEllipsis(draw_list: CPointer<ImDrawList>, pos_min: ImVec2, pos_max: ImVec2, clip_max_x: Float32, ellipsis_max_x: Float32, text: CPointer<UInt8>, text_end: CPointer<UInt8>, text_size_if_known: CPointer<ImVec2>): Unit {
     return unsafe { igRenderTextEllipsis(draw_list, pos_min, pos_max, clip_max_x, ellipsis_max_x, text, text_end, text_size_if_known) }
 }
 
-public func _capi_igRenderTextWrapped(pos: ImVec2, text: CString, text_end: CString, wrap_width: Float32): Unit {
+public func _capi_igRenderTextWrapped(pos: ImVec2, text: CPointer<UInt8>, text_end: CPointer<UInt8>, wrap_width: Float32): Unit {
     return unsafe { igRenderTextWrapped(pos, text, text_end, wrap_width) }
 }
 
@@ -7257,11 +7257,11 @@ public func _capi_igSameLine(offset_from_start_x: Float32, spacing: Float32): Un
     return unsafe { igSameLine(offset_from_start_x, spacing) }
 }
 
-public func _capi_igSaveIniSettingsToDisk(ini_filename: CString): Unit {
+public func _capi_igSaveIniSettingsToDisk(ini_filename: CPointer<UInt8>): Unit {
     return unsafe { igSaveIniSettingsToDisk(ini_filename) }
 }
 
-public func _capi_igSaveIniSettingsToMemory(out_ini_size: CPointer<UIntNative>): CString {
+public func _capi_igSaveIniSettingsToMemory(out_ini_size: CPointer<UIntNative>): CPointer<UInt8> {
     return unsafe { igSaveIniSettingsToMemory(out_ini_size) }
 }
 
@@ -7293,11 +7293,11 @@ public func _capi_igScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scro
     return unsafe { igScrollbarEx(bb, id, axis, p_scroll_v, avail_v, contents_v, flags) }
 }
 
-public func _capi_igSelectable_Bool(label: CString, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
+public func _capi_igSelectable_Bool(label: CPointer<UInt8>, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
     return unsafe { igSelectable_Bool(label, selected, flags, size) }
 }
 
-public func _capi_igSelectable_BoolPtr(label: CString, p_selected: CPointer<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
+public func _capi_igSelectable_BoolPtr(label: CPointer<UInt8>, p_selected: CPointer<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
     return unsafe { igSelectable_BoolPtr(label, p_selected, flags, size) }
 }
 
@@ -7309,11 +7309,11 @@ public func _capi_igSeparatorEx(flags: ImGuiSeparatorFlags, thickness: Float32):
     return unsafe { igSeparatorEx(flags, thickness) }
 }
 
-public func _capi_igSeparatorText(label: CString): Unit {
+public func _capi_igSeparatorText(label: CPointer<UInt8>): Unit {
     return unsafe { igSeparatorText(label) }
 }
 
-public func _capi_igSeparatorTextEx(id: ImGuiID, label: CString, label_end: CString, extra_width: Float32): Unit {
+public func _capi_igSeparatorTextEx(id: ImGuiID, label: CPointer<UInt8>, label_end: CPointer<UInt8>, extra_width: Float32): Unit {
     return unsafe { igSeparatorTextEx(id, label, label_end, extra_width) }
 }
 
@@ -7329,7 +7329,7 @@ public func _capi_igSetAllocatorFunctions(alloc_func: ImGuiMemAllocFunc, free_fu
     return unsafe { igSetAllocatorFunctions(alloc_func, free_func, user_data) }
 }
 
-public func _capi_igSetClipboardText(text: CString): Unit {
+public func _capi_igSetClipboardText(text: CPointer<UInt8>): Unit {
     return unsafe { igSetClipboardText(text) }
 }
 
@@ -7373,7 +7373,7 @@ public func _capi_igSetCursorScreenPos(pos: ImVec2): Unit {
     return unsafe { igSetCursorScreenPos(pos) }
 }
 
-public func _capi_igSetDragDropPayload(`type`: CString, data: CPointer<Unit>, sz: UIntNative, cond: ImGuiCond): Bool {
+public func _capi_igSetDragDropPayload(`type`: CPointer<UInt8>, data: CPointer<Unit>, sz: UIntNative, cond: ImGuiCond): Bool {
     return unsafe { igSetDragDropPayload(`type`, data, sz, cond) }
 }
 
@@ -7393,12 +7393,12 @@ public func _capi_igSetItemKeyOwner(key: ImGuiKey, flags: ImGuiInputFlags): Unit
     return unsafe { igSetItemKeyOwner(key, flags) }
 }
 
-public func _capi_igSetItemTooltip(fmt: CString): Unit {
+public func _capi_igSetItemTooltip(fmt: CPointer<UInt8>): Unit {
     return unsafe { igSetItemTooltip(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igSetItemTooltipV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igSetItemTooltipV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 public func _capi_igSetKeyOwner(key: ImGuiKey, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit {
     return unsafe { igSetKeyOwner(key, owner_id, flags) }
@@ -7560,16 +7560,16 @@ public func _capi_igSetStateStorage(storage: CPointer<ImGuiStorage>): Unit {
     return unsafe { igSetStateStorage(storage) }
 }
 
-public func _capi_igSetTabItemClosed(tab_or_docked_window_label: CString): Unit {
+public func _capi_igSetTabItemClosed(tab_or_docked_window_label: CPointer<UInt8>): Unit {
     return unsafe { igSetTabItemClosed(tab_or_docked_window_label) }
 }
 
-public func _capi_igSetTooltip(fmt: CString): Unit {
+public func _capi_igSetTooltip(fmt: CPointer<UInt8>): Unit {
     return unsafe { igSetTooltip(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igSetTooltipV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igSetTooltipV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 public func _capi_igSetWindowClipRectBeforeSetChannel(window: CPointer<ImGuiWindow>, clip_rect: ImRect): Unit {
     return unsafe { igSetWindowClipRectBeforeSetChannel(window, clip_rect) }
@@ -7579,7 +7579,7 @@ public func _capi_igSetWindowCollapsed_Bool(collapsed: Bool, cond: ImGuiCond): U
     return unsafe { igSetWindowCollapsed_Bool(collapsed, cond) }
 }
 
-public func _capi_igSetWindowCollapsed_Str(name: CString, collapsed: Bool, cond: ImGuiCond): Unit {
+public func _capi_igSetWindowCollapsed_Str(name: CPointer<UInt8>, collapsed: Bool, cond: ImGuiCond): Unit {
     return unsafe { igSetWindowCollapsed_Str(name, collapsed, cond) }
 }
 
@@ -7595,7 +7595,7 @@ public func _capi_igSetWindowFocus_Nil(): Unit {
     return unsafe { igSetWindowFocus_Nil() }
 }
 
-public func _capi_igSetWindowFocus_Str(name: CString): Unit {
+public func _capi_igSetWindowFocus_Str(name: CPointer<UInt8>): Unit {
     return unsafe { igSetWindowFocus_Str(name) }
 }
 
@@ -7619,7 +7619,7 @@ public func _capi_igSetWindowPos_Vec2(pos: ImVec2, cond: ImGuiCond): Unit {
     return unsafe { igSetWindowPos_Vec2(pos, cond) }
 }
 
-public func _capi_igSetWindowPos_Str(name: CString, pos: ImVec2, cond: ImGuiCond): Unit {
+public func _capi_igSetWindowPos_Str(name: CPointer<UInt8>, pos: ImVec2, cond: ImGuiCond): Unit {
     return unsafe { igSetWindowPos_Str(name, pos, cond) }
 }
 
@@ -7631,7 +7631,7 @@ public func _capi_igSetWindowSize_Vec2(size: ImVec2, cond: ImGuiCond): Unit {
     return unsafe { igSetWindowSize_Vec2(size, cond) }
 }
 
-public func _capi_igSetWindowSize_Str(name: CString, size: ImVec2, cond: ImGuiCond): Unit {
+public func _capi_igSetWindowSize_Str(name: CPointer<UInt8>, size: ImVec2, cond: ImGuiCond): Unit {
     return unsafe { igSetWindowSize_Str(name, size, cond) }
 }
 
@@ -7679,7 +7679,7 @@ public func _capi_igShowFontAtlas(atlas: CPointer<ImFontAtlas>): Unit {
     return unsafe { igShowFontAtlas(atlas) }
 }
 
-public func _capi_igShowFontSelector(label: CString): Unit {
+public func _capi_igShowFontSelector(label: CPointer<UInt8>): Unit {
     return unsafe { igShowFontSelector(label) }
 }
 
@@ -7695,7 +7695,7 @@ public func _capi_igShowStyleEditor(ref: CPointer<ImGuiStyle>): Unit {
     return unsafe { igShowStyleEditor(ref) }
 }
 
-public func _capi_igShowStyleSelector(label: CString): Bool {
+public func _capi_igShowStyleSelector(label: CPointer<UInt8>): Bool {
     return unsafe { igShowStyleSelector(label) }
 }
 
@@ -7711,55 +7711,55 @@ public func _capi_igShutdown(): Unit {
     return unsafe { igShutdown() }
 }
 
-public func _capi_igSliderAngle(label: CString, v_rad: CPointer<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderAngle(label: CPointer<UInt8>, v_rad: CPointer<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderAngle(label, v_rad, v_degrees_min, v_degrees_max, format, flags) }
 }
 
-public func _capi_igSliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags, out_grab_bb: CPointer<ImRect>): Bool {
+public func _capi_igSliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_v: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags, out_grab_bb: CPointer<ImRect>): Bool {
     return unsafe { igSliderBehavior(bb, id, data_type, p_v, p_min, p_max, format, flags, out_grab_bb) }
 }
 
-public func _capi_igSliderFloat(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderFloat(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderFloat(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderFloat2(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderFloat2(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderFloat2(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderFloat3(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderFloat3(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderFloat3(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderFloat4(label: CString, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderFloat4(label: CPointer<UInt8>, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderFloat4(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderInt(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderInt(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderInt(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderInt2(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderInt2(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderInt2(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderInt3(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderInt3(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderInt3(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderInt4(label: CString, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderInt4(label: CPointer<UInt8>, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderInt4(label, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igSliderScalar(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderScalar(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderScalar(label, data_type, p_data, p_min, p_max, format, flags) }
 }
 
-public func _capi_igSliderScalarN(label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igSliderScalarN(label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, components: Int32, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igSliderScalarN(label, data_type, p_data, components, p_min, p_max, format, flags) }
 }
 
-public func _capi_igSmallButton(label: CString): Bool {
+public func _capi_igSmallButton(label: CPointer<UInt8>): Bool {
     return unsafe { igSmallButton(label) }
 }
 
@@ -7815,7 +7815,7 @@ public func _capi_igTabBarGetCurrentTab(tab_bar: CPointer<ImGuiTabBar>): CPointe
     return unsafe { igTabBarGetCurrentTab(tab_bar) }
 }
 
-public func _capi_igTabBarGetTabName(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): CString {
+public func _capi_igTabBarGetTabName(tab_bar: CPointer<ImGuiTabBar>, tab: CPointer<ImGuiTabItem>): CPointer<UInt8> {
     return unsafe { igTabBarGetTabName(tab_bar, tab) }
 }
 
@@ -7847,11 +7847,11 @@ public func _capi_igTabItemBackground(draw_list: CPointer<ImDrawList>, bb: ImRec
     return unsafe { igTabItemBackground(draw_list, bb, flags, col) }
 }
 
-public func _capi_igTabItemButton(label: CString, flags: ImGuiTabItemFlags): Bool {
+public func _capi_igTabItemButton(label: CPointer<UInt8>, flags: ImGuiTabItemFlags): Bool {
     return unsafe { igTabItemButton(label, flags) }
 }
 
-public func _capi_igTabItemCalcSize_Str(pOut: CPointer<ImVec2>, label: CString, has_close_button_or_unsaved_marker: Bool): Unit {
+public func _capi_igTabItemCalcSize_Str(pOut: CPointer<ImVec2>, label: CPointer<UInt8>, has_close_button_or_unsaved_marker: Bool): Unit {
     return unsafe { igTabItemCalcSize_Str(pOut, label, has_close_button_or_unsaved_marker) }
 }
 
@@ -7859,11 +7859,11 @@ public func _capi_igTabItemCalcSize_WindowPtr(pOut: CPointer<ImVec2>, window: CP
     return unsafe { igTabItemCalcSize_WindowPtr(pOut, window) }
 }
 
-public func _capi_igTabItemEx(tab_bar: CPointer<ImGuiTabBar>, label: CString, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags, docked_window: CPointer<ImGuiWindow>): Bool {
+public func _capi_igTabItemEx(tab_bar: CPointer<ImGuiTabBar>, label: CPointer<UInt8>, p_open: CPointer<Bool>, flags: ImGuiTabItemFlags, docked_window: CPointer<ImGuiWindow>): Bool {
     return unsafe { igTabItemEx(tab_bar, label, p_open, flags, docked_window) }
 }
 
-public func _capi_igTabItemLabelAndCloseButton(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, frame_padding: ImVec2, label: CString, tab_id: ImGuiID, close_button_id: ImGuiID, is_contents_visible: Bool, out_just_closed: CPointer<Bool>, out_text_clipped: CPointer<Bool>): Unit {
+public func _capi_igTabItemLabelAndCloseButton(draw_list: CPointer<ImDrawList>, bb: ImRect, flags: ImGuiTabItemFlags, frame_padding: ImVec2, label: CPointer<UInt8>, tab_id: ImGuiID, close_button_id: ImGuiID, is_contents_visible: Bool, out_just_closed: CPointer<Bool>, out_text_clipped: CPointer<Bool>): Unit {
     return unsafe { igTabItemLabelAndCloseButton(draw_list, bb, flags, frame_padding, label, tab_id, close_button_id, is_contents_visible, out_just_closed, out_text_clipped) }
 }
 
@@ -7951,11 +7951,11 @@ public func _capi_igTableGetColumnIndex(): Int32 {
     return unsafe { igTableGetColumnIndex() }
 }
 
-public func _capi_igTableGetColumnName_Int(column_n: Int32): CString {
+public func _capi_igTableGetColumnName_Int(column_n: Int32): CPointer<UInt8> {
     return unsafe { igTableGetColumnName_Int(column_n) }
 }
 
-public func _capi_igTableGetColumnName_TablePtr(table: CPointer<ImGuiTable>, column_n: Int32): CString {
+public func _capi_igTableGetColumnName_TablePtr(table: CPointer<ImGuiTable>, column_n: Int32): CPointer<UInt8> {
     return unsafe { igTableGetColumnName_TablePtr(table, column_n) }
 }
 
@@ -8007,7 +8007,7 @@ public func _capi_igTableGetSortSpecs(): CPointer<ImGuiTableSortSpecs> {
     return unsafe { igTableGetSortSpecs() }
 }
 
-public func _capi_igTableHeader(label: CString): Unit {
+public func _capi_igTableHeader(label: CPointer<UInt8>): Unit {
     return unsafe { igTableHeader(label) }
 }
 
@@ -8095,7 +8095,7 @@ public func _capi_igTableSettingsFindByID(id: ImGuiID): CPointer<ImGuiTableSetti
     return unsafe { igTableSettingsFindByID(id) }
 }
 
-public func _capi_igTableSetupColumn(label: CString, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit {
+public func _capi_igTableSetupColumn(label: CPointer<UInt8>, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit {
     return unsafe { igTableSetupColumn(label, flags, init_width_or_weight, user_id) }
 }
 
@@ -8135,11 +8135,11 @@ public func _capi_igTempInputIsActive(id: ImGuiID): Bool {
     return unsafe { igTempInputIsActive(id) }
 }
 
-public func _capi_igTempInputScalar(bb: ImRect, id: ImGuiID, label: CString, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CString, p_clamp_min: CPointer<Unit>, p_clamp_max: CPointer<Unit>): Bool {
+public func _capi_igTempInputScalar(bb: ImRect, id: ImGuiID, label: CPointer<UInt8>, data_type: ImGuiDataType, p_data: CPointer<Unit>, format: CPointer<UInt8>, p_clamp_min: CPointer<Unit>, p_clamp_max: CPointer<Unit>): Bool {
     return unsafe { igTempInputScalar(bb, id, label, data_type, p_data, format, p_clamp_min, p_clamp_max) }
 }
 
-public func _capi_igTempInputText(bb: ImRect, id: ImGuiID, label: CString, buf: CString, buf_size: Int32, flags: ImGuiInputTextFlags): Bool {
+public func _capi_igTempInputText(bb: ImRect, id: ImGuiID, label: CPointer<UInt8>, buf: CPointer<UInt8>, buf_size: Int32, flags: ImGuiInputTextFlags): Bool {
     return unsafe { igTempInputText(bb, id, label, buf, buf_size, flags) }
 }
 
@@ -8151,79 +8151,79 @@ public func _capi_igTestShortcutRouting(key_chord: ImGuiKeyChord, owner_id: ImGu
     return unsafe { igTestShortcutRouting(key_chord, owner_id) }
 }
 
-public func _capi_igText(fmt: CString): Unit {
+public func _capi_igText(fmt: CPointer<UInt8>): Unit {
     return unsafe { igText(fmt) }
 }
 
-public func _capi_igTextColored(col: ImVec4, fmt: CString): Unit {
+public func _capi_igTextColored(col: ImVec4, fmt: CPointer<UInt8>): Unit {
     return unsafe { igTextColored(col, fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTextColoredV(col: ImVec4, fmt: CString, args: va_list): Unit { ...
+// public func _capi_igTextColoredV(col: ImVec4, fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_igTextDisabled(fmt: CString): Unit {
+public func _capi_igTextDisabled(fmt: CPointer<UInt8>): Unit {
     return unsafe { igTextDisabled(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTextDisabledV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igTextDisabledV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_igTextEx(text: CString, text_end: CString, flags: ImGuiTextFlags): Unit {
+public func _capi_igTextEx(text: CPointer<UInt8>, text_end: CPointer<UInt8>, flags: ImGuiTextFlags): Unit {
     return unsafe { igTextEx(text, text_end, flags) }
 }
 
-public func _capi_igTextUnformatted(text: CString, text_end: CString): Unit {
+public func _capi_igTextUnformatted(text: CPointer<UInt8>, text_end: CPointer<UInt8>): Unit {
     return unsafe { igTextUnformatted(text, text_end) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTextV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igTextV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
-public func _capi_igTextWrapped(fmt: CString): Unit {
+public func _capi_igTextWrapped(fmt: CPointer<UInt8>): Unit {
     return unsafe { igTextWrapped(fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTextWrappedV(fmt: CString, args: va_list): Unit { ...
+// public func _capi_igTextWrappedV(fmt: CPointer<UInt8>, args: va_list): Unit { ...
 
 public func _capi_igTranslateWindowsInViewport(viewport: CPointer<ImGuiViewportP>, old_pos: ImVec2, new_pos: ImVec2): Unit {
     return unsafe { igTranslateWindowsInViewport(viewport, old_pos, new_pos) }
 }
 
-public func _capi_igTreeNode_Str(label: CString): Bool {
+public func _capi_igTreeNode_Str(label: CPointer<UInt8>): Bool {
     return unsafe { igTreeNode_Str(label) }
 }
 
-public func _capi_igTreeNode_StrStr(str_id: CString, fmt: CString): Bool {
+public func _capi_igTreeNode_StrStr(str_id: CPointer<UInt8>, fmt: CPointer<UInt8>): Bool {
     return unsafe { igTreeNode_StrStr(str_id, fmt) }
 }
 
-public func _capi_igTreeNode_Ptr(ptr_id: CPointer<Unit>, fmt: CString): Bool {
+public func _capi_igTreeNode_Ptr(ptr_id: CPointer<Unit>, fmt: CPointer<UInt8>): Bool {
     return unsafe { igTreeNode_Ptr(ptr_id, fmt) }
 }
 
-public func _capi_igTreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CString, label_end: CString): Bool {
+public func _capi_igTreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CPointer<UInt8>, label_end: CPointer<UInt8>): Bool {
     return unsafe { igTreeNodeBehavior(id, flags, label, label_end) }
 }
 
-public func _capi_igTreeNodeEx_Str(label: CString, flags: ImGuiTreeNodeFlags): Bool {
+public func _capi_igTreeNodeEx_Str(label: CPointer<UInt8>, flags: ImGuiTreeNodeFlags): Bool {
     return unsafe { igTreeNodeEx_Str(label, flags) }
 }
 
-public func _capi_igTreeNodeEx_StrStr(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString): Bool {
+public func _capi_igTreeNodeEx_StrStr(str_id: CPointer<UInt8>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>): Bool {
     return unsafe { igTreeNodeEx_StrStr(str_id, flags, fmt) }
 }
 
-public func _capi_igTreeNodeEx_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString): Bool {
+public func _capi_igTreeNodeEx_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>): Bool {
     return unsafe { igTreeNodeEx_Ptr(ptr_id, flags, fmt) }
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTreeNodeExV_Str(str_id: CString, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool { ...
+// public func _capi_igTreeNodeExV_Str(str_id: CPointer<UInt8>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, args: va_list): Bool { ...
 
 // Cangjie does not support `va_list`
-// public func _capi_igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CString, args: va_list): Bool { ...
+// public func _capi_igTreeNodeExV_Ptr(ptr_id: CPointer<Unit>, flags: ImGuiTreeNodeFlags, fmt: CPointer<UInt8>, args: va_list): Bool { ...
 
 public func _capi_igTreeNodeSetOpen(id: ImGuiID, `open`: Bool): Unit {
     return unsafe { igTreeNodeSetOpen(id, `open`) }
@@ -8234,16 +8234,16 @@ public func _capi_igTreeNodeUpdateNextOpen(id: ImGuiID, flags: ImGuiTreeNodeFlag
 }
 
 // Cangjie does not support `va_list`
-// public func _capi_igTreeNodeV_Str(str_id: CString, fmt: CString, args: va_list): Bool { ...
+// public func _capi_igTreeNodeV_Str(str_id: CPointer<UInt8>, fmt: CPointer<UInt8>, args: va_list): Bool { ...
 
 // Cangjie does not support `va_list`
-// public func _capi_igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CString, args: va_list): Bool { ...
+// public func _capi_igTreeNodeV_Ptr(ptr_id: CPointer<Unit>, fmt: CPointer<UInt8>, args: va_list): Bool { ...
 
 public func _capi_igTreePop(): Unit {
     return unsafe { igTreePop() }
 }
 
-public func _capi_igTreePush_Str(str_id: CString): Unit {
+public func _capi_igTreePush_Str(str_id: CPointer<UInt8>): Unit {
     return unsafe { igTreePush_Str(str_id) }
 }
 
@@ -8255,15 +8255,15 @@ public func _capi_igTreePushOverrideID(id: ImGuiID): Unit {
     return unsafe { igTreePushOverrideID(id) }
 }
 
-public func _capi_igTypingSelectFindBestLeadingMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>): Int32 {
+public func _capi_igTypingSelectFindBestLeadingMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>): Int32 {
     return unsafe { igTypingSelectFindBestLeadingMatch(req, items_count, get_item_name_func, user_data) }
 }
 
-public func _capi_igTypingSelectFindMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32 {
+public func _capi_igTypingSelectFindMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32 {
     return unsafe { igTypingSelectFindMatch(req, items_count, get_item_name_func, user_data, nav_item_idx) }
 }
 
-public func _capi_igTypingSelectFindNextSingleCharMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CString>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32 {
+public func _capi_igTypingSelectFindNextSingleCharMatch(req: CPointer<ImGuiTypingSelectRequest>, items_count: Int32, get_item_name_func: CFunc<(arg1: CPointer<Unit>, arg2: Int32) -> CPointer<UInt8>>, user_data: CPointer<Unit>, nav_item_idx: Int32): Int32 {
     return unsafe { igTypingSelectFindNextSingleCharMatch(req, items_count, get_item_name_func, user_data, nav_item_idx) }
 }
 
@@ -8299,31 +8299,31 @@ public func _capi_igUpdateWindowSkipRefresh(window: CPointer<ImGuiWindow>): Unit
     return unsafe { igUpdateWindowSkipRefresh(window) }
 }
 
-public func _capi_igVSliderFloat(label: CString, size: ImVec2, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igVSliderFloat(label: CPointer<UInt8>, size: ImVec2, v: CPointer<Float32>, v_min: Float32, v_max: Float32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igVSliderFloat(label, size, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igVSliderInt(label: CString, size: ImVec2, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igVSliderInt(label: CPointer<UInt8>, size: ImVec2, v: CPointer<Int32>, v_min: Int32, v_max: Int32, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igVSliderInt(label, size, v, v_min, v_max, format, flags) }
 }
 
-public func _capi_igVSliderScalar(label: CString, size: ImVec2, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CString, flags: ImGuiSliderFlags): Bool {
+public func _capi_igVSliderScalar(label: CPointer<UInt8>, size: ImVec2, data_type: ImGuiDataType, p_data: CPointer<Unit>, p_min: CPointer<Unit>, p_max: CPointer<Unit>, format: CPointer<UInt8>, flags: ImGuiSliderFlags): Bool {
     return unsafe { igVSliderScalar(label, size, data_type, p_data, p_min, p_max, format, flags) }
 }
 
-public func _capi_igValue_Bool(prefix: CString, b: Bool): Unit {
+public func _capi_igValue_Bool(prefix: CPointer<UInt8>, b: Bool): Unit {
     return unsafe { igValue_Bool(prefix, b) }
 }
 
-public func _capi_igValue_Int(prefix: CString, v: Int32): Unit {
+public func _capi_igValue_Int(prefix: CPointer<UInt8>, v: Int32): Unit {
     return unsafe { igValue_Int(prefix, v) }
 }
 
-public func _capi_igValue_Uint(prefix: CString, v: Int32): Unit {
+public func _capi_igValue_Uint(prefix: CPointer<UInt8>, v: Int32): Unit {
     return unsafe { igValue_Uint(prefix, v) }
 }
 
-public func _capi_igValue_Float(prefix: CString, v: Float32, float_format: CString): Unit {
+public func _capi_igValue_Float(prefix: CPointer<UInt8>, v: Float32, float_format: CPointer<UInt8>): Unit {
     return unsafe { igValue_Float(prefix, v, float_format) }
 }
 

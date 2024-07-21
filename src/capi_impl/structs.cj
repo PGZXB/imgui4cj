@@ -103,7 +103,7 @@ public struct ImDrawDataBuilder {
 // struct ImDrawList
 @C
 public struct ImDrawList {
-    public ImDrawList(public var CmdBuffer!: ImVector_ImDrawCmd, public var IdxBuffer!: ImVector_ImDrawIdx, public var VtxBuffer!: ImVector_ImDrawVert, public var Flags!: ImDrawListFlags, public var _VtxCurrentIdx!: Int32, public var _Data!: CPointer<ImDrawListSharedData>, public var _VtxWritePtr!: CPointer<ImDrawVert>, public var _IdxWritePtr!: CPointer<ImDrawIdx>, public var _Path!: ImVector_ImVec2, public var _CmdHeader!: ImDrawCmdHeader, public var _Splitter!: ImDrawListSplitter, public var _ClipRectStack!: ImVector_ImVec4, public var _TextureIdStack!: ImVector_ImTextureID, public var _FringeScale!: Float32, public var _OwnerName!: CString) {
+    public ImDrawList(public var CmdBuffer!: ImVector_ImDrawCmd, public var IdxBuffer!: ImVector_ImDrawIdx, public var VtxBuffer!: ImVector_ImDrawVert, public var Flags!: ImDrawListFlags, public var _VtxCurrentIdx!: Int32, public var _Data!: CPointer<ImDrawListSharedData>, public var _VtxWritePtr!: CPointer<ImDrawVert>, public var _IdxWritePtr!: CPointer<ImDrawIdx>, public var _Path!: ImVector_ImVec2, public var _CmdHeader!: ImDrawCmdHeader, public var _Splitter!: ImDrawListSplitter, public var _ClipRectStack!: ImVector_ImVec4, public var _TextureIdStack!: ImVector_ImTextureID, public var _FringeScale!: Float32, public var _OwnerName!: CPointer<UInt8>) {
     }
 
     public init() {
@@ -121,7 +121,7 @@ public struct ImDrawList {
         _ClipRectStack = ImVector_ImVec4()
         _TextureIdStack = ImVector_ImTextureID()
         _FringeScale = 0.0f32
-        _OwnerName = CString(CPointer<UInt8>())
+        _OwnerName = CPointer<UInt8>()
     }
 }
 
@@ -351,14 +351,14 @@ public struct ImGuiContextHook {
 // struct ImGuiDataTypeInfo
 @C
 public struct ImGuiDataTypeInfo {
-    public ImGuiDataTypeInfo(public var Size!: UIntNative, public var Name!: CString, public var PrintFmt!: CString, public var ScanFmt!: CString) {
+    public ImGuiDataTypeInfo(public var Size!: UIntNative, public var Name!: CPointer<UInt8>, public var PrintFmt!: CPointer<UInt8>, public var ScanFmt!: CPointer<UInt8>) {
     }
 
     public init() {
         Size = 0
-        Name = CString(CPointer<UInt8>())
-        PrintFmt = CString(CPointer<UInt8>())
-        ScanFmt = CString(CPointer<UInt8>())
+        Name = CPointer<UInt8>()
+        PrintFmt = CPointer<UInt8>()
+        ScanFmt = CPointer<UInt8>()
     }
 }
 
@@ -481,7 +481,7 @@ public struct ImGuiIDStackTool {
 // struct ImGuiIO
 @C
 public struct ImGuiIO {
-    public ImGuiIO(public var ConfigFlags!: ImGuiConfigFlags, public var BackendFlags!: ImGuiBackendFlags, public var DisplaySize!: ImVec2, public var DeltaTime!: Float32, public var IniSavingRate!: Float32, public var IniFilename!: CString, public var LogFilename!: CString, public var UserData!: CPointer<Unit>, public var Fonts!: CPointer<ImFontAtlas>, public var FontGlobalScale!: Float32, public var FontAllowUserScaling!: Bool, public var FontDefault!: CPointer<ImFont>, public var DisplayFramebufferScale!: ImVec2, public var ConfigDockingNoSplit!: Bool, public var ConfigDockingWithShift!: Bool, public var ConfigDockingAlwaysTabBar!: Bool, public var ConfigDockingTransparentPayload!: Bool, public var ConfigViewportsNoAutoMerge!: Bool, public var ConfigViewportsNoTaskBarIcon!: Bool, public var ConfigViewportsNoDecoration!: Bool, public var ConfigViewportsNoDefaultParent!: Bool, public var MouseDrawCursor!: Bool, public var ConfigMacOSXBehaviors!: Bool, public var ConfigInputTrickleEventQueue!: Bool, public var ConfigInputTextCursorBlink!: Bool, public var ConfigInputTextEnterKeepActive!: Bool, public var ConfigDragClickToInputText!: Bool, public var ConfigWindowsResizeFromEdges!: Bool, public var ConfigWindowsMoveFromTitleBarOnly!: Bool, public var ConfigMemoryCompactTimer!: Float32, public var MouseDoubleClickTime!: Float32, public var MouseDoubleClickMaxDist!: Float32, public var MouseDragThreshold!: Float32, public var KeyRepeatDelay!: Float32, public var KeyRepeatRate!: Float32, public var ConfigDebugIsDebuggerPresent!: Bool, public var ConfigDebugBeginReturnValueOnce!: Bool, public var ConfigDebugBeginReturnValueLoop!: Bool, public var ConfigDebugIgnoreFocusLoss!: Bool, public var ConfigDebugIniSettings!: Bool, public var BackendPlatformName!: CString, public var BackendRendererName!: CString, public var BackendPlatformUserData!: CPointer<Unit>, public var BackendRendererUserData!: CPointer<Unit>, public var BackendLanguageUserData!: CPointer<Unit>, public var GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CString>, public var SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit>, public var ClipboardUserData!: CPointer<Unit>, public var SetPlatformImeDataFn!: CFunc<(viewport: CPointer<ImGuiViewport>, data: CPointer<ImGuiPlatformImeData>) -> Unit>, public var PlatformLocaleDecimalPoint!: ImWchar, public var WantCaptureMouse!: Bool, public var WantCaptureKeyboard!: Bool, public var WantTextInput!: Bool, public var WantSetMousePos!: Bool, public var WantSaveIniSettings!: Bool, public var NavActive!: Bool, public var NavVisible!: Bool, public var Framerate!: Float32, public var MetricsRenderVertices!: Int32, public var MetricsRenderIndices!: Int32, public var MetricsRenderWindows!: Int32, public var MetricsActiveWindows!: Int32, public var MouseDelta!: ImVec2, public var Ctx!: CPointer<ImGuiContext>, public var MousePos!: ImVec2, public var MouseDown!: VArray<Bool, $5>, public var MouseWheel!: Float32, public var MouseWheelH!: Float32, public var MouseSource!: ImGuiMouseSource, public var MouseHoveredViewport!: ImGuiID, public var KeyCtrl!: Bool, public var KeyShift!: Bool, public var KeyAlt!: Bool, public var KeySuper!: Bool, public var KeyMods!: ImGuiKeyChord, public var KeysData!: VArray<ImGuiKeyData, $154>, public var WantCaptureMouseUnlessPopupClose!: Bool, public var MousePosPrev!: ImVec2, public var MouseClickedPos!: VArray<ImVec2, $5>, public var MouseClickedTime!: VArray<Float64, $5>, public var MouseClicked!: VArray<Bool, $5>, public var MouseDoubleClicked!: VArray<Bool, $5>, public var MouseClickedCount!: VArray<ImU16, $5>, public var MouseClickedLastCount!: VArray<ImU16, $5>, public var MouseReleased!: VArray<Bool, $5>, public var MouseDownOwned!: VArray<Bool, $5>, public var MouseDownOwnedUnlessPopupClose!: VArray<Bool, $5>, public var MouseWheelRequestAxisSwap!: Bool, public var MouseCtrlLeftAsRightClick!: Bool, public var MouseDownDuration!: VArray<Float32, $5>, public var MouseDownDurationPrev!: VArray<Float32, $5>, public var MouseDragMaxDistanceAbs!: VArray<ImVec2, $5>, public var MouseDragMaxDistanceSqr!: VArray<Float32, $5>, public var PenPressure!: Float32, public var AppFocusLost!: Bool, public var AppAcceptingEvents!: Bool, public var BackendUsingLegacyKeyArrays!: ImS8, public var BackendUsingLegacyNavInputArray!: Bool, public var InputQueueSurrogate!: ImWchar16, public var InputQueueCharacters!: ImVector_ImWchar) {
+    public ImGuiIO(public var ConfigFlags!: ImGuiConfigFlags, public var BackendFlags!: ImGuiBackendFlags, public var DisplaySize!: ImVec2, public var DeltaTime!: Float32, public var IniSavingRate!: Float32, public var IniFilename!: CPointer<UInt8>, public var LogFilename!: CPointer<UInt8>, public var UserData!: CPointer<Unit>, public var Fonts!: CPointer<ImFontAtlas>, public var FontGlobalScale!: Float32, public var FontAllowUserScaling!: Bool, public var FontDefault!: CPointer<ImFont>, public var DisplayFramebufferScale!: ImVec2, public var ConfigDockingNoSplit!: Bool, public var ConfigDockingWithShift!: Bool, public var ConfigDockingAlwaysTabBar!: Bool, public var ConfigDockingTransparentPayload!: Bool, public var ConfigViewportsNoAutoMerge!: Bool, public var ConfigViewportsNoTaskBarIcon!: Bool, public var ConfigViewportsNoDecoration!: Bool, public var ConfigViewportsNoDefaultParent!: Bool, public var MouseDrawCursor!: Bool, public var ConfigMacOSXBehaviors!: Bool, public var ConfigInputTrickleEventQueue!: Bool, public var ConfigInputTextCursorBlink!: Bool, public var ConfigInputTextEnterKeepActive!: Bool, public var ConfigDragClickToInputText!: Bool, public var ConfigWindowsResizeFromEdges!: Bool, public var ConfigWindowsMoveFromTitleBarOnly!: Bool, public var ConfigMemoryCompactTimer!: Float32, public var MouseDoubleClickTime!: Float32, public var MouseDoubleClickMaxDist!: Float32, public var MouseDragThreshold!: Float32, public var KeyRepeatDelay!: Float32, public var KeyRepeatRate!: Float32, public var ConfigDebugIsDebuggerPresent!: Bool, public var ConfigDebugBeginReturnValueOnce!: Bool, public var ConfigDebugBeginReturnValueLoop!: Bool, public var ConfigDebugIgnoreFocusLoss!: Bool, public var ConfigDebugIniSettings!: Bool, public var BackendPlatformName!: CPointer<UInt8>, public var BackendRendererName!: CPointer<UInt8>, public var BackendPlatformUserData!: CPointer<Unit>, public var BackendRendererUserData!: CPointer<Unit>, public var BackendLanguageUserData!: CPointer<Unit>, public var GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>, public var SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>, public var ClipboardUserData!: CPointer<Unit>, public var SetPlatformImeDataFn!: CFunc<(viewport: CPointer<ImGuiViewport>, data: CPointer<ImGuiPlatformImeData>) -> Unit>, public var PlatformLocaleDecimalPoint!: ImWchar, public var WantCaptureMouse!: Bool, public var WantCaptureKeyboard!: Bool, public var WantTextInput!: Bool, public var WantSetMousePos!: Bool, public var WantSaveIniSettings!: Bool, public var NavActive!: Bool, public var NavVisible!: Bool, public var Framerate!: Float32, public var MetricsRenderVertices!: Int32, public var MetricsRenderIndices!: Int32, public var MetricsRenderWindows!: Int32, public var MetricsActiveWindows!: Int32, public var MouseDelta!: ImVec2, public var Ctx!: CPointer<ImGuiContext>, public var MousePos!: ImVec2, public var MouseDown!: VArray<Bool, $5>, public var MouseWheel!: Float32, public var MouseWheelH!: Float32, public var MouseSource!: ImGuiMouseSource, public var MouseHoveredViewport!: ImGuiID, public var KeyCtrl!: Bool, public var KeyShift!: Bool, public var KeyAlt!: Bool, public var KeySuper!: Bool, public var KeyMods!: ImGuiKeyChord, public var KeysData!: VArray<ImGuiKeyData, $154>, public var WantCaptureMouseUnlessPopupClose!: Bool, public var MousePosPrev!: ImVec2, public var MouseClickedPos!: VArray<ImVec2, $5>, public var MouseClickedTime!: VArray<Float64, $5>, public var MouseClicked!: VArray<Bool, $5>, public var MouseDoubleClicked!: VArray<Bool, $5>, public var MouseClickedCount!: VArray<ImU16, $5>, public var MouseClickedLastCount!: VArray<ImU16, $5>, public var MouseReleased!: VArray<Bool, $5>, public var MouseDownOwned!: VArray<Bool, $5>, public var MouseDownOwnedUnlessPopupClose!: VArray<Bool, $5>, public var MouseWheelRequestAxisSwap!: Bool, public var MouseCtrlLeftAsRightClick!: Bool, public var MouseDownDuration!: VArray<Float32, $5>, public var MouseDownDurationPrev!: VArray<Float32, $5>, public var MouseDragMaxDistanceAbs!: VArray<ImVec2, $5>, public var MouseDragMaxDistanceSqr!: VArray<Float32, $5>, public var PenPressure!: Float32, public var AppFocusLost!: Bool, public var AppAcceptingEvents!: Bool, public var BackendUsingLegacyKeyArrays!: ImS8, public var BackendUsingLegacyNavInputArray!: Bool, public var InputQueueSurrogate!: ImWchar16, public var InputQueueCharacters!: ImVector_ImWchar) {
     }
 
     public init() {
@@ -490,8 +490,8 @@ public struct ImGuiIO {
         DisplaySize = ImVec2()
         DeltaTime = 0.0f32
         IniSavingRate = 0.0f32
-        IniFilename = CString(CPointer<UInt8>())
-        LogFilename = CString(CPointer<UInt8>())
+        IniFilename = CPointer<UInt8>()
+        LogFilename = CPointer<UInt8>()
         UserData = CPointer<Unit>()
         Fonts = CPointer<ImFontAtlas>()
         FontGlobalScale = 0.0f32
@@ -525,13 +525,13 @@ public struct ImGuiIO {
         ConfigDebugBeginReturnValueLoop = false
         ConfigDebugIgnoreFocusLoss = false
         ConfigDebugIniSettings = false
-        BackendPlatformName = CString(CPointer<UInt8>())
-        BackendRendererName = CString(CPointer<UInt8>())
+        BackendPlatformName = CPointer<UInt8>()
+        BackendRendererName = CPointer<UInt8>()
         BackendPlatformUserData = CPointer<Unit>()
         BackendRendererUserData = CPointer<Unit>()
         BackendLanguageUserData = CPointer<Unit>()
-        GetClipboardTextFn = CFunc<(user_data: CPointer<Unit>) -> CString>(CPointer<Unit>())
-        SetClipboardTextFn = CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit>(CPointer<Unit>())
+        GetClipboardTextFn = CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>(CPointer<Unit>())
+        SetClipboardTextFn = CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>(CPointer<Unit>())
         ClipboardUserData = CPointer<Unit>()
         SetPlatformImeDataFn = CFunc<(viewport: CPointer<ImGuiViewport>, data: CPointer<ImGuiPlatformImeData>) -> Unit>(CPointer<Unit>())
         PlatformLocaleDecimalPoint = 0
@@ -676,7 +676,7 @@ public struct ImGuiInputEventText {
 // struct ImGuiInputTextCallbackData
 @C
 public struct ImGuiInputTextCallbackData {
-    public ImGuiInputTextCallbackData(public var Ctx!: CPointer<ImGuiContext>, public var EventFlag!: ImGuiInputTextFlags, public var Flags!: ImGuiInputTextFlags, public var UserData!: CPointer<Unit>, public var EventChar!: ImWchar, public var EventKey!: ImGuiKey, public var Buf!: CString, public var BufTextLen!: Int32, public var BufSize!: Int32, public var BufDirty!: Bool, public var CursorPos!: Int32, public var SelectionStart!: Int32, public var SelectionEnd!: Int32) {
+    public ImGuiInputTextCallbackData(public var Ctx!: CPointer<ImGuiContext>, public var EventFlag!: ImGuiInputTextFlags, public var Flags!: ImGuiInputTextFlags, public var UserData!: CPointer<Unit>, public var EventChar!: ImWchar, public var EventKey!: ImGuiKey, public var Buf!: CPointer<UInt8>, public var BufTextLen!: Int32, public var BufSize!: Int32, public var BufDirty!: Bool, public var CursorPos!: Int32, public var SelectionStart!: Int32, public var SelectionEnd!: Int32) {
     }
 
     public init() {
@@ -686,7 +686,7 @@ public struct ImGuiInputTextCallbackData {
         UserData = CPointer<Unit>()
         EventChar = 0
         EventKey = 0
-        Buf = CString(CPointer<UInt8>())
+        Buf = CPointer<UInt8>()
         BufTextLen = 0
         BufSize = 0
         BufDirty = false
@@ -862,12 +862,12 @@ public struct ImGuiListClipperRange {
 // struct ImGuiLocEntry
 @C
 public struct ImGuiLocEntry {
-    public ImGuiLocEntry(public var Key!: ImGuiLocKey, public var Text!: CString) {
+    public ImGuiLocEntry(public var Key!: ImGuiLocKey, public var Text!: CPointer<UInt8>) {
     }
 
     public init() {
         Key = 0
-        Text = CString(CPointer<UInt8>())
+        Text = CPointer<UInt8>()
     }
 }
 
@@ -1069,7 +1069,7 @@ public struct ImGuiPayload {
 // struct ImGuiPlatformIO
 @C
 public struct ImGuiPlatformIO {
-    public ImGuiPlatformIO(public var Platform_CreateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_DestroyWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_ShowWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_SetWindowPos!: CFunc<(vp: CPointer<ImGuiViewport>, pos: ImVec2) -> Unit>, public var Platform_GetWindowPos!: CFunc<(vp: CPointer<ImGuiViewport>) -> ImVec2>, public var Platform_SetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>, size: ImVec2) -> Unit>, public var Platform_GetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>) -> ImVec2>, public var Platform_SetWindowFocus!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_GetWindowFocus!: CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>, public var Platform_GetWindowMinimized!: CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>, public var Platform_SetWindowTitle!: CFunc<(vp: CPointer<ImGuiViewport>, str: CString) -> Unit>, public var Platform_SetWindowAlpha!: CFunc<(vp: CPointer<ImGuiViewport>, alpha: Float32) -> Unit>, public var Platform_UpdateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_RenderWindow!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Platform_SwapBuffers!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<ImGuiViewport>) -> Float32>, public var Platform_OnChangedViewport!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_CreateVkSurface!: CFunc<(vp: CPointer<ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, public var Renderer_CreateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Renderer_DestroyWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Renderer_SetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>, size: ImVec2) -> Unit>, public var Renderer_RenderWindow!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Renderer_SwapBuffers!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Monitors!: ImVector_ImGuiPlatformMonitor, public var Viewports!: ImVector_ImGuiViewportPtr) {
+    public ImGuiPlatformIO(public var Platform_CreateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_DestroyWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_ShowWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_SetWindowPos!: CFunc<(vp: CPointer<ImGuiViewport>, pos: ImVec2) -> Unit>, public var Platform_GetWindowPos!: CFunc<(vp: CPointer<ImGuiViewport>) -> ImVec2>, public var Platform_SetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>, size: ImVec2) -> Unit>, public var Platform_GetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>) -> ImVec2>, public var Platform_SetWindowFocus!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_GetWindowFocus!: CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>, public var Platform_GetWindowMinimized!: CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>, public var Platform_SetWindowTitle!: CFunc<(vp: CPointer<ImGuiViewport>, str: CPointer<UInt8>) -> Unit>, public var Platform_SetWindowAlpha!: CFunc<(vp: CPointer<ImGuiViewport>, alpha: Float32) -> Unit>, public var Platform_UpdateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_RenderWindow!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Platform_SwapBuffers!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<ImGuiViewport>) -> Float32>, public var Platform_OnChangedViewport!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Platform_CreateVkSurface!: CFunc<(vp: CPointer<ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, public var Renderer_CreateWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Renderer_DestroyWindow!: CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>, public var Renderer_SetWindowSize!: CFunc<(vp: CPointer<ImGuiViewport>, size: ImVec2) -> Unit>, public var Renderer_RenderWindow!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Renderer_SwapBuffers!: CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, public var Monitors!: ImVector_ImGuiPlatformMonitor, public var Viewports!: ImVector_ImGuiViewportPtr) {
     }
 
     public init() {
@@ -1083,7 +1083,7 @@ public struct ImGuiPlatformIO {
         Platform_SetWindowFocus = CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>(CPointer<Unit>())
         Platform_GetWindowFocus = CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>(CPointer<Unit>())
         Platform_GetWindowMinimized = CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>(CPointer<Unit>())
-        Platform_SetWindowTitle = CFunc<(vp: CPointer<ImGuiViewport>, str: CString) -> Unit>(CPointer<Unit>())
+        Platform_SetWindowTitle = CFunc<(vp: CPointer<ImGuiViewport>, str: CPointer<UInt8>) -> Unit>(CPointer<Unit>())
         Platform_SetWindowAlpha = CFunc<(vp: CPointer<ImGuiViewport>, alpha: Float32) -> Unit>(CPointer<Unit>())
         Platform_UpdateWindow = CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>(CPointer<Unit>())
         Platform_RenderWindow = CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>(CPointer<Unit>())
@@ -1163,16 +1163,16 @@ public struct ImGuiPtrOrIndex {
 // struct ImGuiSettingsHandler
 @C
 public struct ImGuiSettingsHandler {
-    public ImGuiSettingsHandler(public var TypeName!: CString, public var TypeHash!: ImGuiID, public var ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>>, public var ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit>, public var ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, out_buf: CPointer<ImGuiTextBuffer>) -> Unit>, public var UserData!: CPointer<Unit>) {
+    public ImGuiSettingsHandler(public var TypeName!: CPointer<UInt8>, public var TypeHash!: ImGuiID, public var ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>, public var ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>, public var ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>, public var WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, out_buf: CPointer<ImGuiTextBuffer>) -> Unit>, public var UserData!: CPointer<Unit>) {
     }
 
     public init() {
-        TypeName = CString(CPointer<UInt8>())
+        TypeName = CPointer<UInt8>()
         TypeHash = 0
         ClearAllFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>(CPointer<Unit>())
         ReadInitFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>(CPointer<Unit>())
-        ReadOpenFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>>(CPointer<Unit>())
-        ReadLineFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit>(CPointer<Unit>())
+        ReadOpenFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>(CPointer<Unit>())
+        ReadLineFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>(CPointer<Unit>())
         ApplyAllFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>(CPointer<Unit>())
         WriteAllFn = CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, out_buf: CPointer<ImGuiTextBuffer>) -> Unit>(CPointer<Unit>())
         UserData = CPointer<Unit>()
@@ -1513,25 +1513,25 @@ public struct ImGuiTextIndex {
 // struct ImGuiTextRange
 @C
 public struct ImGuiTextRange {
-    public ImGuiTextRange(public var b!: CString, public var e!: CString) {
+    public ImGuiTextRange(public var b!: CPointer<UInt8>, public var e!: CPointer<UInt8>) {
     }
 
     public init() {
-        b = CString(CPointer<UInt8>())
-        e = CString(CPointer<UInt8>())
+        b = CPointer<UInt8>()
+        e = CPointer<UInt8>()
     }
 }
 
 // struct ImGuiTypingSelectRequest
 @C
 public struct ImGuiTypingSelectRequest {
-    public ImGuiTypingSelectRequest(public var Flags!: ImGuiTypingSelectFlags, public var SearchBufferLen!: Int32, public var SearchBuffer!: CString, public var SelectRequest!: Bool, public var SingleCharMode!: Bool, public var SingleCharSize!: ImS8) {
+    public ImGuiTypingSelectRequest(public var Flags!: ImGuiTypingSelectFlags, public var SearchBufferLen!: Int32, public var SearchBuffer!: CPointer<UInt8>, public var SelectRequest!: Bool, public var SingleCharMode!: Bool, public var SingleCharSize!: ImS8) {
     }
 
     public init() {
         Flags = 0
         SearchBufferLen = 0
-        SearchBuffer = CString(CPointer<UInt8>())
+        SearchBuffer = CPointer<UInt8>()
         SelectRequest = false
         SingleCharMode = false
         SingleCharSize = 0
@@ -2594,26 +2594,26 @@ public struct ImVector_ImWchar {
 // struct ImVector_char
 @C
 public struct ImVector_char {
-    public ImVector_char(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CString) {
+    public ImVector_char(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<UInt8>) {
     }
 
     public init() {
         Size = 0
         Capacity = 0
-        Data = CString(CPointer<UInt8>())
+        Data = CPointer<UInt8>()
     }
 }
 
 // struct ImVector_const_charPtr
 @C
 public struct ImVector_const_charPtr {
-    public ImVector_const_charPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CString>) {
+    public ImVector_const_charPtr(public var Size!: Int32, public var Capacity!: Int32, public var Data!: CPointer<CPointer<UInt8>>) {
     }
 
     public init() {
         Size = 0
         Capacity = 0
-        Data = CPointer<CString>()
+        Data = CPointer<CPointer<UInt8>>()
     }
 }
 

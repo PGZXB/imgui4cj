@@ -607,7 +607,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
 
     public mut prop _OwnerName: String {
         get() {
-            return unsafe { capi.access_ImDrawList__OwnerName(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImDrawList__OwnerName(pointer).read()).toString() }
         }
 
         set(value) {
@@ -2037,7 +2037,7 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
 
     public mut prop Name: String {
         get() {
-            return unsafe { capi.access_ImGuiDataTypeInfo_Name(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiDataTypeInfo_Name(pointer).read()).toString() }
         }
 
         set(value) {
@@ -2047,7 +2047,7 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
 
     public mut prop PrintFmt: String {
         get() {
-            return unsafe { capi.access_ImGuiDataTypeInfo_PrintFmt(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiDataTypeInfo_PrintFmt(pointer).read()).toString() }
         }
 
         set(value) {
@@ -2057,7 +2057,7 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
 
     public mut prop ScanFmt: String {
         get() {
-            return unsafe { capi.access_ImGuiDataTypeInfo_ScanFmt(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiDataTypeInfo_ScanFmt(pointer).read()).toString() }
         }
 
         set(value) {
@@ -2630,7 +2630,7 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
     }
 }
 public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
-    public init(ConfigFlags!: ImGuiConfigFlags, BackendFlags!: ImGuiBackendFlags, DisplaySize!: ImVec2, DeltaTime!: Float32, IniSavingRate!: Float32, IniFilename!: String, LogFilename!: String, UserData!: Value<Unit>, Fonts!: ImFontAtlas, FontGlobalScale!: Float32, FontAllowUserScaling!: Bool, FontDefault!: ImFont, DisplayFramebufferScale!: ImVec2, ConfigDockingNoSplit!: Bool, ConfigDockingWithShift!: Bool, ConfigDockingAlwaysTabBar!: Bool, ConfigDockingTransparentPayload!: Bool, ConfigViewportsNoAutoMerge!: Bool, ConfigViewportsNoTaskBarIcon!: Bool, ConfigViewportsNoDecoration!: Bool, ConfigViewportsNoDefaultParent!: Bool, MouseDrawCursor!: Bool, ConfigMacOSXBehaviors!: Bool, ConfigInputTrickleEventQueue!: Bool, ConfigInputTextCursorBlink!: Bool, ConfigInputTextEnterKeepActive!: Bool, ConfigDragClickToInputText!: Bool, ConfigWindowsResizeFromEdges!: Bool, ConfigWindowsMoveFromTitleBarOnly!: Bool, ConfigMemoryCompactTimer!: Float32, MouseDoubleClickTime!: Float32, MouseDoubleClickMaxDist!: Float32, MouseDragThreshold!: Float32, KeyRepeatDelay!: Float32, KeyRepeatRate!: Float32, ConfigDebugIsDebuggerPresent!: Bool, ConfigDebugBeginReturnValueOnce!: Bool, ConfigDebugBeginReturnValueLoop!: Bool, ConfigDebugIgnoreFocusLoss!: Bool, ConfigDebugIniSettings!: Bool, BackendPlatformName!: String, BackendRendererName!: String, BackendPlatformUserData!: Value<Unit>, BackendRendererUserData!: Value<Unit>, BackendLanguageUserData!: Value<Unit>, GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CString>, SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit>, ClipboardUserData!: Value<Unit>, SetPlatformImeDataFn!: CFunc<(viewport: CPointer<capi.ImGuiViewport>, data: CPointer<capi.ImGuiPlatformImeData>) -> Unit>, PlatformLocaleDecimalPoint!: ImWchar, WantCaptureMouse!: Bool, WantCaptureKeyboard!: Bool, WantTextInput!: Bool, WantSetMousePos!: Bool, WantSaveIniSettings!: Bool, NavActive!: Bool, NavVisible!: Bool, Framerate!: Float32, MetricsRenderVertices!: Int32, MetricsRenderIndices!: Int32, MetricsRenderWindows!: Int32, MetricsActiveWindows!: Int32, MouseDelta!: ImVec2, Ctx!: Value<ImGuiContext>, MousePos!: ImVec2, MouseDown!: Value<Bool>, MouseWheel!: Float32, MouseWheelH!: Float32, MouseSource!: ImGuiMouseSource, MouseHoveredViewport!: ImGuiID, KeyCtrl!: Bool, KeyShift!: Bool, KeyAlt!: Bool, KeySuper!: Bool, KeyMods!: ImGuiKeyChord, KeysData!: ImGuiKeyData, WantCaptureMouseUnlessPopupClose!: Bool, MousePosPrev!: ImVec2, MouseClickedPos!: ImVec2, MouseClickedTime!: Value<Float64>, MouseClicked!: Value<Bool>, MouseDoubleClicked!: Value<Bool>, MouseClickedCount!: Value<ImU16>, MouseClickedLastCount!: Value<ImU16>, MouseReleased!: Value<Bool>, MouseDownOwned!: Value<Bool>, MouseDownOwnedUnlessPopupClose!: Value<Bool>, MouseWheelRequestAxisSwap!: Bool, MouseCtrlLeftAsRightClick!: Bool, MouseDownDuration!: Value<Float32>, MouseDownDurationPrev!: Value<Float32>, MouseDragMaxDistanceAbs!: ImVec2, MouseDragMaxDistanceSqr!: Value<Float32>, PenPressure!: Float32, AppFocusLost!: Bool, AppAcceptingEvents!: Bool, BackendUsingLegacyKeyArrays!: ImS8, BackendUsingLegacyNavInputArray!: Bool, InputQueueSurrogate!: ImWchar16, InputQueueCharacters!: ImVector_ImWchar) {
+    public init(ConfigFlags!: ImGuiConfigFlags, BackendFlags!: ImGuiBackendFlags, DisplaySize!: ImVec2, DeltaTime!: Float32, IniSavingRate!: Float32, IniFilename!: String, LogFilename!: String, UserData!: Value<Unit>, Fonts!: ImFontAtlas, FontGlobalScale!: Float32, FontAllowUserScaling!: Bool, FontDefault!: ImFont, DisplayFramebufferScale!: ImVec2, ConfigDockingNoSplit!: Bool, ConfigDockingWithShift!: Bool, ConfigDockingAlwaysTabBar!: Bool, ConfigDockingTransparentPayload!: Bool, ConfigViewportsNoAutoMerge!: Bool, ConfigViewportsNoTaskBarIcon!: Bool, ConfigViewportsNoDecoration!: Bool, ConfigViewportsNoDefaultParent!: Bool, MouseDrawCursor!: Bool, ConfigMacOSXBehaviors!: Bool, ConfigInputTrickleEventQueue!: Bool, ConfigInputTextCursorBlink!: Bool, ConfigInputTextEnterKeepActive!: Bool, ConfigDragClickToInputText!: Bool, ConfigWindowsResizeFromEdges!: Bool, ConfigWindowsMoveFromTitleBarOnly!: Bool, ConfigMemoryCompactTimer!: Float32, MouseDoubleClickTime!: Float32, MouseDoubleClickMaxDist!: Float32, MouseDragThreshold!: Float32, KeyRepeatDelay!: Float32, KeyRepeatRate!: Float32, ConfigDebugIsDebuggerPresent!: Bool, ConfigDebugBeginReturnValueOnce!: Bool, ConfigDebugBeginReturnValueLoop!: Bool, ConfigDebugIgnoreFocusLoss!: Bool, ConfigDebugIniSettings!: Bool, BackendPlatformName!: String, BackendRendererName!: String, BackendPlatformUserData!: Value<Unit>, BackendRendererUserData!: Value<Unit>, BackendLanguageUserData!: Value<Unit>, GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>, SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>, ClipboardUserData!: Value<Unit>, SetPlatformImeDataFn!: CFunc<(viewport: CPointer<capi.ImGuiViewport>, data: CPointer<capi.ImGuiPlatformImeData>) -> Unit>, PlatformLocaleDecimalPoint!: ImWchar, WantCaptureMouse!: Bool, WantCaptureKeyboard!: Bool, WantTextInput!: Bool, WantSetMousePos!: Bool, WantSaveIniSettings!: Bool, NavActive!: Bool, NavVisible!: Bool, Framerate!: Float32, MetricsRenderVertices!: Int32, MetricsRenderIndices!: Int32, MetricsRenderWindows!: Int32, MetricsActiveWindows!: Int32, MouseDelta!: ImVec2, Ctx!: Value<ImGuiContext>, MousePos!: ImVec2, MouseDown!: Value<Bool>, MouseWheel!: Float32, MouseWheelH!: Float32, MouseSource!: ImGuiMouseSource, MouseHoveredViewport!: ImGuiID, KeyCtrl!: Bool, KeyShift!: Bool, KeyAlt!: Bool, KeySuper!: Bool, KeyMods!: ImGuiKeyChord, KeysData!: ImGuiKeyData, WantCaptureMouseUnlessPopupClose!: Bool, MousePosPrev!: ImVec2, MouseClickedPos!: ImVec2, MouseClickedTime!: Value<Float64>, MouseClicked!: Value<Bool>, MouseDoubleClicked!: Value<Bool>, MouseClickedCount!: Value<ImU16>, MouseClickedLastCount!: Value<ImU16>, MouseReleased!: Value<Bool>, MouseDownOwned!: Value<Bool>, MouseDownOwnedUnlessPopupClose!: Value<Bool>, MouseWheelRequestAxisSwap!: Bool, MouseCtrlLeftAsRightClick!: Bool, MouseDownDuration!: Value<Float32>, MouseDownDurationPrev!: Value<Float32>, MouseDragMaxDistanceAbs!: ImVec2, MouseDragMaxDistanceSqr!: Value<Float32>, PenPressure!: Float32, AppFocusLost!: Bool, AppAcceptingEvents!: Bool, BackendUsingLegacyKeyArrays!: ImS8, BackendUsingLegacyNavInputArray!: Bool, InputQueueSurrogate!: ImWchar16, InputQueueCharacters!: ImVector_ImWchar) {
         super()
 
         this.ConfigFlags = ConfigFlags
@@ -2802,7 +2802,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     public mut prop IniFilename: String {
         get() {
-            return unsafe { capi.access_ImGuiIO_IniFilename(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiIO_IniFilename(pointer).read()).toString() }
         }
 
         set(value) {
@@ -2812,7 +2812,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     public mut prop LogFilename: String {
         get() {
-            return unsafe { capi.access_ImGuiIO_LogFilename(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiIO_LogFilename(pointer).read()).toString() }
         }
 
         set(value) {
@@ -3152,7 +3152,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     public mut prop BackendPlatformName: String {
         get() {
-            return unsafe { capi.access_ImGuiIO_BackendPlatformName(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiIO_BackendPlatformName(pointer).read()).toString() }
         }
 
         set(value) {
@@ -3162,7 +3162,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     public mut prop BackendRendererName: String {
         get() {
-            return unsafe { capi.access_ImGuiIO_BackendRendererName(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiIO_BackendRendererName(pointer).read()).toString() }
         }
 
         set(value) {
@@ -3200,7 +3200,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop GetClipboardTextFn: CFunc<(user_data: CPointer<Unit>) -> CString> {
+    public mut prop GetClipboardTextFn: CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>> {
         get() {
             return unsafe { capi.access_ImGuiIO_GetClipboardTextFn(pointer).read() }
         }
@@ -3210,7 +3210,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop SetClipboardTextFn: CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit> {
+    public mut prop SetClipboardTextFn: CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit> {
         get() {
             return unsafe { capi.access_ImGuiIO_SetClipboardTextFn(pointer).read() }
         }
@@ -4158,7 +4158,7 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
 
     public mut prop Buf: String {
         get() {
-            return unsafe { capi.access_ImGuiInputTextCallbackData_Buf(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiInputTextCallbackData_Buf(pointer).read()).toString() }
         }
 
         set(value) {
@@ -5164,7 +5164,7 @@ public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
 
     public mut prop Text: String {
         get() {
-            return unsafe { capi.access_ImGuiLocEntry_Text(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiLocEntry_Text(pointer).read()).toString() }
         }
 
         set(value) {
@@ -6428,7 +6428,7 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
     }
 }
 public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
-    public init(Platform_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_ShowWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_SetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>, pos: capi.ImVec2) -> Unit>, Platform_GetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Platform_GetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_GetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_GetWindowMinimized!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_SetWindowTitle!: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CString) -> Unit>, Platform_SetWindowAlpha!: CFunc<(vp: CPointer<capi.ImGuiViewport>, alpha: Float32) -> Unit>, Platform_UpdateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Float32>, Platform_OnChangedViewport!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_CreateVkSurface!: CFunc<(vp: CPointer<capi.ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, Renderer_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Renderer_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Renderer_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Monitors!: ImVector_ImGuiPlatformMonitor, Viewports!: ImVector_ImGuiViewportPtr) {
+    public init(Platform_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_ShowWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_SetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>, pos: capi.ImVec2) -> Unit>, Platform_GetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Platform_GetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_GetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_GetWindowMinimized!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_SetWindowTitle!: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CPointer<UInt8>) -> Unit>, Platform_SetWindowAlpha!: CFunc<(vp: CPointer<capi.ImGuiViewport>, alpha: Float32) -> Unit>, Platform_UpdateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Float32>, Platform_OnChangedViewport!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_CreateVkSurface!: CFunc<(vp: CPointer<capi.ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, Renderer_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Renderer_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Renderer_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Monitors!: ImVector_ImGuiPlatformMonitor, Viewports!: ImVector_ImGuiViewportPtr) {
         super()
 
         this.Platform_CreateWindow = Platform_CreateWindow
@@ -6573,7 +6573,7 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
         }
     }
 
-    public mut prop Platform_SetWindowTitle: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CString) -> Unit> {
+    public mut prop Platform_SetWindowTitle: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CPointer<UInt8>) -> Unit> {
         get() {
             return unsafe { capi.access_ImGuiPlatformIO_Platform_SetWindowTitle(pointer).read() }
         }
@@ -7017,7 +7017,7 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
     }
 }
 public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
-    public init(TypeName!: String, TypeHash!: ImGuiID, ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>>, ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit>, ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, out_buf: CPointer<capi.ImGuiTextBuffer>) -> Unit>, UserData!: Value<Unit>) {
+    public init(TypeName!: String, TypeHash!: ImGuiID, ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>, ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>, ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, out_buf: CPointer<capi.ImGuiTextBuffer>) -> Unit>, UserData!: Value<Unit>) {
         super()
 
         this.TypeName = TypeName
@@ -7048,7 +7048,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
 
     public mut prop TypeName: String {
         get() {
-            return unsafe { capi.access_ImGuiSettingsHandler_TypeName(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiSettingsHandler_TypeName(pointer).read()).toString() }
         }
 
         set(value) {
@@ -7086,7 +7086,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
         }
     }
 
-    public mut prop ReadOpenFn: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>> {
+    public mut prop ReadOpenFn: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>> {
         get() {
             return unsafe { capi.access_ImGuiSettingsHandler_ReadOpenFn(pointer).read() }
         }
@@ -7096,7 +7096,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
         }
     }
 
-    public mut prop ReadLineFn: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit> {
+    public mut prop ReadLineFn: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit> {
         get() {
             return unsafe { capi.access_ImGuiSettingsHandler_ReadLineFn(pointer).read() }
         }
@@ -9289,7 +9289,7 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
 
     public mut prop b: String {
         get() {
-            return unsafe { capi.access_ImGuiTextRange_b(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiTextRange_b(pointer).read()).toString() }
         }
 
         set(value) {
@@ -9299,7 +9299,7 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
 
     public mut prop e: String {
         get() {
-            return unsafe { capi.access_ImGuiTextRange_e(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiTextRange_e(pointer).read()).toString() }
         }
 
         set(value) {
@@ -9356,7 +9356,7 @@ public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectReq
 
     public mut prop SearchBuffer: String {
         get() {
-            return unsafe { capi.access_ImGuiTypingSelectRequest_SearchBuffer(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImGuiTypingSelectRequest_SearchBuffer(pointer).read()).toString() }
         }
 
         set(value) {
@@ -14437,7 +14437,7 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
 
     public mut prop Data: String {
         get() {
-            return unsafe { capi.access_ImVector_char_Data(pointer).read().toString() }
+            return unsafe { CString(capi.access_ImVector_char_Data(pointer).read()).toString() }
         }
 
         set(value) {
@@ -14446,7 +14446,7 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
     }
 }
 public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<CString>) {
+    public init(Size!: Int32, Capacity!: Int32, Data!: Value<CPointer<UInt8>>) {
         super()
 
         this.Size = Size
@@ -14489,9 +14489,9 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
         }
     }
 
-    public mut prop Data: Value<CString> {
+    public mut prop Data: Value<CPointer<UInt8>> {
         get() {
-            return unsafe { Value<CString>.unsafeMake(capi.access_ImVector_const_charPtr_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<CPointer<UInt8>>.unsafeMake(capi.access_ImVector_const_charPtr_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {

@@ -39,7 +39,7 @@ public interface Backend {
     func setBeforeRenderHook(fn: VoidCallback): Backend
     func setAfterRenderHook(fn: VoidCallback): Backend
 
-    func setBgColor(color: ImVec4): Backend
+    func setBgColor(r: Float32, g: Float32, b: Float32, a: Float32): Backend
     func setWindowPos(x: Int32, y: Int32): Backend
     func getWindowPos(): (Int32, Int32)
     func setWindowSize(width: Int32, height: Int32): Backend

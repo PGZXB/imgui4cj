@@ -167,7 +167,7 @@ foreign func imgui4cj_access_ImDrawList__Splitter(self: CPointer<ImDrawList>): C
 foreign func imgui4cj_access_ImDrawList__ClipRectStack(self: CPointer<ImDrawList>): CPointer<ImVector_ImVec4>
 foreign func imgui4cj_access_ImDrawList__TextureIdStack(self: CPointer<ImDrawList>): CPointer<ImVector_ImTextureID>
 foreign func imgui4cj_access_ImDrawList__FringeScale(self: CPointer<ImDrawList>): CPointer<Float32>
-foreign func imgui4cj_access_ImDrawList__OwnerName(self: CPointer<ImDrawList>): CPointer<CString>
+foreign func imgui4cj_access_ImDrawList__OwnerName(self: CPointer<ImDrawList>): CPointer<CPointer<UInt8>>
 
 public func access_ImDrawList_CmdBuffer(self: CPointer<ImDrawList>): CPointer<ImVector_ImDrawCmd> {
     return unsafe { imgui4cj_access_ImDrawList_CmdBuffer(self) }
@@ -225,7 +225,7 @@ public func access_ImDrawList__FringeScale(self: CPointer<ImDrawList>): CPointer
     return unsafe { imgui4cj_access_ImDrawList__FringeScale(self) }
 }
 
-public func access_ImDrawList__OwnerName(self: CPointer<ImDrawList>): CPointer<CString> {
+public func access_ImDrawList__OwnerName(self: CPointer<ImDrawList>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImDrawList__OwnerName(self) }
 }
 
@@ -783,23 +783,23 @@ public func access_ImGuiContextHook_UserData(self: CPointer<ImGuiContextHook>): 
 // struct ImGuiDataTypeInfo
 
 foreign func imgui4cj_access_ImGuiDataTypeInfo_Size(self: CPointer<ImGuiDataTypeInfo>): CPointer<UIntNative>
-foreign func imgui4cj_access_ImGuiDataTypeInfo_Name(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString>
-foreign func imgui4cj_access_ImGuiDataTypeInfo_PrintFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString>
-foreign func imgui4cj_access_ImGuiDataTypeInfo_ScanFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiDataTypeInfo_Name(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>>
+foreign func imgui4cj_access_ImGuiDataTypeInfo_PrintFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>>
+foreign func imgui4cj_access_ImGuiDataTypeInfo_ScanFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>>
 
 public func access_ImGuiDataTypeInfo_Size(self: CPointer<ImGuiDataTypeInfo>): CPointer<UIntNative> {
     return unsafe { imgui4cj_access_ImGuiDataTypeInfo_Size(self) }
 }
 
-public func access_ImGuiDataTypeInfo_Name(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString> {
+public func access_ImGuiDataTypeInfo_Name(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiDataTypeInfo_Name(self) }
 }
 
-public func access_ImGuiDataTypeInfo_PrintFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString> {
+public func access_ImGuiDataTypeInfo_PrintFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiDataTypeInfo_PrintFmt(self) }
 }
 
-public func access_ImGuiDataTypeInfo_ScanFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CString> {
+public func access_ImGuiDataTypeInfo_ScanFmt(self: CPointer<ImGuiDataTypeInfo>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiDataTypeInfo_ScanFmt(self) }
 }
 
@@ -1014,8 +1014,8 @@ foreign func imgui4cj_access_ImGuiIO_BackendFlags(self: CPointer<ImGuiIO>): CPoi
 foreign func imgui4cj_access_ImGuiIO_DisplaySize(self: CPointer<ImGuiIO>): CPointer<ImVec2>
 foreign func imgui4cj_access_ImGuiIO_DeltaTime(self: CPointer<ImGuiIO>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiIO_IniSavingRate(self: CPointer<ImGuiIO>): CPointer<Float32>
-foreign func imgui4cj_access_ImGuiIO_IniFilename(self: CPointer<ImGuiIO>): CPointer<CString>
-foreign func imgui4cj_access_ImGuiIO_LogFilename(self: CPointer<ImGuiIO>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiIO_IniFilename(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>>
+foreign func imgui4cj_access_ImGuiIO_LogFilename(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiIO_UserData(self: CPointer<ImGuiIO>): CPointer<CPointer<Unit>>
 foreign func imgui4cj_access_ImGuiIO_Fonts(self: CPointer<ImGuiIO>): CPointer<CPointer<ImFontAtlas>>
 foreign func imgui4cj_access_ImGuiIO_FontGlobalScale(self: CPointer<ImGuiIO>): CPointer<Float32>
@@ -1049,13 +1049,13 @@ foreign func imgui4cj_access_ImGuiIO_ConfigDebugBeginReturnValueOnce(self: CPoin
 foreign func imgui4cj_access_ImGuiIO_ConfigDebugBeginReturnValueLoop(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_ConfigDebugIgnoreFocusLoss(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_ConfigDebugIniSettings(self: CPointer<ImGuiIO>): CPointer<Bool>
-foreign func imgui4cj_access_ImGuiIO_BackendPlatformName(self: CPointer<ImGuiIO>): CPointer<CString>
-foreign func imgui4cj_access_ImGuiIO_BackendRendererName(self: CPointer<ImGuiIO>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiIO_BackendPlatformName(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>>
+foreign func imgui4cj_access_ImGuiIO_BackendRendererName(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiIO_BackendPlatformUserData(self: CPointer<ImGuiIO>): CPointer<CPointer<Unit>>
 foreign func imgui4cj_access_ImGuiIO_BackendRendererUserData(self: CPointer<ImGuiIO>): CPointer<CPointer<Unit>>
 foreign func imgui4cj_access_ImGuiIO_BackendLanguageUserData(self: CPointer<ImGuiIO>): CPointer<CPointer<Unit>>
-foreign func imgui4cj_access_ImGuiIO_GetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>) -> CString>>
-foreign func imgui4cj_access_ImGuiIO_SetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit>>
+foreign func imgui4cj_access_ImGuiIO_GetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>>
+foreign func imgui4cj_access_ImGuiIO_SetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>>
 foreign func imgui4cj_access_ImGuiIO_ClipboardUserData(self: CPointer<ImGuiIO>): CPointer<CPointer<Unit>>
 foreign func imgui4cj_access_ImGuiIO_SetPlatformImeDataFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(viewport: CPointer<ImGuiViewport>, data: CPointer<ImGuiPlatformImeData>) -> Unit>>
 foreign func imgui4cj_access_ImGuiIO_PlatformLocaleDecimalPoint(self: CPointer<ImGuiIO>): CPointer<ImWchar>
@@ -1130,11 +1130,11 @@ public func access_ImGuiIO_IniSavingRate(self: CPointer<ImGuiIO>): CPointer<Floa
     return unsafe { imgui4cj_access_ImGuiIO_IniSavingRate(self) }
 }
 
-public func access_ImGuiIO_IniFilename(self: CPointer<ImGuiIO>): CPointer<CString> {
+public func access_ImGuiIO_IniFilename(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiIO_IniFilename(self) }
 }
 
-public func access_ImGuiIO_LogFilename(self: CPointer<ImGuiIO>): CPointer<CString> {
+public func access_ImGuiIO_LogFilename(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiIO_LogFilename(self) }
 }
 
@@ -1270,11 +1270,11 @@ public func access_ImGuiIO_ConfigDebugIniSettings(self: CPointer<ImGuiIO>): CPoi
     return unsafe { imgui4cj_access_ImGuiIO_ConfigDebugIniSettings(self) }
 }
 
-public func access_ImGuiIO_BackendPlatformName(self: CPointer<ImGuiIO>): CPointer<CString> {
+public func access_ImGuiIO_BackendPlatformName(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiIO_BackendPlatformName(self) }
 }
 
-public func access_ImGuiIO_BackendRendererName(self: CPointer<ImGuiIO>): CPointer<CString> {
+public func access_ImGuiIO_BackendRendererName(self: CPointer<ImGuiIO>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiIO_BackendRendererName(self) }
 }
 
@@ -1290,11 +1290,11 @@ public func access_ImGuiIO_BackendLanguageUserData(self: CPointer<ImGuiIO>): CPo
     return unsafe { imgui4cj_access_ImGuiIO_BackendLanguageUserData(self) }
 }
 
-public func access_ImGuiIO_GetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>) -> CString>> {
+public func access_ImGuiIO_GetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>> {
     return unsafe { imgui4cj_access_ImGuiIO_GetClipboardTextFn(self) }
 }
 
-public func access_ImGuiIO_SetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>, text: CString) -> Unit>> {
+public func access_ImGuiIO_SetClipboardTextFn(self: CPointer<ImGuiIO>): CPointer<CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>> {
     return unsafe { imgui4cj_access_ImGuiIO_SetClipboardTextFn(self) }
 }
 
@@ -1614,7 +1614,7 @@ foreign func imgui4cj_access_ImGuiInputTextCallbackData_Flags(self: CPointer<ImG
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_UserData(self: CPointer<ImGuiInputTextCallbackData>): CPointer<CPointer<Unit>>
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_EventChar(self: CPointer<ImGuiInputTextCallbackData>): CPointer<ImWchar>
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_EventKey(self: CPointer<ImGuiInputTextCallbackData>): CPointer<ImGuiKey>
-foreign func imgui4cj_access_ImGuiInputTextCallbackData_Buf(self: CPointer<ImGuiInputTextCallbackData>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiInputTextCallbackData_Buf(self: CPointer<ImGuiInputTextCallbackData>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_BufTextLen(self: CPointer<ImGuiInputTextCallbackData>): CPointer<Int32>
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_BufSize(self: CPointer<ImGuiInputTextCallbackData>): CPointer<Int32>
 foreign func imgui4cj_access_ImGuiInputTextCallbackData_BufDirty(self: CPointer<ImGuiInputTextCallbackData>): CPointer<Bool>
@@ -1646,7 +1646,7 @@ public func access_ImGuiInputTextCallbackData_EventKey(self: CPointer<ImGuiInput
     return unsafe { imgui4cj_access_ImGuiInputTextCallbackData_EventKey(self) }
 }
 
-public func access_ImGuiInputTextCallbackData_Buf(self: CPointer<ImGuiInputTextCallbackData>): CPointer<CString> {
+public func access_ImGuiInputTextCallbackData_Buf(self: CPointer<ImGuiInputTextCallbackData>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiInputTextCallbackData_Buf(self) }
 }
 
@@ -2022,13 +2022,13 @@ public func access_ImGuiListClipperRange_PosToIndexOffsetMax(self: CPointer<ImGu
 // struct ImGuiLocEntry
 
 foreign func imgui4cj_access_ImGuiLocEntry_Key(self: CPointer<ImGuiLocEntry>): CPointer<ImGuiLocKey>
-foreign func imgui4cj_access_ImGuiLocEntry_Text(self: CPointer<ImGuiLocEntry>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiLocEntry_Text(self: CPointer<ImGuiLocEntry>): CPointer<CPointer<UInt8>>
 
 public func access_ImGuiLocEntry_Key(self: CPointer<ImGuiLocEntry>): CPointer<ImGuiLocKey> {
     return unsafe { imgui4cj_access_ImGuiLocEntry_Key(self) }
 }
 
-public func access_ImGuiLocEntry_Text(self: CPointer<ImGuiLocEntry>): CPointer<CString> {
+public func access_ImGuiLocEntry_Text(self: CPointer<ImGuiLocEntry>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiLocEntry_Text(self) }
 }
 
@@ -2549,7 +2549,7 @@ foreign func imgui4cj_access_ImGuiPlatformIO_Platform_GetWindowSize(self: CPoint
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_SetWindowFocus(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>>
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_GetWindowFocus(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>>
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_GetWindowMinimized(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>) -> Bool>>
-foreign func imgui4cj_access_ImGuiPlatformIO_Platform_SetWindowTitle(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, str: CString) -> Unit>>
+foreign func imgui4cj_access_ImGuiPlatformIO_Platform_SetWindowTitle(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, str: CPointer<UInt8>) -> Unit>>
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_SetWindowAlpha(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, alpha: Float32) -> Unit>>
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_UpdateWindow(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>) -> Unit>>
 foreign func imgui4cj_access_ImGuiPlatformIO_Platform_RenderWindow(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>>
@@ -2605,7 +2605,7 @@ public func access_ImGuiPlatformIO_Platform_GetWindowMinimized(self: CPointer<Im
     return unsafe { imgui4cj_access_ImGuiPlatformIO_Platform_GetWindowMinimized(self) }
 }
 
-public func access_ImGuiPlatformIO_Platform_SetWindowTitle(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, str: CString) -> Unit>> {
+public func access_ImGuiPlatformIO_Platform_SetWindowTitle(self: CPointer<ImGuiPlatformIO>): CPointer<CFunc<(vp: CPointer<ImGuiViewport>, str: CPointer<UInt8>) -> Unit>> {
     return unsafe { imgui4cj_access_ImGuiPlatformIO_Platform_SetWindowTitle(self) }
 }
 
@@ -2774,17 +2774,17 @@ public func access_ImGuiPtrOrIndex_Index(self: CPointer<ImGuiPtrOrIndex>): CPoin
 
 // struct ImGuiSettingsHandler
 
-foreign func imgui4cj_access_ImGuiSettingsHandler_TypeName(self: CPointer<ImGuiSettingsHandler>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiSettingsHandler_TypeName(self: CPointer<ImGuiSettingsHandler>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiSettingsHandler_TypeHash(self: CPointer<ImGuiSettingsHandler>): CPointer<ImGuiID>
 foreign func imgui4cj_access_ImGuiSettingsHandler_ClearAllFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>>
 foreign func imgui4cj_access_ImGuiSettingsHandler_ReadInitFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>>
-foreign func imgui4cj_access_ImGuiSettingsHandler_ReadOpenFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>>>
-foreign func imgui4cj_access_ImGuiSettingsHandler_ReadLineFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit>>
+foreign func imgui4cj_access_ImGuiSettingsHandler_ReadOpenFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>>
+foreign func imgui4cj_access_ImGuiSettingsHandler_ReadLineFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>>
 foreign func imgui4cj_access_ImGuiSettingsHandler_ApplyAllFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>) -> Unit>>
 foreign func imgui4cj_access_ImGuiSettingsHandler_WriteAllFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, out_buf: CPointer<ImGuiTextBuffer>) -> Unit>>
 foreign func imgui4cj_access_ImGuiSettingsHandler_UserData(self: CPointer<ImGuiSettingsHandler>): CPointer<CPointer<Unit>>
 
-public func access_ImGuiSettingsHandler_TypeName(self: CPointer<ImGuiSettingsHandler>): CPointer<CString> {
+public func access_ImGuiSettingsHandler_TypeName(self: CPointer<ImGuiSettingsHandler>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiSettingsHandler_TypeName(self) }
 }
 
@@ -2800,11 +2800,11 @@ public func access_ImGuiSettingsHandler_ReadInitFn(self: CPointer<ImGuiSettingsH
     return unsafe { imgui4cj_access_ImGuiSettingsHandler_ReadInitFn(self) }
 }
 
-public func access_ImGuiSettingsHandler_ReadOpenFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CString) -> CPointer<Unit>>> {
+public func access_ImGuiSettingsHandler_ReadOpenFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>> {
     return unsafe { imgui4cj_access_ImGuiSettingsHandler_ReadOpenFn(self) }
 }
 
-public func access_ImGuiSettingsHandler_ReadLineFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CString) -> Unit>> {
+public func access_ImGuiSettingsHandler_ReadLineFn(self: CPointer<ImGuiSettingsHandler>): CPointer<CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>> {
     return unsafe { imgui4cj_access_ImGuiSettingsHandler_ReadLineFn(self) }
 }
 
@@ -3678,14 +3678,14 @@ public func access_ImGuiTextIndex_EndOffset(self: CPointer<ImGuiTextIndex>): CPo
 
 // struct ImGuiTextRange
 
-foreign func imgui4cj_access_ImGuiTextRange_b(self: CPointer<ImGuiTextRange>): CPointer<CString>
-foreign func imgui4cj_access_ImGuiTextRange_e(self: CPointer<ImGuiTextRange>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiTextRange_b(self: CPointer<ImGuiTextRange>): CPointer<CPointer<UInt8>>
+foreign func imgui4cj_access_ImGuiTextRange_e(self: CPointer<ImGuiTextRange>): CPointer<CPointer<UInt8>>
 
-public func access_ImGuiTextRange_b(self: CPointer<ImGuiTextRange>): CPointer<CString> {
+public func access_ImGuiTextRange_b(self: CPointer<ImGuiTextRange>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiTextRange_b(self) }
 }
 
-public func access_ImGuiTextRange_e(self: CPointer<ImGuiTextRange>): CPointer<CString> {
+public func access_ImGuiTextRange_e(self: CPointer<ImGuiTextRange>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiTextRange_e(self) }
 }
 
@@ -3693,7 +3693,7 @@ public func access_ImGuiTextRange_e(self: CPointer<ImGuiTextRange>): CPointer<CS
 
 foreign func imgui4cj_access_ImGuiTypingSelectRequest_Flags(self: CPointer<ImGuiTypingSelectRequest>): CPointer<ImGuiTypingSelectFlags>
 foreign func imgui4cj_access_ImGuiTypingSelectRequest_SearchBufferLen(self: CPointer<ImGuiTypingSelectRequest>): CPointer<Int32>
-foreign func imgui4cj_access_ImGuiTypingSelectRequest_SearchBuffer(self: CPointer<ImGuiTypingSelectRequest>): CPointer<CString>
+foreign func imgui4cj_access_ImGuiTypingSelectRequest_SearchBuffer(self: CPointer<ImGuiTypingSelectRequest>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiTypingSelectRequest_SelectRequest(self: CPointer<ImGuiTypingSelectRequest>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiTypingSelectRequest_SingleCharMode(self: CPointer<ImGuiTypingSelectRequest>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiTypingSelectRequest_SingleCharSize(self: CPointer<ImGuiTypingSelectRequest>): CPointer<ImS8>
@@ -3706,7 +3706,7 @@ public func access_ImGuiTypingSelectRequest_SearchBufferLen(self: CPointer<ImGui
     return unsafe { imgui4cj_access_ImGuiTypingSelectRequest_SearchBufferLen(self) }
 }
 
-public func access_ImGuiTypingSelectRequest_SearchBuffer(self: CPointer<ImGuiTypingSelectRequest>): CPointer<CString> {
+public func access_ImGuiTypingSelectRequest_SearchBuffer(self: CPointer<ImGuiTypingSelectRequest>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiTypingSelectRequest_SearchBuffer(self) }
 }
 
@@ -5513,7 +5513,7 @@ public func access_ImVector_ImWchar_Data(self: CPointer<ImVector_ImWchar>): CPoi
 
 foreign func imgui4cj_access_ImVector_char_Size(self: CPointer<ImVector_char>): CPointer<Int32>
 foreign func imgui4cj_access_ImVector_char_Capacity(self: CPointer<ImVector_char>): CPointer<Int32>
-foreign func imgui4cj_access_ImVector_char_Data(self: CPointer<ImVector_char>): CPointer<CString>
+foreign func imgui4cj_access_ImVector_char_Data(self: CPointer<ImVector_char>): CPointer<CPointer<UInt8>>
 
 public func access_ImVector_char_Size(self: CPointer<ImVector_char>): CPointer<Int32> {
     return unsafe { imgui4cj_access_ImVector_char_Size(self) }
@@ -5523,7 +5523,7 @@ public func access_ImVector_char_Capacity(self: CPointer<ImVector_char>): CPoint
     return unsafe { imgui4cj_access_ImVector_char_Capacity(self) }
 }
 
-public func access_ImVector_char_Data(self: CPointer<ImVector_char>): CPointer<CString> {
+public func access_ImVector_char_Data(self: CPointer<ImVector_char>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImVector_char_Data(self) }
 }
 
@@ -5531,7 +5531,7 @@ public func access_ImVector_char_Data(self: CPointer<ImVector_char>): CPointer<C
 
 foreign func imgui4cj_access_ImVector_const_charPtr_Size(self: CPointer<ImVector_const_charPtr>): CPointer<Int32>
 foreign func imgui4cj_access_ImVector_const_charPtr_Capacity(self: CPointer<ImVector_const_charPtr>): CPointer<Int32>
-foreign func imgui4cj_access_ImVector_const_charPtr_Data(self: CPointer<ImVector_const_charPtr>): CPointer<CPointer<CString>>
+foreign func imgui4cj_access_ImVector_const_charPtr_Data(self: CPointer<ImVector_const_charPtr>): CPointer<CPointer<CPointer<UInt8>>>
 
 public func access_ImVector_const_charPtr_Size(self: CPointer<ImVector_const_charPtr>): CPointer<Int32> {
     return unsafe { imgui4cj_access_ImVector_const_charPtr_Size(self) }
@@ -5541,7 +5541,7 @@ public func access_ImVector_const_charPtr_Capacity(self: CPointer<ImVector_const
     return unsafe { imgui4cj_access_ImVector_const_charPtr_Capacity(self) }
 }
 
-public func access_ImVector_const_charPtr_Data(self: CPointer<ImVector_const_charPtr>): CPointer<CPointer<CString>> {
+public func access_ImVector_const_charPtr_Data(self: CPointer<ImVector_const_charPtr>): CPointer<CPointer<CPointer<UInt8>>> {
     return unsafe { imgui4cj_access_ImVector_const_charPtr_Data(self) }
 }
 

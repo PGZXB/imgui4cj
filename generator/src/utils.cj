@@ -103,7 +103,7 @@ enum CjType <: ToString {
             case UIntNativeType => "UIntNative"
             case Float32Type => "Float32"
             case Float64Type => "Float64"
-            case CStringType => "CString"
+            case CStringType => "CPointer<UInt8>"
             case CFuncType(pTypes, retType) =>
                 // CFunc<(argName: CPointer<Int8>) -> Unit>
                 let sb = StringBuilder()
@@ -150,7 +150,7 @@ enum CjType <: ToString {
             case UIntNativeType => "0"
             case Float32Type => "0.0f32"
             case Float64Type => "0.0f64"
-            case CStringType => "CString(CPointer<UInt8>())"
+            case CStringType => "CPointer<UInt8>()"
             case CFuncType(pTypes, retType) => "${this}(CPointer<Unit>())"
             case VArrayType(ty, size) => "${this}(item: ${ty.getDefaultValueLiteral(typeAlias: typeAlias)})"
             case StructType(name) => "${this}()"
@@ -498,7 +498,7 @@ func getWCAPIReturn(ty: CjType, originalReturn: String, typeAlias: HashMap<Strin
         case UIntNativeType => (ty.toString(), originalReturn)
         case Float32Type => (ty.toString(), originalReturn)
         case Float64Type => (ty.toString(), originalReturn)
-        case CStringType => ("String", "${originalReturn}.toString()")
+        case CStringType => ("String", "CString(${originalReturn}).toString()")
         case CFuncType(_, _) => (ty.toString(), originalReturn)
         case VArrayType(_, _) => throw IllegalStateException()
         case StructType(_) => (ty.toString(), "${ty}(value: Some(${originalReturn}))")
@@ -601,7 +601,8 @@ func getWCAPIMemberAccess(ty: CjType, accessCall: String, writeArg: String, type
         case UIntNativeType => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
         case Float32Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
         case Float64Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
-        case CStringType => ("String", "${accessCall}.read().toString()", "${accessCall}.write(${writeArg}.asCString())")
+        case CStringType => ("String", "CString(${accessCall}.read()).toString()",
+            "${accessCall}.write(${writeArg}.asCString())")
         case CFuncType(_, _) => (rename(ty, false).toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
         case VArrayType(eleTy, size) =>
             var (t, read, write) = ("Value<${rename(eleTy, false)}>",

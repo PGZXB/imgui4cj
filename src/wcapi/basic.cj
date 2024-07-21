@@ -3,34 +3,34 @@ package wcapi
 from std import collection.*
 from std import reflect.TypeInfo
 
-let STRING_POOL = HashMap<String, CString>()
+let STRING_POOL = HashMap<String, CPointer<UInt8>>()
 
-func getCStringFromPool(string: String): CString {
+func getCStringFromPool(string: String): CPointer<UInt8> {
     if (!STRING_POOL.contains(string)) {
-        STRING_POOL.put(string, unsafe { LibC.mallocCString(string) })
+        STRING_POOL.put(string, unsafe { LibC.mallocCString(string).getChars() })
     }
     return STRING_POOL.get(string).getOrThrow()
 }
 
 public interface CStringConvertable {
-    func asCString(): CString
+    func asCString(): CPointer<UInt8>
 }
 
 extend String <: CStringConvertable {
-    public func asCString(): CString {
+    public func asCString(): CPointer<UInt8> {
         return getCStringFromPool(this)
     }
 }
 
 extend CString <: CStringConvertable {
-    public func asCString(): CString {
-        return this
+    public func asCString(): CPointer<UInt8> {
+        return this.getChars()
     }
 }
 
 extend CPointer<T> <: CStringConvertable where T <: UInt8 {
-    public func asCString(): CString {
-        return CString(CPointer<UInt8>(this))
+    public func asCString(): CPointer<UInt8> {
+        return CPointer<UInt8>(this)
     }
 }
 
@@ -77,7 +77,7 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
         return Value<T>(pointer, count, owned: true)
     }
 
-    public static func makeArray(values: Collection<T>): Value<T> {
+    public static func fromArray(values: Array<T>): Value<T> {
         let pointer = unsafe { LibC.malloc<T>(count: values.size) }
         unsafe {
             var p = pointer
@@ -157,6 +157,14 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
 
 public func vaule<T>(val: T) where T <: CType {
     return Value<T>.make(val)
+}
+
+public func array<T>(arr: Array<T>) where T <: CType {
+    let ret = Value<T>.makeArray(arr.size)
+    for (i in 0..ret.size) {
+        ret[i] = arr[i]
+    }
+    return ret
 }
 
 public func null<T>() where T <: CType {
