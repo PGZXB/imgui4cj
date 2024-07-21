@@ -1,6 +1,7 @@
 package wcapi
 
 from std import collection.*
+from std import reflect.TypeInfo
 
 let STRING_POOL = HashMap<String, CString>()
 
@@ -34,7 +35,7 @@ extend CPointer<T> <: CStringConvertable where T <: UInt8 {
 }
 
 public class Value<T> <: ToString where T <: CType { // For int*, float*, ... arguments
-    private Value(private let pointer: CPointer<T>, private let count: ?Int64, private let owned!: Bool = true) {
+    private Value(private let pointer: CPointer<T>, private let count: ?Int64, private let owned!: Bool) {
     }
 
     ~init() {
@@ -43,8 +44,8 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
         }
     }
 
-    public static func unsafeMake(pointer: CPointer<T>, count!: ?Int64 = None, owned!: Bool = true): Value<T> {
-        return Value<T>(pointer, -1, owned: owned)
+    static func unsafeMake(pointer: CPointer<T>, count!: ?Int64, owned!: Bool): Value<T> {
+        return Value<T>(pointer, count, owned: owned)
     }
 
     public static func null(): Value<T> {
@@ -53,7 +54,7 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
 
     public static func make(): Value<T> {
         let pointer = unsafe { LibC.malloc<T>() }
-        return Value<T>(pointer, None)
+        return Value<T>(pointer, None, owned: true)
     }
 
     public static func make(value: T): Value<T> {
@@ -73,7 +74,7 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
                 }
             }
         }
-        return Value<T>(pointer, count)
+        return Value<T>(pointer, count, owned: true)
     }
 
     public static func makeArray(values: Collection<T>): Value<T> {
@@ -85,7 +86,7 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
                 p += 1
             }
         }
-        return Value<T>(pointer, values.size)
+        return Value<T>(pointer, values.size, owned: true)
     }
 
     func getCPointer(): CPointer<T> {
@@ -169,3 +170,36 @@ public let i64 = vaule<Int64>
 public let u64 = vaule<UInt64>
 public let f32 = vaule<Float32>
 public let f64 = vaule<Float64>
+
+public open class StructWrapper<T> <: ToString where T <: CType {
+    protected let pointer: CPointer<T>
+    protected let count: ?Int64
+    protected let owned: Bool
+
+    public init(value!: ?T = None, count!: ?Int64 = None) {
+        this(unsafe { LibC.malloc<T>(count: count ?? 1) }, count: count, owned: true)
+        if (let Some(v) <- value) {
+            unsafe { this.pointer.write(v) }
+        }
+    }
+
+    public init(pointer: CPointer<T>, count!: ?Int64, owned!: Bool) {
+        this.pointer = pointer
+        this.count = count
+        this.owned = owned
+    }
+
+    // public func uninit() {
+    //     if (owned) {
+    //         unsafe { LibC.free(this.pointer) }
+    //     }
+    // }
+
+    func getCPointer() {
+        return pointer
+    }
+
+    public func toString(): String {
+        return "${TypeInfo.of<T>()}@${pointer.toUIntNative()}"
+    }
+}

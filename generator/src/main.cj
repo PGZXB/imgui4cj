@@ -92,11 +92,19 @@ main(args: Array<String>): Int64 {
             "ImGuiErrorLogCallback") {
             continue // SKIP the four
         }
-        typeAlias.put(d.alias, CjType.fromCType(template2SepcOne.get(d.typename) ?? d.typename))
+        if (let Some(specOne) <- template2SepcOne.get(d.typename)) {
+            typeAlias.put(d.alias, StructType(specOne))
+        } else {
+            typeAlias.put(d.alias, CjType.fromCType(d.typename))
+        }
     }
     /// 2. enums
     for (e in enumDefs) {
         typeAlias.put(e.name, Int32Type)
+    }
+    /// 3. template structs
+    for ((_, specOne) in template2SepcOne) {
+        typeAlias.put(specOne, StructType(specOne))
     }
 
     // Generate cimgui structs -> src/capi/structs.cj
@@ -114,6 +122,7 @@ main(args: Array<String>): Int64 {
         match (ty) {
             case StructType(name) => if (!definedStructNames.contains(name)) {
                 undefStructTypedefs.append(TypeDef(alias, "void"))
+                typeAlias.put(alias, UnitType)
             }
             case _ => continue
         }
@@ -148,7 +157,7 @@ main(args: Array<String>): Int64 {
     // Generate capi package (public import _capi.xxx as xxx ...)
     let capiCodeFilename = "${capiOutputDir}/capi.cj"
     println("Generating capi package -> ${capiCodeFilename} ...")
-    genCAPIPackage(capiCodeFilename, capiPkgName, capiImplPkgName,
+    genReExportCode(capiCodeFilename, capiPkgName, capiImplPkgName,
         typeDefSymbols + enumSymbols + structSymbols + undefStructSymbols + funcSymbols + structAccessorSymbols)
     println("Generated capi package -> ${capiCodeFilename}")
 
@@ -159,6 +168,18 @@ main(args: Array<String>): Int64 {
     println("Generated cimgui funcs wcapi -> ${funcsWCAPICodeFilename}")
 
     // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj
+    let structsWCAPICodeFilename = "${wcapiOutputDir}/structs.cj"
+    println("Generating cimgui funcs wcapi -> ${structsWCAPICodeFilename} ...")
+    genStructsWCAPICode(structsWCAPICodeFilename, wcapiPkgName, capiPkgName, structDefs, typeAlias,
+        globalConstants: globalConstants)
+    println("Generated cimgui funcs wcapi -> ${structsWCAPICodeFilename}")
+
+    // Generate re-exports wcapi -> src/wcapi/re_exports.cj
+    let reExportsWCAPICodeFilename = "${wcapiOutputDir}/re_exports.cj"
+    println("Generating re-exports wcapi -> ${reExportsWCAPICodeFilename} ...")
+    genReExportCode(reExportsWCAPICodeFilename, wcapiPkgName, capiPkgName,
+        typeDefSymbols + enumSymbols + undefStructSymbols)
+    println("Generated re-exports wcapi -> ${reExportsWCAPICodeFilename}")
 
     return 0
 }

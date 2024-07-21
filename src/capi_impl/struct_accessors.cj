@@ -140,10 +140,10 @@ public func access_ImDrawData_OwnerViewport(self: CPointer<ImDrawData>): CPointe
 
 // struct ImDrawDataBuilder
 
-foreign func imgui4cj_access_ImDrawDataBuilder_Layers(self: CPointer<ImDrawDataBuilder>): CPointer<VArray<CPointer<ImVector_ImDrawListPtr>, $2>>
+foreign func imgui4cj_access_ImDrawDataBuilder_Layers(self: CPointer<ImDrawDataBuilder>): CPointer<CPointer<CPointer<ImVector_ImDrawListPtr>>>
 foreign func imgui4cj_access_ImDrawDataBuilder_LayerData1(self: CPointer<ImDrawDataBuilder>): CPointer<ImVector_ImDrawListPtr>
 
-public func access_ImDrawDataBuilder_Layers(self: CPointer<ImDrawDataBuilder>): CPointer<VArray<CPointer<ImVector_ImDrawListPtr>, $2>> {
+public func access_ImDrawDataBuilder_Layers(self: CPointer<ImDrawDataBuilder>): CPointer<CPointer<CPointer<ImVector_ImDrawListPtr>>> {
     return unsafe { imgui4cj_access_ImDrawDataBuilder_Layers(self) }
 }
 
@@ -239,9 +239,9 @@ foreign func imgui4cj_access_ImDrawListSharedData_CircleSegmentMaxError(self: CP
 foreign func imgui4cj_access_ImDrawListSharedData_ClipRectFullscreen(self: CPointer<ImDrawListSharedData>): CPointer<ImVec4>
 foreign func imgui4cj_access_ImDrawListSharedData_InitialFlags(self: CPointer<ImDrawListSharedData>): CPointer<ImDrawListFlags>
 foreign func imgui4cj_access_ImDrawListSharedData_TempBuffer(self: CPointer<ImDrawListSharedData>): CPointer<ImVector_ImVec2>
-foreign func imgui4cj_access_ImDrawListSharedData_ArcFastVtx(self: CPointer<ImDrawListSharedData>): CPointer<VArray<ImVec2, $48>>
+foreign func imgui4cj_access_ImDrawListSharedData_ArcFastVtx(self: CPointer<ImDrawListSharedData>): CPointer<CPointer<ImVec2>>
 foreign func imgui4cj_access_ImDrawListSharedData_ArcFastRadiusCutoff(self: CPointer<ImDrawListSharedData>): CPointer<Float32>
-foreign func imgui4cj_access_ImDrawListSharedData_CircleSegmentCounts(self: CPointer<ImDrawListSharedData>): CPointer<VArray<ImU8, $64>>
+foreign func imgui4cj_access_ImDrawListSharedData_CircleSegmentCounts(self: CPointer<ImDrawListSharedData>): CPointer<CPointer<ImU8>>
 foreign func imgui4cj_access_ImDrawListSharedData_TexUvLines(self: CPointer<ImDrawListSharedData>): CPointer<CPointer<ImVec4>>
 
 public func access_ImDrawListSharedData_TexUvWhitePixel(self: CPointer<ImDrawListSharedData>): CPointer<ImVec2> {
@@ -276,7 +276,7 @@ public func access_ImDrawListSharedData_TempBuffer(self: CPointer<ImDrawListShar
     return unsafe { imgui4cj_access_ImDrawListSharedData_TempBuffer(self) }
 }
 
-public func access_ImDrawListSharedData_ArcFastVtx(self: CPointer<ImDrawListSharedData>): CPointer<VArray<ImVec2, $48>> {
+public func access_ImDrawListSharedData_ArcFastVtx(self: CPointer<ImDrawListSharedData>): CPointer<CPointer<ImVec2>> {
     return unsafe { imgui4cj_access_ImDrawListSharedData_ArcFastVtx(self) }
 }
 
@@ -284,7 +284,7 @@ public func access_ImDrawListSharedData_ArcFastRadiusCutoff(self: CPointer<ImDra
     return unsafe { imgui4cj_access_ImDrawListSharedData_ArcFastRadiusCutoff(self) }
 }
 
-public func access_ImDrawListSharedData_CircleSegmentCounts(self: CPointer<ImDrawListSharedData>): CPointer<VArray<ImU8, $64>> {
+public func access_ImDrawListSharedData_CircleSegmentCounts(self: CPointer<ImDrawListSharedData>): CPointer<CPointer<ImU8>> {
     return unsafe { imgui4cj_access_ImDrawListSharedData_CircleSegmentCounts(self) }
 }
 
@@ -349,7 +349,7 @@ foreign func imgui4cj_access_ImFont_Scale(self: CPointer<ImFont>): CPointer<Floa
 foreign func imgui4cj_access_ImFont_Ascent(self: CPointer<ImFont>): CPointer<Float32>
 foreign func imgui4cj_access_ImFont_Descent(self: CPointer<ImFont>): CPointer<Float32>
 foreign func imgui4cj_access_ImFont_MetricsTotalSurface(self: CPointer<ImFont>): CPointer<Int32>
-foreign func imgui4cj_access_ImFont_Used4kPagesMap(self: CPointer<ImFont>): CPointer<VArray<ImU8, $2>>
+foreign func imgui4cj_access_ImFont_Used4kPagesMap(self: CPointer<ImFont>): CPointer<CPointer<ImU8>>
 
 public func access_ImFont_IndexAdvanceX(self: CPointer<ImFont>): CPointer<ImVector_float> {
     return unsafe { imgui4cj_access_ImFont_IndexAdvanceX(self) }
@@ -427,7 +427,7 @@ public func access_ImFont_MetricsTotalSurface(self: CPointer<ImFont>): CPointer<
     return unsafe { imgui4cj_access_ImFont_MetricsTotalSurface(self) }
 }
 
-public func access_ImFont_Used4kPagesMap(self: CPointer<ImFont>): CPointer<VArray<ImU8, $2>> {
+public func access_ImFont_Used4kPagesMap(self: CPointer<ImFont>): CPointer<CPointer<ImU8>> {
     return unsafe { imgui4cj_access_ImFont_Used4kPagesMap(self) }
 }
 
@@ -450,7 +450,7 @@ foreign func imgui4cj_access_ImFontAtlas_TexUvWhitePixel(self: CPointer<ImFontAt
 foreign func imgui4cj_access_ImFontAtlas_Fonts(self: CPointer<ImFontAtlas>): CPointer<ImVector_ImFontPtr>
 foreign func imgui4cj_access_ImFontAtlas_CustomRects(self: CPointer<ImFontAtlas>): CPointer<ImVector_ImFontAtlasCustomRect>
 foreign func imgui4cj_access_ImFontAtlas_ConfigData(self: CPointer<ImFontAtlas>): CPointer<ImVector_ImFontConfig>
-foreign func imgui4cj_access_ImFontAtlas_TexUvLines(self: CPointer<ImFontAtlas>): CPointer<VArray<ImVec4, $64>>
+foreign func imgui4cj_access_ImFontAtlas_TexUvLines(self: CPointer<ImFontAtlas>): CPointer<CPointer<ImVec4>>
 foreign func imgui4cj_access_ImFontAtlas_FontBuilderIO(self: CPointer<ImFontAtlas>): CPointer<CPointer<ImFontBuilderIO>>
 foreign func imgui4cj_access_ImFontAtlas_FontBuilderFlags(self: CPointer<ImFontAtlas>): CPointer<Int32>
 foreign func imgui4cj_access_ImFontAtlas_PackIdMouseCursors(self: CPointer<ImFontAtlas>): CPointer<Int32>
@@ -524,7 +524,7 @@ public func access_ImFontAtlas_ConfigData(self: CPointer<ImFontAtlas>): CPointer
     return unsafe { imgui4cj_access_ImFontAtlas_ConfigData(self) }
 }
 
-public func access_ImFontAtlas_TexUvLines(self: CPointer<ImFontAtlas>): CPointer<VArray<ImVec4, $64>> {
+public func access_ImFontAtlas_TexUvLines(self: CPointer<ImFontAtlas>): CPointer<CPointer<ImVec4>> {
     return unsafe { imgui4cj_access_ImFontAtlas_TexUvLines(self) }
 }
 
@@ -615,7 +615,7 @@ foreign func imgui4cj_access_ImFontConfig_FontBuilderFlags(self: CPointer<ImFont
 foreign func imgui4cj_access_ImFontConfig_RasterizerMultiply(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_RasterizerDensity(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_EllipsisChar(self: CPointer<ImFontConfig>): CPointer<ImWchar>
-foreign func imgui4cj_access_ImFontConfig_Name(self: CPointer<ImFontConfig>): CPointer<VArray<UInt8, $40>>
+foreign func imgui4cj_access_ImFontConfig_Name(self: CPointer<ImFontConfig>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImFontConfig_DstFont(self: CPointer<ImFontConfig>): CPointer<CPointer<ImFont>>
 
 public func access_ImFontConfig_FontData(self: CPointer<ImFontConfig>): CPointer<CPointer<Unit>> {
@@ -690,7 +690,7 @@ public func access_ImFontConfig_EllipsisChar(self: CPointer<ImFontConfig>): CPoi
     return unsafe { imgui4cj_access_ImFontConfig_EllipsisChar(self) }
 }
 
-public func access_ImFontConfig_Name(self: CPointer<ImFontConfig>): CPointer<VArray<UInt8, $40>> {
+public func access_ImFontConfig_Name(self: CPointer<ImFontConfig>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImFontConfig_Name(self) }
 }
 
@@ -805,9 +805,9 @@ public func access_ImGuiDataTypeInfo_ScanFmt(self: CPointer<ImGuiDataTypeInfo>):
 
 // struct ImGuiDataTypeStorage
 
-foreign func imgui4cj_access_ImGuiDataTypeStorage_Data(self: CPointer<ImGuiDataTypeStorage>): CPointer<VArray<ImU8, $8>>
+foreign func imgui4cj_access_ImGuiDataTypeStorage_Data(self: CPointer<ImGuiDataTypeStorage>): CPointer<CPointer<ImU8>>
 
-public func access_ImGuiDataTypeStorage_Data(self: CPointer<ImGuiDataTypeStorage>): CPointer<VArray<ImU8, $8>> {
+public func access_ImGuiDataTypeStorage_Data(self: CPointer<ImGuiDataTypeStorage>): CPointer<CPointer<ImU8>> {
     return unsafe { imgui4cj_access_ImGuiDataTypeStorage_Data(self) }
 }
 
@@ -852,7 +852,7 @@ public func access_ImGuiDebugAllocEntry_FreeCount(self: CPointer<ImGuiDebugAlloc
 foreign func imgui4cj_access_ImGuiDebugAllocInfo_TotalAllocCount(self: CPointer<ImGuiDebugAllocInfo>): CPointer<Int32>
 foreign func imgui4cj_access_ImGuiDebugAllocInfo_TotalFreeCount(self: CPointer<ImGuiDebugAllocInfo>): CPointer<Int32>
 foreign func imgui4cj_access_ImGuiDebugAllocInfo_LastEntriesIdx(self: CPointer<ImGuiDebugAllocInfo>): CPointer<ImS16>
-foreign func imgui4cj_access_ImGuiDebugAllocInfo_LastEntriesBuf(self: CPointer<ImGuiDebugAllocInfo>): CPointer<VArray<ImGuiDebugAllocEntry, $6>>
+foreign func imgui4cj_access_ImGuiDebugAllocInfo_LastEntriesBuf(self: CPointer<ImGuiDebugAllocInfo>): CPointer<CPointer<ImGuiDebugAllocEntry>>
 
 public func access_ImGuiDebugAllocInfo_TotalAllocCount(self: CPointer<ImGuiDebugAllocInfo>): CPointer<Int32> {
     return unsafe { imgui4cj_access_ImGuiDebugAllocInfo_TotalAllocCount(self) }
@@ -866,7 +866,7 @@ public func access_ImGuiDebugAllocInfo_LastEntriesIdx(self: CPointer<ImGuiDebugA
     return unsafe { imgui4cj_access_ImGuiDebugAllocInfo_LastEntriesIdx(self) }
 }
 
-public func access_ImGuiDebugAllocInfo_LastEntriesBuf(self: CPointer<ImGuiDebugAllocInfo>): CPointer<VArray<ImGuiDebugAllocEntry, $6>> {
+public func access_ImGuiDebugAllocInfo_LastEntriesBuf(self: CPointer<ImGuiDebugAllocInfo>): CPointer<CPointer<ImGuiDebugAllocEntry>> {
     return unsafe { imgui4cj_access_ImGuiDebugAllocInfo_LastEntriesBuf(self) }
 }
 
@@ -1074,7 +1074,7 @@ foreign func imgui4cj_access_ImGuiIO_MetricsActiveWindows(self: CPointer<ImGuiIO
 foreign func imgui4cj_access_ImGuiIO_MouseDelta(self: CPointer<ImGuiIO>): CPointer<ImVec2>
 foreign func imgui4cj_access_ImGuiIO_Ctx(self: CPointer<ImGuiIO>): CPointer<CPointer<ImGuiContext>>
 foreign func imgui4cj_access_ImGuiIO_MousePos(self: CPointer<ImGuiIO>): CPointer<ImVec2>
-foreign func imgui4cj_access_ImGuiIO_MouseDown(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
+foreign func imgui4cj_access_ImGuiIO_MouseDown(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
 foreign func imgui4cj_access_ImGuiIO_MouseWheel(self: CPointer<ImGuiIO>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiIO_MouseWheelH(self: CPointer<ImGuiIO>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiIO_MouseSource(self: CPointer<ImGuiIO>): CPointer<ImGuiMouseSource>
@@ -1084,24 +1084,24 @@ foreign func imgui4cj_access_ImGuiIO_KeyShift(self: CPointer<ImGuiIO>): CPointer
 foreign func imgui4cj_access_ImGuiIO_KeyAlt(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_KeySuper(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_KeyMods(self: CPointer<ImGuiIO>): CPointer<ImGuiKeyChord>
-foreign func imgui4cj_access_ImGuiIO_KeysData(self: CPointer<ImGuiIO>): CPointer<VArray<ImGuiKeyData, $154>>
+foreign func imgui4cj_access_ImGuiIO_KeysData(self: CPointer<ImGuiIO>): CPointer<CPointer<ImGuiKeyData>>
 foreign func imgui4cj_access_ImGuiIO_WantCaptureMouseUnlessPopupClose(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_MousePosPrev(self: CPointer<ImGuiIO>): CPointer<ImVec2>
-foreign func imgui4cj_access_ImGuiIO_MouseClickedPos(self: CPointer<ImGuiIO>): CPointer<VArray<ImVec2, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseClickedTime(self: CPointer<ImGuiIO>): CPointer<VArray<Float64, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseClicked(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDoubleClicked(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseClickedCount(self: CPointer<ImGuiIO>): CPointer<VArray<ImU16, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseClickedLastCount(self: CPointer<ImGuiIO>): CPointer<VArray<ImU16, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseReleased(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDownOwned(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDownOwnedUnlessPopupClose(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>>
+foreign func imgui4cj_access_ImGuiIO_MouseClickedPos(self: CPointer<ImGuiIO>): CPointer<CPointer<ImVec2>>
+foreign func imgui4cj_access_ImGuiIO_MouseClickedTime(self: CPointer<ImGuiIO>): CPointer<CPointer<Float64>>
+foreign func imgui4cj_access_ImGuiIO_MouseClicked(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
+foreign func imgui4cj_access_ImGuiIO_MouseDoubleClicked(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
+foreign func imgui4cj_access_ImGuiIO_MouseClickedCount(self: CPointer<ImGuiIO>): CPointer<CPointer<ImU16>>
+foreign func imgui4cj_access_ImGuiIO_MouseClickedLastCount(self: CPointer<ImGuiIO>): CPointer<CPointer<ImU16>>
+foreign func imgui4cj_access_ImGuiIO_MouseReleased(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
+foreign func imgui4cj_access_ImGuiIO_MouseDownOwned(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
+foreign func imgui4cj_access_ImGuiIO_MouseDownOwnedUnlessPopupClose(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>>
 foreign func imgui4cj_access_ImGuiIO_MouseWheelRequestAxisSwap(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_MouseCtrlLeftAsRightClick(self: CPointer<ImGuiIO>): CPointer<Bool>
-foreign func imgui4cj_access_ImGuiIO_MouseDownDuration(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDownDurationPrev(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDragMaxDistanceAbs(self: CPointer<ImGuiIO>): CPointer<VArray<ImVec2, $5>>
-foreign func imgui4cj_access_ImGuiIO_MouseDragMaxDistanceSqr(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>>
+foreign func imgui4cj_access_ImGuiIO_MouseDownDuration(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>>
+foreign func imgui4cj_access_ImGuiIO_MouseDownDurationPrev(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>>
+foreign func imgui4cj_access_ImGuiIO_MouseDragMaxDistanceAbs(self: CPointer<ImGuiIO>): CPointer<CPointer<ImVec2>>
+foreign func imgui4cj_access_ImGuiIO_MouseDragMaxDistanceSqr(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>>
 foreign func imgui4cj_access_ImGuiIO_PenPressure(self: CPointer<ImGuiIO>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiIO_AppFocusLost(self: CPointer<ImGuiIO>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiIO_AppAcceptingEvents(self: CPointer<ImGuiIO>): CPointer<Bool>
@@ -1370,7 +1370,7 @@ public func access_ImGuiIO_MousePos(self: CPointer<ImGuiIO>): CPointer<ImVec2> {
     return unsafe { imgui4cj_access_ImGuiIO_MousePos(self) }
 }
 
-public func access_ImGuiIO_MouseDown(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseDown(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDown(self) }
 }
 
@@ -1410,7 +1410,7 @@ public func access_ImGuiIO_KeyMods(self: CPointer<ImGuiIO>): CPointer<ImGuiKeyCh
     return unsafe { imgui4cj_access_ImGuiIO_KeyMods(self) }
 }
 
-public func access_ImGuiIO_KeysData(self: CPointer<ImGuiIO>): CPointer<VArray<ImGuiKeyData, $154>> {
+public func access_ImGuiIO_KeysData(self: CPointer<ImGuiIO>): CPointer<CPointer<ImGuiKeyData>> {
     return unsafe { imgui4cj_access_ImGuiIO_KeysData(self) }
 }
 
@@ -1422,39 +1422,39 @@ public func access_ImGuiIO_MousePosPrev(self: CPointer<ImGuiIO>): CPointer<ImVec
     return unsafe { imgui4cj_access_ImGuiIO_MousePosPrev(self) }
 }
 
-public func access_ImGuiIO_MouseClickedPos(self: CPointer<ImGuiIO>): CPointer<VArray<ImVec2, $5>> {
+public func access_ImGuiIO_MouseClickedPos(self: CPointer<ImGuiIO>): CPointer<CPointer<ImVec2>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseClickedPos(self) }
 }
 
-public func access_ImGuiIO_MouseClickedTime(self: CPointer<ImGuiIO>): CPointer<VArray<Float64, $5>> {
+public func access_ImGuiIO_MouseClickedTime(self: CPointer<ImGuiIO>): CPointer<CPointer<Float64>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseClickedTime(self) }
 }
 
-public func access_ImGuiIO_MouseClicked(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseClicked(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseClicked(self) }
 }
 
-public func access_ImGuiIO_MouseDoubleClicked(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseDoubleClicked(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDoubleClicked(self) }
 }
 
-public func access_ImGuiIO_MouseClickedCount(self: CPointer<ImGuiIO>): CPointer<VArray<ImU16, $5>> {
+public func access_ImGuiIO_MouseClickedCount(self: CPointer<ImGuiIO>): CPointer<CPointer<ImU16>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseClickedCount(self) }
 }
 
-public func access_ImGuiIO_MouseClickedLastCount(self: CPointer<ImGuiIO>): CPointer<VArray<ImU16, $5>> {
+public func access_ImGuiIO_MouseClickedLastCount(self: CPointer<ImGuiIO>): CPointer<CPointer<ImU16>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseClickedLastCount(self) }
 }
 
-public func access_ImGuiIO_MouseReleased(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseReleased(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseReleased(self) }
 }
 
-public func access_ImGuiIO_MouseDownOwned(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseDownOwned(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDownOwned(self) }
 }
 
-public func access_ImGuiIO_MouseDownOwnedUnlessPopupClose(self: CPointer<ImGuiIO>): CPointer<VArray<Bool, $5>> {
+public func access_ImGuiIO_MouseDownOwnedUnlessPopupClose(self: CPointer<ImGuiIO>): CPointer<CPointer<Bool>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDownOwnedUnlessPopupClose(self) }
 }
 
@@ -1466,19 +1466,19 @@ public func access_ImGuiIO_MouseCtrlLeftAsRightClick(self: CPointer<ImGuiIO>): C
     return unsafe { imgui4cj_access_ImGuiIO_MouseCtrlLeftAsRightClick(self) }
 }
 
-public func access_ImGuiIO_MouseDownDuration(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>> {
+public func access_ImGuiIO_MouseDownDuration(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDownDuration(self) }
 }
 
-public func access_ImGuiIO_MouseDownDurationPrev(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>> {
+public func access_ImGuiIO_MouseDownDurationPrev(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDownDurationPrev(self) }
 }
 
-public func access_ImGuiIO_MouseDragMaxDistanceAbs(self: CPointer<ImGuiIO>): CPointer<VArray<ImVec2, $5>> {
+public func access_ImGuiIO_MouseDragMaxDistanceAbs(self: CPointer<ImGuiIO>): CPointer<CPointer<ImVec2>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDragMaxDistanceAbs(self) }
 }
 
-public func access_ImGuiIO_MouseDragMaxDistanceSqr(self: CPointer<ImGuiIO>): CPointer<VArray<Float32, $5>> {
+public func access_ImGuiIO_MouseDragMaxDistanceSqr(self: CPointer<ImGuiIO>): CPointer<CPointer<Float32>> {
     return unsafe { imgui4cj_access_ImGuiIO_MouseDragMaxDistanceSqr(self) }
 }
 
@@ -1866,11 +1866,11 @@ public func access_ImGuiKeyRoutingData_RoutingNext(self: CPointer<ImGuiKeyRoutin
 
 // struct ImGuiKeyRoutingTable
 
-foreign func imgui4cj_access_ImGuiKeyRoutingTable_Index(self: CPointer<ImGuiKeyRoutingTable>): CPointer<VArray<ImGuiKeyRoutingIndex, $154>>
+foreign func imgui4cj_access_ImGuiKeyRoutingTable_Index(self: CPointer<ImGuiKeyRoutingTable>): CPointer<CPointer<ImGuiKeyRoutingIndex>>
 foreign func imgui4cj_access_ImGuiKeyRoutingTable_Entries(self: CPointer<ImGuiKeyRoutingTable>): CPointer<ImVector_ImGuiKeyRoutingData>
 foreign func imgui4cj_access_ImGuiKeyRoutingTable_EntriesNext(self: CPointer<ImGuiKeyRoutingTable>): CPointer<ImVector_ImGuiKeyRoutingData>
 
-public func access_ImGuiKeyRoutingTable_Index(self: CPointer<ImGuiKeyRoutingTable>): CPointer<VArray<ImGuiKeyRoutingIndex, $154>> {
+public func access_ImGuiKeyRoutingTable_Index(self: CPointer<ImGuiKeyRoutingTable>): CPointer<CPointer<ImGuiKeyRoutingIndex>> {
     return unsafe { imgui4cj_access_ImGuiKeyRoutingTable_Index(self) }
 }
 
@@ -2041,7 +2041,7 @@ foreign func imgui4cj_access_ImGuiMenuColumns_OffsetIcon(self: CPointer<ImGuiMen
 foreign func imgui4cj_access_ImGuiMenuColumns_OffsetLabel(self: CPointer<ImGuiMenuColumns>): CPointer<ImU16>
 foreign func imgui4cj_access_ImGuiMenuColumns_OffsetShortcut(self: CPointer<ImGuiMenuColumns>): CPointer<ImU16>
 foreign func imgui4cj_access_ImGuiMenuColumns_OffsetMark(self: CPointer<ImGuiMenuColumns>): CPointer<ImU16>
-foreign func imgui4cj_access_ImGuiMenuColumns_Widths(self: CPointer<ImGuiMenuColumns>): CPointer<VArray<ImU16, $4>>
+foreign func imgui4cj_access_ImGuiMenuColumns_Widths(self: CPointer<ImGuiMenuColumns>): CPointer<CPointer<ImU16>>
 
 public func access_ImGuiMenuColumns_TotalWidth(self: CPointer<ImGuiMenuColumns>): CPointer<ImU32> {
     return unsafe { imgui4cj_access_ImGuiMenuColumns_TotalWidth(self) }
@@ -2071,7 +2071,7 @@ public func access_ImGuiMenuColumns_OffsetMark(self: CPointer<ImGuiMenuColumns>)
     return unsafe { imgui4cj_access_ImGuiMenuColumns_OffsetMark(self) }
 }
 
-public func access_ImGuiMenuColumns_Widths(self: CPointer<ImGuiMenuColumns>): CPointer<VArray<ImU16, $4>> {
+public func access_ImGuiMenuColumns_Widths(self: CPointer<ImGuiMenuColumns>): CPointer<CPointer<ImU16>> {
     return unsafe { imgui4cj_access_ImGuiMenuColumns_Widths(self) }
 }
 
@@ -2501,7 +2501,7 @@ foreign func imgui4cj_access_ImGuiPayload_DataSize(self: CPointer<ImGuiPayload>)
 foreign func imgui4cj_access_ImGuiPayload_SourceId(self: CPointer<ImGuiPayload>): CPointer<ImGuiID>
 foreign func imgui4cj_access_ImGuiPayload_SourceParentId(self: CPointer<ImGuiPayload>): CPointer<ImGuiID>
 foreign func imgui4cj_access_ImGuiPayload_DataFrameCount(self: CPointer<ImGuiPayload>): CPointer<Int32>
-foreign func imgui4cj_access_ImGuiPayload_DataType(self: CPointer<ImGuiPayload>): CPointer<VArray<UInt8, $33>>
+foreign func imgui4cj_access_ImGuiPayload_DataType(self: CPointer<ImGuiPayload>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiPayload_Preview(self: CPointer<ImGuiPayload>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiPayload_Delivery(self: CPointer<ImGuiPayload>): CPointer<Bool>
 
@@ -2525,7 +2525,7 @@ public func access_ImGuiPayload_DataFrameCount(self: CPointer<ImGuiPayload>): CP
     return unsafe { imgui4cj_access_ImGuiPayload_DataFrameCount(self) }
 }
 
-public func access_ImGuiPayload_DataType(self: CPointer<ImGuiPayload>): CPointer<VArray<UInt8, $33>> {
+public func access_ImGuiPayload_DataType(self: CPointer<ImGuiPayload>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiPayload_DataType(self) }
 }
 
@@ -2966,7 +2966,7 @@ foreign func imgui4cj_access_ImGuiStyle_AntiAliasedLinesUseTex(self: CPointer<Im
 foreign func imgui4cj_access_ImGuiStyle_AntiAliasedFill(self: CPointer<ImGuiStyle>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiStyle_CurveTessellationTol(self: CPointer<ImGuiStyle>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiStyle_CircleTessellationMaxError(self: CPointer<ImGuiStyle>): CPointer<Float32>
-foreign func imgui4cj_access_ImGuiStyle_Colors(self: CPointer<ImGuiStyle>): CPointer<VArray<ImVec4, $55>>
+foreign func imgui4cj_access_ImGuiStyle_Colors(self: CPointer<ImGuiStyle>): CPointer<CPointer<ImVec4>>
 foreign func imgui4cj_access_ImGuiStyle_HoverStationaryDelay(self: CPointer<ImGuiStyle>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiStyle_HoverDelayShort(self: CPointer<ImGuiStyle>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiStyle_HoverDelayNormal(self: CPointer<ImGuiStyle>): CPointer<Float32>
@@ -3161,7 +3161,7 @@ public func access_ImGuiStyle_CircleTessellationMaxError(self: CPointer<ImGuiSty
     return unsafe { imgui4cj_access_ImGuiStyle_CircleTessellationMaxError(self) }
 }
 
-public func access_ImGuiStyle_Colors(self: CPointer<ImGuiStyle>): CPointer<VArray<ImVec4, $55>> {
+public func access_ImGuiStyle_Colors(self: CPointer<ImGuiStyle>): CPointer<CPointer<ImVec4>> {
     return unsafe { imgui4cj_access_ImGuiStyle_Colors(self) }
 }
 
@@ -3647,11 +3647,11 @@ public func access_ImGuiTextBuffer_Buf(self: CPointer<ImGuiTextBuffer>): CPointe
 
 // struct ImGuiTextFilter
 
-foreign func imgui4cj_access_ImGuiTextFilter_InputBuf(self: CPointer<ImGuiTextFilter>): CPointer<VArray<UInt8, $256>>
+foreign func imgui4cj_access_ImGuiTextFilter_InputBuf(self: CPointer<ImGuiTextFilter>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiTextFilter_Filters(self: CPointer<ImGuiTextFilter>): CPointer<ImVector_ImGuiTextRange>
 foreign func imgui4cj_access_ImGuiTextFilter_CountGrep(self: CPointer<ImGuiTextFilter>): CPointer<Int32>
 
-public func access_ImGuiTextFilter_InputBuf(self: CPointer<ImGuiTextFilter>): CPointer<VArray<UInt8, $256>> {
+public func access_ImGuiTextFilter_InputBuf(self: CPointer<ImGuiTextFilter>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiTextFilter_InputBuf(self) }
 }
 
@@ -3725,7 +3725,7 @@ public func access_ImGuiTypingSelectRequest_SingleCharSize(self: CPointer<ImGuiT
 // struct ImGuiTypingSelectState
 
 foreign func imgui4cj_access_ImGuiTypingSelectState_Request(self: CPointer<ImGuiTypingSelectState>): CPointer<ImGuiTypingSelectRequest>
-foreign func imgui4cj_access_ImGuiTypingSelectState_SearchBuffer(self: CPointer<ImGuiTypingSelectState>): CPointer<VArray<UInt8, $64>>
+foreign func imgui4cj_access_ImGuiTypingSelectState_SearchBuffer(self: CPointer<ImGuiTypingSelectState>): CPointer<CPointer<UInt8>>
 foreign func imgui4cj_access_ImGuiTypingSelectState_FocusScope(self: CPointer<ImGuiTypingSelectState>): CPointer<ImGuiID>
 foreign func imgui4cj_access_ImGuiTypingSelectState_LastRequestFrame(self: CPointer<ImGuiTypingSelectState>): CPointer<Int32>
 foreign func imgui4cj_access_ImGuiTypingSelectState_LastRequestTime(self: CPointer<ImGuiTypingSelectState>): CPointer<Float32>
@@ -3735,7 +3735,7 @@ public func access_ImGuiTypingSelectState_Request(self: CPointer<ImGuiTypingSele
     return unsafe { imgui4cj_access_ImGuiTypingSelectState_Request(self) }
 }
 
-public func access_ImGuiTypingSelectState_SearchBuffer(self: CPointer<ImGuiTypingSelectState>): CPointer<VArray<UInt8, $64>> {
+public func access_ImGuiTypingSelectState_SearchBuffer(self: CPointer<ImGuiTypingSelectState>): CPointer<CPointer<UInt8>> {
     return unsafe { imgui4cj_access_ImGuiTypingSelectState_SearchBuffer(self) }
 }
 
@@ -3856,8 +3856,8 @@ foreign func imgui4cj_access_ImGuiViewportP_Alpha(self: CPointer<ImGuiViewportP>
 foreign func imgui4cj_access_ImGuiViewportP_LastAlpha(self: CPointer<ImGuiViewportP>): CPointer<Float32>
 foreign func imgui4cj_access_ImGuiViewportP_LastFocusedHadNavWindow(self: CPointer<ImGuiViewportP>): CPointer<Bool>
 foreign func imgui4cj_access_ImGuiViewportP_PlatformMonitor(self: CPointer<ImGuiViewportP>): CPointer<Int16>
-foreign func imgui4cj_access_ImGuiViewportP_BgFgDrawListsLastFrame(self: CPointer<ImGuiViewportP>): CPointer<VArray<Int32, $2>>
-foreign func imgui4cj_access_ImGuiViewportP_BgFgDrawLists(self: CPointer<ImGuiViewportP>): CPointer<VArray<CPointer<ImDrawList>, $2>>
+foreign func imgui4cj_access_ImGuiViewportP_BgFgDrawListsLastFrame(self: CPointer<ImGuiViewportP>): CPointer<CPointer<Int32>>
+foreign func imgui4cj_access_ImGuiViewportP_BgFgDrawLists(self: CPointer<ImGuiViewportP>): CPointer<CPointer<CPointer<ImDrawList>>>
 foreign func imgui4cj_access_ImGuiViewportP_DrawDataP(self: CPointer<ImGuiViewportP>): CPointer<ImDrawData>
 foreign func imgui4cj_access_ImGuiViewportP_DrawDataBuilder(self: CPointer<ImGuiViewportP>): CPointer<ImDrawDataBuilder>
 foreign func imgui4cj_access_ImGuiViewportP_LastPlatformPos(self: CPointer<ImGuiViewportP>): CPointer<ImVec2>
@@ -3912,11 +3912,11 @@ public func access_ImGuiViewportP_PlatformMonitor(self: CPointer<ImGuiViewportP>
     return unsafe { imgui4cj_access_ImGuiViewportP_PlatformMonitor(self) }
 }
 
-public func access_ImGuiViewportP_BgFgDrawListsLastFrame(self: CPointer<ImGuiViewportP>): CPointer<VArray<Int32, $2>> {
+public func access_ImGuiViewportP_BgFgDrawListsLastFrame(self: CPointer<ImGuiViewportP>): CPointer<CPointer<Int32>> {
     return unsafe { imgui4cj_access_ImGuiViewportP_BgFgDrawListsLastFrame(self) }
 }
 
-public func access_ImGuiViewportP_BgFgDrawLists(self: CPointer<ImGuiViewportP>): CPointer<VArray<CPointer<ImDrawList>, $2>> {
+public func access_ImGuiViewportP_BgFgDrawLists(self: CPointer<ImGuiViewportP>): CPointer<CPointer<CPointer<ImDrawList>>> {
     return unsafe { imgui4cj_access_ImGuiViewportP_BgFgDrawLists(self) }
 }
 
@@ -4006,9 +4006,9 @@ public func access_ImGuiWindowClass_DockingAllowUnclassed(self: CPointer<ImGuiWi
 
 // struct ImGuiWindowDockStyle
 
-foreign func imgui4cj_access_ImGuiWindowDockStyle_Colors(self: CPointer<ImGuiWindowDockStyle>): CPointer<VArray<ImU32, $6>>
+foreign func imgui4cj_access_ImGuiWindowDockStyle_Colors(self: CPointer<ImGuiWindowDockStyle>): CPointer<CPointer<ImU32>>
 
-public func access_ImGuiWindowDockStyle_Colors(self: CPointer<ImGuiWindowDockStyle>): CPointer<VArray<ImU32, $6>> {
+public func access_ImGuiWindowDockStyle_Colors(self: CPointer<ImGuiWindowDockStyle>): CPointer<CPointer<ImU32>> {
     return unsafe { imgui4cj_access_ImGuiWindowDockStyle_Colors(self) }
 }
 
@@ -4487,18 +4487,18 @@ public func access_StbUndoRecord_char_storage(self: CPointer<StbUndoRecord>): CP
 
 // struct StbUndoState
 
-foreign func imgui4cj_access_StbUndoState_undo_rec(self: CPointer<StbUndoState>): CPointer<VArray<StbUndoRecord, $99>>
-foreign func imgui4cj_access_StbUndoState_undo_char(self: CPointer<StbUndoState>): CPointer<VArray<ImWchar, $999>>
+foreign func imgui4cj_access_StbUndoState_undo_rec(self: CPointer<StbUndoState>): CPointer<CPointer<StbUndoRecord>>
+foreign func imgui4cj_access_StbUndoState_undo_char(self: CPointer<StbUndoState>): CPointer<CPointer<ImWchar>>
 foreign func imgui4cj_access_StbUndoState_undo_point(self: CPointer<StbUndoState>): CPointer<Int16>
 foreign func imgui4cj_access_StbUndoState_redo_point(self: CPointer<StbUndoState>): CPointer<Int16>
 foreign func imgui4cj_access_StbUndoState_undo_char_point(self: CPointer<StbUndoState>): CPointer<Int32>
 foreign func imgui4cj_access_StbUndoState_redo_char_point(self: CPointer<StbUndoState>): CPointer<Int32>
 
-public func access_StbUndoState_undo_rec(self: CPointer<StbUndoState>): CPointer<VArray<StbUndoRecord, $99>> {
+public func access_StbUndoState_undo_rec(self: CPointer<StbUndoState>): CPointer<CPointer<StbUndoRecord>> {
     return unsafe { imgui4cj_access_StbUndoState_undo_rec(self) }
 }
 
-public func access_StbUndoState_undo_char(self: CPointer<StbUndoState>): CPointer<VArray<ImWchar, $999>> {
+public func access_StbUndoState_undo_char(self: CPointer<StbUndoState>): CPointer<CPointer<ImWchar>> {
     return unsafe { imgui4cj_access_StbUndoState_undo_char(self) }
 }
 
@@ -4520,9 +4520,9 @@ public func access_StbUndoState_redo_char_point(self: CPointer<StbUndoState>): C
 
 // struct ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN
 
-foreign func imgui4cj_access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(self: CPointer<ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN>): CPointer<VArray<ImU32, $5>>
+foreign func imgui4cj_access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(self: CPointer<ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN>): CPointer<CPointer<ImU32>>
 
-public func access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(self: CPointer<ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN>): CPointer<VArray<ImU32, $5>> {
+public func access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(self: CPointer<ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN>): CPointer<CPointer<ImU32>> {
     return unsafe { imgui4cj_access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(self) }
 }
 

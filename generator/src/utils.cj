@@ -187,13 +187,13 @@ enum CjType <: ToString {
         }
     }
 
-    private static func tryGetCjTypeOfCPointer(ty: String): ?CjType {
+    private static func tryGetCjTypeOfCPointer(ty: String, cArrayAsPointer!: Bool = false): ?CjType {
         if (!ty.endsWith("*")) {
             return None
         }
 
         let baseTy = ty[0..ty.size - 1].trimLeft("const").trimAscii()
-        let baseCjTy = getCjTypeOfCType(baseTy)
+        let baseCjTy = getCjTypeOfCType(baseTy, cArrayAsPointer: cArrayAsPointer)
         return baseCjTy.getPointer()
     }
 
@@ -232,11 +232,15 @@ enum CjType <: ToString {
     private static func getCjTypeOfCType(_ty: String, size!: ?Int64 = None, cArrayAsPointer!: Bool = false): CjType {
         let ty = _ty.replace("const ", "").trimAscii().replace(" const", "").trimAscii()
         let cjTy = tryGetCjTypeOfBuiltinCType(ty) ?? tryGetCjTypeOfCArrayType(ty, cArrayAsPointer) ??
-            tryGetCjTypeOfCPointer(ty) ?? tryGetCjTypeOfCFunc(ty) ?? tryGetCjTypeOfCExplicitStructType(ty) ?? TypeAlias(
-            ty)
+            tryGetCjTypeOfCPointer(ty, cArrayAsPointer: cArrayAsPointer) ?? tryGetCjTypeOfCFunc(ty) ??
+            tryGetCjTypeOfCExplicitStructType(ty) ?? TypeAlias(ty)
 
         return match (size) {
-            case Some(size) => cjTy.getVArray(size)
+            case Some(size) => if (cArrayAsPointer) {
+                cjTy.getPointer()
+            } else {
+                cjTy.getVArray(size)
+            }
             case None => cjTy
         }
     }
@@ -440,8 +444,7 @@ func getWCAPIArgument(ty: CjType, argName_: String, typeAlias: HashMap<String, C
         case CStringType => ("CStringConvertable", "${argName}.asCString()")
         case CFuncType(_, _) => (ty.toString(), argName)
         case VArrayType(_, _) => throw IllegalStateException()
-        case StructType(_) => (ty.toString(), argName)
-        // case StructType(_) => (ty.toString(), "${argName}.getPointer()")
+        case StructType(_) => (ty.toString(), "unsafe { ${argName}.getCPointer().read() }")
         case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
             getWCAPIArgument(StructType(sname), argName, typeAlias)
         } else {
@@ -466,8 +469,7 @@ func getWCAPIArgument(ty: CjType, argName_: String, typeAlias: HashMap<String, C
                 case CStringType => ("Value<${typenames[0]}>", "${argName}.getCPointer()")
                 case CFuncType(_, _) => ("Value<${typenames[0]}>", "${argName}.getCPointer()")
                 case VArrayType(_, _) => throw IllegalStateException()
-                case StructType(_) => (ty.toString(), argName)
-                // case StructType(_) => (typenames[0].toString(), "${argName}.getCPointer()")
+                case StructType(_) => (typenames[0].toString(), "${argName}.getCPointer()")
                 case TypeAlias(name) =>
                     let alias = typeAlias.get(name) ?? StructType(name)
                     var (newTy, argName) = getWCAPIArgument(TemplateType(CPointerType, [alias]), argName, typeAlias)
@@ -499,8 +501,7 @@ func getWCAPIReturn(ty: CjType, originalReturn: String, typeAlias: HashMap<Strin
         case CStringType => ("String", "${originalReturn}.toString()")
         case CFuncType(_, _) => (ty.toString(), originalReturn)
         case VArrayType(_, _) => throw IllegalStateException()
-        case StructType(_) => (ty.toString(), originalReturn)
-        // case StructType(_) => (ty.toString(), "${typenames[0]}.make(${originalReturn})")
+        case StructType(_) => (ty.toString(), "${ty}(value: Some(${originalReturn}))")
         case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
             getWCAPIReturn(StructType(sname), originalReturn, typeAlias)
         } else {
@@ -509,46 +510,183 @@ func getWCAPIReturn(ty: CjType, originalReturn: String, typeAlias: HashMap<Strin
         case TemplateType(template, typenames) => match (template) {
             case CPointerType => match (typenames[0]) {
                 case UnitType => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case BoolType => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Int8Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case UInt8Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Int16Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case UInt16Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Int32Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case UInt32Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Int64Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case UInt64Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case IntNativeType => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case UIntNativeType => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Float32Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case Float64Type => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case CStringType => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case CFuncType(_, _) => ("Value<${typenames[0]}>",
-                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, owned: false)")
+                    "Value<${typenames[0]}>.unsafeMake(${originalReturn}, count: -1, owned: false)")
                 case VArrayType(_, _) => throw IllegalStateException()
-                case StructType(_) => (ty.toString(), originalReturn)
-                // case StructType(_) => (typenames[0].toString(), "${typenames[0]}.make(${originalReturn}, owned: false)")
+                case StructType(_) => (typenames[0].toString(), "${typenames[0]}(${originalReturn}, owned: false)")
                 case TypeAlias(name) =>
                     let alias = typeAlias.get(name) ?? StructType(name)
                     var (newTy, newRet) = getWCAPIReturn(TemplateType(CPointerType, [alias]), originalReturn, typeAlias)
                     (newTy.replace(alias.toString(), name), newRet)
                 case TemplateType(template, typenames) => match (template) {
                     case CPointerType => (ty.toString(), originalReturn)
+                }
+            }
+        }
+    }
+}
+
+func getWCAPIMemberAccess(ty: CjType, accessCall: String, writeArg: String, typeAlias: HashMap<String, CjType>,
+    makeCType!: (String) -> String): (String, String, String) {
+    func rename(ty: CjType, trans: Bool): CjType {
+        return match (ty) {
+            case CFuncType(params, ret) => CFuncType(
+                ArrayList<(String, CjType)>.fromIterator(
+                    params |> map {
+                    pair: (String, CjType) =>
+                    let (pname, ptype) = pair
+                    (pname, rename(ptype, true))
+                }).toArray(),
+                rename(ret, true)
+            )
+            case VArrayType(ty, size) => CjType.VArrayType(rename(ty, true), size)
+            case StructType(name) => StructType(if (trans) {
+                makeCType(name)
+            } else {
+                name
+            })
+            case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+                rename(StructType(sname), trans)
+            } else {
+                ty
+            }
+            case TemplateType(template, typenames) => match (template) {
+                case CPointerType => TemplateType(CPointerType, [rename(typenames[0], true)])
+            }
+            case _ => ty
+        }
+    }
+
+    return match (ty) {
+        case UnitType => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case BoolType => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Int8Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case UInt8Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Int16Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case UInt16Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Int32Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case UInt32Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Int64Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case UInt64Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case IntNativeType => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case UIntNativeType => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Float32Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case Float64Type => (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case CStringType => ("String", "${accessCall}.read().toString()", "${accessCall}.write(${writeArg}.asCString())")
+        case CFuncType(_, _) => (rename(ty, false).toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        case VArrayType(eleTy, size) =>
+            var (t, read, write) = ("Value<${rename(eleTy, false)}>",
+                "Value<${rename(eleTy, false)}>.unsafeMake(${accessCall}.read(), count: ${size}, owned: false)",
+                "throw UnsupportedException(\"C array member can not be set \${${writeArg}}\");")
+            if (let StructType(name) <- eleTy) {
+                t = name
+                read = "${name}(${accessCall}.read(), count: ${size}, owned: false)"
+                write = "throw UnsupportedException(\"C array member can not be set \${${writeArg}}\");"
+            } else if (let TypeAlias(name) <- eleTy) {
+                if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+                    t = name
+                    read = "${sname}(${accessCall}.read(), count: ${size}, owned: false)"
+                    write = "throw UnsupportedException(\"C array member can not be set \${${writeArg}}\");"
+                }
+            }
+            (t, read, write)
+        case StructType(_) => (ty.toString(), "${ty}(${accessCall}, owned: false)",
+            "${accessCall}.write(${writeArg}.getCPointer().read())")
+        case TypeAlias(name) => if (let StructType(sname) <- typeAlias.get(name).getOrDefault {TypeAlias(name)}) {
+            getWCAPIMemberAccess(StructType(sname), accessCall, writeArg, typeAlias, makeCType: makeCType)
+        } else {
+            (ty.toString(), "${accessCall}.read()", "${accessCall}.write(${writeArg})")
+        }
+        case TemplateType(template, typenames) => match (template) {
+            case CPointerType => match (typenames[0]) {
+                case UnitType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case BoolType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Int8Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case UInt8Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Int16Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case UInt16Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Int32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case UInt32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Int64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case UInt64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case IntNativeType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case UIntNativeType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Float32Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case Float64Type => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case CStringType => ("Value<${typenames[0]}>",
+                    "Value<${typenames[0]}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case CFuncType(_, _) => ("Value<${rename(typenames[0], false)}>",
+                    "Value<${rename(typenames[0], false)}>.unsafeMake(${accessCall}.read(), count: -1, owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case VArrayType(_, _) => throw IllegalStateException()
+                case StructType(_) => (typenames[0].toString(), "${typenames[0]}(${accessCall}.read(), owned: false)",
+                    "${accessCall}.write(${writeArg}.getCPointer())")
+                case TypeAlias(name) =>
+                    let alias = typeAlias.get(name) ?? StructType(name)
+                    var (newTy, read, write) = getWCAPIMemberAccess(TemplateType(CPointerType, [alias]), accessCall,
+                        writeArg, typeAlias, makeCType: makeCType)
+                    (newTy.replace(alias.toString(), name), read, write)
+                case TemplateType(template, typenames) => match (template) {
+                    case CPointerType => (rename(ty, false).toString(), "${accessCall}.read()",
+                        "${accessCall}.write(${writeArg})")
                 }
             }
         }
