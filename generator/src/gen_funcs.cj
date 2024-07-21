@@ -8,8 +8,8 @@ struct FuncParameter {
 }
 
 struct FuncSignature {
-    FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String, let structName: ?String,
-        let isConstructor: Bool, let isDestructor: Bool) {
+    FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String, let structName: String,
+        let isClassStaticMethod: Bool, let isConstructor: Bool, let isDestructor: Bool) {
     }
 }
 
@@ -46,6 +46,7 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
                     )),
                     fnSig["ret"].asString().getValue(), // retType
                     fnSig.get("stname")?.asString().getValue() ?? "", // structName
+                    fnSig.get("is_static_function")?.asBool().getValue() ?? false, // isClassStaticMethod
                     fnSig.get("constructor")?.asBool().getValue() ?? false, // isConstructor
                     fnSig.get("destructor")?.asBool().getValue() ?? false // isDestructor
                 )
