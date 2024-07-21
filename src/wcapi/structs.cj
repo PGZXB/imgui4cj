@@ -38,6 +38,26 @@ public class ImBitVector <: StructWrapper<capi.ImBitVector> {
             unsafe { capi.access_ImBitVector_Storage(pointer).write(value.getCPointer().read()) }
         }
     }
+
+    public func Clear(): Unit {
+        return ImBitVector_Clear(this)
+    }
+
+    public func ClearBit(n: Int32): Unit {
+        return ImBitVector_ClearBit(this, n)
+    }
+
+    public func Create(sz: Int32): Unit {
+        return ImBitVector_Create(this, sz)
+    }
+
+    public func SetBit(n: Int32): Unit {
+        return ImBitVector_SetBit(this, n)
+    }
+
+    public func TestBit(n: Int32): Bool {
+        return ImBitVector_TestBit(this, n)
+    }
 }
 public class ImColor <: StructWrapper<capi.ImColor> {
     public init(Value!: ImVec4) {
@@ -69,6 +89,14 @@ public class ImColor <: StructWrapper<capi.ImColor> {
         set(value) {
             unsafe { capi.access_ImColor_Value(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public static func HSV(pOut: ImColor, h: Float32, s: Float32, v: Float32, a: Float32): Unit {
+        return ImColor_HSV(pOut, h, s, v, a)
+    }
+
+    public func SetHSV(h: Float32, s: Float32, v: Float32, a: Float32): Unit {
+        return ImColor_SetHSV(this, h, s, v, a)
     }
 }
 public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
@@ -210,6 +238,10 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         set(value) {
             unsafe { capi.access_ImDrawCmd_UserCallbackData(pointer).write(value.getCPointer()) }
         }
+    }
+
+    public func GetTexID(): ImTextureID {
+        return ImDrawCmd_GetTexID(this)
     }
 }
 public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
@@ -384,6 +416,22 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
         set(value) {
             unsafe { capi.access_ImDrawData_OwnerViewport(pointer).write(value.getCPointer()) }
         }
+    }
+
+    public func AddDrawList(draw_list: ImDrawList): Unit {
+        return ImDrawData_AddDrawList(this, draw_list)
+    }
+
+    public func Clear(): Unit {
+        return ImDrawData_Clear(this)
+    }
+
+    public func DeIndexAllBuffers(): Unit {
+        return ImDrawData_DeIndexAllBuffers(this)
+    }
+
+    public func ScaleClipRects(fb_scale: ImVec2): Unit {
+        return ImDrawData_ScaleClipRects(this, fb_scale)
     }
 }
 public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
@@ -614,6 +662,274 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
             unsafe { capi.access_ImDrawList__OwnerName(pointer).write(value.asCString()) }
         }
     }
+
+    public func AddBezierCubic(p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
+        return ImDrawList_AddBezierCubic(this, p1, p2, p3, p4, col, thickness, num_segments)
+    }
+
+    public func AddBezierQuadratic(p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
+        return ImDrawList_AddBezierQuadratic(this, p1, p2, p3, col, thickness, num_segments)
+    }
+
+    public func AddCallback(callback: ImDrawCallback, callback_data: Value<Unit>): Unit {
+        return ImDrawList_AddCallback(this, callback, callback_data)
+    }
+
+    public func AddCircle(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
+        return ImDrawList_AddCircle(this, center, radius, col, num_segments, thickness)
+    }
+
+    public func AddCircleFilled(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit {
+        return ImDrawList_AddCircleFilled(this, center, radius, col, num_segments)
+    }
+
+    public func AddConcavePolyFilled(points: ImVec2, num_points: Int32, col: ImU32): Unit {
+        return ImDrawList_AddConcavePolyFilled(this, points, num_points, col)
+    }
+
+    public func AddConvexPolyFilled(points: ImVec2, num_points: Int32, col: ImU32): Unit {
+        return ImDrawList_AddConvexPolyFilled(this, points, num_points, col)
+    }
+
+    public func AddDrawCmd(): Unit {
+        return ImDrawList_AddDrawCmd(this)
+    }
+
+    public func AddEllipse(center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32, thickness: Float32): Unit {
+        return ImDrawList_AddEllipse(this, center, radius, col, rot, num_segments, thickness)
+    }
+
+    public func AddEllipseFilled(center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32): Unit {
+        return ImDrawList_AddEllipseFilled(this, center, radius, col, rot, num_segments)
+    }
+
+    public func AddImage(user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32): Unit {
+        return ImDrawList_AddImage(this, user_texture_id, p_min, p_max, uv_min, uv_max, col)
+    }
+
+    public func AddImageQuad(user_texture_id: ImTextureID, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, uv1: ImVec2, uv2: ImVec2, uv3: ImVec2, uv4: ImVec2, col: ImU32): Unit {
+        return ImDrawList_AddImageQuad(this, user_texture_id, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col)
+    }
+
+    public func AddImageRounded(user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
+        return ImDrawList_AddImageRounded(this, user_texture_id, p_min, p_max, uv_min, uv_max, col, rounding, flags)
+    }
+
+    public func AddLine(p1: ImVec2, p2: ImVec2, col: ImU32, thickness: Float32): Unit {
+        return ImDrawList_AddLine(this, p1, p2, col, thickness)
+    }
+
+    public func AddNgon(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
+        return ImDrawList_AddNgon(this, center, radius, col, num_segments, thickness)
+    }
+
+    public func AddNgonFilled(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit {
+        return ImDrawList_AddNgonFilled(this, center, radius, col, num_segments)
+    }
+
+    public func AddPolyline(points: ImVec2, num_points: Int32, col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit {
+        return ImDrawList_AddPolyline(this, points, num_points, col, flags, thickness)
+    }
+
+    public func AddQuad(p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32): Unit {
+        return ImDrawList_AddQuad(this, p1, p2, p3, p4, col, thickness)
+    }
+
+    public func AddQuadFilled(p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32): Unit {
+        return ImDrawList_AddQuadFilled(this, p1, p2, p3, p4, col)
+    }
+
+    public func AddRect(p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags, thickness: Float32): Unit {
+        return ImDrawList_AddRect(this, p_min, p_max, col, rounding, flags, thickness)
+    }
+
+    public func AddRectFilled(p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
+        return ImDrawList_AddRectFilled(this, p_min, p_max, col, rounding, flags)
+    }
+
+    public func AddRectFilledMultiColor(p_min: ImVec2, p_max: ImVec2, col_upr_left: ImU32, col_upr_right: ImU32, col_bot_right: ImU32, col_bot_left: ImU32): Unit {
+        return ImDrawList_AddRectFilledMultiColor(this, p_min, p_max, col_upr_left, col_upr_right, col_bot_right, col_bot_left)
+    }
+
+    public func AddText(pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable): Unit {
+        return ImDrawList_AddText_Vec2(this, pos, col, text_begin, text_end)
+    }
+
+    public func AddText(font: ImFont, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip_rect: ImVec4): Unit {
+        return ImDrawList_AddText_FontPtr(this, font, font_size, pos, col, text_begin, text_end, wrap_width, cpu_fine_clip_rect)
+    }
+
+    public func AddTriangle(p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32): Unit {
+        return ImDrawList_AddTriangle(this, p1, p2, p3, col, thickness)
+    }
+
+    public func AddTriangleFilled(p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32): Unit {
+        return ImDrawList_AddTriangleFilled(this, p1, p2, p3, col)
+    }
+
+    public func ChannelsMerge(): Unit {
+        return ImDrawList_ChannelsMerge(this)
+    }
+
+    public func ChannelsSetCurrent(n: Int32): Unit {
+        return ImDrawList_ChannelsSetCurrent(this, n)
+    }
+
+    public func ChannelsSplit(count: Int32): Unit {
+        return ImDrawList_ChannelsSplit(this, count)
+    }
+
+    public func CloneOutput(): ImDrawList {
+        return ImDrawList_CloneOutput(this)
+    }
+
+    public func GetClipRectMax(pOut: ImVec2): Unit {
+        return ImDrawList_GetClipRectMax(pOut, this)
+    }
+
+    public func GetClipRectMin(pOut: ImVec2): Unit {
+        return ImDrawList_GetClipRectMin(pOut, this)
+    }
+
+    public func PathArcTo(center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
+        return ImDrawList_PathArcTo(this, center, radius, a_min, a_max, num_segments)
+    }
+
+    public func PathArcToFast(center: ImVec2, radius: Float32, a_min_of_12: Int32, a_max_of_12: Int32): Unit {
+        return ImDrawList_PathArcToFast(this, center, radius, a_min_of_12, a_max_of_12)
+    }
+
+    public func PathBezierCubicCurveTo(p2: ImVec2, p3: ImVec2, p4: ImVec2, num_segments: Int32): Unit {
+        return ImDrawList_PathBezierCubicCurveTo(this, p2, p3, p4, num_segments)
+    }
+
+    public func PathBezierQuadraticCurveTo(p2: ImVec2, p3: ImVec2, num_segments: Int32): Unit {
+        return ImDrawList_PathBezierQuadraticCurveTo(this, p2, p3, num_segments)
+    }
+
+    public func PathClear(): Unit {
+        return ImDrawList_PathClear(this)
+    }
+
+    public func PathEllipticalArcTo(center: ImVec2, radius: ImVec2, rot: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
+        return ImDrawList_PathEllipticalArcTo(this, center, radius, rot, a_min, a_max, num_segments)
+    }
+
+    public func PathFillConcave(col: ImU32): Unit {
+        return ImDrawList_PathFillConcave(this, col)
+    }
+
+    public func PathFillConvex(col: ImU32): Unit {
+        return ImDrawList_PathFillConvex(this, col)
+    }
+
+    public func PathLineTo(pos: ImVec2): Unit {
+        return ImDrawList_PathLineTo(this, pos)
+    }
+
+    public func PathLineToMergeDuplicate(pos: ImVec2): Unit {
+        return ImDrawList_PathLineToMergeDuplicate(this, pos)
+    }
+
+    public func PathRect(rect_min: ImVec2, rect_max: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit {
+        return ImDrawList_PathRect(this, rect_min, rect_max, rounding, flags)
+    }
+
+    public func PathStroke(col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit {
+        return ImDrawList_PathStroke(this, col, flags, thickness)
+    }
+
+    public func PopClipRect(): Unit {
+        return ImDrawList_PopClipRect(this)
+    }
+
+    public func PopTextureID(): Unit {
+        return ImDrawList_PopTextureID(this)
+    }
+
+    public func PrimQuadUV(a: ImVec2, b: ImVec2, c: ImVec2, d: ImVec2, uv_a: ImVec2, uv_b: ImVec2, uv_c: ImVec2, uv_d: ImVec2, col: ImU32): Unit {
+        return ImDrawList_PrimQuadUV(this, a, b, c, d, uv_a, uv_b, uv_c, uv_d, col)
+    }
+
+    public func PrimRect(a: ImVec2, b: ImVec2, col: ImU32): Unit {
+        return ImDrawList_PrimRect(this, a, b, col)
+    }
+
+    public func PrimRectUV(a: ImVec2, b: ImVec2, uv_a: ImVec2, uv_b: ImVec2, col: ImU32): Unit {
+        return ImDrawList_PrimRectUV(this, a, b, uv_a, uv_b, col)
+    }
+
+    public func PrimReserve(idx_count: Int32, vtx_count: Int32): Unit {
+        return ImDrawList_PrimReserve(this, idx_count, vtx_count)
+    }
+
+    public func PrimUnreserve(idx_count: Int32, vtx_count: Int32): Unit {
+        return ImDrawList_PrimUnreserve(this, idx_count, vtx_count)
+    }
+
+    public func PrimVtx(pos: ImVec2, uv: ImVec2, col: ImU32): Unit {
+        return ImDrawList_PrimVtx(this, pos, uv, col)
+    }
+
+    public func PrimWriteIdx(idx: ImDrawIdx): Unit {
+        return ImDrawList_PrimWriteIdx(this, idx)
+    }
+
+    public func PrimWriteVtx(pos: ImVec2, uv: ImVec2, col: ImU32): Unit {
+        return ImDrawList_PrimWriteVtx(this, pos, uv, col)
+    }
+
+    public func PushClipRect(clip_rect_min: ImVec2, clip_rect_max: ImVec2, intersect_with_current_clip_rect: Bool): Unit {
+        return ImDrawList_PushClipRect(this, clip_rect_min, clip_rect_max, intersect_with_current_clip_rect)
+    }
+
+    public func PushClipRectFullScreen(): Unit {
+        return ImDrawList_PushClipRectFullScreen(this)
+    }
+
+    public func PushTextureID(texture_id: ImTextureID): Unit {
+        return ImDrawList_PushTextureID(this, texture_id)
+    }
+
+    public func _CalcCircleAutoSegmentCount(radius: Float32): Int32 {
+        return ImDrawList__CalcCircleAutoSegmentCount(this, radius)
+    }
+
+    public func _ClearFreeMemory(): Unit {
+        return ImDrawList__ClearFreeMemory(this)
+    }
+
+    public func _OnChangedClipRect(): Unit {
+        return ImDrawList__OnChangedClipRect(this)
+    }
+
+    public func _OnChangedTextureID(): Unit {
+        return ImDrawList__OnChangedTextureID(this)
+    }
+
+    public func _OnChangedVtxOffset(): Unit {
+        return ImDrawList__OnChangedVtxOffset(this)
+    }
+
+    public func _PathArcToFastEx(center: ImVec2, radius: Float32, a_min_sample: Int32, a_max_sample: Int32, a_step: Int32): Unit {
+        return ImDrawList__PathArcToFastEx(this, center, radius, a_min_sample, a_max_sample, a_step)
+    }
+
+    public func _PathArcToN(center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
+        return ImDrawList__PathArcToN(this, center, radius, a_min, a_max, num_segments)
+    }
+
+    public func _PopUnusedDrawCmd(): Unit {
+        return ImDrawList__PopUnusedDrawCmd(this)
+    }
+
+    public func _ResetForNewFrame(): Unit {
+        return ImDrawList__ResetForNewFrame(this)
+    }
+
+    public func _TryMergeDrawCmds(): Unit {
+        return ImDrawList__TryMergeDrawCmds(this)
+    }
 }
 public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
     public init(TexUvWhitePixel!: ImVec2, Font!: ImFont, FontSize!: Float32, CurveTessellationTol!: Float32, CircleSegmentMaxError!: Float32, ClipRectFullscreen!: ImVec4, InitialFlags!: ImDrawListFlags, TempBuffer!: ImVector_ImVec2, ArcFastVtx!: ImVec2, ArcFastRadiusCutoff!: Float32, CircleSegmentCounts!: Value<ImU8>, TexUvLines!: ImVec4) {
@@ -767,6 +1083,10 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
             unsafe { capi.access_ImDrawListSharedData_TexUvLines(pointer).write(value.getCPointer()) }
         }
     }
+
+    public func SetCircleTessellationMaxError(max_error: Float32): Unit {
+        return ImDrawListSharedData_SetCircleTessellationMaxError(this, max_error)
+    }
 }
 public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
     public init(_Current!: Int32, _Count!: Int32, _Channels!: ImVector_ImDrawChannel) {
@@ -820,6 +1140,26 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
         set(value) {
             unsafe { capi.access_ImDrawListSplitter__Channels(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func Clear(): Unit {
+        return ImDrawListSplitter_Clear(this)
+    }
+
+    public func ClearFreeMemory(): Unit {
+        return ImDrawListSplitter_ClearFreeMemory(this)
+    }
+
+    public func Merge(draw_list: ImDrawList): Unit {
+        return ImDrawListSplitter_Merge(this, draw_list)
+    }
+
+    public func SetCurrentChannel(draw_list: ImDrawList, channel_idx: Int32): Unit {
+        return ImDrawListSplitter_SetCurrentChannel(this, draw_list, channel_idx)
+    }
+
+    public func Split(draw_list: ImDrawList, count: Int32): Unit {
+        return ImDrawListSplitter_Split(this, draw_list, count)
     }
 }
 public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
@@ -1116,6 +1456,70 @@ public class ImFont <: StructWrapper<capi.ImFont> {
             unsafe { throw UnsupportedException("C array member can not be set ${value}"); }
         }
     }
+
+    public func AddGlyph(src_cfg: ImFontConfig, c: ImWchar, x0: Float32, y0: Float32, x1: Float32, y1: Float32, u0: Float32, v0: Float32, u1: Float32, v1: Float32, advance_x: Float32): Unit {
+        return ImFont_AddGlyph(this, src_cfg, c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x)
+    }
+
+    public func AddRemapChar(dst: ImWchar, src: ImWchar, overwrite_dst: Bool): Unit {
+        return ImFont_AddRemapChar(this, dst, src, overwrite_dst)
+    }
+
+    public func BuildLookupTable(): Unit {
+        return ImFont_BuildLookupTable(this)
+    }
+
+    public func CalcTextSizeA(pOut: ImVec2, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Value<CPointer<UInt8>>): Unit {
+        return ImFont_CalcTextSizeA(pOut, this, size, max_width, wrap_width, text_begin, text_end, remaining)
+    }
+
+    public func CalcWordWrapPositionA(scale: Float32, text: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32): String {
+        return ImFont_CalcWordWrapPositionA(this, scale, text, text_end, wrap_width)
+    }
+
+    public func ClearOutputData(): Unit {
+        return ImFont_ClearOutputData(this)
+    }
+
+    public func FindGlyph(c: ImWchar): Value<ImFontGlyph> {
+        return ImFont_FindGlyph(this, c)
+    }
+
+    public func FindGlyphNoFallback(c: ImWchar): Value<ImFontGlyph> {
+        return ImFont_FindGlyphNoFallback(this, c)
+    }
+
+    public func GetCharAdvance(c: ImWchar): Float32 {
+        return ImFont_GetCharAdvance(this, c)
+    }
+
+    public func GetDebugName(): String {
+        return ImFont_GetDebugName(this)
+    }
+
+    public func GrowIndex(new_size: Int32): Unit {
+        return ImFont_GrowIndex(this, new_size)
+    }
+
+    public func IsGlyphRangeUnused(c_begin: Int32, c_last: Int32): Bool {
+        return ImFont_IsGlyphRangeUnused(this, c_begin, c_last)
+    }
+
+    public func IsLoaded(): Bool {
+        return ImFont_IsLoaded(this)
+    }
+
+    public func RenderChar(draw_list: ImDrawList, size: Float32, pos: ImVec2, col: ImU32, c: ImWchar): Unit {
+        return ImFont_RenderChar(this, draw_list, size, pos, col, c)
+    }
+
+    public func RenderText(draw_list: ImDrawList, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip: Bool): Unit {
+        return ImFont_RenderText(this, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip)
+    }
+
+    public func SetGlyphVisible(c: ImWchar, visible: Bool): Unit {
+        return ImFont_SetGlyphVisible(this, c, visible)
+    }
 }
 public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
     public init(Flags!: ImFontAtlasFlags, TexID!: ImTextureID, TexDesiredWidth!: Int32, TexGlyphPadding!: Int32, Locked!: Bool, UserData!: Value<Unit>, TexReady!: Bool, TexPixelsUseColors!: Bool, TexPixelsAlpha8!: Value<UInt8>, TexPixelsRGBA32!: Value<Int32>, TexWidth!: Int32, TexHeight!: Int32, TexUvScale!: ImVec2, TexUvWhitePixel!: ImVec2, Fonts!: ImVector_ImFontPtr, CustomRects!: ImVector_ImFontAtlasCustomRect, ConfigData!: ImVector_ImFontConfig, TexUvLines!: ImVec4, FontBuilderIO!: ImFontBuilderIO, FontBuilderFlags!: Int32, PackIdMouseCursors!: Int32, PackIdLines!: Int32) {
@@ -1379,6 +1783,122 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
             unsafe { capi.access_ImFontAtlas_PackIdLines(pointer).write(value) }
         }
     }
+
+    public func AddCustomRectFontGlyph(font: ImFont, id: ImWchar, width: Int32, height: Int32, advance_x: Float32, offset: ImVec2): Int32 {
+        return ImFontAtlas_AddCustomRectFontGlyph(this, font, id, width, height, advance_x, offset)
+    }
+
+    public func AddCustomRectRegular(width: Int32, height: Int32): Int32 {
+        return ImFontAtlas_AddCustomRectRegular(this, width, height)
+    }
+
+    public func AddFont(font_cfg: ImFontConfig): ImFont {
+        return ImFontAtlas_AddFont(this, font_cfg)
+    }
+
+    public func AddFontDefault(font_cfg: ImFontConfig): ImFont {
+        return ImFontAtlas_AddFontDefault(this, font_cfg)
+    }
+
+    public func AddFontFromFileTTF(filename: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+        return ImFontAtlas_AddFontFromFileTTF(this, filename, size_pixels, font_cfg, glyph_ranges)
+    }
+
+    public func AddFontFromMemoryCompressedBase85TTF(compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+        return ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(this, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges)
+    }
+
+    public func AddFontFromMemoryCompressedTTF(compressed_font_data: Value<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+        return ImFontAtlas_AddFontFromMemoryCompressedTTF(this, compressed_font_data, compressed_font_data_size, size_pixels, font_cfg, glyph_ranges)
+    }
+
+    public func AddFontFromMemoryTTF(font_data: Value<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+        return ImFontAtlas_AddFontFromMemoryTTF(this, font_data, font_data_size, size_pixels, font_cfg, glyph_ranges)
+    }
+
+    public func Build(): Bool {
+        return ImFontAtlas_Build(this)
+    }
+
+    public func CalcCustomRectUV(rect: ImFontAtlasCustomRect, out_uv_min: ImVec2, out_uv_max: ImVec2): Unit {
+        return ImFontAtlas_CalcCustomRectUV(this, rect, out_uv_min, out_uv_max)
+    }
+
+    public func Clear(): Unit {
+        return ImFontAtlas_Clear(this)
+    }
+
+    public func ClearFonts(): Unit {
+        return ImFontAtlas_ClearFonts(this)
+    }
+
+    public func ClearInputData(): Unit {
+        return ImFontAtlas_ClearInputData(this)
+    }
+
+    public func ClearTexData(): Unit {
+        return ImFontAtlas_ClearTexData(this)
+    }
+
+    public func GetCustomRectByIndex(index: Int32): ImFontAtlasCustomRect {
+        return ImFontAtlas_GetCustomRectByIndex(this, index)
+    }
+
+    public func GetGlyphRangesChineseFull(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesChineseFull(this)
+    }
+
+    public func GetGlyphRangesChineseSimplifiedCommon(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(this)
+    }
+
+    public func GetGlyphRangesCyrillic(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesCyrillic(this)
+    }
+
+    public func GetGlyphRangesDefault(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesDefault(this)
+    }
+
+    public func GetGlyphRangesGreek(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesGreek(this)
+    }
+
+    public func GetGlyphRangesJapanese(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesJapanese(this)
+    }
+
+    public func GetGlyphRangesKorean(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesKorean(this)
+    }
+
+    public func GetGlyphRangesThai(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesThai(this)
+    }
+
+    public func GetGlyphRangesVietnamese(): Value<ImWchar> {
+        return ImFontAtlas_GetGlyphRangesVietnamese(this)
+    }
+
+    public func GetMouseCursorTexData(cursor: ImGuiMouseCursor, out_offset: ImVec2, out_size: ImVec2, out_uv_border: ImVec2, out_uv_fill: ImVec2): Bool {
+        return ImFontAtlas_GetMouseCursorTexData(this, cursor, out_offset, out_size, out_uv_border, out_uv_fill)
+    }
+
+    public func GetTexDataAsAlpha8(out_pixels: CPointer<CPointer<UInt8>>, out_width: Value<Int32>, out_height: Value<Int32>, out_bytes_per_pixel: Value<Int32>): Unit {
+        return ImFontAtlas_GetTexDataAsAlpha8(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
+    }
+
+    public func GetTexDataAsRGBA32(out_pixels: CPointer<CPointer<UInt8>>, out_width: Value<Int32>, out_height: Value<Int32>, out_bytes_per_pixel: Value<Int32>): Unit {
+        return ImFontAtlas_GetTexDataAsRGBA32(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
+    }
+
+    public func IsBuilt(): Bool {
+        return ImFontAtlas_IsBuilt(this)
+    }
+
+    public func SetTexID(id: ImTextureID): Unit {
+        return ImFontAtlas_SetTexID(this, id)
+    }
 }
 public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> {
     public init(Width!: Int16, Height!: Int16, X!: Int16, Y!: Int16, GlyphID!: Int32, GlyphAdvanceX!: Float32, GlyphOffset!: ImVec2, Font!: ImFont) {
@@ -1487,6 +2007,10 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         set(value) {
             unsafe { capi.access_ImFontAtlasCustomRect_Font(pointer).write(value.getCPointer()) }
         }
+    }
+
+    public func IsPacked(): Bool {
+        return ImFontAtlasCustomRect_IsPacked(this)
     }
 }
 public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
@@ -1792,6 +2316,34 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
         set(value) {
             unsafe { capi.access_ImFontGlyphRangesBuilder_UsedChars(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func AddChar(c: ImWchar): Unit {
+        return ImFontGlyphRangesBuilder_AddChar(this, c)
+    }
+
+    public func AddRanges(ranges: Value<ImWchar>): Unit {
+        return ImFontGlyphRangesBuilder_AddRanges(this, ranges)
+    }
+
+    public func AddText(text: CStringConvertable, text_end: CStringConvertable): Unit {
+        return ImFontGlyphRangesBuilder_AddText(this, text, text_end)
+    }
+
+    public func BuildRanges(out_ranges: ImVector_ImWchar): Unit {
+        return ImFontGlyphRangesBuilder_BuildRanges(this, out_ranges)
+    }
+
+    public func Clear(): Unit {
+        return ImFontGlyphRangesBuilder_Clear(this)
+    }
+
+    public func GetBit(n: UIntNative): Bool {
+        return ImFontGlyphRangesBuilder_GetBit(this, n)
+    }
+
+    public func SetBit(n: UIntNative): Unit {
+        return ImFontGlyphRangesBuilder_SetBit(this, n)
     }
 }
 public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
@@ -2149,6 +2701,10 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
         set(value) {
             unsafe { capi.access_ImGuiDataVarInfo_Offset(pointer).write(value) }
         }
+    }
+
+    public func GetVarPtr(parent: Value<Unit>): Value<Unit> {
+        return ImGuiDataVarInfo_GetVarPtr(this, parent)
     }
 }
 public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
@@ -3749,6 +4305,66 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
             unsafe { capi.access_ImGuiIO_InputQueueCharacters(pointer).write(value.getCPointer().read()) }
         }
     }
+
+    public func AddFocusEvent(focused: Bool): Unit {
+        return ImGuiIO_AddFocusEvent(this, focused)
+    }
+
+    public func AddInputCharacter(c: Int32): Unit {
+        return ImGuiIO_AddInputCharacter(this, c)
+    }
+
+    public func AddInputCharacterUTF16(c: ImWchar16): Unit {
+        return ImGuiIO_AddInputCharacterUTF16(this, c)
+    }
+
+    public func AddInputCharactersUTF8(str: CStringConvertable): Unit {
+        return ImGuiIO_AddInputCharactersUTF8(this, str)
+    }
+
+    public func AddKeyAnalogEvent(key: ImGuiKey, down: Bool, v: Float32): Unit {
+        return ImGuiIO_AddKeyAnalogEvent(this, key, down, v)
+    }
+
+    public func AddKeyEvent(key: ImGuiKey, down: Bool): Unit {
+        return ImGuiIO_AddKeyEvent(this, key, down)
+    }
+
+    public func AddMouseButtonEvent(button: Int32, down: Bool): Unit {
+        return ImGuiIO_AddMouseButtonEvent(this, button, down)
+    }
+
+    public func AddMousePosEvent(x: Float32, y: Float32): Unit {
+        return ImGuiIO_AddMousePosEvent(this, x, y)
+    }
+
+    public func AddMouseSourceEvent(source: ImGuiMouseSource): Unit {
+        return ImGuiIO_AddMouseSourceEvent(this, source)
+    }
+
+    public func AddMouseViewportEvent(id: ImGuiID): Unit {
+        return ImGuiIO_AddMouseViewportEvent(this, id)
+    }
+
+    public func AddMouseWheelEvent(wheel_x: Float32, wheel_y: Float32): Unit {
+        return ImGuiIO_AddMouseWheelEvent(this, wheel_x, wheel_y)
+    }
+
+    public func ClearEventsQueue(): Unit {
+        return ImGuiIO_ClearEventsQueue(this)
+    }
+
+    public func ClearInputKeys(): Unit {
+        return ImGuiIO_ClearInputKeys(this)
+    }
+
+    public func SetAppAcceptingEvents(accepting_events: Bool): Unit {
+        return ImGuiIO_SetAppAcceptingEvents(this, accepting_events)
+    }
+
+    public func SetKeyEventNativeData(key: ImGuiKey, native_keycode: Int32, native_scancode: Int32, native_legacy_index: Int32): Unit {
+        return ImGuiIO_SetKeyEventNativeData(this, key, native_keycode, native_scancode, native_legacy_index)
+    }
 }
 public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppFocused> {
     public init(Focused!: Bool) {
@@ -4225,6 +4841,26 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
             unsafe { capi.access_ImGuiInputTextCallbackData_SelectionEnd(pointer).write(value) }
         }
     }
+
+    public func ClearSelection(): Unit {
+        return ImGuiInputTextCallbackData_ClearSelection(this)
+    }
+
+    public func DeleteChars(pos: Int32, bytes_count: Int32): Unit {
+        return ImGuiInputTextCallbackData_DeleteChars(this, pos, bytes_count)
+    }
+
+    public func HasSelection(): Bool {
+        return ImGuiInputTextCallbackData_HasSelection(this)
+    }
+
+    public func InsertChars(pos: Int32, text: CStringConvertable, text_end: CStringConvertable): Unit {
+        return ImGuiInputTextCallbackData_InsertChars(this, pos, text, text_end)
+    }
+
+    public func SelectAll(): Unit {
+        return ImGuiInputTextCallbackData_SelectAll(this)
+    }
 }
 public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputTextDeactivatedState> {
     public init(ID!: ImGuiID, TextA!: ImVector_char) {
@@ -4267,6 +4903,10 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
         set(value) {
             unsafe { capi.access_ImGuiInputTextDeactivatedState_TextA(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func ClearFreeMemory(): Unit {
+        return ImGuiInputTextDeactivatedState_ClearFreeMemory(this)
     }
 }
 public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
@@ -4497,6 +5137,70 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
         set(value) {
             unsafe { capi.access_ImGuiInputTextState_ReloadSelectionEnd(pointer).write(value) }
         }
+    }
+
+    public func ClearFreeMemory(): Unit {
+        return ImGuiInputTextState_ClearFreeMemory(this)
+    }
+
+    public func ClearSelection(): Unit {
+        return ImGuiInputTextState_ClearSelection(this)
+    }
+
+    public func ClearText(): Unit {
+        return ImGuiInputTextState_ClearText(this)
+    }
+
+    public func CursorAnimReset(): Unit {
+        return ImGuiInputTextState_CursorAnimReset(this)
+    }
+
+    public func CursorClamp(): Unit {
+        return ImGuiInputTextState_CursorClamp(this)
+    }
+
+    public func GetCursorPos(): Int32 {
+        return ImGuiInputTextState_GetCursorPos(this)
+    }
+
+    public func GetRedoAvailCount(): Int32 {
+        return ImGuiInputTextState_GetRedoAvailCount(this)
+    }
+
+    public func GetSelectionEnd(): Int32 {
+        return ImGuiInputTextState_GetSelectionEnd(this)
+    }
+
+    public func GetSelectionStart(): Int32 {
+        return ImGuiInputTextState_GetSelectionStart(this)
+    }
+
+    public func GetUndoAvailCount(): Int32 {
+        return ImGuiInputTextState_GetUndoAvailCount(this)
+    }
+
+    public func HasSelection(): Bool {
+        return ImGuiInputTextState_HasSelection(this)
+    }
+
+    public func OnKeyPressed(key: Int32): Unit {
+        return ImGuiInputTextState_OnKeyPressed(this, key)
+    }
+
+    public func ReloadUserBufAndKeepSelection(): Unit {
+        return ImGuiInputTextState_ReloadUserBufAndKeepSelection(this)
+    }
+
+    public func ReloadUserBufAndMoveToEnd(): Unit {
+        return ImGuiInputTextState_ReloadUserBufAndMoveToEnd(this)
+    }
+
+    public func ReloadUserBufAndSelectAll(): Unit {
+        return ImGuiInputTextState_ReloadUserBufAndSelectAll(this)
+    }
+
+    public func SelectAll(): Unit {
+        return ImGuiInputTextState_SelectAll(this)
     }
 }
 public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
@@ -4769,6 +5473,10 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
             unsafe { capi.access_ImGuiKeyRoutingTable_EntriesNext(pointer).write(value.getCPointer().read()) }
         }
     }
+
+    public func Clear(): Unit {
+        return ImGuiKeyRoutingTable_Clear(this)
+    }
 }
 public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
     public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, StatusFlags!: ImGuiItemStatusFlags, Rect!: ImRect, NavRect!: ImRect, DisplayRect!: ImRect, ClipRect!: ImRect, Shortcut!: ImGuiKeyChord) {
@@ -4976,6 +5684,26 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
             unsafe { capi.access_ImGuiListClipper_TempData(pointer).write(value.getCPointer()) }
         }
     }
+
+    public func Begin(items_count: Int32, items_height: Float32): Unit {
+        return ImGuiListClipper_Begin(this, items_count, items_height)
+    }
+
+    public func End(): Unit {
+        return ImGuiListClipper_End(this)
+    }
+
+    public func IncludeItemByIndex(item_index: Int32): Unit {
+        return ImGuiListClipper_IncludeItemByIndex(this, item_index)
+    }
+
+    public func IncludeItemsByIndex(item_begin: Int32, item_end: Int32): Unit {
+        return ImGuiListClipper_IncludeItemsByIndex(this, item_begin, item_end)
+    }
+
+    public func Step(): Bool {
+        return ImGuiListClipper_Step(this)
+    }
 }
 public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
     public init(ListClipper!: ImGuiListClipper, LossynessOffset!: Float32, StepNo!: Int32, ItemsFrozen!: Int32, Ranges!: ImVector_ImGuiListClipperRange) {
@@ -5052,6 +5780,10 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
             unsafe { capi.access_ImGuiListClipperData_Ranges(pointer).write(value.getCPointer().read()) }
         }
     }
+
+    public func Reset(clipper: ImGuiListClipper): Unit {
+        return ImGuiListClipperData_Reset(this, clipper)
+    }
 }
 public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> {
     public init(Min!: Int32, Max!: Int32, PosToIndexConvert!: Bool, PosToIndexOffsetMin!: ImS8, PosToIndexOffsetMax!: ImS8) {
@@ -5127,6 +5859,14 @@ public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> 
         set(value) {
             unsafe { capi.access_ImGuiListClipperRange_PosToIndexOffsetMax(pointer).write(value) }
         }
+    }
+
+    public static func FromIndices(min: Int32, max: Int32): ImGuiListClipperRange {
+        return ImGuiListClipperRange_FromIndices(min, max)
+    }
+
+    public static func FromPositions(y1: Float32, y2: Float32, off_min: Int32, off_max: Int32): ImGuiListClipperRange {
+        return ImGuiListClipperRange_FromPositions(y1, y2, off_min, off_max)
     }
 }
 public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
@@ -5279,6 +6019,18 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
         set(value) {
             unsafe { throw UnsupportedException("C array member can not be set ${value}"); }
         }
+    }
+
+    public func CalcNextTotalWidth(update_offsets: Bool): Unit {
+        return ImGuiMenuColumns_CalcNextTotalWidth(this, update_offsets)
+    }
+
+    public func DeclColumns(w_icon: Float32, w_label: Float32, w_shortcut: Float32, w_mark: Float32): Float32 {
+        return ImGuiMenuColumns_DeclColumns(this, w_icon, w_label, w_shortcut, w_mark)
+    }
+
+    public func Update(spacing: Float32, window_reappearing: Bool): Unit {
+        return ImGuiMenuColumns_Update(this, spacing, window_reappearing)
     }
 }
 public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
@@ -5575,6 +6327,10 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
             unsafe { capi.access_ImGuiNavItemData_SelectionUserData(pointer).write(value) }
         }
     }
+
+    public func Clear(): Unit {
+        return ImGuiNavItemData_Clear(this)
+    }
 }
 public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
     public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, NavRect!: ImRect) {
@@ -5748,6 +6504,10 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
         set(value) {
             unsafe { capi.access_ImGuiNextItemData_RefVal(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func ClearFlags(): Unit {
+        return ImGuiNextItemData_ClearFlags(this)
     }
 }
 public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
@@ -6011,6 +6771,10 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
         set(value) {
             unsafe { capi.access_ImGuiNextWindowData_RefreshFlagsVal(pointer).write(value) }
         }
+    }
+
+    public func ClearFlags(): Unit {
+        return ImGuiNextWindowData_ClearFlags(this)
     }
 }
 public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
@@ -6425,6 +7189,22 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
         set(value) {
             unsafe { capi.access_ImGuiPayload_Delivery(pointer).write(value) }
         }
+    }
+
+    public func Clear(): Unit {
+        return ImGuiPayload_Clear(this)
+    }
+
+    public func IsDataType(`type`: CStringConvertable): Bool {
+        return ImGuiPayload_IsDataType(this, `type`)
+    }
+
+    public func IsDelivery(): Bool {
+        return ImGuiPayload_IsDelivery(this)
+    }
+
+    public func IsPreview(): Bool {
+        return ImGuiPayload_IsPreview(this)
     }
 }
 public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
@@ -7374,6 +8154,14 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
             unsafe { capi.access_ImGuiStackSizes_SizeOfDisabledStack(pointer).write(value) }
         }
     }
+
+    public func CompareWithContextState(ctx: Value<ImGuiContext>): Unit {
+        return ImGuiStackSizes_CompareWithContextState(this, ctx)
+    }
+
+    public func SetToContextState(ctx: Value<ImGuiContext>): Unit {
+        return ImGuiStackSizes_SetToContextState(this, ctx)
+    }
 }
 public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
     public init(Data!: ImVector_ImGuiStoragePair) {
@@ -7405,6 +8193,66 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         set(value) {
             unsafe { capi.access_ImGuiStorage_Data(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func BuildSortByKey(): Unit {
+        return ImGuiStorage_BuildSortByKey(this)
+    }
+
+    public func Clear(): Unit {
+        return ImGuiStorage_Clear(this)
+    }
+
+    public func GetBool(key: ImGuiID, default_val: Bool): Bool {
+        return ImGuiStorage_GetBool(this, key, default_val)
+    }
+
+    public func GetBoolRef(key: ImGuiID, default_val: Bool): Value<Bool> {
+        return ImGuiStorage_GetBoolRef(this, key, default_val)
+    }
+
+    public func GetFloat(key: ImGuiID, default_val: Float32): Float32 {
+        return ImGuiStorage_GetFloat(this, key, default_val)
+    }
+
+    public func GetFloatRef(key: ImGuiID, default_val: Float32): Value<Float32> {
+        return ImGuiStorage_GetFloatRef(this, key, default_val)
+    }
+
+    public func GetInt(key: ImGuiID, default_val: Int32): Int32 {
+        return ImGuiStorage_GetInt(this, key, default_val)
+    }
+
+    public func GetIntRef(key: ImGuiID, default_val: Int32): Value<Int32> {
+        return ImGuiStorage_GetIntRef(this, key, default_val)
+    }
+
+    public func GetVoidPtr(key: ImGuiID): Value<Unit> {
+        return ImGuiStorage_GetVoidPtr(this, key)
+    }
+
+    public func GetVoidPtrRef(key: ImGuiID, default_val: Value<Unit>): CPointer<CPointer<Unit>> {
+        return ImGuiStorage_GetVoidPtrRef(this, key, default_val)
+    }
+
+    public func SetAllInt(val: Int32): Unit {
+        return ImGuiStorage_SetAllInt(this, val)
+    }
+
+    public func SetBool(key: ImGuiID, val: Bool): Unit {
+        return ImGuiStorage_SetBool(this, key, val)
+    }
+
+    public func SetFloat(key: ImGuiID, val: Float32): Unit {
+        return ImGuiStorage_SetFloat(this, key, val)
+    }
+
+    public func SetInt(key: ImGuiID, val: Int32): Unit {
+        return ImGuiStorage_SetInt(this, key, val)
+    }
+
+    public func SetVoidPtr(key: ImGuiID, val: Value<Unit>): Unit {
+        return ImGuiStorage_SetVoidPtr(this, key, val)
     }
 }
 public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
@@ -8009,6 +8857,10 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
         set(value) {
             unsafe { capi.access_ImGuiStyle_HoverFlagsForTooltipNav(pointer).write(value) }
         }
+    }
+
+    public func ScaleAllSizes(scale_factor: Float32): Unit {
+        return ImGuiStyle_ScaleAllSizes(this, scale_factor)
     }
 }
 public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
@@ -8905,6 +9757,10 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
             unsafe { capi.access_ImGuiTableSettings_WantApply(pointer).write(value) }
         }
     }
+
+    public func GetColumnSettings(): Value<ImGuiTableColumnSettings> {
+        return ImGuiTableSettings_GetColumnSettings(this)
+    }
 }
 public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
     public init(Specs!: ImGuiTableColumnSortSpecs, SpecsCount!: Int32, SpecsDirty!: Bool) {
@@ -9166,6 +10022,43 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
             unsafe { capi.access_ImGuiTextBuffer_Buf(pointer).write(value.getCPointer().read()) }
         }
     }
+
+    public func append(str: CStringConvertable, str_end: CStringConvertable): Unit {
+        return ImGuiTextBuffer_append(this, str, str_end)
+    }
+
+    public func appendf(fmt: CStringConvertable): Unit {
+        return ImGuiTextBuffer_appendf(this, fmt)
+    }
+
+
+    public func begin(): String {
+        return ImGuiTextBuffer_begin(this)
+    }
+
+    public func c_str(): String {
+        return ImGuiTextBuffer_c_str(this)
+    }
+
+    public func clear(): Unit {
+        return ImGuiTextBuffer_clear(this)
+    }
+
+    public func empty(): Bool {
+        return ImGuiTextBuffer_empty(this)
+    }
+
+    public func end(): String {
+        return ImGuiTextBuffer_end(this)
+    }
+
+    public func reserve(capacity: Int32): Unit {
+        return ImGuiTextBuffer_reserve(this, capacity)
+    }
+
+    public func size(): Int32 {
+        return ImGuiTextBuffer_size(this)
+    }
 }
 public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
     public init(InputBuf!: Value<UInt8>, Filters!: ImVector_ImGuiTextRange, CountGrep!: Int32) {
@@ -9220,6 +10113,26 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
             unsafe { capi.access_ImGuiTextFilter_CountGrep(pointer).write(value) }
         }
     }
+
+    public func Build(): Unit {
+        return ImGuiTextFilter_Build(this)
+    }
+
+    public func Clear(): Unit {
+        return ImGuiTextFilter_Clear(this)
+    }
+
+    public func Draw(label: CStringConvertable, width: Float32): Bool {
+        return ImGuiTextFilter_Draw(this, label, width)
+    }
+
+    public func IsActive(): Bool {
+        return ImGuiTextFilter_IsActive(this)
+    }
+
+    public func PassFilter(text: CStringConvertable, text_end: CStringConvertable): Bool {
+        return ImGuiTextFilter_PassFilter(this, text, text_end)
+    }
 }
 public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
     public init(LineOffsets!: ImVector_int, EndOffset!: Int32) {
@@ -9263,6 +10176,26 @@ public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
             unsafe { capi.access_ImGuiTextIndex_EndOffset(pointer).write(value) }
         }
     }
+
+    public func append(base: CStringConvertable, old_size: Int32, new_size: Int32): Unit {
+        return ImGuiTextIndex_append(this, base, old_size, new_size)
+    }
+
+    public func clear(): Unit {
+        return ImGuiTextIndex_clear(this)
+    }
+
+    public func get_line_begin(base: CStringConvertable, n: Int32): String {
+        return ImGuiTextIndex_get_line_begin(this, base, n)
+    }
+
+    public func get_line_end(base: CStringConvertable, n: Int32): String {
+        return ImGuiTextIndex_get_line_end(this, base, n)
+    }
+
+    public func size(): Int32 {
+        return ImGuiTextIndex_size(this)
+    }
 }
 public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
     public init(b!: String, e!: String) {
@@ -9305,6 +10238,14 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
         set(value) {
             unsafe { capi.access_ImGuiTextRange_e(pointer).write(value.asCString()) }
         }
+    }
+
+    public func empty(): Bool {
+        return ImGuiTextRange_empty(this)
+    }
+
+    public func split(separator: UInt8, out: ImVector_ImGuiTextRange): Unit {
+        return ImGuiTextRange_split(this, separator, out)
     }
 }
 public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectRequest> {
@@ -9479,6 +10420,10 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
         set(value) {
             unsafe { capi.access_ImGuiTypingSelectState_SingleCharModeLock(pointer).write(value) }
         }
+    }
+
+    public func Clear(): Unit {
+        return ImGuiTypingSelectState_Clear(this)
     }
 }
 public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
@@ -9687,6 +10632,14 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         set(value) {
             unsafe { capi.access_ImGuiViewport_PlatformRequestClose(pointer).write(value) }
         }
+    }
+
+    public func GetCenter(pOut: ImVec2): Unit {
+        return ImGuiViewport_GetCenter(pOut, this)
+    }
+
+    public func GetWorkCenter(pOut: ImVec2): Unit {
+        return ImGuiViewport_GetWorkCenter(pOut, this)
     }
 }
 public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
@@ -9950,6 +10903,34 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
         set(value) {
             unsafe { capi.access_ImGuiViewportP_BuildWorkOffsetMax(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func CalcWorkRectPos(pOut: ImVec2, off_min: ImVec2): Unit {
+        return ImGuiViewportP_CalcWorkRectPos(pOut, this, off_min)
+    }
+
+    public func CalcWorkRectSize(pOut: ImVec2, off_min: ImVec2, off_max: ImVec2): Unit {
+        return ImGuiViewportP_CalcWorkRectSize(pOut, this, off_min, off_max)
+    }
+
+    public func ClearRequestFlags(): Unit {
+        return ImGuiViewportP_ClearRequestFlags(this)
+    }
+
+    public func GetBuildWorkRect(pOut: ImRect): Unit {
+        return ImGuiViewportP_GetBuildWorkRect(pOut, this)
+    }
+
+    public func GetMainRect(pOut: ImRect): Unit {
+        return ImGuiViewportP_GetMainRect(pOut, this)
+    }
+
+    public func GetWorkRect(pOut: ImRect): Unit {
+        return ImGuiViewportP_GetWorkRect(pOut, this)
+    }
+
+    public func UpdateWorkRect(): Unit {
+        return ImGuiViewportP_UpdateWorkRect(this)
     }
 }
 public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
@@ -10255,6 +11236,10 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
         set(value) {
             unsafe { capi.access_ImGuiWindowSettings_WantDelete(pointer).write(value) }
         }
+    }
+
+    public func GetName(): String {
+        return ImGuiWindowSettings_GetName(this)
     }
 }
 public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
@@ -10791,6 +11776,106 @@ public class ImRect <: StructWrapper<capi.ImRect> {
         set(value) {
             unsafe { capi.access_ImRect_Max(pointer).write(value.getCPointer().read()) }
         }
+    }
+
+    public func Add(p: ImVec2): Unit {
+        return ImRect_Add_Vec2(this, p)
+    }
+
+    public func Add(r: ImRect): Unit {
+        return ImRect_Add_Rect(this, r)
+    }
+
+    public func ClipWith(r: ImRect): Unit {
+        return ImRect_ClipWith(this, r)
+    }
+
+    public func ClipWithFull(r: ImRect): Unit {
+        return ImRect_ClipWithFull(this, r)
+    }
+
+    public func Contains(p: ImVec2): Bool {
+        return ImRect_Contains_Vec2(this, p)
+    }
+
+    public func Contains(r: ImRect): Bool {
+        return ImRect_Contains_Rect(this, r)
+    }
+
+    public func ContainsWithPad(p: ImVec2, pad: ImVec2): Bool {
+        return ImRect_ContainsWithPad(this, p, pad)
+    }
+
+    public func Expand(amount: Float32): Unit {
+        return ImRect_Expand_Float(this, amount)
+    }
+
+    public func Expand(amount: ImVec2): Unit {
+        return ImRect_Expand_Vec2(this, amount)
+    }
+
+    public func Floor(): Unit {
+        return ImRect_Floor(this)
+    }
+
+    public func GetArea(): Float32 {
+        return ImRect_GetArea(this)
+    }
+
+    public func GetBL(pOut: ImVec2): Unit {
+        return ImRect_GetBL(pOut, this)
+    }
+
+    public func GetBR(pOut: ImVec2): Unit {
+        return ImRect_GetBR(pOut, this)
+    }
+
+    public func GetCenter(pOut: ImVec2): Unit {
+        return ImRect_GetCenter(pOut, this)
+    }
+
+    public func GetHeight(): Float32 {
+        return ImRect_GetHeight(this)
+    }
+
+    public func GetSize(pOut: ImVec2): Unit {
+        return ImRect_GetSize(pOut, this)
+    }
+
+    public func GetTL(pOut: ImVec2): Unit {
+        return ImRect_GetTL(pOut, this)
+    }
+
+    public func GetTR(pOut: ImVec2): Unit {
+        return ImRect_GetTR(pOut, this)
+    }
+
+    public func GetWidth(): Float32 {
+        return ImRect_GetWidth(this)
+    }
+
+    public func IsInverted(): Bool {
+        return ImRect_IsInverted(this)
+    }
+
+    public func Overlaps(r: ImRect): Bool {
+        return ImRect_Overlaps(this, r)
+    }
+
+    public func ToVec4(pOut: ImVec4): Unit {
+        return ImRect_ToVec4(pOut, this)
+    }
+
+    public func Translate(d: ImVec2): Unit {
+        return ImRect_Translate(this, d)
+    }
+
+    public func TranslateX(dx: Float32): Unit {
+        return ImRect_TranslateX(this, dx)
+    }
+
+    public func TranslateY(dy: Float32): Unit {
+        return ImRect_TranslateY(this, dy)
     }
 }
 public class ImVec1 <: StructWrapper<capi.ImVec1> {
