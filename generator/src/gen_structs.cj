@@ -512,8 +512,8 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     os.writeln("package ${pkgName}")
     os.writeln()
     os.writeln("import ${capiPkgName}.*")
-    os.writeln()
     for (def in structDefs) {
+        os.writeln()
         os.writeln("public class ${def.name} <: StructWrapper<${capiPkgName}.${def.name}> {")
         // Init from fields
         os.write("    public init(")

@@ -58,6 +58,7 @@ public class ImBitVector <: StructWrapper<capi.ImBitVector> {
         return ImBitVector_TestBit(this, n)
     }
 }
+
 public class ImColor <: StructWrapper<capi.ImColor> {
     public init(Value!: ImVec4) {
         super()
@@ -97,6 +98,7 @@ public class ImColor <: StructWrapper<capi.ImColor> {
         return ImColor_SetHSV(this, h, s, v, a)
     }
 }
+
 public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
     public init(_CmdBuffer!: ImVector_ImDrawCmd, _IdxBuffer!: ImVector_ImDrawIdx) {
         super()
@@ -139,6 +141,7 @@ public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
         }
     }
 }
+
 public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
     public init(ClipRect!: ImVec4, TextureId!: ImTextureID, VtxOffset!: Int32, IdxOffset!: Int32, ElemCount!: Int32, UserCallback!: ImDrawCallback, UserCallbackData!: Value<Unit>) {
         super()
@@ -240,6 +243,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         return ImDrawCmd_GetTexID(this)
     }
 }
+
 public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
     public init(ClipRect!: ImVec4, TextureId!: ImTextureID, VtxOffset!: Int32) {
         super()
@@ -293,6 +297,7 @@ public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
         }
     }
 }
+
 public class ImDrawData <: StructWrapper<capi.ImDrawData> {
     public init(Valid!: Bool, CmdListsCount!: Int32, TotalIdxCount!: Int32, TotalVtxCount!: Int32, CmdLists!: ImVector_ImDrawListPtr, DisplayPos!: ImVec2, DisplaySize!: ImVec2, FramebufferScale!: ImVec2, OwnerViewport!: ImGuiViewport) {
         super()
@@ -428,6 +433,7 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
         return ImDrawData_ScaleClipRects(this, fb_scale)
     }
 }
+
 public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
     public init(Layers!: Value<CPointer<capi.ImVector_ImDrawListPtr>>, LayerData1!: ImVector_ImDrawListPtr) {
         super()
@@ -470,6 +476,7 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
         }
     }
 }
+
 public class ImDrawList <: StructWrapper<capi.ImDrawList> {
     public init(CmdBuffer!: ImVector_ImDrawCmd, IdxBuffer!: ImVector_ImDrawIdx, VtxBuffer!: ImVector_ImDrawVert, Flags!: ImDrawListFlags, _VtxCurrentIdx!: Int32, _Data!: ImDrawListSharedData, _VtxWritePtr!: ImDrawVert, _IdxWritePtr!: Value<ImDrawIdx>, _Path!: ImVector_ImVec2, _CmdHeader!: ImDrawCmdHeader, _Splitter!: ImDrawListSplitter, _ClipRectStack!: ImVector_ImVec4, _TextureIdStack!: ImVector_ImTextureID, _FringeScale!: Float32, _OwnerName!: String) {
         super()
@@ -923,6 +930,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList__TryMergeDrawCmds(this)
     }
 }
+
 public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
     public init(TexUvWhitePixel!: ImVec2, Font!: ImFont, FontSize!: Float32, CurveTessellationTol!: Float32, CircleSegmentMaxError!: Float32, ClipRectFullscreen!: ImVec4, InitialFlags!: ImDrawListFlags, TempBuffer!: ImVector_ImVec2, ArcFastVtx!: ImVec2, ArcFastRadiusCutoff!: Float32, CircleSegmentCounts!: Value<ImU8>, TexUvLines!: ImVec4) {
         super()
@@ -1079,6 +1087,7 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
         return ImDrawListSharedData_SetCircleTessellationMaxError(this, max_error)
     }
 }
+
 public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
     public init(_Current!: Int32, _Count!: Int32, _Channels!: ImVector_ImDrawChannel) {
         super()
@@ -1152,6 +1161,7 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
         return ImDrawListSplitter_Split(this, draw_list, count)
     }
 }
+
 public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
     public init(pos!: ImVec2, uv!: ImVec2, col!: ImU32) {
         super()
@@ -1205,6 +1215,7 @@ public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
         }
     }
 }
+
 public class ImFont <: StructWrapper<capi.ImFont> {
     public init(IndexAdvanceX!: ImVector_float, FallbackAdvanceX!: Float32, FontSize!: Float32, IndexLookup!: ImVector_ImWchar, Glyphs!: ImVector_ImFontGlyph, FallbackGlyph!: Value<ImFontGlyph>, ContainerAtlas!: ImFontAtlas, ConfigData!: ImFontConfig, ConfigDataCount!: Int16, FallbackChar!: ImWchar, EllipsisChar!: ImWchar, EllipsisCharCount!: Int16, EllipsisWidth!: Float32, EllipsisCharStep!: Float32, DirtyLookupTables!: Bool, Scale!: Float32, Ascent!: Float32, Descent!: Float32, MetricsTotalSurface!: Int32, Used4kPagesMap!: Value<ImU8>) {
         super()
@@ -1509,6 +1520,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_SetGlyphVisible(this, c, visible)
     }
 }
+
 public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
     public init(Flags!: ImFontAtlasFlags, TexID!: ImTextureID, TexDesiredWidth!: Int32, TexGlyphPadding!: Int32, Locked!: Bool, UserData!: Value<Unit>, TexReady!: Bool, TexPixelsUseColors!: Bool, TexPixelsAlpha8!: Value<UInt8>, TexPixelsRGBA32!: Value<Int32>, TexWidth!: Int32, TexHeight!: Int32, TexUvScale!: ImVec2, TexUvWhitePixel!: ImVec2, Fonts!: ImVector_ImFontPtr, CustomRects!: ImVector_ImFontAtlasCustomRect, ConfigData!: ImVector_ImFontConfig, TexUvLines!: ImVec4, FontBuilderIO!: ImFontBuilderIO, FontBuilderFlags!: Int32, PackIdMouseCursors!: Int32, PackIdLines!: Int32) {
         super()
@@ -1887,6 +1899,7 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_SetTexID(this, id)
     }
 }
+
 public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> {
     public init(Width!: Int16, Height!: Int16, X!: Int16, Y!: Int16, GlyphID!: Int32, GlyphAdvanceX!: Float32, GlyphOffset!: ImVec2, Font!: ImFont) {
         super()
@@ -1999,6 +2012,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         return ImFontAtlasCustomRect_IsPacked(this)
     }
 }
+
 public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
     public init(FontBuilder_Build!: CFunc<(atlas: CPointer<capi.ImFontAtlas>) -> Bool>) {
         super()
@@ -2030,6 +2044,7 @@ public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
         }
     }
 }
+
 public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
     public init(FontData!: Value<Unit>, FontDataSize!: Int32, FontDataOwnedByAtlas!: Bool, FontNo!: Int32, SizePixels!: Float32, OversampleH!: Int32, OversampleV!: Int32, PixelSnapH!: Bool, GlyphExtraSpacing!: ImVec2, GlyphOffset!: ImVec2, GlyphRanges!: Value<ImWchar>, GlyphMinAdvanceX!: Float32, GlyphMaxAdvanceX!: Float32, MergeMode!: Bool, FontBuilderFlags!: Int32, RasterizerMultiply!: Float32, RasterizerDensity!: Float32, EllipsisChar!: ImWchar, Name!: Value<UInt8>, DstFont!: ImFont) {
         super()
@@ -2270,6 +2285,7 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
         }
     }
 }
+
 public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBuilder> {
     public init(UsedChars!: ImVector_ImU32) {
         super()
@@ -2329,6 +2345,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
         return ImFontGlyphRangesBuilder_SetBit(this, n)
     }
 }
+
 public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
     public init(Col!: ImGuiCol, BackupValue!: ImVec4) {
         super()
@@ -2371,6 +2388,7 @@ public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
         }
     }
 }
+
 public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> {
     public init(PreviewRect!: ImRect, BackupCursorPos!: ImVec2, BackupCursorMaxPos!: ImVec2, BackupCursorPosPrevLine!: ImVec2, BackupPrevLineTextBaseOffset!: Float32, BackupLayout!: ImGuiLayoutType) {
         super()
@@ -2457,6 +2475,7 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
         }
     }
 }
+
 public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
     public init(HookId!: ImGuiID, Type!: ImGuiContextHookType, Owner!: ImGuiID, Callback!: ImGuiContextHookCallback, UserData!: Value<Unit>) {
         super()
@@ -2532,6 +2551,7 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
         }
     }
 }
+
 public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
     public init(Size!: UIntNative, Name!: String, PrintFmt!: String, ScanFmt!: String) {
         super()
@@ -2596,6 +2616,7 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
         }
     }
 }
+
 public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
     public init(Data!: Value<ImU8>) {
         super()
@@ -2627,6 +2648,7 @@ public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
         }
     }
 }
+
 public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
     public init(Type!: ImGuiDataType, Count!: ImU32, Offset!: ImU32) {
         super()
@@ -2684,6 +2706,7 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
         return ImGuiDataVarInfo_GetVarPtr(this, parent)
     }
 }
+
 public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
     public init(FrameCount!: Int32, AllocCount!: ImS16, FreeCount!: ImS16) {
         super()
@@ -2737,6 +2760,7 @@ public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
         }
     }
 }
+
 public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
     public init(TotalAllocCount!: Int32, TotalFreeCount!: Int32, LastEntriesIdx!: ImS16, LastEntriesBuf!: ImGuiDebugAllocEntry) {
         super()
@@ -2801,6 +2825,7 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
         }
     }
 }
+
 public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
     public init(Nodes!: ImGuiStorage, Requests!: ImVector_ImGuiDockRequest, NodesSettings!: ImVector_ImGuiDockNodeSettings, WantFullRebuild!: Bool) {
         super()
@@ -2865,6 +2890,7 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
         }
     }
 }
+
 public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
     public init(ID!: ImGuiID, WindowID!: ImGuiID) {
         super()
@@ -2907,6 +2933,7 @@ public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
         }
     }
 }
+
 public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
     public init(WindowID!: ImGuiID, BackupCursorPos!: ImVec2, BackupCursorMaxPos!: ImVec2, BackupCursorPosPrevLine!: ImVec2, BackupIndent!: ImVec1, BackupGroupOffset!: ImVec1, BackupCurrLineSize!: ImVec2, BackupCurrLineTextBaseOffset!: Float32, BackupActiveIdIsAlive!: ImGuiID, BackupActiveIdPreviousFrameIsAlive!: Bool, BackupHoveredIdIsAlive!: Bool, BackupIsSameLine!: Bool, EmitItem!: Bool) {
         super()
@@ -3070,6 +3097,7 @@ public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
         }
     }
 }
+
 public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
     public init(LastActiveFrame!: Int32, StackLevel!: Int32, QueryId!: ImGuiID, Results!: ImVector_ImGuiStackLevelInfo, CopyToClipboardOnCtrlC!: Bool, CopyToClipboardLastTime!: Float32) {
         super()
@@ -3156,6 +3184,7 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
         }
     }
 }
+
 public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
     public init(ConfigFlags!: ImGuiConfigFlags, BackendFlags!: ImGuiBackendFlags, DisplaySize!: ImVec2, DeltaTime!: Float32, IniSavingRate!: Float32, IniFilename!: String, LogFilename!: String, UserData!: Value<Unit>, Fonts!: ImFontAtlas, FontGlobalScale!: Float32, FontAllowUserScaling!: Bool, FontDefault!: ImFont, DisplayFramebufferScale!: ImVec2, ConfigDockingNoSplit!: Bool, ConfigDockingWithShift!: Bool, ConfigDockingAlwaysTabBar!: Bool, ConfigDockingTransparentPayload!: Bool, ConfigViewportsNoAutoMerge!: Bool, ConfigViewportsNoTaskBarIcon!: Bool, ConfigViewportsNoDecoration!: Bool, ConfigViewportsNoDefaultParent!: Bool, MouseDrawCursor!: Bool, ConfigMacOSXBehaviors!: Bool, ConfigInputTrickleEventQueue!: Bool, ConfigInputTextCursorBlink!: Bool, ConfigInputTextEnterKeepActive!: Bool, ConfigDragClickToInputText!: Bool, ConfigWindowsResizeFromEdges!: Bool, ConfigWindowsMoveFromTitleBarOnly!: Bool, ConfigMemoryCompactTimer!: Float32, MouseDoubleClickTime!: Float32, MouseDoubleClickMaxDist!: Float32, MouseDragThreshold!: Float32, KeyRepeatDelay!: Float32, KeyRepeatRate!: Float32, ConfigDebugIsDebuggerPresent!: Bool, ConfigDebugBeginReturnValueOnce!: Bool, ConfigDebugBeginReturnValueLoop!: Bool, ConfigDebugIgnoreFocusLoss!: Bool, ConfigDebugIniSettings!: Bool, BackendPlatformName!: String, BackendRendererName!: String, BackendPlatformUserData!: Value<Unit>, BackendRendererUserData!: Value<Unit>, BackendLanguageUserData!: Value<Unit>, GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>, SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>, ClipboardUserData!: Value<Unit>, SetPlatformImeDataFn!: CFunc<(viewport: CPointer<capi.ImGuiViewport>, data: CPointer<capi.ImGuiPlatformImeData>) -> Unit>, PlatformLocaleDecimalPoint!: ImWchar, WantCaptureMouse!: Bool, WantCaptureKeyboard!: Bool, WantTextInput!: Bool, WantSetMousePos!: Bool, WantSaveIniSettings!: Bool, NavActive!: Bool, NavVisible!: Bool, Framerate!: Float32, MetricsRenderVertices!: Int32, MetricsRenderIndices!: Int32, MetricsRenderWindows!: Int32, MetricsActiveWindows!: Int32, MouseDelta!: ImVec2, Ctx!: Value<ImGuiContext>, MousePos!: ImVec2, MouseDown!: Value<Bool>, MouseWheel!: Float32, MouseWheelH!: Float32, MouseSource!: ImGuiMouseSource, MouseHoveredViewport!: ImGuiID, KeyCtrl!: Bool, KeyShift!: Bool, KeyAlt!: Bool, KeySuper!: Bool, KeyMods!: ImGuiKeyChord, KeysData!: ImGuiKeyData, WantCaptureMouseUnlessPopupClose!: Bool, MousePosPrev!: ImVec2, MouseClickedPos!: ImVec2, MouseClickedTime!: Value<Float64>, MouseClicked!: Value<Bool>, MouseDoubleClicked!: Value<Bool>, MouseClickedCount!: Value<ImU16>, MouseClickedLastCount!: Value<ImU16>, MouseReleased!: Value<Bool>, MouseDownOwned!: Value<Bool>, MouseDownOwnedUnlessPopupClose!: Value<Bool>, MouseWheelRequestAxisSwap!: Bool, MouseCtrlLeftAsRightClick!: Bool, MouseDownDuration!: Value<Float32>, MouseDownDurationPrev!: Value<Float32>, MouseDragMaxDistanceAbs!: ImVec2, MouseDragMaxDistanceSqr!: Value<Float32>, PenPressure!: Float32, AppFocusLost!: Bool, AppAcceptingEvents!: Bool, BackendUsingLegacyKeyArrays!: ImS8, BackendUsingLegacyNavInputArray!: Bool, InputQueueSurrogate!: ImWchar16, InputQueueCharacters!: ImVector_ImWchar) {
         super()
@@ -4336,6 +4365,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         return ImGuiIO_SetKeyEventNativeData(this, key, native_keycode, native_scancode, native_legacy_index)
     }
 }
+
 public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppFocused> {
     public init(Focused!: Bool) {
         super()
@@ -4367,6 +4397,7 @@ public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppF
         }
     }
 }
+
 public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
     public init(Key!: ImGuiKey, Down!: Bool, AnalogValue!: Float32) {
         super()
@@ -4420,6 +4451,7 @@ public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
         }
     }
 }
+
 public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMouseButton> {
     public init(Button!: Int32, Down!: Bool, MouseSource!: ImGuiMouseSource) {
         super()
@@ -4473,6 +4505,7 @@ public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMou
         }
     }
 }
+
 public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMousePos> {
     public init(PosX!: Float32, PosY!: Float32, MouseSource!: ImGuiMouseSource) {
         super()
@@ -4526,6 +4559,7 @@ public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMouseP
         }
     }
 }
+
 public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventMouseViewport> {
     public init(HoveredViewportID!: ImGuiID) {
         super()
@@ -4557,6 +4591,7 @@ public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventM
         }
     }
 }
+
 public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMouseWheel> {
     public init(WheelX!: Float32, WheelY!: Float32, MouseSource!: ImGuiMouseSource) {
         super()
@@ -4610,6 +4645,7 @@ public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMous
         }
     }
 }
+
 public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
     public init(`Char`!: Int32) {
         super()
@@ -4641,6 +4677,7 @@ public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
         }
     }
 }
+
 public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCallbackData> {
     public init(Ctx!: Value<ImGuiContext>, EventFlag!: ImGuiInputTextFlags, Flags!: ImGuiInputTextFlags, UserData!: Value<Unit>, EventChar!: ImWchar, EventKey!: ImGuiKey, Buf!: String, BufTextLen!: Int32, BufSize!: Int32, BufDirty!: Bool, CursorPos!: Int32, SelectionStart!: Int32, SelectionEnd!: Int32) {
         super()
@@ -4824,6 +4861,7 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
         return ImGuiInputTextCallbackData_SelectAll(this)
     }
 }
+
 public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputTextDeactivatedState> {
     public init(ID!: ImGuiID, TextA!: ImVector_char) {
         super()
@@ -4870,6 +4908,7 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
         return ImGuiInputTextDeactivatedState_ClearFreeMemory(this)
     }
 }
+
 public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
     public init(Ctx!: Value<ImGuiContext>, ID!: ImGuiID, CurLenW!: Int32, CurLenA!: Int32, TextW!: ImVector_ImWchar, TextA!: ImVector_char, InitialTextA!: ImVector_char, TextAIsValid!: Bool, BufCapacityA!: Int32, ScrollX!: Float32, Stb!: STB_TexteditState, CursorAnim!: Float32, CursorFollow!: Bool, SelectedAllMouseLock!: Bool, Edited!: Bool, Flags!: ImGuiInputTextFlags, ReloadUserBuf!: Bool, ReloadSelectionStart!: Int32, ReloadSelectionEnd!: Int32) {
         super()
@@ -5163,6 +5202,7 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
         return ImGuiInputTextState_SelectAll(this)
     }
 }
+
 public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
     public init(Down!: Bool, DownDuration!: Float32, DownDurationPrev!: Float32, AnalogValue!: Float32) {
         super()
@@ -5227,6 +5267,7 @@ public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
         }
     }
 }
+
 public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
     public init(OwnerCurr!: ImGuiID, OwnerNext!: ImGuiID, LockThisFrame!: Bool, LockUntilRelease!: Bool) {
         super()
@@ -5291,6 +5332,7 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
         }
     }
 }
+
 public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
     public init(NextEntryIndex!: ImGuiKeyRoutingIndex, Mods!: ImU16, RoutingCurrScore!: ImU8, RoutingNextScore!: ImU8, RoutingCurr!: ImGuiID, RoutingNext!: ImGuiID) {
         super()
@@ -5377,6 +5419,7 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
         }
     }
 }
+
 public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
     public init(Index!: Value<ImGuiKeyRoutingIndex>, Entries!: ImVector_ImGuiKeyRoutingData, EntriesNext!: ImVector_ImGuiKeyRoutingData) {
         super()
@@ -5434,6 +5477,7 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
         return ImGuiKeyRoutingTable_Clear(this)
     }
 }
+
 public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
     public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, StatusFlags!: ImGuiItemStatusFlags, Rect!: ImRect, NavRect!: ImRect, DisplayRect!: ImRect, ClipRect!: ImRect, Shortcut!: ImGuiKeyChord) {
         super()
@@ -5542,6 +5586,7 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
         }
     }
 }
+
 public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
     public init(Ctx!: Value<ImGuiContext>, DisplayStart!: Int32, DisplayEnd!: Int32, ItemsCount!: Int32, ItemsHeight!: Float32, StartPosY!: Float32, TempData!: Value<Unit>) {
         super()
@@ -5659,6 +5704,7 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
         return ImGuiListClipper_Step(this)
     }
 }
+
 public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
     public init(ListClipper!: ImGuiListClipper, LossynessOffset!: Float32, StepNo!: Int32, ItemsFrozen!: Int32, Ranges!: ImVector_ImGuiListClipperRange) {
         super()
@@ -5738,6 +5784,7 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
         return ImGuiListClipperData_Reset(this, clipper)
     }
 }
+
 public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> {
     public init(Min!: Int32, Max!: Int32, PosToIndexConvert!: Bool, PosToIndexOffsetMin!: ImS8, PosToIndexOffsetMax!: ImS8) {
         super()
@@ -5821,6 +5868,7 @@ public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> 
         return ImGuiListClipperRange_FromPositions(y1, y2, off_min, off_max)
     }
 }
+
 public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
     public init(Key!: ImGuiLocKey, Text!: String) {
         super()
@@ -5863,6 +5911,7 @@ public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
         }
     }
 }
+
 public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
     public init(TotalWidth!: ImU32, NextTotalWidth!: ImU32, Spacing!: ImU16, OffsetIcon!: ImU16, OffsetLabel!: ImU16, OffsetShortcut!: ImU16, OffsetMark!: ImU16, Widths!: Value<ImU16>) {
         super()
@@ -5983,6 +6032,7 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
         return ImGuiMenuColumns_Update(this, spacing, window_reappearing)
     }
 }
+
 public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
     public init(ShowDebugLog!: Bool, ShowIDStackTool!: Bool, ShowWindowsRects!: Bool, ShowWindowsBeginOrder!: Bool, ShowTablesRects!: Bool, ShowDrawCmdMesh!: Bool, ShowDrawCmdBoundingBoxes!: Bool, ShowTextEncodingViewer!: Bool, ShowAtlasTintedWithTextColor!: Bool, ShowDockingNodes!: Bool, ShowWindowsRectsType!: Int32, ShowTablesRectsType!: Int32, HighlightMonitorIdx!: Int32, HighlightViewportID!: ImGuiID) {
         super()
@@ -6157,6 +6207,7 @@ public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
         }
     }
 }
+
 public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
     public init(Window!: Value<ImGuiWindow>, ID!: ImGuiID, FocusScopeId!: ImGuiID, RectRel!: ImRect, InFlags!: ImGuiItemFlags, DistBox!: Float32, DistCenter!: Float32, DistAxial!: Float32, SelectionUserData!: ImGuiSelectionUserData) {
         super()
@@ -6280,6 +6331,7 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
         return ImGuiNavItemData_Clear(this)
     }
 }
+
 public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
     public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, NavRect!: ImRect) {
         super()
@@ -6333,6 +6385,7 @@ public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
         }
     }
 }
+
 public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
     public init(Flags!: ImGuiNextItemDataFlags, ItemFlags!: ImGuiItemFlags, SelectionUserData!: ImGuiSelectionUserData, Width!: Float32, Shortcut!: ImGuiKeyChord, ShortcutFlags!: ImGuiInputFlags, OpenVal!: Bool, OpenCond!: ImU8, RefVal!: ImGuiDataTypeStorage) {
         super()
@@ -6456,6 +6509,7 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
         return ImGuiNextItemData_ClearFlags(this)
     }
 }
+
 public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
     public init(Flags!: ImGuiNextWindowDataFlags, PosCond!: ImGuiCond, SizeCond!: ImGuiCond, CollapsedCond!: ImGuiCond, DockCond!: ImGuiCond, PosVal!: ImVec2, PosPivotVal!: ImVec2, SizeVal!: ImVec2, ContentSizeVal!: ImVec2, ScrollVal!: ImVec2, ChildFlags!: ImGuiChildFlags, PosUndock!: Bool, CollapsedVal!: Bool, SizeConstraintRect!: ImRect, SizeCallback!: ImGuiSizeCallback, SizeCallbackUserData!: Value<Unit>, BgAlphaVal!: Float32, ViewportId!: ImGuiID, DockId!: ImGuiID, WindowClass!: ImGuiWindowClass, MenuBarOffsetMinVal!: ImVec2, RefreshFlagsVal!: ImGuiWindowRefreshFlags) {
         super()
@@ -6722,6 +6776,7 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
         return ImGuiNextWindowData_ClearFlags(this)
     }
 }
+
 public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
     public init(OffsetNorm!: Float32, OffsetNormBeforeResize!: Float32, Flags!: ImGuiOldColumnFlags, ClipRect!: ImRect) {
         super()
@@ -6786,6 +6841,7 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
         }
     }
 }
+
 public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
     public init(ID!: ImGuiID, Flags!: ImGuiOldColumnFlags, IsFirstFrame!: Bool, IsBeingResized!: Bool, Current!: Int32, Count!: Int32, OffMinX!: Float32, OffMaxX!: Float32, LineMinY!: Float32, LineMaxY!: Float32, HostCursorPosY!: Float32, HostCursorMaxPosX!: Float32, HostInitialClipRect!: ImRect, HostBackupClipRect!: ImRect, HostBackupParentWorkRect!: ImRect, Columns!: ImVector_ImGuiOldColumnData, Splitter!: ImDrawListSplitter) {
         super()
@@ -6993,6 +7049,7 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
         }
     }
 }
+
 public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
     public init(RefFrame!: Int32) {
         super()
@@ -7024,6 +7081,7 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
         }
     }
 }
+
 public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
     public init(Data!: Value<Unit>, DataSize!: Int32, SourceId!: ImGuiID, SourceParentId!: ImGuiID, DataFrameCount!: Int32, DataType!: Value<UInt8>, Preview!: Bool, Delivery!: Bool) {
         super()
@@ -7148,6 +7206,7 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
         return ImGuiPayload_IsPreview(this)
     }
 }
+
 public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
     public init(Platform_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_ShowWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_SetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>, pos: capi.ImVec2) -> Unit>, Platform_GetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Platform_GetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_GetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_GetWindowMinimized!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_SetWindowTitle!: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CPointer<UInt8>) -> Unit>, Platform_SetWindowAlpha!: CFunc<(vp: CPointer<capi.ImGuiViewport>, alpha: Float32) -> Unit>, Platform_UpdateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Float32>, Platform_OnChangedViewport!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_CreateVkSurface!: CFunc<(vp: CPointer<capi.ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, Renderer_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Renderer_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Renderer_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Monitors!: ImVector_ImGuiPlatformMonitor, Viewports!: ImVector_ImGuiViewportPtr) {
         super()
@@ -7443,6 +7502,7 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
         }
     }
 }
+
 public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
     public init(WantVisible!: Bool, InputPos!: ImVec2, InputLineHeight!: Float32) {
         super()
@@ -7496,6 +7556,7 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
         }
     }
 }
+
 public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
     public init(MainPos!: ImVec2, MainSize!: ImVec2, WorkPos!: ImVec2, WorkSize!: ImVec2, DpiScale!: Float32, PlatformHandle!: Value<Unit>) {
         super()
@@ -7582,6 +7643,7 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
         }
     }
 }
+
 public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
     public init(PopupId!: ImGuiID, Window!: Value<ImGuiWindow>, RestoreNavWindow!: Value<ImGuiWindow>, ParentNavLayer!: Int32, OpenFrameCount!: Int32, OpenParentId!: ImGuiID, OpenPopupPos!: ImVec2, OpenMousePos!: ImVec2) {
         super()
@@ -7690,6 +7752,7 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
         }
     }
 }
+
 public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
     public init(Ptr!: Value<Unit>, Index!: Int32) {
         super()
@@ -7732,6 +7795,7 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
         }
     }
 }
+
 public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
     public init(TypeName!: String, TypeHash!: ImGuiID, ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>, ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>, ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, out_buf: CPointer<capi.ImGuiTextBuffer>) -> Unit>, UserData!: Value<Unit>) {
         super()
@@ -7851,6 +7915,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
         }
     }
 }
+
 public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
     public init(Index!: Int32, Width!: Float32, InitialWidth!: Float32) {
         super()
@@ -7904,6 +7969,7 @@ public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
         }
     }
 }
+
 public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> {
     public init(UserData!: Value<Unit>, Pos!: ImVec2, CurrentSize!: ImVec2, DesiredSize!: ImVec2) {
         super()
@@ -7968,6 +8034,7 @@ public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> 
         }
     }
 }
+
 public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
     public init(SizeOfIDStack!: Int16, SizeOfColorStack!: Int16, SizeOfStyleVarStack!: Int16, SizeOfFontStack!: Int16, SizeOfFocusScopeStack!: Int16, SizeOfGroupStack!: Int16, SizeOfItemFlagsStack!: Int16, SizeOfBeginPopupStack!: Int16, SizeOfDisabledStack!: Int16) {
         super()
@@ -8095,6 +8162,7 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
         return ImGuiStackSizes_SetToContextState(this, ctx)
     }
 }
+
 public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
     public init(Data!: ImVector_ImGuiStoragePair) {
         super()
@@ -8186,6 +8254,7 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_SetVoidPtr(this, key, val)
     }
 }
+
 public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
     public init(Alpha!: Float32, DisabledAlpha!: Float32, WindowPadding!: ImVec2, WindowRounding!: Float32, WindowBorderSize!: Float32, WindowMinSize!: ImVec2, WindowTitleAlign!: ImVec2, WindowMenuButtonPosition!: ImGuiDir, ChildRounding!: Float32, ChildBorderSize!: Float32, PopupRounding!: Float32, PopupBorderSize!: Float32, FramePadding!: ImVec2, FrameRounding!: Float32, FrameBorderSize!: Float32, ItemSpacing!: ImVec2, ItemInnerSpacing!: ImVec2, CellPadding!: ImVec2, TouchExtraPadding!: ImVec2, IndentSpacing!: Float32, ColumnsMinSpacing!: Float32, ScrollbarSize!: Float32, ScrollbarRounding!: Float32, GrabMinSize!: Float32, GrabRounding!: Float32, LogSliderDeadzone!: Float32, TabRounding!: Float32, TabBorderSize!: Float32, TabMinWidthForCloseButton!: Float32, TabBarBorderSize!: Float32, TableAngledHeadersAngle!: Float32, TableAngledHeadersTextAlign!: ImVec2, ColorButtonPosition!: ImGuiDir, ButtonTextAlign!: ImVec2, SelectableTextAlign!: ImVec2, SeparatorTextBorderSize!: Float32, SeparatorTextAlign!: ImVec2, SeparatorTextPadding!: ImVec2, DisplayWindowPadding!: ImVec2, DisplaySafeAreaPadding!: ImVec2, DockingSeparatorSize!: Float32, MouseCursorScale!: Float32, AntiAliasedLines!: Bool, AntiAliasedLinesUseTex!: Bool, AntiAliasedFill!: Bool, CurveTessellationTol!: Float32, CircleTessellationMaxError!: Float32, Colors!: ImVec4, HoverStationaryDelay!: Float32, HoverDelayShort!: Float32, HoverDelayNormal!: Float32, HoverFlagsForTooltipMouse!: ImGuiHoveredFlags, HoverFlagsForTooltipNav!: ImGuiHoveredFlags) {
         super()
@@ -8793,6 +8862,7 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
         return ImGuiStyle_ScaleAllSizes(this, scale_factor)
     }
 }
+
 public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
     public init(Tabs!: ImVector_ImGuiTabItem, Flags!: ImGuiTabBarFlags, ID!: ImGuiID, SelectedTabId!: ImGuiID, NextSelectedTabId!: ImGuiID, VisibleTabId!: ImGuiID, CurrFrameVisible!: Int32, PrevFrameVisible!: Int32, BarRect!: ImRect, CurrTabsContentsHeight!: Float32, PrevTabsContentsHeight!: Float32, WidthAllTabs!: Float32, WidthAllTabsIdeal!: Float32, ScrollingAnim!: Float32, ScrollingTarget!: Float32, ScrollingTargetDistToVisibility!: Float32, ScrollingSpeed!: Float32, ScrollingRectMinX!: Float32, ScrollingRectMaxX!: Float32, SeparatorMinX!: Float32, SeparatorMaxX!: Float32, ReorderRequestTabId!: ImGuiID, ReorderRequestOffset!: ImS16, BeginCount!: ImS8, WantLayout!: Bool, VisibleTabWasSubmitted!: Bool, TabsAddedNew!: Bool, TabsActiveCount!: ImS16, LastTabItemIdx!: ImS16, ItemSpacingY!: Float32, FramePadding!: ImVec2, BackupCursorPos!: ImVec2, TabsNames!: ImGuiTextBuffer) {
         super()
@@ -9176,6 +9246,7 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
         }
     }
 }
+
 public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
     public init(ID!: ImGuiID, Flags!: ImGuiTabItemFlags, Window!: Value<ImGuiWindow>, LastFrameVisible!: Int32, LastFrameSelected!: Int32, Offset!: Float32, Width!: Float32, ContentWidth!: Float32, RequestedWidth!: Float32, NameOffset!: ImS32, BeginOrder!: ImS16, IndexDuringLayout!: ImS16, WantClose!: Bool) {
         super()
@@ -9339,6 +9410,7 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
         }
     }
 }
+
 public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
     public init(BgColor!: ImU32, Column!: ImGuiTableColumnIdx) {
         super()
@@ -9381,6 +9453,7 @@ public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
         }
     }
 }
+
 public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSortSpecs> {
     public init(ColumnUserID!: ImGuiID, ColumnIndex!: ImS16, SortOrder!: ImS16, SortDirection!: ImGuiSortDirection) {
         super()
@@ -9445,6 +9518,7 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
         }
     }
 }
+
 public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
     public init(Index!: ImGuiTableColumnIdx, TextColor!: ImU32, BgColor0!: ImU32, BgColor1!: ImU32) {
         super()
@@ -9509,6 +9583,7 @@ public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
         }
     }
 }
+
 public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData> {
     public init(TableInstanceID!: ImGuiID, LastOuterHeight!: Float32, LastTopHeadersRowHeight!: Float32, LastFrozenHeight!: Float32, HoveredRowLast!: Int32, HoveredRowNext!: Int32) {
         super()
@@ -9595,6 +9670,7 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
         }
     }
 }
+
 public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
     public init(ID!: ImGuiID, SaveFlags!: ImGuiTableFlags, RefScale!: Float32, ColumnsCount!: ImGuiTableColumnIdx, ColumnsCountMax!: ImGuiTableColumnIdx, WantApply!: Bool) {
         super()
@@ -9685,6 +9761,7 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
         return ImGuiTableSettings_GetColumnSettings(this)
     }
 }
+
 public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
     public init(Specs!: ImGuiTableColumnSortSpecs, SpecsCount!: Int32, SpecsDirty!: Bool) {
         super()
@@ -9738,6 +9815,7 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
         }
     }
 }
+
 public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
     public init(TableIndex!: Int32, LastTimeActive!: Float32, AngledHeadersExtraWidth!: Float32, AngledHeadersRequests!: ImVector_ImGuiTableHeaderData, UserOuterSize!: ImVec2, DrawSplitter!: ImDrawListSplitter, HostBackupWorkRect!: ImRect, HostBackupParentWorkRect!: ImRect, HostBackupPrevLineSize!: ImVec2, HostBackupCurrLineSize!: ImVec2, HostBackupCursorMaxPos!: ImVec2, HostBackupColumnsOffset!: ImVec1, HostBackupItemWidth!: Float32, HostBackupItemWidthStackSize!: Int32) {
         super()
@@ -9912,6 +9990,7 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
         }
     }
 }
+
 public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
     public init(Buf!: ImVector_char) {
         super()
@@ -9980,6 +10059,7 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
         return ImGuiTextBuffer_size(this)
     }
 }
+
 public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
     public init(InputBuf!: Value<UInt8>, Filters!: ImVector_ImGuiTextRange, CountGrep!: Int32) {
         super()
@@ -10053,6 +10133,7 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
         return ImGuiTextFilter_PassFilter(this, text, text_end)
     }
 }
+
 public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
     public init(LineOffsets!: ImVector_int, EndOffset!: Int32) {
         super()
@@ -10115,6 +10196,7 @@ public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
         return ImGuiTextIndex_size(this)
     }
 }
+
 public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
     public init(b!: String, e!: String) {
         super()
@@ -10165,6 +10247,7 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
         return ImGuiTextRange_split(this, separator, out)
     }
 }
+
 public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectRequest> {
     public init(Flags!: ImGuiTypingSelectFlags, SearchBufferLen!: Int32, SearchBuffer!: String, SelectRequest!: Bool, SingleCharMode!: Bool, SingleCharSize!: ImS8) {
         super()
@@ -10251,6 +10334,7 @@ public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectReq
         }
     }
 }
+
 public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState> {
     public init(Request!: ImGuiTypingSelectRequest, SearchBuffer!: Value<UInt8>, FocusScope!: ImGuiID, LastRequestFrame!: Int32, LastRequestTime!: Float32, SingleCharModeLock!: Bool) {
         super()
@@ -10341,6 +10425,7 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
         return ImGuiTypingSelectState_Clear(this)
     }
 }
+
 public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
     public init(ID!: ImGuiID, Flags!: ImGuiViewportFlags, Pos!: ImVec2, Size!: ImVec2, WorkPos!: ImVec2, WorkSize!: ImVec2, DpiScale!: Float32, ParentViewportId!: ImGuiID, DrawData!: ImDrawData, RendererUserData!: Value<Unit>, PlatformUserData!: Value<Unit>, PlatformHandle!: Value<Unit>, PlatformHandleRaw!: Value<Unit>, PlatformWindowCreated!: Bool, PlatformRequestMove!: Bool, PlatformRequestResize!: Bool, PlatformRequestClose!: Bool) {
         super()
@@ -10556,6 +10641,7 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         return ImGuiViewport_GetWorkCenter(pOut, this)
     }
 }
+
 public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
     public init(_ImGuiViewport!: ImGuiViewport, Window!: Value<ImGuiWindow>, Idx!: Int32, LastFrameActive!: Int32, LastFocusedStampCount!: Int32, LastNameHash!: ImGuiID, LastPos!: ImVec2, Alpha!: Float32, LastAlpha!: Float32, LastFocusedHadNavWindow!: Bool, PlatformMonitor!: Int16, BgFgDrawListsLastFrame!: Value<Int32>, BgFgDrawLists!: Value<CPointer<capi.ImDrawList>>, DrawDataP!: ImDrawData, DrawDataBuilder!: ImDrawDataBuilder, LastPlatformPos!: ImVec2, LastPlatformSize!: ImVec2, LastRendererSize!: ImVec2, WorkOffsetMin!: ImVec2, WorkOffsetMax!: ImVec2, BuildWorkOffsetMin!: ImVec2, BuildWorkOffsetMax!: ImVec2) {
         super()
@@ -10846,6 +10932,7 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
         return ImGuiViewportP_UpdateWorkRect(this)
     }
 }
+
 public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
     public init(ClassId!: ImGuiID, ParentViewportId!: ImGuiID, FocusRouteParentWindowId!: ImGuiID, ViewportFlagsOverrideSet!: ImGuiViewportFlags, ViewportFlagsOverrideClear!: ImGuiViewportFlags, TabItemFlagsOverrideSet!: ImGuiTabItemFlags, DockNodeFlagsOverrideSet!: ImGuiDockNodeFlags, DockingAlwaysTabBar!: Bool, DockingAllowUnclassed!: Bool) {
         super()
@@ -10965,6 +11052,7 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
         }
     }
 }
+
 public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
     public init(Colors!: Value<ImU32>) {
         super()
@@ -10996,6 +11084,7 @@ public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
         }
     }
 }
+
 public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
     public init(ID!: ImGuiID, Pos!: ImVec2ih, Size!: ImVec2ih, ViewportPos!: ImVec2ih, ViewportId!: ImGuiID, DockId!: ImGuiID, ClassId!: ImGuiID, DockOrder!: Int16, Collapsed!: Bool, IsChild!: Bool, WantApply!: Bool, WantDelete!: Bool) {
         super()
@@ -11152,6 +11241,7 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
         return ImGuiWindowSettings_GetName(this)
     }
 }
+
 public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
     public init(Window!: Value<ImGuiWindow>, ParentLastItemDataBackup!: ImGuiLastItemData, StackSizesOnBegin!: ImGuiStackSizes, DisabledOverrideReenable!: Bool) {
         super()
@@ -11216,6 +11306,7 @@ public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
         }
     }
 }
+
 public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
     public init(CursorPos!: ImVec2, CursorPosPrevLine!: ImVec2, CursorStartPos!: ImVec2, CursorMaxPos!: ImVec2, IdealMaxPos!: ImVec2, CurrLineSize!: ImVec2, PrevLineSize!: ImVec2, CurrLineTextBaseOffset!: Float32, PrevLineTextBaseOffset!: Float32, IsSameLine!: Bool, IsSetPos!: Bool, Indent!: ImVec1, ColumnsOffset!: ImVec1, GroupOffset!: ImVec1, CursorStartPosLossyness!: ImVec2, NavLayerCurrent!: ImGuiNavLayer, NavLayersActiveMask!: Int16, NavLayersActiveMaskNext!: Int16, NavIsScrollPushableX!: Bool, NavHideHighlightOneFrame!: Bool, NavWindowHasScrollY!: Bool, MenuBarAppending!: Bool, MenuBarOffset!: ImVec2, MenuColumns!: ImGuiMenuColumns, TreeDepth!: Int32, TreeJumpToParentOnPopMask!: ImU32, ChildWindows!: ImVector_ImGuiWindowPtr, StateStorage!: ImGuiStorage, CurrentColumns!: ImGuiOldColumns, CurrentTableIdx!: Int32, LayoutType!: ImGuiLayoutType, ParentLayoutType!: ImGuiLayoutType, ModalDimBgColor!: ImU32, ItemWidth!: Float32, TextWrapPos!: Float32, ItemWidthStack!: ImVector_float, TextWrapPosStack!: ImVector_float) {
         super()
@@ -11643,6 +11734,7 @@ public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
         }
     }
 }
+
 public class ImRect <: StructWrapper<capi.ImRect> {
     public init(Min!: ImVec2, Max!: ImVec2) {
         super()
@@ -11785,6 +11877,7 @@ public class ImRect <: StructWrapper<capi.ImRect> {
         return ImRect_TranslateY(this, dy)
     }
 }
+
 public class ImVec1 <: StructWrapper<capi.ImVec1> {
     public init(x!: Float32) {
         super()
@@ -11816,6 +11909,7 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
         }
     }
 }
+
 public class ImVec2 <: StructWrapper<capi.ImVec2> {
     public init(x!: Float32, y!: Float32) {
         super()
@@ -11858,6 +11952,7 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
         }
     }
 }
+
 public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
     public init(x!: Int16, y!: Int16) {
         super()
@@ -11900,6 +11995,7 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
         }
     }
 }
+
 public class ImVec4 <: StructWrapper<capi.ImVec4> {
     public init(x!: Float32, y!: Float32, z!: Float32, w!: Float32) {
         super()
@@ -11964,6 +12060,7 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
         }
     }
 }
+
 public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
     public init(cursor!: Int32, select_start!: Int32, select_end!: Int32, insert_mode!: UInt8, row_count_per_page!: Int32, cursor_at_end_of_line!: UInt8, initialized!: UInt8, has_preferred_x!: UInt8, single_line!: UInt8, padding1!: UInt8, padding2!: UInt8, padding3!: UInt8, preferred_x!: Float32, undostate!: StbUndoState) {
         super()
@@ -12138,6 +12235,7 @@ public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
         }
     }
 }
+
 public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
     public init(x0!: Float32, x1!: Float32, baseline_y_delta!: Float32, ymin!: Float32, ymax!: Float32, num_chars!: Int32) {
         super()
@@ -12224,6 +12322,7 @@ public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
         }
     }
 }
+
 public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
     public init(`where`!: Int32, insert_length!: Int32, delete_length!: Int32, char_storage!: Int32) {
         super()
@@ -12288,6 +12387,7 @@ public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
         }
     }
 }
+
 public class StbUndoState <: StructWrapper<capi.StbUndoState> {
     public init(undo_rec!: StbUndoRecord, undo_char!: Value<ImWchar>, undo_point!: Int16, redo_point!: Int16, undo_char_point!: Int32, redo_char_point!: Int32) {
         super()
@@ -12374,6 +12474,7 @@ public class StbUndoState <: StructWrapper<capi.StbUndoState> {
         }
     }
 }
+
 public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: StructWrapper<capi.ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN> {
     public init(Storage!: Value<ImU32>) {
         super()
@@ -12405,6 +12506,7 @@ public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: 
         }
     }
 }
+
 public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStream_ImGuiTableSettings> {
     public init(Buf!: ImVector_char) {
         super()
@@ -12436,6 +12538,7 @@ public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStrea
         }
     }
 }
+
 public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStream_ImGuiWindowSettings> {
     public init(Buf!: ImVector_char) {
         super()
@@ -12467,6 +12570,7 @@ public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStre
         }
     }
 }
+
 public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
     public init(Buf!: ImVector_ImGuiTabBar, Map!: ImGuiStorage, FreeIdx!: ImPoolIdx, AliveCount!: ImPoolIdx) {
         super()
@@ -12531,6 +12635,7 @@ public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
         }
     }
 }
+
 public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
     public init(Buf!: ImVector_ImGuiTable, Map!: ImGuiStorage, FreeIdx!: ImPoolIdx, AliveCount!: ImPoolIdx) {
         super()
@@ -12595,6 +12700,7 @@ public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
         }
     }
 }
+
 public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCellData> {
     public init(Data!: ImGuiTableCellData, DataEnd!: ImGuiTableCellData) {
         super()
@@ -12637,6 +12743,7 @@ public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCe
         }
     }
 }
+
 public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColumn> {
     public init(Data!: Value<ImGuiTableColumn>, DataEnd!: Value<ImGuiTableColumn>) {
         super()
@@ -12679,6 +12786,7 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
         }
     }
 }
+
 public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableColumnIdx> {
     public init(Data!: Value<ImGuiTableColumnIdx>, DataEnd!: Value<ImGuiTableColumnIdx>) {
         super()
@@ -12721,6 +12829,7 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
         }
     }
 }
+
 public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawChannel) {
         super()
@@ -12774,6 +12883,7 @@ public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel
         }
     }
 }
+
 public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawCmd) {
         super()
@@ -12827,6 +12937,7 @@ public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
         }
     }
 }
+
 public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImDrawIdx>) {
         super()
@@ -12880,6 +12991,7 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
         }
     }
 }
+
 public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImDrawList>>) {
         super()
@@ -12933,6 +13045,7 @@ public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr
         }
     }
 }
+
 public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawVert) {
         super()
@@ -12986,6 +13099,7 @@ public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
         }
     }
 }
+
 public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImFont>>) {
         super()
@@ -13039,6 +13153,7 @@ public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
         }
     }
 }
+
 public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFontAtlasCustomRect> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImFontAtlasCustomRect) {
         super()
@@ -13092,6 +13207,7 @@ public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFon
         }
     }
 }
+
 public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImFontConfig) {
         super()
@@ -13145,6 +13261,7 @@ public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> 
         }
     }
 }
+
 public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImFontGlyph>) {
         super()
@@ -13198,6 +13315,7 @@ public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
         }
     }
 }
+
 public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiColorMod) {
         super()
@@ -13251,6 +13369,7 @@ public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod
         }
     }
 }
+
 public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiContextHook> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiContextHook) {
         super()
@@ -13304,6 +13423,7 @@ public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiConte
         }
     }
 }
+
 public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGuiDockNodeSettings> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiDockNodeSettings>) {
         super()
@@ -13357,6 +13477,7 @@ public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGui
         }
     }
 }
+
 public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockRequest> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiDockRequest>) {
         super()
@@ -13410,6 +13531,7 @@ public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockR
         }
     }
 }
+
 public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFocusScopeData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiFocusScopeData) {
         super()
@@ -13463,6 +13585,7 @@ public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFo
         }
     }
 }
+
 public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiGroupData) {
         super()
@@ -13516,6 +13639,7 @@ public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupDa
         }
     }
 }
+
 public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiID>) {
         super()
@@ -13569,6 +13693,7 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
         }
     }
 }
+
 public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputEvent> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiInputEvent>) {
         super()
@@ -13622,6 +13747,7 @@ public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputE
         }
     }
 }
+
 public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFlags> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiItemFlags>) {
         super()
@@ -13675,6 +13801,7 @@ public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFla
         }
     }
 }
+
 public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKeyRoutingData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiKeyRoutingData) {
         super()
@@ -13728,6 +13855,7 @@ public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKe
         }
     }
 }
+
 public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiListClipperData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiListClipperData) {
         super()
@@ -13781,6 +13909,7 @@ public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiL
         }
     }
 }
+
 public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGuiListClipperRange> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiListClipperRange) {
         super()
@@ -13834,6 +13963,7 @@ public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGui
         }
     }
 }
+
 public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiNavTreeNodeData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiNavTreeNodeData) {
         super()
@@ -13887,6 +14017,7 @@ public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiN
         }
     }
 }
+
 public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOldColumnData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiOldColumnData) {
         super()
@@ -13940,6 +14071,7 @@ public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOld
         }
     }
 }
+
 public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldColumns> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiOldColumns) {
         super()
@@ -13993,6 +14125,7 @@ public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldCol
         }
     }
 }
+
 public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiPlatformMonitor> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPlatformMonitor) {
         super()
@@ -14046,6 +14179,7 @@ public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiP
         }
     }
 }
+
 public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPopupData) {
         super()
@@ -14099,6 +14233,7 @@ public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupDa
         }
     }
 }
+
 public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrIndex> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPtrOrIndex) {
         super()
@@ -14152,6 +14287,7 @@ public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrI
         }
     }
 }
+
 public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiSettingsHandler> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiSettingsHandler) {
         super()
@@ -14205,6 +14341,7 @@ public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiS
         }
     }
 }
+
 public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiShrinkWidthItem> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiShrinkWidthItem) {
         super()
@@ -14258,6 +14395,7 @@ public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiS
         }
     }
 }
+
 public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiStackLevelInfo> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStackLevelInfo>) {
         super()
@@ -14311,6 +14449,7 @@ public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiSt
         }
     }
 }
+
 public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStoragePair> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStoragePair>) {
         super()
@@ -14364,6 +14503,7 @@ public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStora
         }
     }
 }
+
 public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStyleMod>) {
         super()
@@ -14417,6 +14557,7 @@ public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod
         }
     }
 }
+
 public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTabBar) {
         super()
@@ -14470,6 +14611,7 @@ public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
         }
     }
 }
+
 public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTabItem) {
         super()
@@ -14523,6 +14665,7 @@ public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> 
         }
     }
 }
+
 public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiTable>) {
         super()
@@ -14576,6 +14719,7 @@ public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
         }
     }
 }
+
 public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_ImGuiTableColumnSortSpecs> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableColumnSortSpecs) {
         super()
@@ -14629,6 +14773,7 @@ public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_I
         }
     }
 }
+
 public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiTableHeaderData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableHeaderData) {
         super()
@@ -14682,6 +14827,7 @@ public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiT
         }
     }
 }
+
 public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGuiTableInstanceData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableInstanceData) {
         super()
@@ -14735,6 +14881,7 @@ public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGu
         }
     }
 }
+
 public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTableTempData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableTempData) {
         super()
@@ -14788,6 +14935,7 @@ public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTab
         }
     }
 }
+
 public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRange> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTextRange) {
         super()
@@ -14841,6 +14989,7 @@ public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRan
         }
     }
 }
+
 public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewportPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImGuiViewport>>) {
         super()
@@ -14894,6 +15043,7 @@ public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewp
         }
     }
 }
+
 public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiViewportPPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImGuiViewportP>>) {
         super()
@@ -14947,6 +15097,7 @@ public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiView
         }
     }
 }
+
 public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<ImGuiWindow>>) {
         super()
@@ -15000,6 +15151,7 @@ public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowP
         }
     }
 }
+
 public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiWindowStackData> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiWindowStackData) {
         super()
@@ -15053,6 +15205,7 @@ public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiW
         }
     }
 }
+
 public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
     public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<ImTextureID>) {
         super()
@@ -15106,6 +15259,7 @@ public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
         }
     }
 }
+
 public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImU32>) {
         super()
@@ -15159,6 +15313,7 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
         }
     }
 }
+
 public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImVec2) {
         super()
@@ -15212,6 +15367,7 @@ public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
         }
     }
 }
+
 public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
     public init(Size!: Int32, Capacity!: Int32, Data!: ImVec4) {
         super()
@@ -15265,6 +15421,7 @@ public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
         }
     }
 }
+
 public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImWchar>) {
         super()
@@ -15318,6 +15475,7 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
         }
     }
 }
+
 public class ImVector_char <: StructWrapper<capi.ImVector_char> {
     public init(Size!: Int32, Capacity!: Int32, Data!: String) {
         super()
@@ -15371,6 +15529,7 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
         }
     }
 }
+
 public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<CPointer<UInt8>>) {
         super()
@@ -15424,6 +15583,7 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
         }
     }
 }
+
 public class ImVector_float <: StructWrapper<capi.ImVector_float> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<Float32>) {
         super()
@@ -15477,6 +15637,7 @@ public class ImVector_float <: StructWrapper<capi.ImVector_float> {
         }
     }
 }
+
 public class ImVector_int <: StructWrapper<capi.ImVector_int> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<Int32>) {
         super()
@@ -15530,6 +15691,7 @@ public class ImVector_int <: StructWrapper<capi.ImVector_int> {
         }
     }
 }
+
 public class ImVector_unsigned_char <: StructWrapper<capi.ImVector_unsigned_char> {
     public init(Size!: Int32, Capacity!: Int32, Data!: Value<UInt8>) {
         super()
