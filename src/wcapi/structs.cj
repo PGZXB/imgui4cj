@@ -23,7 +23,6 @@ public class ImBitVector <: StructWrapper<capi.ImBitVector> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -75,9 +74,8 @@ public class ImColor <: StructWrapper<capi.ImColor> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImColor_destroy(this.pointer)
         }
     }
 
@@ -116,7 +114,6 @@ public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -164,9 +161,8 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawCmd_destroy(this.pointer)
         }
     }
 
@@ -262,7 +258,6 @@ public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -322,9 +317,8 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawData_destroy(this.pointer)
         }
     }
 
@@ -451,9 +445,8 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawDataBuilder_destroy(this.pointer)
         }
     }
 
@@ -507,9 +500,8 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawList_destroy(this.pointer)
         }
     }
 
@@ -958,9 +950,8 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawListSharedData_destroy(this.pointer)
         }
     }
 
@@ -1106,9 +1097,8 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImDrawListSplitter_destroy(this.pointer)
         }
     }
 
@@ -1180,7 +1170,6 @@ public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -1251,9 +1240,8 @@ public class ImFont <: StructWrapper<capi.ImFont> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImFont_destroy(this.pointer)
         }
     }
 
@@ -1558,9 +1546,8 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImFontAtlas_destroy(this.pointer)
         }
     }
 
@@ -1923,9 +1910,8 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImFontAtlasCustomRect_destroy(this.pointer)
         }
     }
 
@@ -2029,7 +2015,6 @@ public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2080,9 +2065,8 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImFontConfig_destroy(this.pointer)
         }
     }
 
@@ -2302,9 +2286,8 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImFontGlyphRangesBuilder_destroy(this.pointer)
         }
     }
 
@@ -2363,7 +2346,6 @@ public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2410,9 +2392,8 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiComboPreviewData_destroy(this.pointer)
         }
     }
 
@@ -2496,9 +2477,8 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiContextHook_destroy(this.pointer)
         }
     }
 
@@ -2571,7 +2551,6 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2633,7 +2612,6 @@ public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2667,7 +2645,6 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2725,7 +2702,6 @@ public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2780,9 +2756,8 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiDebugAllocInfo_destroy(this.pointer)
         }
     }
 
@@ -2845,9 +2820,8 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiDockContext_destroy(this.pointer)
         }
     }
 
@@ -2908,7 +2882,6 @@ public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -2962,7 +2935,6 @@ public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -3119,9 +3091,8 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiIDStackTool_destroy(this.pointer)
         }
     }
 
@@ -3300,9 +3271,8 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiIO_destroy(this.pointer)
         }
     }
 
@@ -4382,7 +4352,6 @@ public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppF
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4416,7 +4385,6 @@ public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4470,7 +4438,6 @@ public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMou
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4524,7 +4491,6 @@ public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMouseP
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4576,7 +4542,6 @@ public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventM
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4610,7 +4575,6 @@ public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMous
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4662,7 +4626,6 @@ public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -4706,9 +4669,8 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiInputTextCallbackData_destroy(this.pointer)
         }
     }
 
@@ -4879,9 +4841,8 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiInputTextDeactivatedState_destroy(this.pointer)
         }
     }
 
@@ -4943,9 +4904,8 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiInputTextState_destroy(this.pointer)
         }
     }
 
@@ -5222,7 +5182,6 @@ public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -5287,9 +5246,8 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiKeyOwnerData_destroy(this.pointer)
         }
     }
 
@@ -5354,9 +5312,8 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiKeyRoutingData_destroy(this.pointer)
         }
     }
 
@@ -5438,9 +5395,8 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiKeyRoutingTable_destroy(this.pointer)
         }
     }
 
@@ -5501,9 +5457,8 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiLastItemData_destroy(this.pointer)
         }
     }
 
@@ -5609,9 +5564,8 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiListClipper_destroy(this.pointer)
         }
     }
 
@@ -5725,9 +5679,8 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiListClipperData_destroy(this.pointer)
         }
     }
 
@@ -5805,7 +5758,6 @@ public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -5886,7 +5838,6 @@ public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -5935,9 +5886,8 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiMenuColumns_destroy(this.pointer)
         }
     }
 
@@ -6062,7 +6012,6 @@ public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -6232,9 +6181,8 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiNavItemData_destroy(this.pointer)
         }
     }
 
@@ -6350,7 +6298,6 @@ public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -6410,9 +6357,8 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiNextItemData_destroy(this.pointer)
         }
     }
 
@@ -6547,9 +6493,8 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiNextWindowData_destroy(this.pointer)
         }
     }
 
@@ -6796,9 +6741,8 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiOldColumnData_destroy(this.pointer)
         }
     }
 
@@ -6874,9 +6818,8 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiOldColumns_destroy(this.pointer)
         }
     }
 
@@ -7066,9 +7009,8 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiOnceUponAFrame_destroy(this.pointer)
         }
     }
 
@@ -7105,9 +7047,8 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPayload_destroy(this.pointer)
         }
     }
 
@@ -7247,9 +7188,8 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPlatformIO_destroy(this.pointer)
         }
     }
 
@@ -7521,9 +7461,8 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPlatformImeData_destroy(this.pointer)
         }
     }
 
@@ -7578,9 +7517,8 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPlatformMonitor_destroy(this.pointer)
         }
     }
 
@@ -7667,9 +7605,8 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPopupData_destroy(this.pointer)
         }
     }
 
@@ -7770,9 +7707,8 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiPtrOrIndex_destroy(this.pointer)
         }
     }
 
@@ -7820,9 +7756,8 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiSettingsHandler_destroy(this.pointer)
         }
     }
 
@@ -7934,7 +7869,6 @@ public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -7989,7 +7923,6 @@ public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -8059,9 +7992,8 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiStackSizes_destroy(this.pointer)
         }
     }
 
@@ -8179,7 +8111,6 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -8323,9 +8254,8 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiStyle_destroy(this.pointer)
         }
     }
 
@@ -8911,9 +8841,8 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTabBar_destroy(this.pointer)
         }
     }
 
@@ -9275,9 +9204,8 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTabItem_destroy(this.pointer)
         }
     }
 
@@ -9428,7 +9356,6 @@ public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -9473,9 +9400,8 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTableColumnSortSpecs_destroy(this.pointer)
         }
     }
 
@@ -9538,7 +9464,6 @@ public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -9605,9 +9530,8 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTableInstanceData_destroy(this.pointer)
         }
     }
 
@@ -9692,9 +9616,8 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTableSettings_destroy(this.pointer)
         }
     }
 
@@ -9780,9 +9703,8 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTableSortSpecs_destroy(this.pointer)
         }
     }
 
@@ -9845,9 +9767,8 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTableTempData_destroy(this.pointer)
         }
     }
 
@@ -10007,9 +9928,8 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTextBuffer_destroy(this.pointer)
         }
     }
 
@@ -10078,9 +9998,8 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTextFilter_destroy(this.pointer)
         }
     }
 
@@ -10151,7 +10070,6 @@ public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -10214,9 +10132,8 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTextRange_destroy(this.pointer)
         }
     }
 
@@ -10269,7 +10186,6 @@ public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectReq
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -10356,9 +10272,8 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiTypingSelectState_destroy(this.pointer)
         }
     }
 
@@ -10458,9 +10373,8 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiViewport_destroy(this.pointer)
         }
     }
 
@@ -10679,9 +10593,8 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiViewportP_destroy(this.pointer)
         }
     }
 
@@ -10957,9 +10870,8 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiWindowClass_destroy(this.pointer)
         }
     }
 
@@ -11069,7 +10981,6 @@ public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -11112,9 +11023,8 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImGuiWindowSettings_destroy(this.pointer)
         }
     }
 
@@ -11261,7 +11171,6 @@ public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -11359,7 +11268,6 @@ public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -11752,9 +11660,8 @@ public class ImRect <: StructWrapper<capi.ImRect> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImRect_destroy(this.pointer)
         }
     }
 
@@ -11894,9 +11801,8 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImVec1_destroy(this.pointer)
         }
     }
 
@@ -11927,9 +11833,8 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImVec2_destroy(this.pointer)
         }
     }
 
@@ -11970,9 +11875,8 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImVec2ih_destroy(this.pointer)
         }
     }
 
@@ -12015,9 +11919,8 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
-            unsafe { LibC.free(this.pointer) }
+            ImVec4_destroy(this.pointer)
         }
     }
 
@@ -12090,7 +11993,6 @@ public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12257,7 +12159,6 @@ public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12342,7 +12243,6 @@ public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12409,7 +12309,6 @@ public class StbUndoState <: StructWrapper<capi.StbUndoState> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12491,7 +12390,6 @@ public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12523,7 +12421,6 @@ public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStrea
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12555,7 +12452,6 @@ public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStre
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12590,7 +12486,6 @@ public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12655,7 +12550,6 @@ public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12718,7 +12612,6 @@ public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCe
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12761,7 +12654,6 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12804,7 +12696,6 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12848,7 +12739,6 @@ public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12902,7 +12792,6 @@ public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -12956,7 +12845,6 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13010,7 +12898,6 @@ public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13064,7 +12951,6 @@ public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13118,7 +13004,6 @@ public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13172,7 +13057,6 @@ public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFon
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13226,7 +13110,6 @@ public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13280,7 +13163,6 @@ public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13334,7 +13216,6 @@ public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13388,7 +13269,6 @@ public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiConte
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13442,7 +13322,6 @@ public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGui
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13496,7 +13375,6 @@ public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockR
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13550,7 +13428,6 @@ public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFo
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13604,7 +13481,6 @@ public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupDa
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13658,7 +13534,6 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13712,7 +13587,6 @@ public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputE
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13766,7 +13640,6 @@ public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFla
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13820,7 +13693,6 @@ public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKe
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13874,7 +13746,6 @@ public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiL
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13928,7 +13799,6 @@ public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGui
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -13982,7 +13852,6 @@ public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiN
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14036,7 +13905,6 @@ public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOld
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14090,7 +13958,6 @@ public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldCol
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14144,7 +14011,6 @@ public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiP
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14198,7 +14064,6 @@ public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupDa
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14252,7 +14117,6 @@ public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrI
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14306,7 +14170,6 @@ public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiS
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14360,7 +14223,6 @@ public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiS
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14414,7 +14276,6 @@ public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiSt
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14468,7 +14329,6 @@ public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStora
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14522,7 +14382,6 @@ public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14576,7 +14435,6 @@ public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14630,7 +14488,6 @@ public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> 
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14684,7 +14541,6 @@ public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14738,7 +14594,6 @@ public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_I
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14792,7 +14647,6 @@ public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiT
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14846,7 +14700,6 @@ public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGu
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14900,7 +14753,6 @@ public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTab
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -14954,7 +14806,6 @@ public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRan
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15008,7 +14859,6 @@ public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewp
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15062,7 +14912,6 @@ public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiView
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15116,7 +14965,6 @@ public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowP
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15170,7 +15018,6 @@ public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiW
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15224,7 +15071,6 @@ public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15278,7 +15124,6 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15332,7 +15177,6 @@ public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15386,7 +15230,6 @@ public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15440,7 +15283,6 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15494,7 +15336,6 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15548,7 +15389,6 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15602,7 +15442,6 @@ public class ImVector_float <: StructWrapper<capi.ImVector_float> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15656,7 +15495,6 @@ public class ImVector_int <: StructWrapper<capi.ImVector_int> {
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }
@@ -15710,7 +15548,6 @@ public class ImVector_unsigned_char <: StructWrapper<capi.ImVector_unsigned_char
     }
 
     ~init() {
-        // ?? Cangjie does not allow ~init call methods ??
         if (owned) {
             unsafe { LibC.free(this.pointer) }
         }

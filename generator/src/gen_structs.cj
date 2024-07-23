@@ -493,14 +493,14 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
 
     // TODO: init calls constructor & ~init calls destructor
     // let constructorTable = HashMap<String, ArrayList<FuncSignature>>() // struct name => list of constructors
-    // let destructorTable = HashMap<String, FuncSignature>() // struct name => destructors
+    let destructorTable = HashMap<String, FuncSignature>() // struct name => destructors
     let methodTable = HashMap<String, ArrayList<FuncSignature>>() // struct name => list of funcs
     for (fn in funcs) {
         if (fn.structName != "") {
             if (fn.isConstructor) {
             // constructorTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
             } else if (fn.isDestructor) {
-            // destructorTable[fn.structName] = fn
+                destructorTable[fn.structName] = fn
             } else {
                 methodTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
             }
@@ -550,10 +550,15 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         os.writeln()
         // Finalizer for releasing managed pointer
         os.writeln("    ~init() {")
-        os.writeln("        // ?? Cangjie does not allow ~init call methods ??")
-        os.writeln("        if (owned) {")
-        os.writeln("            unsafe { LibC.free(this.pointer) }")
-        os.writeln("        }")
+        if (let Some(d) <- destructorTable.get(def.name)) {
+            os.writeln("        if (owned) {")
+            os.writeln("            ${d.name}(this.pointer)")
+            os.writeln("        }")
+        } else {
+            os.writeln("        if (owned) {")
+            os.writeln("            unsafe { LibC.free(this.pointer) }")
+            os.writeln("        }")
+        }
         os.writeln("    }")
         // Props for accessing fields
         for (mDef in def.members) {

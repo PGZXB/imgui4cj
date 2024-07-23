@@ -181,6 +181,10 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
     os.writeln("import ${capiPkgName}.*")
     os.writeln()
     for (fn in funcs) {
+        if (fn.isDestructor) {
+            continue // Skip destructors
+        }
+
         let fnSb = StringBuilder()
         var hasVaList = false
         let params = ArrayList<FuncParameter>.fromIterator(
