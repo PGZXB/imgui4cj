@@ -40,7 +40,7 @@ main(): Int64 {
 
             Text("Click Count: ${clickCount}")
             SameLine(0.0, -1.0)
-            if (Button("Click Me!", ImVec2(x: 0.0, y: 0.0))) {
+            if (Button("Click Me!", ImVec2(0.0, 0.0))) {
                 clickCount.value += 1
             }
 

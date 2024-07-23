@@ -187,7 +187,10 @@ public open class StructWrapper<T> <: ToString where T <: CType {
     public init(value!: ?T = None, count!: ?Int64 = None) {
         this(unsafe { LibC.malloc<T>(count: count ?? 1) }, count: count, owned: true)
         if (let Some(v) <- value) {
-            unsafe { this.pointer.write(v) }
+            let n = count.getOrDefault {1}
+            for (i in 0..n) {
+                unsafe { (this.pointer + i).write(v) }
+            }
         }
     }
 

@@ -439,6 +439,77 @@ func genStructAccessorFuncsCode(filename: String, pkgName: String, structDefs: A
     throw IllegalStateException("illegal state")
 }
 
+func genStructWCAPIMethod<T>(os: StringWriter<T>, md: FuncSignature, typeAlias: HashMap<String, CjType>) where T <: OutputStream {
+    let params = ArrayList<FuncParameter>.fromIterator(
+        md.params |> filter {
+        item => !(item.name == "..." && item.ty == "...")
+    })
+    if (params |> all {item => item.ty != "va_list"}) {
+        let callArgs = LinkedList<(String, String)>()
+        let selfIdx = if (md.nonUDT) {
+            1
+        } else {
+            0
+        }
+        for ((i, p) in withIndex(params) where md.isClassStaticMethod || md.isConstructor || i != selfIdx) {
+            let ty = CjType.fromCType(p.ty, cArrayAsPointer: true)
+            let (wcapiTy, _) = getWCAPIArgument(ty, "DONT_CARE", typeAlias)
+            callArgs.append((getValidCjIdentifier(p.name), wcapiTy))
+        }
+
+        os.write("    public ")
+        if (md.isClassStaticMethod) {
+            os.write("static ")
+        }
+        if (md.isConstructor) {
+            os.write("init(")
+        } else {
+            os.write("func ${md.originalName}(")
+        }
+        for ((i, (arg, ty)) in withIndex(callArgs)) {
+            os.write("${arg}: ${ty}")
+            if (i != callArgs.size - 1) {
+                os.write(", ")
+            }
+        }
+        os.write(")")
+
+        if (!md.isClassStaticMethod && !md.isConstructor) {
+            if (selfIdx == 0) {
+                callArgs.prepend(("this", "DONT_CARE"))
+            } else if (let Some(fistNode) <- callArgs.firstNode()) {
+                callArgs.insertAfter(fistNode, ("this", "DONT_CARE"))
+            }
+        }
+
+        let retTy = CjType.fromCType(md.retType, cArrayAsPointer: true)
+        let (wcapiRetTy, _) = getWCAPIReturn(retTy, "DONT_CARE", typeAlias)
+        if (md.isConstructor) {
+            os.writeln(" {")
+        } else {
+            os.writeln(": ${wcapiRetTy} {")
+        }
+        if (md.isConstructor) {
+            os.write("        super(")
+        } else {
+            os.write("        return ")
+        }
+        os.write("${md.name}(")
+        for ((i, (arg, _)) in withIndex(callArgs)) {
+            os.write(arg)
+            if (i != callArgs.size - 1) {
+                os.write(", ")
+            }
+        }
+        if (md.isConstructor) {
+            os.writeln(").getCPointer(), count: None, owned: true)")
+        } else {
+            os.writeln(")")
+        }
+        os.writeln("    }")
+    }
+}
+
 func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: String, structDefs: ArrayList<StructDef>,
     funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>) where T <: OutputStream {
     // SOME COMMENTS ....
@@ -491,14 +562,13 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         }
     }
 
-    // TODO: init calls constructor & ~init calls destructor
-    // let constructorTable = HashMap<String, ArrayList<FuncSignature>>() // struct name => list of constructors
+    let constructorTable = HashMap<String, ArrayList<FuncSignature>>() // struct name => list of constructors
     let destructorTable = HashMap<String, FuncSignature>() // struct name => destructors
     let methodTable = HashMap<String, ArrayList<FuncSignature>>() // struct name => list of funcs
     for (fn in funcs) {
         if (fn.structName != "") {
             if (fn.isConstructor) {
-            // constructorTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
+                constructorTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
             } else if (fn.isDestructor) {
                 destructorTable[fn.structName] = fn
             } else {
@@ -515,29 +585,29 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     for (def in structDefs) {
         os.writeln()
         os.writeln("public class ${def.name} <: StructWrapper<${capiPkgName}.${def.name}> {")
-        // Init from fields
-        os.write("    public init(")
-        for ((i, mDef) in withIndex(def.members)) {
-            let mCjName = getValidCjIdentifier(getCjStructMemberName(mDef))
-            let mCjType = CjType.fromCType(mDef.ty, size: getIntValue(mDef.size))
-            let (wcapiMemberTy, _, _) = getWCAPIMemberAccess(mCjType, "", "", typeAlias,
-                makeCType: {name => "${capiPkgName}.${name}"})
-            os.write("${mCjName}!: ${wcapiMemberTy}")
-            if (i != def.members.size - 1) {
-                os.write(", ")
-            }
-        }
-        os.writeln(") {")
-        os.writeln("        super()")
-        os.writeln()
-        for (mDef in def.members) {
-            let mCjName = getValidCjIdentifier(getCjStructMemberName(mDef))
-            os.writeln("        this.${mCjName} = ${mCjName}")
-        }
-        os.writeln("    }")
+        // // Init from fields
+        // os.write("    public init(")
+        // for ((i, mDef) in withIndex(def.members)) {
+        //     let mCjName = getValidCjIdentifier(getCjStructMemberName(mDef))
+        //     let mCjType = CjType.fromCType(mDef.ty, size: getIntValue(mDef.size))
+        //     let (wcapiMemberTy, _, _) = getWCAPIMemberAccess(mCjType, "", "", typeAlias,
+        //         makeCType: {name => "${capiPkgName}.${name}"})
+        //     os.write("${mCjName}!: ${wcapiMemberTy}")
+        //     if (i != def.members.size - 1) {
+        //         os.write(", ")
+        //     }
+        // }
+        // os.writeln(") {")
+        // os.writeln("        super()")
+        // os.writeln()
+        // for (mDef in def.members) {
+        //     let mCjName = getValidCjIdentifier(getCjStructMemberName(mDef))
+        //     os.writeln("        this.${mCjName} = ${mCjName}")
+        // }
+        // os.writeln("    }")
+        // os.writeln()
         // Init from nil or value
-        os.writeln()
-        os.writeln("    public init(value!: ?${capiPkgName}.${def.name} = None, count!: ?Int64 = None) {")
+        os.writeln("    public init(value!: ?${capiPkgName}.${def.name}, count!: ?Int64 = None) {")
         os.writeln("        super(value: value, count: count)")
         os.writeln("    }")
         os.writeln()
@@ -548,6 +618,13 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         os.writeln("        super(pointer, count: count, owned: owned)")
         os.writeln("    }")
         os.writeln()
+        // Inits defined in cimgui
+        if (let Some(constructors) <- constructorTable.get(def.name)) {
+            for (c in constructors) {
+                genStructWCAPIMethod(os, c, typeAlias)
+                os.writeln()
+            }
+        }
         // Finalizer for releasing managed pointer
         os.writeln("    ~init() {")
         if (let Some(d) <- destructorTable.get(def.name)) {
@@ -582,59 +659,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         if (let Some(methods) <- methodTable.get(def.name)) {
             for (md in methods) {
                 os.writeln()
-
-                let params = ArrayList<FuncParameter>.fromIterator(
-                    md.params |> filter {
-                    item => !(item.name == "..." && item.ty == "...")
-                })
-                if (params |> all {item => item.ty != "va_list"}) {
-                    let callArgs = LinkedList<(String, String)>()
-                    let selfIdx = if (md.nonUDT) {
-                        1
-                    } else {
-                        0
-                    }
-                    for ((i, p) in withIndex(params) where md.isClassStaticMethod || i != selfIdx) {
-                        let ty = CjType.fromCType(p.ty, cArrayAsPointer: true)
-                        let (wcapiTy, _) = getWCAPIArgument(ty, "DONT_CARE", typeAlias)
-                        callArgs.append((getValidCjIdentifier(p.name), wcapiTy))
-                    }
-
-                    os.write("    public ")
-                    if (md.isClassStaticMethod) {
-                        os.write("static ")
-                    }
-                    os.write("func ${md.originalName}(")
-                    for ((i, (arg, ty)) in withIndex(callArgs)) {
-                        os.write("${arg}: ${ty}")
-                        if (i != callArgs.size - 1) {
-                            os.write(", ")
-                        }
-                    }
-                    os.write(")")
-
-                    if (!md.isClassStaticMethod) {
-                        if (selfIdx == 0) {
-                            callArgs.prepend(("this", "DONT_CARE"))
-                        } else if (let Some(fistNode) <- callArgs.firstNode()) {
-                            callArgs.insertAfter(fistNode, ("this", "DONT_CARE"))
-                        }
-                    }
-
-                    let retTy = CjType.fromCType(md.retType, cArrayAsPointer: true)
-                    let (wcapiRetTy, _) = getWCAPIReturn(retTy, "DONT_CARE", typeAlias)
-                    os.writeln(": ${wcapiRetTy} {")
-                    os.write("        return ")
-                    os.write("${md.name}(")
-                    for ((i, (arg, _)) in withIndex(callArgs)) {
-                        os.write(arg)
-                        if (i != callArgs.size - 1) {
-                            os.write(", ")
-                        }
-                    }
-                    os.writeln(")")
-                    os.writeln("    }")
-                }
+                genStructWCAPIMethod(os, md, typeAlias)
             }
         }
         os.writeln("}")

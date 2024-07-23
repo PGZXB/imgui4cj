@@ -8,13 +8,7 @@ package wcapi
 import capi.*
 
 public class ImBitVector <: StructWrapper<capi.ImBitVector> {
-    public init(Storage!: ImVector_ImU32) {
-        super()
-
-        this.Storage = Storage
-    }
-
-    public init(value!: ?capi.ImBitVector = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImBitVector, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -60,18 +54,32 @@ public class ImBitVector <: StructWrapper<capi.ImBitVector> {
 }
 
 public class ImColor <: StructWrapper<capi.ImColor> {
-    public init(Value!: ImVec4) {
-        super()
-
-        this.Value = Value
-    }
-
-    public init(value!: ?capi.ImColor = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImColor, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImColor>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImColor_ImColor_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(r: Float32, g: Float32, b: Float32, a: Float32) {
+        super(ImColor_ImColor_Float(r, g, b, a).getCPointer(), count: None, owned: true)
+    }
+
+    public init(col: ImVec4) {
+        super(ImColor_ImColor_Vec4(col).getCPointer(), count: None, owned: true)
+    }
+
+    public init(r: Int32, g: Int32, b: Int32, a: Int32) {
+        super(ImColor_ImColor_Int(r, g, b, a).getCPointer(), count: None, owned: true)
+    }
+
+    public init(rgba: ImU32) {
+        super(ImColor_ImColor_U32(rgba).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -100,14 +108,7 @@ public class ImColor <: StructWrapper<capi.ImColor> {
 }
 
 public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
-    public init(_CmdBuffer!: ImVector_ImDrawCmd, _IdxBuffer!: ImVector_ImDrawIdx) {
-        super()
-
-        this._CmdBuffer = _CmdBuffer
-        this._IdxBuffer = _IdxBuffer
-    }
-
-    public init(value!: ?capi.ImDrawChannel = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawChannel, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -143,24 +144,16 @@ public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
 }
 
 public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
-    public init(ClipRect!: ImVec4, TextureId!: ImTextureID, VtxOffset!: Int32, IdxOffset!: Int32, ElemCount!: Int32, UserCallback!: ImDrawCallback, UserCallbackData!: Value<Unit>) {
-        super()
-
-        this.ClipRect = ClipRect
-        this.TextureId = TextureId
-        this.VtxOffset = VtxOffset
-        this.IdxOffset = IdxOffset
-        this.ElemCount = ElemCount
-        this.UserCallback = UserCallback
-        this.UserCallbackData = UserCallbackData
-    }
-
-    public init(value!: ?capi.ImDrawCmd = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawCmd, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawCmd>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImDrawCmd_ImDrawCmd().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -245,15 +238,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
 }
 
 public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
-    public init(ClipRect!: ImVec4, TextureId!: ImTextureID, VtxOffset!: Int32) {
-        super()
-
-        this.ClipRect = ClipRect
-        this.TextureId = TextureId
-        this.VtxOffset = VtxOffset
-    }
-
-    public init(value!: ?capi.ImDrawCmdHeader = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawCmdHeader, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -299,26 +284,16 @@ public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
 }
 
 public class ImDrawData <: StructWrapper<capi.ImDrawData> {
-    public init(Valid!: Bool, CmdListsCount!: Int32, TotalIdxCount!: Int32, TotalVtxCount!: Int32, CmdLists!: ImVector_ImDrawListPtr, DisplayPos!: ImVec2, DisplaySize!: ImVec2, FramebufferScale!: ImVec2, OwnerViewport!: ImGuiViewport) {
-        super()
-
-        this.Valid = Valid
-        this.CmdListsCount = CmdListsCount
-        this.TotalIdxCount = TotalIdxCount
-        this.TotalVtxCount = TotalVtxCount
-        this.CmdLists = CmdLists
-        this.DisplayPos = DisplayPos
-        this.DisplaySize = DisplaySize
-        this.FramebufferScale = FramebufferScale
-        this.OwnerViewport = OwnerViewport
-    }
-
-    public init(value!: ?capi.ImDrawData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImDrawData_ImDrawData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -435,19 +410,16 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
 }
 
 public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
-    public init(Layers!: Value<CPointer<capi.ImVector_ImDrawListPtr>>, LayerData1!: ImVector_ImDrawListPtr) {
-        super()
-
-        this.Layers = Layers
-        this.LayerData1 = LayerData1
-    }
-
-    public init(value!: ?capi.ImDrawDataBuilder = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawDataBuilder, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawDataBuilder>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImDrawDataBuilder_ImDrawDataBuilder().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -478,32 +450,16 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
 }
 
 public class ImDrawList <: StructWrapper<capi.ImDrawList> {
-    public init(CmdBuffer!: ImVector_ImDrawCmd, IdxBuffer!: ImVector_ImDrawIdx, VtxBuffer!: ImVector_ImDrawVert, Flags!: ImDrawListFlags, _VtxCurrentIdx!: Int32, _Data!: ImDrawListSharedData, _VtxWritePtr!: ImDrawVert, _IdxWritePtr!: Value<ImDrawIdx>, _Path!: ImVector_ImVec2, _CmdHeader!: ImDrawCmdHeader, _Splitter!: ImDrawListSplitter, _ClipRectStack!: ImVector_ImVec4, _TextureIdStack!: ImVector_ImTextureID, _FringeScale!: Float32, _OwnerName!: String) {
-        super()
-
-        this.CmdBuffer = CmdBuffer
-        this.IdxBuffer = IdxBuffer
-        this.VtxBuffer = VtxBuffer
-        this.Flags = Flags
-        this._VtxCurrentIdx = _VtxCurrentIdx
-        this._Data = _Data
-        this._VtxWritePtr = _VtxWritePtr
-        this._IdxWritePtr = _IdxWritePtr
-        this._Path = _Path
-        this._CmdHeader = _CmdHeader
-        this._Splitter = _Splitter
-        this._ClipRectStack = _ClipRectStack
-        this._TextureIdStack = _TextureIdStack
-        this._FringeScale = _FringeScale
-        this._OwnerName = _OwnerName
-    }
-
-    public init(value!: ?capi.ImDrawList = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawList, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawList>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init(shared_data: ImDrawListSharedData) {
+        super(ImDrawList_ImDrawList(shared_data).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -932,29 +888,16 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
 }
 
 public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
-    public init(TexUvWhitePixel!: ImVec2, Font!: ImFont, FontSize!: Float32, CurveTessellationTol!: Float32, CircleSegmentMaxError!: Float32, ClipRectFullscreen!: ImVec4, InitialFlags!: ImDrawListFlags, TempBuffer!: ImVector_ImVec2, ArcFastVtx!: ImVec2, ArcFastRadiusCutoff!: Float32, CircleSegmentCounts!: Value<ImU8>, TexUvLines!: ImVec4) {
-        super()
-
-        this.TexUvWhitePixel = TexUvWhitePixel
-        this.Font = Font
-        this.FontSize = FontSize
-        this.CurveTessellationTol = CurveTessellationTol
-        this.CircleSegmentMaxError = CircleSegmentMaxError
-        this.ClipRectFullscreen = ClipRectFullscreen
-        this.InitialFlags = InitialFlags
-        this.TempBuffer = TempBuffer
-        this.ArcFastVtx = ArcFastVtx
-        this.ArcFastRadiusCutoff = ArcFastRadiusCutoff
-        this.CircleSegmentCounts = CircleSegmentCounts
-        this.TexUvLines = TexUvLines
-    }
-
-    public init(value!: ?capi.ImDrawListSharedData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawListSharedData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawListSharedData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImDrawListSharedData_ImDrawListSharedData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -1089,20 +1032,16 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
 }
 
 public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
-    public init(_Current!: Int32, _Count!: Int32, _Channels!: ImVector_ImDrawChannel) {
-        super()
-
-        this._Current = _Current
-        this._Count = _Count
-        this._Channels = _Channels
-    }
-
-    public init(value!: ?capi.ImDrawListSplitter = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawListSplitter, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImDrawListSplitter>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImDrawListSplitter_ImDrawListSplitter().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -1163,15 +1102,7 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
 }
 
 public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
-    public init(pos!: ImVec2, uv!: ImVec2, col!: ImU32) {
-        super()
-
-        this.pos = pos
-        this.uv = uv
-        this.col = col
-    }
-
-    public init(value!: ?capi.ImDrawVert = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImDrawVert, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -1217,37 +1148,16 @@ public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
 }
 
 public class ImFont <: StructWrapper<capi.ImFont> {
-    public init(IndexAdvanceX!: ImVector_float, FallbackAdvanceX!: Float32, FontSize!: Float32, IndexLookup!: ImVector_ImWchar, Glyphs!: ImVector_ImFontGlyph, FallbackGlyph!: Value<ImFontGlyph>, ContainerAtlas!: ImFontAtlas, ConfigData!: ImFontConfig, ConfigDataCount!: Int16, FallbackChar!: ImWchar, EllipsisChar!: ImWchar, EllipsisCharCount!: Int16, EllipsisWidth!: Float32, EllipsisCharStep!: Float32, DirtyLookupTables!: Bool, Scale!: Float32, Ascent!: Float32, Descent!: Float32, MetricsTotalSurface!: Int32, Used4kPagesMap!: Value<ImU8>) {
-        super()
-
-        this.IndexAdvanceX = IndexAdvanceX
-        this.FallbackAdvanceX = FallbackAdvanceX
-        this.FontSize = FontSize
-        this.IndexLookup = IndexLookup
-        this.Glyphs = Glyphs
-        this.FallbackGlyph = FallbackGlyph
-        this.ContainerAtlas = ContainerAtlas
-        this.ConfigData = ConfigData
-        this.ConfigDataCount = ConfigDataCount
-        this.FallbackChar = FallbackChar
-        this.EllipsisChar = EllipsisChar
-        this.EllipsisCharCount = EllipsisCharCount
-        this.EllipsisWidth = EllipsisWidth
-        this.EllipsisCharStep = EllipsisCharStep
-        this.DirtyLookupTables = DirtyLookupTables
-        this.Scale = Scale
-        this.Ascent = Ascent
-        this.Descent = Descent
-        this.MetricsTotalSurface = MetricsTotalSurface
-        this.Used4kPagesMap = Used4kPagesMap
-    }
-
-    public init(value!: ?capi.ImFont = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFont, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImFont>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImFont_ImFont().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -1522,39 +1432,16 @@ public class ImFont <: StructWrapper<capi.ImFont> {
 }
 
 public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
-    public init(Flags!: ImFontAtlasFlags, TexID!: ImTextureID, TexDesiredWidth!: Int32, TexGlyphPadding!: Int32, Locked!: Bool, UserData!: Value<Unit>, TexReady!: Bool, TexPixelsUseColors!: Bool, TexPixelsAlpha8!: Value<UInt8>, TexPixelsRGBA32!: Value<Int32>, TexWidth!: Int32, TexHeight!: Int32, TexUvScale!: ImVec2, TexUvWhitePixel!: ImVec2, Fonts!: ImVector_ImFontPtr, CustomRects!: ImVector_ImFontAtlasCustomRect, ConfigData!: ImVector_ImFontConfig, TexUvLines!: ImVec4, FontBuilderIO!: ImFontBuilderIO, FontBuilderFlags!: Int32, PackIdMouseCursors!: Int32, PackIdLines!: Int32) {
-        super()
-
-        this.Flags = Flags
-        this.TexID = TexID
-        this.TexDesiredWidth = TexDesiredWidth
-        this.TexGlyphPadding = TexGlyphPadding
-        this.Locked = Locked
-        this.UserData = UserData
-        this.TexReady = TexReady
-        this.TexPixelsUseColors = TexPixelsUseColors
-        this.TexPixelsAlpha8 = TexPixelsAlpha8
-        this.TexPixelsRGBA32 = TexPixelsRGBA32
-        this.TexWidth = TexWidth
-        this.TexHeight = TexHeight
-        this.TexUvScale = TexUvScale
-        this.TexUvWhitePixel = TexUvWhitePixel
-        this.Fonts = Fonts
-        this.CustomRects = CustomRects
-        this.ConfigData = ConfigData
-        this.TexUvLines = TexUvLines
-        this.FontBuilderIO = FontBuilderIO
-        this.FontBuilderFlags = FontBuilderFlags
-        this.PackIdMouseCursors = PackIdMouseCursors
-        this.PackIdLines = PackIdLines
-    }
-
-    public init(value!: ?capi.ImFontAtlas = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFontAtlas, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImFontAtlas>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImFontAtlas_ImFontAtlas().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -1901,25 +1788,16 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
 }
 
 public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> {
-    public init(Width!: Int16, Height!: Int16, X!: Int16, Y!: Int16, GlyphID!: Int32, GlyphAdvanceX!: Float32, GlyphOffset!: ImVec2, Font!: ImFont) {
-        super()
-
-        this.Width = Width
-        this.Height = Height
-        this.X = X
-        this.Y = Y
-        this.GlyphID = GlyphID
-        this.GlyphAdvanceX = GlyphAdvanceX
-        this.GlyphOffset = GlyphOffset
-        this.Font = Font
-    }
-
-    public init(value!: ?capi.ImFontAtlasCustomRect = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFontAtlasCustomRect, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImFontAtlasCustomRect>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImFontAtlasCustomRect_ImFontAtlasCustomRect().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2014,13 +1892,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
 }
 
 public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
-    public init(FontBuilder_Build!: CFunc<(atlas: CPointer<capi.ImFontAtlas>) -> Bool>) {
-        super()
-
-        this.FontBuilder_Build = FontBuilder_Build
-    }
-
-    public init(value!: ?capi.ImFontBuilderIO = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFontBuilderIO, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2046,37 +1918,16 @@ public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
 }
 
 public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
-    public init(FontData!: Value<Unit>, FontDataSize!: Int32, FontDataOwnedByAtlas!: Bool, FontNo!: Int32, SizePixels!: Float32, OversampleH!: Int32, OversampleV!: Int32, PixelSnapH!: Bool, GlyphExtraSpacing!: ImVec2, GlyphOffset!: ImVec2, GlyphRanges!: Value<ImWchar>, GlyphMinAdvanceX!: Float32, GlyphMaxAdvanceX!: Float32, MergeMode!: Bool, FontBuilderFlags!: Int32, RasterizerMultiply!: Float32, RasterizerDensity!: Float32, EllipsisChar!: ImWchar, Name!: Value<UInt8>, DstFont!: ImFont) {
-        super()
-
-        this.FontData = FontData
-        this.FontDataSize = FontDataSize
-        this.FontDataOwnedByAtlas = FontDataOwnedByAtlas
-        this.FontNo = FontNo
-        this.SizePixels = SizePixels
-        this.OversampleH = OversampleH
-        this.OversampleV = OversampleV
-        this.PixelSnapH = PixelSnapH
-        this.GlyphExtraSpacing = GlyphExtraSpacing
-        this.GlyphOffset = GlyphOffset
-        this.GlyphRanges = GlyphRanges
-        this.GlyphMinAdvanceX = GlyphMinAdvanceX
-        this.GlyphMaxAdvanceX = GlyphMaxAdvanceX
-        this.MergeMode = MergeMode
-        this.FontBuilderFlags = FontBuilderFlags
-        this.RasterizerMultiply = RasterizerMultiply
-        this.RasterizerDensity = RasterizerDensity
-        this.EllipsisChar = EllipsisChar
-        this.Name = Name
-        this.DstFont = DstFont
-    }
-
-    public init(value!: ?capi.ImFontConfig = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFontConfig, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImFontConfig>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImFontConfig_ImFontConfig().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2287,18 +2138,16 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
 }
 
 public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBuilder> {
-    public init(UsedChars!: ImVector_ImU32) {
-        super()
-
-        this.UsedChars = UsedChars
-    }
-
-    public init(value!: ?capi.ImFontGlyphRangesBuilder = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImFontGlyphRangesBuilder, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImFontGlyphRangesBuilder>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2347,14 +2196,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
 }
 
 public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
-    public init(Col!: ImGuiCol, BackupValue!: ImVec4) {
-        super()
-
-        this.Col = Col
-        this.BackupValue = BackupValue
-    }
-
-    public init(value!: ?capi.ImGuiColorMod = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiColorMod, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2390,23 +2232,16 @@ public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
 }
 
 public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> {
-    public init(PreviewRect!: ImRect, BackupCursorPos!: ImVec2, BackupCursorMaxPos!: ImVec2, BackupCursorPosPrevLine!: ImVec2, BackupPrevLineTextBaseOffset!: Float32, BackupLayout!: ImGuiLayoutType) {
-        super()
-
-        this.PreviewRect = PreviewRect
-        this.BackupCursorPos = BackupCursorPos
-        this.BackupCursorMaxPos = BackupCursorMaxPos
-        this.BackupCursorPosPrevLine = BackupCursorPosPrevLine
-        this.BackupPrevLineTextBaseOffset = BackupPrevLineTextBaseOffset
-        this.BackupLayout = BackupLayout
-    }
-
-    public init(value!: ?capi.ImGuiComboPreviewData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiComboPreviewData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiComboPreviewData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiComboPreviewData_ImGuiComboPreviewData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2477,22 +2312,16 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
 }
 
 public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
-    public init(HookId!: ImGuiID, Type!: ImGuiContextHookType, Owner!: ImGuiID, Callback!: ImGuiContextHookCallback, UserData!: Value<Unit>) {
-        super()
-
-        this.HookId = HookId
-        this.Type = Type
-        this.Owner = Owner
-        this.Callback = Callback
-        this.UserData = UserData
-    }
-
-    public init(value!: ?capi.ImGuiContextHook = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiContextHook, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiContextHook>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiContextHook_ImGuiContextHook().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2553,16 +2382,7 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
 }
 
 public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
-    public init(Size!: UIntNative, Name!: String, PrintFmt!: String, ScanFmt!: String) {
-        super()
-
-        this.Size = Size
-        this.Name = Name
-        this.PrintFmt = PrintFmt
-        this.ScanFmt = ScanFmt
-    }
-
-    public init(value!: ?capi.ImGuiDataTypeInfo = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDataTypeInfo, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2618,13 +2438,7 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
 }
 
 public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
-    public init(Data!: Value<ImU8>) {
-        super()
-
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImGuiDataTypeStorage = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDataTypeStorage, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2650,15 +2464,7 @@ public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
 }
 
 public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
-    public init(Type!: ImGuiDataType, Count!: ImU32, Offset!: ImU32) {
-        super()
-
-        this.Type = Type
-        this.Count = Count
-        this.Offset = Offset
-    }
-
-    public init(value!: ?capi.ImGuiDataVarInfo = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDataVarInfo, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2708,15 +2514,7 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
 }
 
 public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
-    public init(FrameCount!: Int32, AllocCount!: ImS16, FreeCount!: ImS16) {
-        super()
-
-        this.FrameCount = FrameCount
-        this.AllocCount = AllocCount
-        this.FreeCount = FreeCount
-    }
-
-    public init(value!: ?capi.ImGuiDebugAllocEntry = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDebugAllocEntry, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2762,21 +2560,16 @@ public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
 }
 
 public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
-    public init(TotalAllocCount!: Int32, TotalFreeCount!: Int32, LastEntriesIdx!: ImS16, LastEntriesBuf!: ImGuiDebugAllocEntry) {
-        super()
-
-        this.TotalAllocCount = TotalAllocCount
-        this.TotalFreeCount = TotalFreeCount
-        this.LastEntriesIdx = LastEntriesIdx
-        this.LastEntriesBuf = LastEntriesBuf
-    }
-
-    public init(value!: ?capi.ImGuiDebugAllocInfo = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDebugAllocInfo, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiDebugAllocInfo>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiDebugAllocInfo_ImGuiDebugAllocInfo().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2827,21 +2620,16 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
 }
 
 public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
-    public init(Nodes!: ImGuiStorage, Requests!: ImVector_ImGuiDockRequest, NodesSettings!: ImVector_ImGuiDockNodeSettings, WantFullRebuild!: Bool) {
-        super()
-
-        this.Nodes = Nodes
-        this.Requests = Requests
-        this.NodesSettings = NodesSettings
-        this.WantFullRebuild = WantFullRebuild
-    }
-
-    public init(value!: ?capi.ImGuiDockContext = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiDockContext, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiDockContext>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiDockContext_ImGuiDockContext().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -2892,14 +2680,7 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
 }
 
 public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
-    public init(ID!: ImGuiID, WindowID!: ImGuiID) {
-        super()
-
-        this.ID = ID
-        this.WindowID = WindowID
-    }
-
-    public init(value!: ?capi.ImGuiFocusScopeData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiFocusScopeData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -2935,25 +2716,7 @@ public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
 }
 
 public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
-    public init(WindowID!: ImGuiID, BackupCursorPos!: ImVec2, BackupCursorMaxPos!: ImVec2, BackupCursorPosPrevLine!: ImVec2, BackupIndent!: ImVec1, BackupGroupOffset!: ImVec1, BackupCurrLineSize!: ImVec2, BackupCurrLineTextBaseOffset!: Float32, BackupActiveIdIsAlive!: ImGuiID, BackupActiveIdPreviousFrameIsAlive!: Bool, BackupHoveredIdIsAlive!: Bool, BackupIsSameLine!: Bool, EmitItem!: Bool) {
-        super()
-
-        this.WindowID = WindowID
-        this.BackupCursorPos = BackupCursorPos
-        this.BackupCursorMaxPos = BackupCursorMaxPos
-        this.BackupCursorPosPrevLine = BackupCursorPosPrevLine
-        this.BackupIndent = BackupIndent
-        this.BackupGroupOffset = BackupGroupOffset
-        this.BackupCurrLineSize = BackupCurrLineSize
-        this.BackupCurrLineTextBaseOffset = BackupCurrLineTextBaseOffset
-        this.BackupActiveIdIsAlive = BackupActiveIdIsAlive
-        this.BackupActiveIdPreviousFrameIsAlive = BackupActiveIdPreviousFrameIsAlive
-        this.BackupHoveredIdIsAlive = BackupHoveredIdIsAlive
-        this.BackupIsSameLine = BackupIsSameLine
-        this.EmitItem = EmitItem
-    }
-
-    public init(value!: ?capi.ImGuiGroupData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiGroupData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -3099,23 +2862,16 @@ public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
 }
 
 public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
-    public init(LastActiveFrame!: Int32, StackLevel!: Int32, QueryId!: ImGuiID, Results!: ImVector_ImGuiStackLevelInfo, CopyToClipboardOnCtrlC!: Bool, CopyToClipboardLastTime!: Float32) {
-        super()
-
-        this.LastActiveFrame = LastActiveFrame
-        this.StackLevel = StackLevel
-        this.QueryId = QueryId
-        this.Results = Results
-        this.CopyToClipboardOnCtrlC = CopyToClipboardOnCtrlC
-        this.CopyToClipboardLastTime = CopyToClipboardLastTime
-    }
-
-    public init(value!: ?capi.ImGuiIDStackTool = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiIDStackTool, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiIDStackTool>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiIDStackTool_ImGuiIDStackTool().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -3186,117 +2942,16 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
 }
 
 public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
-    public init(ConfigFlags!: ImGuiConfigFlags, BackendFlags!: ImGuiBackendFlags, DisplaySize!: ImVec2, DeltaTime!: Float32, IniSavingRate!: Float32, IniFilename!: String, LogFilename!: String, UserData!: Value<Unit>, Fonts!: ImFontAtlas, FontGlobalScale!: Float32, FontAllowUserScaling!: Bool, FontDefault!: ImFont, DisplayFramebufferScale!: ImVec2, ConfigDockingNoSplit!: Bool, ConfigDockingWithShift!: Bool, ConfigDockingAlwaysTabBar!: Bool, ConfigDockingTransparentPayload!: Bool, ConfigViewportsNoAutoMerge!: Bool, ConfigViewportsNoTaskBarIcon!: Bool, ConfigViewportsNoDecoration!: Bool, ConfigViewportsNoDefaultParent!: Bool, MouseDrawCursor!: Bool, ConfigMacOSXBehaviors!: Bool, ConfigInputTrickleEventQueue!: Bool, ConfigInputTextCursorBlink!: Bool, ConfigInputTextEnterKeepActive!: Bool, ConfigDragClickToInputText!: Bool, ConfigWindowsResizeFromEdges!: Bool, ConfigWindowsMoveFromTitleBarOnly!: Bool, ConfigMemoryCompactTimer!: Float32, MouseDoubleClickTime!: Float32, MouseDoubleClickMaxDist!: Float32, MouseDragThreshold!: Float32, KeyRepeatDelay!: Float32, KeyRepeatRate!: Float32, ConfigDebugIsDebuggerPresent!: Bool, ConfigDebugBeginReturnValueOnce!: Bool, ConfigDebugBeginReturnValueLoop!: Bool, ConfigDebugIgnoreFocusLoss!: Bool, ConfigDebugIniSettings!: Bool, BackendPlatformName!: String, BackendRendererName!: String, BackendPlatformUserData!: Value<Unit>, BackendRendererUserData!: Value<Unit>, BackendLanguageUserData!: Value<Unit>, GetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>) -> CPointer<UInt8>>, SetClipboardTextFn!: CFunc<(user_data: CPointer<Unit>, text: CPointer<UInt8>) -> Unit>, ClipboardUserData!: Value<Unit>, SetPlatformImeDataFn!: CFunc<(viewport: CPointer<capi.ImGuiViewport>, data: CPointer<capi.ImGuiPlatformImeData>) -> Unit>, PlatformLocaleDecimalPoint!: ImWchar, WantCaptureMouse!: Bool, WantCaptureKeyboard!: Bool, WantTextInput!: Bool, WantSetMousePos!: Bool, WantSaveIniSettings!: Bool, NavActive!: Bool, NavVisible!: Bool, Framerate!: Float32, MetricsRenderVertices!: Int32, MetricsRenderIndices!: Int32, MetricsRenderWindows!: Int32, MetricsActiveWindows!: Int32, MouseDelta!: ImVec2, Ctx!: Value<ImGuiContext>, MousePos!: ImVec2, MouseDown!: Value<Bool>, MouseWheel!: Float32, MouseWheelH!: Float32, MouseSource!: ImGuiMouseSource, MouseHoveredViewport!: ImGuiID, KeyCtrl!: Bool, KeyShift!: Bool, KeyAlt!: Bool, KeySuper!: Bool, KeyMods!: ImGuiKeyChord, KeysData!: ImGuiKeyData, WantCaptureMouseUnlessPopupClose!: Bool, MousePosPrev!: ImVec2, MouseClickedPos!: ImVec2, MouseClickedTime!: Value<Float64>, MouseClicked!: Value<Bool>, MouseDoubleClicked!: Value<Bool>, MouseClickedCount!: Value<ImU16>, MouseClickedLastCount!: Value<ImU16>, MouseReleased!: Value<Bool>, MouseDownOwned!: Value<Bool>, MouseDownOwnedUnlessPopupClose!: Value<Bool>, MouseWheelRequestAxisSwap!: Bool, MouseCtrlLeftAsRightClick!: Bool, MouseDownDuration!: Value<Float32>, MouseDownDurationPrev!: Value<Float32>, MouseDragMaxDistanceAbs!: ImVec2, MouseDragMaxDistanceSqr!: Value<Float32>, PenPressure!: Float32, AppFocusLost!: Bool, AppAcceptingEvents!: Bool, BackendUsingLegacyKeyArrays!: ImS8, BackendUsingLegacyNavInputArray!: Bool, InputQueueSurrogate!: ImWchar16, InputQueueCharacters!: ImVector_ImWchar) {
-        super()
-
-        this.ConfigFlags = ConfigFlags
-        this.BackendFlags = BackendFlags
-        this.DisplaySize = DisplaySize
-        this.DeltaTime = DeltaTime
-        this.IniSavingRate = IniSavingRate
-        this.IniFilename = IniFilename
-        this.LogFilename = LogFilename
-        this.UserData = UserData
-        this.Fonts = Fonts
-        this.FontGlobalScale = FontGlobalScale
-        this.FontAllowUserScaling = FontAllowUserScaling
-        this.FontDefault = FontDefault
-        this.DisplayFramebufferScale = DisplayFramebufferScale
-        this.ConfigDockingNoSplit = ConfigDockingNoSplit
-        this.ConfigDockingWithShift = ConfigDockingWithShift
-        this.ConfigDockingAlwaysTabBar = ConfigDockingAlwaysTabBar
-        this.ConfigDockingTransparentPayload = ConfigDockingTransparentPayload
-        this.ConfigViewportsNoAutoMerge = ConfigViewportsNoAutoMerge
-        this.ConfigViewportsNoTaskBarIcon = ConfigViewportsNoTaskBarIcon
-        this.ConfigViewportsNoDecoration = ConfigViewportsNoDecoration
-        this.ConfigViewportsNoDefaultParent = ConfigViewportsNoDefaultParent
-        this.MouseDrawCursor = MouseDrawCursor
-        this.ConfigMacOSXBehaviors = ConfigMacOSXBehaviors
-        this.ConfigInputTrickleEventQueue = ConfigInputTrickleEventQueue
-        this.ConfigInputTextCursorBlink = ConfigInputTextCursorBlink
-        this.ConfigInputTextEnterKeepActive = ConfigInputTextEnterKeepActive
-        this.ConfigDragClickToInputText = ConfigDragClickToInputText
-        this.ConfigWindowsResizeFromEdges = ConfigWindowsResizeFromEdges
-        this.ConfigWindowsMoveFromTitleBarOnly = ConfigWindowsMoveFromTitleBarOnly
-        this.ConfigMemoryCompactTimer = ConfigMemoryCompactTimer
-        this.MouseDoubleClickTime = MouseDoubleClickTime
-        this.MouseDoubleClickMaxDist = MouseDoubleClickMaxDist
-        this.MouseDragThreshold = MouseDragThreshold
-        this.KeyRepeatDelay = KeyRepeatDelay
-        this.KeyRepeatRate = KeyRepeatRate
-        this.ConfigDebugIsDebuggerPresent = ConfigDebugIsDebuggerPresent
-        this.ConfigDebugBeginReturnValueOnce = ConfigDebugBeginReturnValueOnce
-        this.ConfigDebugBeginReturnValueLoop = ConfigDebugBeginReturnValueLoop
-        this.ConfigDebugIgnoreFocusLoss = ConfigDebugIgnoreFocusLoss
-        this.ConfigDebugIniSettings = ConfigDebugIniSettings
-        this.BackendPlatformName = BackendPlatformName
-        this.BackendRendererName = BackendRendererName
-        this.BackendPlatformUserData = BackendPlatformUserData
-        this.BackendRendererUserData = BackendRendererUserData
-        this.BackendLanguageUserData = BackendLanguageUserData
-        this.GetClipboardTextFn = GetClipboardTextFn
-        this.SetClipboardTextFn = SetClipboardTextFn
-        this.ClipboardUserData = ClipboardUserData
-        this.SetPlatformImeDataFn = SetPlatformImeDataFn
-        this.PlatformLocaleDecimalPoint = PlatformLocaleDecimalPoint
-        this.WantCaptureMouse = WantCaptureMouse
-        this.WantCaptureKeyboard = WantCaptureKeyboard
-        this.WantTextInput = WantTextInput
-        this.WantSetMousePos = WantSetMousePos
-        this.WantSaveIniSettings = WantSaveIniSettings
-        this.NavActive = NavActive
-        this.NavVisible = NavVisible
-        this.Framerate = Framerate
-        this.MetricsRenderVertices = MetricsRenderVertices
-        this.MetricsRenderIndices = MetricsRenderIndices
-        this.MetricsRenderWindows = MetricsRenderWindows
-        this.MetricsActiveWindows = MetricsActiveWindows
-        this.MouseDelta = MouseDelta
-        this.Ctx = Ctx
-        this.MousePos = MousePos
-        this.MouseDown = MouseDown
-        this.MouseWheel = MouseWheel
-        this.MouseWheelH = MouseWheelH
-        this.MouseSource = MouseSource
-        this.MouseHoveredViewport = MouseHoveredViewport
-        this.KeyCtrl = KeyCtrl
-        this.KeyShift = KeyShift
-        this.KeyAlt = KeyAlt
-        this.KeySuper = KeySuper
-        this.KeyMods = KeyMods
-        this.KeysData = KeysData
-        this.WantCaptureMouseUnlessPopupClose = WantCaptureMouseUnlessPopupClose
-        this.MousePosPrev = MousePosPrev
-        this.MouseClickedPos = MouseClickedPos
-        this.MouseClickedTime = MouseClickedTime
-        this.MouseClicked = MouseClicked
-        this.MouseDoubleClicked = MouseDoubleClicked
-        this.MouseClickedCount = MouseClickedCount
-        this.MouseClickedLastCount = MouseClickedLastCount
-        this.MouseReleased = MouseReleased
-        this.MouseDownOwned = MouseDownOwned
-        this.MouseDownOwnedUnlessPopupClose = MouseDownOwnedUnlessPopupClose
-        this.MouseWheelRequestAxisSwap = MouseWheelRequestAxisSwap
-        this.MouseCtrlLeftAsRightClick = MouseCtrlLeftAsRightClick
-        this.MouseDownDuration = MouseDownDuration
-        this.MouseDownDurationPrev = MouseDownDurationPrev
-        this.MouseDragMaxDistanceAbs = MouseDragMaxDistanceAbs
-        this.MouseDragMaxDistanceSqr = MouseDragMaxDistanceSqr
-        this.PenPressure = PenPressure
-        this.AppFocusLost = AppFocusLost
-        this.AppAcceptingEvents = AppAcceptingEvents
-        this.BackendUsingLegacyKeyArrays = BackendUsingLegacyKeyArrays
-        this.BackendUsingLegacyNavInputArray = BackendUsingLegacyNavInputArray
-        this.InputQueueSurrogate = InputQueueSurrogate
-        this.InputQueueCharacters = InputQueueCharacters
-    }
-
-    public init(value!: ?capi.ImGuiIO = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiIO, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiIO>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiIO_ImGuiIO().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -4367,13 +4022,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 }
 
 public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppFocused> {
-    public init(Focused!: Bool) {
-        super()
-
-        this.Focused = Focused
-    }
-
-    public init(value!: ?capi.ImGuiInputEventAppFocused = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventAppFocused, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4399,15 +4048,7 @@ public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppF
 }
 
 public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
-    public init(Key!: ImGuiKey, Down!: Bool, AnalogValue!: Float32) {
-        super()
-
-        this.Key = Key
-        this.Down = Down
-        this.AnalogValue = AnalogValue
-    }
-
-    public init(value!: ?capi.ImGuiInputEventKey = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventKey, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4453,15 +4094,7 @@ public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
 }
 
 public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMouseButton> {
-    public init(Button!: Int32, Down!: Bool, MouseSource!: ImGuiMouseSource) {
-        super()
-
-        this.Button = Button
-        this.Down = Down
-        this.MouseSource = MouseSource
-    }
-
-    public init(value!: ?capi.ImGuiInputEventMouseButton = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventMouseButton, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4507,15 +4140,7 @@ public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMou
 }
 
 public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMousePos> {
-    public init(PosX!: Float32, PosY!: Float32, MouseSource!: ImGuiMouseSource) {
-        super()
-
-        this.PosX = PosX
-        this.PosY = PosY
-        this.MouseSource = MouseSource
-    }
-
-    public init(value!: ?capi.ImGuiInputEventMousePos = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventMousePos, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4561,13 +4186,7 @@ public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMouseP
 }
 
 public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventMouseViewport> {
-    public init(HoveredViewportID!: ImGuiID) {
-        super()
-
-        this.HoveredViewportID = HoveredViewportID
-    }
-
-    public init(value!: ?capi.ImGuiInputEventMouseViewport = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventMouseViewport, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4593,15 +4212,7 @@ public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventM
 }
 
 public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMouseWheel> {
-    public init(WheelX!: Float32, WheelY!: Float32, MouseSource!: ImGuiMouseSource) {
-        super()
-
-        this.WheelX = WheelX
-        this.WheelY = WheelY
-        this.MouseSource = MouseSource
-    }
-
-    public init(value!: ?capi.ImGuiInputEventMouseWheel = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventMouseWheel, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4647,13 +4258,7 @@ public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMous
 }
 
 public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
-    public init(`Char`!: Int32) {
-        super()
-
-        this.`Char` = `Char`
-    }
-
-    public init(value!: ?capi.ImGuiInputEventText = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputEventText, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -4679,30 +4284,16 @@ public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
 }
 
 public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCallbackData> {
-    public init(Ctx!: Value<ImGuiContext>, EventFlag!: ImGuiInputTextFlags, Flags!: ImGuiInputTextFlags, UserData!: Value<Unit>, EventChar!: ImWchar, EventKey!: ImGuiKey, Buf!: String, BufTextLen!: Int32, BufSize!: Int32, BufDirty!: Bool, CursorPos!: Int32, SelectionStart!: Int32, SelectionEnd!: Int32) {
-        super()
-
-        this.Ctx = Ctx
-        this.EventFlag = EventFlag
-        this.Flags = Flags
-        this.UserData = UserData
-        this.EventChar = EventChar
-        this.EventKey = EventKey
-        this.Buf = Buf
-        this.BufTextLen = BufTextLen
-        this.BufSize = BufSize
-        this.BufDirty = BufDirty
-        this.CursorPos = CursorPos
-        this.SelectionStart = SelectionStart
-        this.SelectionEnd = SelectionEnd
-    }
-
-    public init(value!: ?capi.ImGuiInputTextCallbackData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputTextCallbackData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiInputTextCallbackData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiInputTextCallbackData_ImGuiInputTextCallbackData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -4863,19 +4454,16 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
 }
 
 public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputTextDeactivatedState> {
-    public init(ID!: ImGuiID, TextA!: ImVector_char) {
-        super()
-
-        this.ID = ID
-        this.TextA = TextA
-    }
-
-    public init(value!: ?capi.ImGuiInputTextDeactivatedState = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputTextDeactivatedState, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiInputTextDeactivatedState>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiInputTextDeactivatedState_ImGuiInputTextDeactivatedState().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -4910,36 +4498,16 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
 }
 
 public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
-    public init(Ctx!: Value<ImGuiContext>, ID!: ImGuiID, CurLenW!: Int32, CurLenA!: Int32, TextW!: ImVector_ImWchar, TextA!: ImVector_char, InitialTextA!: ImVector_char, TextAIsValid!: Bool, BufCapacityA!: Int32, ScrollX!: Float32, Stb!: STB_TexteditState, CursorAnim!: Float32, CursorFollow!: Bool, SelectedAllMouseLock!: Bool, Edited!: Bool, Flags!: ImGuiInputTextFlags, ReloadUserBuf!: Bool, ReloadSelectionStart!: Int32, ReloadSelectionEnd!: Int32) {
-        super()
-
-        this.Ctx = Ctx
-        this.ID = ID
-        this.CurLenW = CurLenW
-        this.CurLenA = CurLenA
-        this.TextW = TextW
-        this.TextA = TextA
-        this.InitialTextA = InitialTextA
-        this.TextAIsValid = TextAIsValid
-        this.BufCapacityA = BufCapacityA
-        this.ScrollX = ScrollX
-        this.Stb = Stb
-        this.CursorAnim = CursorAnim
-        this.CursorFollow = CursorFollow
-        this.SelectedAllMouseLock = SelectedAllMouseLock
-        this.Edited = Edited
-        this.Flags = Flags
-        this.ReloadUserBuf = ReloadUserBuf
-        this.ReloadSelectionStart = ReloadSelectionStart
-        this.ReloadSelectionEnd = ReloadSelectionEnd
-    }
-
-    public init(value!: ?capi.ImGuiInputTextState = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiInputTextState, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiInputTextState>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiInputTextState_ImGuiInputTextState().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5204,16 +4772,7 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
 }
 
 public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
-    public init(Down!: Bool, DownDuration!: Float32, DownDurationPrev!: Float32, AnalogValue!: Float32) {
-        super()
-
-        this.Down = Down
-        this.DownDuration = DownDuration
-        this.DownDurationPrev = DownDurationPrev
-        this.AnalogValue = AnalogValue
-    }
-
-    public init(value!: ?capi.ImGuiKeyData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiKeyData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -5269,21 +4828,16 @@ public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
 }
 
 public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
-    public init(OwnerCurr!: ImGuiID, OwnerNext!: ImGuiID, LockThisFrame!: Bool, LockUntilRelease!: Bool) {
-        super()
-
-        this.OwnerCurr = OwnerCurr
-        this.OwnerNext = OwnerNext
-        this.LockThisFrame = LockThisFrame
-        this.LockUntilRelease = LockUntilRelease
-    }
-
-    public init(value!: ?capi.ImGuiKeyOwnerData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiKeyOwnerData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiKeyOwnerData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiKeyOwnerData_ImGuiKeyOwnerData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5334,23 +4888,16 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
 }
 
 public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
-    public init(NextEntryIndex!: ImGuiKeyRoutingIndex, Mods!: ImU16, RoutingCurrScore!: ImU8, RoutingNextScore!: ImU8, RoutingCurr!: ImGuiID, RoutingNext!: ImGuiID) {
-        super()
-
-        this.NextEntryIndex = NextEntryIndex
-        this.Mods = Mods
-        this.RoutingCurrScore = RoutingCurrScore
-        this.RoutingNextScore = RoutingNextScore
-        this.RoutingCurr = RoutingCurr
-        this.RoutingNext = RoutingNext
-    }
-
-    public init(value!: ?capi.ImGuiKeyRoutingData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiKeyRoutingData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiKeyRoutingData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiKeyRoutingData_ImGuiKeyRoutingData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5421,20 +4968,16 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
 }
 
 public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
-    public init(Index!: Value<ImGuiKeyRoutingIndex>, Entries!: ImVector_ImGuiKeyRoutingData, EntriesNext!: ImVector_ImGuiKeyRoutingData) {
-        super()
-
-        this.Index = Index
-        this.Entries = Entries
-        this.EntriesNext = EntriesNext
-    }
-
-    public init(value!: ?capi.ImGuiKeyRoutingTable = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiKeyRoutingTable, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiKeyRoutingTable>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiKeyRoutingTable_ImGuiKeyRoutingTable().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5479,25 +5022,16 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
 }
 
 public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
-    public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, StatusFlags!: ImGuiItemStatusFlags, Rect!: ImRect, NavRect!: ImRect, DisplayRect!: ImRect, ClipRect!: ImRect, Shortcut!: ImGuiKeyChord) {
-        super()
-
-        this.ID = ID
-        this.InFlags = InFlags
-        this.StatusFlags = StatusFlags
-        this.Rect = Rect
-        this.NavRect = NavRect
-        this.DisplayRect = DisplayRect
-        this.ClipRect = ClipRect
-        this.Shortcut = Shortcut
-    }
-
-    public init(value!: ?capi.ImGuiLastItemData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiLastItemData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiLastItemData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiLastItemData_ImGuiLastItemData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5588,24 +5122,16 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
 }
 
 public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
-    public init(Ctx!: Value<ImGuiContext>, DisplayStart!: Int32, DisplayEnd!: Int32, ItemsCount!: Int32, ItemsHeight!: Float32, StartPosY!: Float32, TempData!: Value<Unit>) {
-        super()
-
-        this.Ctx = Ctx
-        this.DisplayStart = DisplayStart
-        this.DisplayEnd = DisplayEnd
-        this.ItemsCount = ItemsCount
-        this.ItemsHeight = ItemsHeight
-        this.StartPosY = StartPosY
-        this.TempData = TempData
-    }
-
-    public init(value!: ?capi.ImGuiListClipper = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiListClipper, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiListClipper>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiListClipper_ImGuiListClipper().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5706,22 +5232,16 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
 }
 
 public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
-    public init(ListClipper!: ImGuiListClipper, LossynessOffset!: Float32, StepNo!: Int32, ItemsFrozen!: Int32, Ranges!: ImVector_ImGuiListClipperRange) {
-        super()
-
-        this.ListClipper = ListClipper
-        this.LossynessOffset = LossynessOffset
-        this.StepNo = StepNo
-        this.ItemsFrozen = ItemsFrozen
-        this.Ranges = Ranges
-    }
-
-    public init(value!: ?capi.ImGuiListClipperData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiListClipperData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiListClipperData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiListClipperData_ImGuiListClipperData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -5786,17 +5306,7 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
 }
 
 public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> {
-    public init(Min!: Int32, Max!: Int32, PosToIndexConvert!: Bool, PosToIndexOffsetMin!: ImS8, PosToIndexOffsetMax!: ImS8) {
-        super()
-
-        this.Min = Min
-        this.Max = Max
-        this.PosToIndexConvert = PosToIndexConvert
-        this.PosToIndexOffsetMin = PosToIndexOffsetMin
-        this.PosToIndexOffsetMax = PosToIndexOffsetMax
-    }
-
-    public init(value!: ?capi.ImGuiListClipperRange = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiListClipperRange, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -5870,14 +5380,7 @@ public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> 
 }
 
 public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
-    public init(Key!: ImGuiLocKey, Text!: String) {
-        super()
-
-        this.Key = Key
-        this.Text = Text
-    }
-
-    public init(value!: ?capi.ImGuiLocEntry = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiLocEntry, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -5913,25 +5416,16 @@ public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
 }
 
 public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
-    public init(TotalWidth!: ImU32, NextTotalWidth!: ImU32, Spacing!: ImU16, OffsetIcon!: ImU16, OffsetLabel!: ImU16, OffsetShortcut!: ImU16, OffsetMark!: ImU16, Widths!: Value<ImU16>) {
-        super()
-
-        this.TotalWidth = TotalWidth
-        this.NextTotalWidth = NextTotalWidth
-        this.Spacing = Spacing
-        this.OffsetIcon = OffsetIcon
-        this.OffsetLabel = OffsetLabel
-        this.OffsetShortcut = OffsetShortcut
-        this.OffsetMark = OffsetMark
-        this.Widths = Widths
-    }
-
-    public init(value!: ?capi.ImGuiMenuColumns = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiMenuColumns, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiMenuColumns>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiMenuColumns_ImGuiMenuColumns().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -6034,26 +5528,7 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
 }
 
 public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
-    public init(ShowDebugLog!: Bool, ShowIDStackTool!: Bool, ShowWindowsRects!: Bool, ShowWindowsBeginOrder!: Bool, ShowTablesRects!: Bool, ShowDrawCmdMesh!: Bool, ShowDrawCmdBoundingBoxes!: Bool, ShowTextEncodingViewer!: Bool, ShowAtlasTintedWithTextColor!: Bool, ShowDockingNodes!: Bool, ShowWindowsRectsType!: Int32, ShowTablesRectsType!: Int32, HighlightMonitorIdx!: Int32, HighlightViewportID!: ImGuiID) {
-        super()
-
-        this.ShowDebugLog = ShowDebugLog
-        this.ShowIDStackTool = ShowIDStackTool
-        this.ShowWindowsRects = ShowWindowsRects
-        this.ShowWindowsBeginOrder = ShowWindowsBeginOrder
-        this.ShowTablesRects = ShowTablesRects
-        this.ShowDrawCmdMesh = ShowDrawCmdMesh
-        this.ShowDrawCmdBoundingBoxes = ShowDrawCmdBoundingBoxes
-        this.ShowTextEncodingViewer = ShowTextEncodingViewer
-        this.ShowAtlasTintedWithTextColor = ShowAtlasTintedWithTextColor
-        this.ShowDockingNodes = ShowDockingNodes
-        this.ShowWindowsRectsType = ShowWindowsRectsType
-        this.ShowTablesRectsType = ShowTablesRectsType
-        this.HighlightMonitorIdx = HighlightMonitorIdx
-        this.HighlightViewportID = HighlightViewportID
-    }
-
-    public init(value!: ?capi.ImGuiMetricsConfig = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiMetricsConfig, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -6209,26 +5684,16 @@ public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
 }
 
 public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
-    public init(Window!: Value<ImGuiWindow>, ID!: ImGuiID, FocusScopeId!: ImGuiID, RectRel!: ImRect, InFlags!: ImGuiItemFlags, DistBox!: Float32, DistCenter!: Float32, DistAxial!: Float32, SelectionUserData!: ImGuiSelectionUserData) {
-        super()
-
-        this.Window = Window
-        this.ID = ID
-        this.FocusScopeId = FocusScopeId
-        this.RectRel = RectRel
-        this.InFlags = InFlags
-        this.DistBox = DistBox
-        this.DistCenter = DistCenter
-        this.DistAxial = DistAxial
-        this.SelectionUserData = SelectionUserData
-    }
-
-    public init(value!: ?capi.ImGuiNavItemData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiNavItemData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiNavItemData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiNavItemData_ImGuiNavItemData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -6333,15 +5798,7 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
 }
 
 public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
-    public init(ID!: ImGuiID, InFlags!: ImGuiItemFlags, NavRect!: ImRect) {
-        super()
-
-        this.ID = ID
-        this.InFlags = InFlags
-        this.NavRect = NavRect
-    }
-
-    public init(value!: ?capi.ImGuiNavTreeNodeData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiNavTreeNodeData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -6387,26 +5844,16 @@ public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
 }
 
 public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
-    public init(Flags!: ImGuiNextItemDataFlags, ItemFlags!: ImGuiItemFlags, SelectionUserData!: ImGuiSelectionUserData, Width!: Float32, Shortcut!: ImGuiKeyChord, ShortcutFlags!: ImGuiInputFlags, OpenVal!: Bool, OpenCond!: ImU8, RefVal!: ImGuiDataTypeStorage) {
-        super()
-
-        this.Flags = Flags
-        this.ItemFlags = ItemFlags
-        this.SelectionUserData = SelectionUserData
-        this.Width = Width
-        this.Shortcut = Shortcut
-        this.ShortcutFlags = ShortcutFlags
-        this.OpenVal = OpenVal
-        this.OpenCond = OpenCond
-        this.RefVal = RefVal
-    }
-
-    public init(value!: ?capi.ImGuiNextItemData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiNextItemData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiNextItemData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiNextItemData_ImGuiNextItemData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -6511,39 +5958,16 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
 }
 
 public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
-    public init(Flags!: ImGuiNextWindowDataFlags, PosCond!: ImGuiCond, SizeCond!: ImGuiCond, CollapsedCond!: ImGuiCond, DockCond!: ImGuiCond, PosVal!: ImVec2, PosPivotVal!: ImVec2, SizeVal!: ImVec2, ContentSizeVal!: ImVec2, ScrollVal!: ImVec2, ChildFlags!: ImGuiChildFlags, PosUndock!: Bool, CollapsedVal!: Bool, SizeConstraintRect!: ImRect, SizeCallback!: ImGuiSizeCallback, SizeCallbackUserData!: Value<Unit>, BgAlphaVal!: Float32, ViewportId!: ImGuiID, DockId!: ImGuiID, WindowClass!: ImGuiWindowClass, MenuBarOffsetMinVal!: ImVec2, RefreshFlagsVal!: ImGuiWindowRefreshFlags) {
-        super()
-
-        this.Flags = Flags
-        this.PosCond = PosCond
-        this.SizeCond = SizeCond
-        this.CollapsedCond = CollapsedCond
-        this.DockCond = DockCond
-        this.PosVal = PosVal
-        this.PosPivotVal = PosPivotVal
-        this.SizeVal = SizeVal
-        this.ContentSizeVal = ContentSizeVal
-        this.ScrollVal = ScrollVal
-        this.ChildFlags = ChildFlags
-        this.PosUndock = PosUndock
-        this.CollapsedVal = CollapsedVal
-        this.SizeConstraintRect = SizeConstraintRect
-        this.SizeCallback = SizeCallback
-        this.SizeCallbackUserData = SizeCallbackUserData
-        this.BgAlphaVal = BgAlphaVal
-        this.ViewportId = ViewportId
-        this.DockId = DockId
-        this.WindowClass = WindowClass
-        this.MenuBarOffsetMinVal = MenuBarOffsetMinVal
-        this.RefreshFlagsVal = RefreshFlagsVal
-    }
-
-    public init(value!: ?capi.ImGuiNextWindowData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiNextWindowData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiNextWindowData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiNextWindowData_ImGuiNextWindowData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -6778,21 +6202,16 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
 }
 
 public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
-    public init(OffsetNorm!: Float32, OffsetNormBeforeResize!: Float32, Flags!: ImGuiOldColumnFlags, ClipRect!: ImRect) {
-        super()
-
-        this.OffsetNorm = OffsetNorm
-        this.OffsetNormBeforeResize = OffsetNormBeforeResize
-        this.Flags = Flags
-        this.ClipRect = ClipRect
-    }
-
-    public init(value!: ?capi.ImGuiOldColumnData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiOldColumnData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiOldColumnData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiOldColumnData_ImGuiOldColumnData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -6843,34 +6262,16 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
 }
 
 public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
-    public init(ID!: ImGuiID, Flags!: ImGuiOldColumnFlags, IsFirstFrame!: Bool, IsBeingResized!: Bool, Current!: Int32, Count!: Int32, OffMinX!: Float32, OffMaxX!: Float32, LineMinY!: Float32, LineMaxY!: Float32, HostCursorPosY!: Float32, HostCursorMaxPosX!: Float32, HostInitialClipRect!: ImRect, HostBackupClipRect!: ImRect, HostBackupParentWorkRect!: ImRect, Columns!: ImVector_ImGuiOldColumnData, Splitter!: ImDrawListSplitter) {
-        super()
-
-        this.ID = ID
-        this.Flags = Flags
-        this.IsFirstFrame = IsFirstFrame
-        this.IsBeingResized = IsBeingResized
-        this.Current = Current
-        this.Count = Count
-        this.OffMinX = OffMinX
-        this.OffMaxX = OffMaxX
-        this.LineMinY = LineMinY
-        this.LineMaxY = LineMaxY
-        this.HostCursorPosY = HostCursorPosY
-        this.HostCursorMaxPosX = HostCursorMaxPosX
-        this.HostInitialClipRect = HostInitialClipRect
-        this.HostBackupClipRect = HostBackupClipRect
-        this.HostBackupParentWorkRect = HostBackupParentWorkRect
-        this.Columns = Columns
-        this.Splitter = Splitter
-    }
-
-    public init(value!: ?capi.ImGuiOldColumns = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiOldColumns, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiOldColumns>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiOldColumns_ImGuiOldColumns().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7051,18 +6452,16 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
 }
 
 public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
-    public init(RefFrame!: Int32) {
-        super()
-
-        this.RefFrame = RefFrame
-    }
-
-    public init(value!: ?capi.ImGuiOnceUponAFrame = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiOnceUponAFrame, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiOnceUponAFrame>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiOnceUponAFrame_ImGuiOnceUponAFrame().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7083,25 +6482,16 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
 }
 
 public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
-    public init(Data!: Value<Unit>, DataSize!: Int32, SourceId!: ImGuiID, SourceParentId!: ImGuiID, DataFrameCount!: Int32, DataType!: Value<UInt8>, Preview!: Bool, Delivery!: Bool) {
-        super()
-
-        this.Data = Data
-        this.DataSize = DataSize
-        this.SourceId = SourceId
-        this.SourceParentId = SourceParentId
-        this.DataFrameCount = DataFrameCount
-        this.DataType = DataType
-        this.Preview = Preview
-        this.Delivery = Delivery
-    }
-
-    public init(value!: ?capi.ImGuiPayload = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPayload, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPayload>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiPayload_ImGuiPayload().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7208,42 +6598,16 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
 }
 
 public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
-    public init(Platform_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_ShowWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_SetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>, pos: capi.ImVec2) -> Unit>, Platform_GetWindowPos!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Platform_GetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> capi.ImVec2>, Platform_SetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_GetWindowFocus!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_GetWindowMinimized!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Bool>, Platform_SetWindowTitle!: CFunc<(vp: CPointer<capi.ImGuiViewport>, str: CPointer<UInt8>) -> Unit>, Platform_SetWindowAlpha!: CFunc<(vp: CPointer<capi.ImGuiViewport>, alpha: Float32) -> Unit>, Platform_UpdateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Platform_GetWindowDpiScale!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Float32>, Platform_OnChangedViewport!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Platform_CreateVkSurface!: CFunc<(vp: CPointer<capi.ImGuiViewport>, vk_inst: ImU64, vk_allocators: CPointer<Unit>, out_vk_surface: CPointer<ImU64>) -> Int32>, Renderer_CreateWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_DestroyWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>) -> Unit>, Renderer_SetWindowSize!: CFunc<(vp: CPointer<capi.ImGuiViewport>, size: capi.ImVec2) -> Unit>, Renderer_RenderWindow!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Renderer_SwapBuffers!: CFunc<(vp: CPointer<capi.ImGuiViewport>, render_arg: CPointer<Unit>) -> Unit>, Monitors!: ImVector_ImGuiPlatformMonitor, Viewports!: ImVector_ImGuiViewportPtr) {
-        super()
-
-        this.Platform_CreateWindow = Platform_CreateWindow
-        this.Platform_DestroyWindow = Platform_DestroyWindow
-        this.Platform_ShowWindow = Platform_ShowWindow
-        this.Platform_SetWindowPos = Platform_SetWindowPos
-        this.Platform_GetWindowPos = Platform_GetWindowPos
-        this.Platform_SetWindowSize = Platform_SetWindowSize
-        this.Platform_GetWindowSize = Platform_GetWindowSize
-        this.Platform_SetWindowFocus = Platform_SetWindowFocus
-        this.Platform_GetWindowFocus = Platform_GetWindowFocus
-        this.Platform_GetWindowMinimized = Platform_GetWindowMinimized
-        this.Platform_SetWindowTitle = Platform_SetWindowTitle
-        this.Platform_SetWindowAlpha = Platform_SetWindowAlpha
-        this.Platform_UpdateWindow = Platform_UpdateWindow
-        this.Platform_RenderWindow = Platform_RenderWindow
-        this.Platform_SwapBuffers = Platform_SwapBuffers
-        this.Platform_GetWindowDpiScale = Platform_GetWindowDpiScale
-        this.Platform_OnChangedViewport = Platform_OnChangedViewport
-        this.Platform_CreateVkSurface = Platform_CreateVkSurface
-        this.Renderer_CreateWindow = Renderer_CreateWindow
-        this.Renderer_DestroyWindow = Renderer_DestroyWindow
-        this.Renderer_SetWindowSize = Renderer_SetWindowSize
-        this.Renderer_RenderWindow = Renderer_RenderWindow
-        this.Renderer_SwapBuffers = Renderer_SwapBuffers
-        this.Monitors = Monitors
-        this.Viewports = Viewports
-    }
-
-    public init(value!: ?capi.ImGuiPlatformIO = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPlatformIO, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPlatformIO>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiPlatformIO_ImGuiPlatformIO().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7504,20 +6868,16 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
 }
 
 public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
-    public init(WantVisible!: Bool, InputPos!: ImVec2, InputLineHeight!: Float32) {
-        super()
-
-        this.WantVisible = WantVisible
-        this.InputPos = InputPos
-        this.InputLineHeight = InputLineHeight
-    }
-
-    public init(value!: ?capi.ImGuiPlatformImeData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPlatformImeData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPlatformImeData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiPlatformImeData_ImGuiPlatformImeData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7558,23 +6918,16 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
 }
 
 public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
-    public init(MainPos!: ImVec2, MainSize!: ImVec2, WorkPos!: ImVec2, WorkSize!: ImVec2, DpiScale!: Float32, PlatformHandle!: Value<Unit>) {
-        super()
-
-        this.MainPos = MainPos
-        this.MainSize = MainSize
-        this.WorkPos = WorkPos
-        this.WorkSize = WorkSize
-        this.DpiScale = DpiScale
-        this.PlatformHandle = PlatformHandle
-    }
-
-    public init(value!: ?capi.ImGuiPlatformMonitor = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPlatformMonitor, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPlatformMonitor>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiPlatformMonitor_ImGuiPlatformMonitor().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7645,25 +6998,16 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
 }
 
 public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
-    public init(PopupId!: ImGuiID, Window!: Value<ImGuiWindow>, RestoreNavWindow!: Value<ImGuiWindow>, ParentNavLayer!: Int32, OpenFrameCount!: Int32, OpenParentId!: ImGuiID, OpenPopupPos!: ImVec2, OpenMousePos!: ImVec2) {
-        super()
-
-        this.PopupId = PopupId
-        this.Window = Window
-        this.RestoreNavWindow = RestoreNavWindow
-        this.ParentNavLayer = ParentNavLayer
-        this.OpenFrameCount = OpenFrameCount
-        this.OpenParentId = OpenParentId
-        this.OpenPopupPos = OpenPopupPos
-        this.OpenMousePos = OpenMousePos
-    }
-
-    public init(value!: ?capi.ImGuiPopupData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPopupData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPopupData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiPopupData_ImGuiPopupData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7754,19 +7098,20 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
 }
 
 public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
-    public init(Ptr!: Value<Unit>, Index!: Int32) {
-        super()
-
-        this.Ptr = Ptr
-        this.Index = Index
-    }
-
-    public init(value!: ?capi.ImGuiPtrOrIndex = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiPtrOrIndex, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiPtrOrIndex>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init(ptr: Value<Unit>) {
+        super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(ptr).getCPointer(), count: None, owned: true)
+    }
+
+    public init(index: Int32) {
+        super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(index).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7797,26 +7142,16 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
 }
 
 public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
-    public init(TypeName!: String, TypeHash!: ImGuiID, ClearAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadInitFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, ReadOpenFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, name: CPointer<UInt8>) -> CPointer<Unit>>, ReadLineFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, entry: CPointer<Unit>, line: CPointer<UInt8>) -> Unit>, ApplyAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>) -> Unit>, WriteAllFn!: CFunc<(ctx: CPointer<ImGuiContext>, handler: CPointer<capi.ImGuiSettingsHandler>, out_buf: CPointer<capi.ImGuiTextBuffer>) -> Unit>, UserData!: Value<Unit>) {
-        super()
-
-        this.TypeName = TypeName
-        this.TypeHash = TypeHash
-        this.ClearAllFn = ClearAllFn
-        this.ReadInitFn = ReadInitFn
-        this.ReadOpenFn = ReadOpenFn
-        this.ReadLineFn = ReadLineFn
-        this.ApplyAllFn = ApplyAllFn
-        this.WriteAllFn = WriteAllFn
-        this.UserData = UserData
-    }
-
-    public init(value!: ?capi.ImGuiSettingsHandler = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiSettingsHandler, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiSettingsHandler>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiSettingsHandler_ImGuiSettingsHandler().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -7917,15 +7252,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
 }
 
 public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
-    public init(Index!: Int32, Width!: Float32, InitialWidth!: Float32) {
-        super()
-
-        this.Index = Index
-        this.Width = Width
-        this.InitialWidth = InitialWidth
-    }
-
-    public init(value!: ?capi.ImGuiShrinkWidthItem = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiShrinkWidthItem, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -7971,16 +7298,7 @@ public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
 }
 
 public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> {
-    public init(UserData!: Value<Unit>, Pos!: ImVec2, CurrentSize!: ImVec2, DesiredSize!: ImVec2) {
-        super()
-
-        this.UserData = UserData
-        this.Pos = Pos
-        this.CurrentSize = CurrentSize
-        this.DesiredSize = DesiredSize
-    }
-
-    public init(value!: ?capi.ImGuiSizeCallbackData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiSizeCallbackData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -8036,26 +7354,16 @@ public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> 
 }
 
 public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
-    public init(SizeOfIDStack!: Int16, SizeOfColorStack!: Int16, SizeOfStyleVarStack!: Int16, SizeOfFontStack!: Int16, SizeOfFocusScopeStack!: Int16, SizeOfGroupStack!: Int16, SizeOfItemFlagsStack!: Int16, SizeOfBeginPopupStack!: Int16, SizeOfDisabledStack!: Int16) {
-        super()
-
-        this.SizeOfIDStack = SizeOfIDStack
-        this.SizeOfColorStack = SizeOfColorStack
-        this.SizeOfStyleVarStack = SizeOfStyleVarStack
-        this.SizeOfFontStack = SizeOfFontStack
-        this.SizeOfFocusScopeStack = SizeOfFocusScopeStack
-        this.SizeOfGroupStack = SizeOfGroupStack
-        this.SizeOfItemFlagsStack = SizeOfItemFlagsStack
-        this.SizeOfBeginPopupStack = SizeOfBeginPopupStack
-        this.SizeOfDisabledStack = SizeOfDisabledStack
-    }
-
-    public init(value!: ?capi.ImGuiStackSizes = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiStackSizes, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiStackSizes>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiStackSizes_ImGuiStackSizes().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -8164,13 +7472,7 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
 }
 
 public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
-    public init(Data!: ImVector_ImGuiStoragePair) {
-        super()
-
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImGuiStorage = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiStorage, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -8256,70 +7558,16 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
 }
 
 public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
-    public init(Alpha!: Float32, DisabledAlpha!: Float32, WindowPadding!: ImVec2, WindowRounding!: Float32, WindowBorderSize!: Float32, WindowMinSize!: ImVec2, WindowTitleAlign!: ImVec2, WindowMenuButtonPosition!: ImGuiDir, ChildRounding!: Float32, ChildBorderSize!: Float32, PopupRounding!: Float32, PopupBorderSize!: Float32, FramePadding!: ImVec2, FrameRounding!: Float32, FrameBorderSize!: Float32, ItemSpacing!: ImVec2, ItemInnerSpacing!: ImVec2, CellPadding!: ImVec2, TouchExtraPadding!: ImVec2, IndentSpacing!: Float32, ColumnsMinSpacing!: Float32, ScrollbarSize!: Float32, ScrollbarRounding!: Float32, GrabMinSize!: Float32, GrabRounding!: Float32, LogSliderDeadzone!: Float32, TabRounding!: Float32, TabBorderSize!: Float32, TabMinWidthForCloseButton!: Float32, TabBarBorderSize!: Float32, TableAngledHeadersAngle!: Float32, TableAngledHeadersTextAlign!: ImVec2, ColorButtonPosition!: ImGuiDir, ButtonTextAlign!: ImVec2, SelectableTextAlign!: ImVec2, SeparatorTextBorderSize!: Float32, SeparatorTextAlign!: ImVec2, SeparatorTextPadding!: ImVec2, DisplayWindowPadding!: ImVec2, DisplaySafeAreaPadding!: ImVec2, DockingSeparatorSize!: Float32, MouseCursorScale!: Float32, AntiAliasedLines!: Bool, AntiAliasedLinesUseTex!: Bool, AntiAliasedFill!: Bool, CurveTessellationTol!: Float32, CircleTessellationMaxError!: Float32, Colors!: ImVec4, HoverStationaryDelay!: Float32, HoverDelayShort!: Float32, HoverDelayNormal!: Float32, HoverFlagsForTooltipMouse!: ImGuiHoveredFlags, HoverFlagsForTooltipNav!: ImGuiHoveredFlags) {
-        super()
-
-        this.Alpha = Alpha
-        this.DisabledAlpha = DisabledAlpha
-        this.WindowPadding = WindowPadding
-        this.WindowRounding = WindowRounding
-        this.WindowBorderSize = WindowBorderSize
-        this.WindowMinSize = WindowMinSize
-        this.WindowTitleAlign = WindowTitleAlign
-        this.WindowMenuButtonPosition = WindowMenuButtonPosition
-        this.ChildRounding = ChildRounding
-        this.ChildBorderSize = ChildBorderSize
-        this.PopupRounding = PopupRounding
-        this.PopupBorderSize = PopupBorderSize
-        this.FramePadding = FramePadding
-        this.FrameRounding = FrameRounding
-        this.FrameBorderSize = FrameBorderSize
-        this.ItemSpacing = ItemSpacing
-        this.ItemInnerSpacing = ItemInnerSpacing
-        this.CellPadding = CellPadding
-        this.TouchExtraPadding = TouchExtraPadding
-        this.IndentSpacing = IndentSpacing
-        this.ColumnsMinSpacing = ColumnsMinSpacing
-        this.ScrollbarSize = ScrollbarSize
-        this.ScrollbarRounding = ScrollbarRounding
-        this.GrabMinSize = GrabMinSize
-        this.GrabRounding = GrabRounding
-        this.LogSliderDeadzone = LogSliderDeadzone
-        this.TabRounding = TabRounding
-        this.TabBorderSize = TabBorderSize
-        this.TabMinWidthForCloseButton = TabMinWidthForCloseButton
-        this.TabBarBorderSize = TabBarBorderSize
-        this.TableAngledHeadersAngle = TableAngledHeadersAngle
-        this.TableAngledHeadersTextAlign = TableAngledHeadersTextAlign
-        this.ColorButtonPosition = ColorButtonPosition
-        this.ButtonTextAlign = ButtonTextAlign
-        this.SelectableTextAlign = SelectableTextAlign
-        this.SeparatorTextBorderSize = SeparatorTextBorderSize
-        this.SeparatorTextAlign = SeparatorTextAlign
-        this.SeparatorTextPadding = SeparatorTextPadding
-        this.DisplayWindowPadding = DisplayWindowPadding
-        this.DisplaySafeAreaPadding = DisplaySafeAreaPadding
-        this.DockingSeparatorSize = DockingSeparatorSize
-        this.MouseCursorScale = MouseCursorScale
-        this.AntiAliasedLines = AntiAliasedLines
-        this.AntiAliasedLinesUseTex = AntiAliasedLinesUseTex
-        this.AntiAliasedFill = AntiAliasedFill
-        this.CurveTessellationTol = CurveTessellationTol
-        this.CircleTessellationMaxError = CircleTessellationMaxError
-        this.Colors = Colors
-        this.HoverStationaryDelay = HoverStationaryDelay
-        this.HoverDelayShort = HoverDelayShort
-        this.HoverDelayNormal = HoverDelayNormal
-        this.HoverFlagsForTooltipMouse = HoverFlagsForTooltipMouse
-        this.HoverFlagsForTooltipNav = HoverFlagsForTooltipNav
-    }
-
-    public init(value!: ?capi.ImGuiStyle = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiStyle, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiStyle>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiStyle_ImGuiStyle().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -8864,50 +8112,16 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
 }
 
 public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
-    public init(Tabs!: ImVector_ImGuiTabItem, Flags!: ImGuiTabBarFlags, ID!: ImGuiID, SelectedTabId!: ImGuiID, NextSelectedTabId!: ImGuiID, VisibleTabId!: ImGuiID, CurrFrameVisible!: Int32, PrevFrameVisible!: Int32, BarRect!: ImRect, CurrTabsContentsHeight!: Float32, PrevTabsContentsHeight!: Float32, WidthAllTabs!: Float32, WidthAllTabsIdeal!: Float32, ScrollingAnim!: Float32, ScrollingTarget!: Float32, ScrollingTargetDistToVisibility!: Float32, ScrollingSpeed!: Float32, ScrollingRectMinX!: Float32, ScrollingRectMaxX!: Float32, SeparatorMinX!: Float32, SeparatorMaxX!: Float32, ReorderRequestTabId!: ImGuiID, ReorderRequestOffset!: ImS16, BeginCount!: ImS8, WantLayout!: Bool, VisibleTabWasSubmitted!: Bool, TabsAddedNew!: Bool, TabsActiveCount!: ImS16, LastTabItemIdx!: ImS16, ItemSpacingY!: Float32, FramePadding!: ImVec2, BackupCursorPos!: ImVec2, TabsNames!: ImGuiTextBuffer) {
-        super()
-
-        this.Tabs = Tabs
-        this.Flags = Flags
-        this.ID = ID
-        this.SelectedTabId = SelectedTabId
-        this.NextSelectedTabId = NextSelectedTabId
-        this.VisibleTabId = VisibleTabId
-        this.CurrFrameVisible = CurrFrameVisible
-        this.PrevFrameVisible = PrevFrameVisible
-        this.BarRect = BarRect
-        this.CurrTabsContentsHeight = CurrTabsContentsHeight
-        this.PrevTabsContentsHeight = PrevTabsContentsHeight
-        this.WidthAllTabs = WidthAllTabs
-        this.WidthAllTabsIdeal = WidthAllTabsIdeal
-        this.ScrollingAnim = ScrollingAnim
-        this.ScrollingTarget = ScrollingTarget
-        this.ScrollingTargetDistToVisibility = ScrollingTargetDistToVisibility
-        this.ScrollingSpeed = ScrollingSpeed
-        this.ScrollingRectMinX = ScrollingRectMinX
-        this.ScrollingRectMaxX = ScrollingRectMaxX
-        this.SeparatorMinX = SeparatorMinX
-        this.SeparatorMaxX = SeparatorMaxX
-        this.ReorderRequestTabId = ReorderRequestTabId
-        this.ReorderRequestOffset = ReorderRequestOffset
-        this.BeginCount = BeginCount
-        this.WantLayout = WantLayout
-        this.VisibleTabWasSubmitted = VisibleTabWasSubmitted
-        this.TabsAddedNew = TabsAddedNew
-        this.TabsActiveCount = TabsActiveCount
-        this.LastTabItemIdx = LastTabItemIdx
-        this.ItemSpacingY = ItemSpacingY
-        this.FramePadding = FramePadding
-        this.BackupCursorPos = BackupCursorPos
-        this.TabsNames = TabsNames
-    }
-
-    public init(value!: ?capi.ImGuiTabBar = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTabBar, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTabBar>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTabBar_ImGuiTabBar().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9248,30 +8462,16 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
 }
 
 public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
-    public init(ID!: ImGuiID, Flags!: ImGuiTabItemFlags, Window!: Value<ImGuiWindow>, LastFrameVisible!: Int32, LastFrameSelected!: Int32, Offset!: Float32, Width!: Float32, ContentWidth!: Float32, RequestedWidth!: Float32, NameOffset!: ImS32, BeginOrder!: ImS16, IndexDuringLayout!: ImS16, WantClose!: Bool) {
-        super()
-
-        this.ID = ID
-        this.Flags = Flags
-        this.Window = Window
-        this.LastFrameVisible = LastFrameVisible
-        this.LastFrameSelected = LastFrameSelected
-        this.Offset = Offset
-        this.Width = Width
-        this.ContentWidth = ContentWidth
-        this.RequestedWidth = RequestedWidth
-        this.NameOffset = NameOffset
-        this.BeginOrder = BeginOrder
-        this.IndexDuringLayout = IndexDuringLayout
-        this.WantClose = WantClose
-    }
-
-    public init(value!: ?capi.ImGuiTabItem = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTabItem, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTabItem>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTabItem_ImGuiTabItem().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9412,14 +8612,7 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
 }
 
 public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
-    public init(BgColor!: ImU32, Column!: ImGuiTableColumnIdx) {
-        super()
-
-        this.BgColor = BgColor
-        this.Column = Column
-    }
-
-    public init(value!: ?capi.ImGuiTableCellData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableCellData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -9455,21 +8648,16 @@ public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
 }
 
 public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSortSpecs> {
-    public init(ColumnUserID!: ImGuiID, ColumnIndex!: ImS16, SortOrder!: ImS16, SortDirection!: ImGuiSortDirection) {
-        super()
-
-        this.ColumnUserID = ColumnUserID
-        this.ColumnIndex = ColumnIndex
-        this.SortOrder = SortOrder
-        this.SortDirection = SortDirection
-    }
-
-    public init(value!: ?capi.ImGuiTableColumnSortSpecs = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableColumnSortSpecs, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTableColumnSortSpecs>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9520,16 +8708,7 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
 }
 
 public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
-    public init(Index!: ImGuiTableColumnIdx, TextColor!: ImU32, BgColor0!: ImU32, BgColor1!: ImU32) {
-        super()
-
-        this.Index = Index
-        this.TextColor = TextColor
-        this.BgColor0 = BgColor0
-        this.BgColor1 = BgColor1
-    }
-
-    public init(value!: ?capi.ImGuiTableHeaderData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableHeaderData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -9585,23 +8764,16 @@ public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
 }
 
 public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData> {
-    public init(TableInstanceID!: ImGuiID, LastOuterHeight!: Float32, LastTopHeadersRowHeight!: Float32, LastFrozenHeight!: Float32, HoveredRowLast!: Int32, HoveredRowNext!: Int32) {
-        super()
-
-        this.TableInstanceID = TableInstanceID
-        this.LastOuterHeight = LastOuterHeight
-        this.LastTopHeadersRowHeight = LastTopHeadersRowHeight
-        this.LastFrozenHeight = LastFrozenHeight
-        this.HoveredRowLast = HoveredRowLast
-        this.HoveredRowNext = HoveredRowNext
-    }
-
-    public init(value!: ?capi.ImGuiTableInstanceData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableInstanceData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTableInstanceData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTableInstanceData_ImGuiTableInstanceData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9672,23 +8844,16 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
 }
 
 public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
-    public init(ID!: ImGuiID, SaveFlags!: ImGuiTableFlags, RefScale!: Float32, ColumnsCount!: ImGuiTableColumnIdx, ColumnsCountMax!: ImGuiTableColumnIdx, WantApply!: Bool) {
-        super()
-
-        this.ID = ID
-        this.SaveFlags = SaveFlags
-        this.RefScale = RefScale
-        this.ColumnsCount = ColumnsCount
-        this.ColumnsCountMax = ColumnsCountMax
-        this.WantApply = WantApply
-    }
-
-    public init(value!: ?capi.ImGuiTableSettings = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableSettings, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTableSettings>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTableSettings_ImGuiTableSettings().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9763,20 +8928,16 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
 }
 
 public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
-    public init(Specs!: ImGuiTableColumnSortSpecs, SpecsCount!: Int32, SpecsDirty!: Bool) {
-        super()
-
-        this.Specs = Specs
-        this.SpecsCount = SpecsCount
-        this.SpecsDirty = SpecsDirty
-    }
-
-    public init(value!: ?capi.ImGuiTableSortSpecs = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableSortSpecs, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTableSortSpecs>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTableSortSpecs_ImGuiTableSortSpecs().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9817,31 +8978,16 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
 }
 
 public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
-    public init(TableIndex!: Int32, LastTimeActive!: Float32, AngledHeadersExtraWidth!: Float32, AngledHeadersRequests!: ImVector_ImGuiTableHeaderData, UserOuterSize!: ImVec2, DrawSplitter!: ImDrawListSplitter, HostBackupWorkRect!: ImRect, HostBackupParentWorkRect!: ImRect, HostBackupPrevLineSize!: ImVec2, HostBackupCurrLineSize!: ImVec2, HostBackupCursorMaxPos!: ImVec2, HostBackupColumnsOffset!: ImVec1, HostBackupItemWidth!: Float32, HostBackupItemWidthStackSize!: Int32) {
-        super()
-
-        this.TableIndex = TableIndex
-        this.LastTimeActive = LastTimeActive
-        this.AngledHeadersExtraWidth = AngledHeadersExtraWidth
-        this.AngledHeadersRequests = AngledHeadersRequests
-        this.UserOuterSize = UserOuterSize
-        this.DrawSplitter = DrawSplitter
-        this.HostBackupWorkRect = HostBackupWorkRect
-        this.HostBackupParentWorkRect = HostBackupParentWorkRect
-        this.HostBackupPrevLineSize = HostBackupPrevLineSize
-        this.HostBackupCurrLineSize = HostBackupCurrLineSize
-        this.HostBackupCursorMaxPos = HostBackupCursorMaxPos
-        this.HostBackupColumnsOffset = HostBackupColumnsOffset
-        this.HostBackupItemWidth = HostBackupItemWidth
-        this.HostBackupItemWidthStackSize = HostBackupItemWidthStackSize
-    }
-
-    public init(value!: ?capi.ImGuiTableTempData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTableTempData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTableTempData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTableTempData_ImGuiTableTempData().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -9992,18 +9138,16 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
 }
 
 public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
-    public init(Buf!: ImVector_char) {
-        super()
-
-        this.Buf = Buf
-    }
-
-    public init(value!: ?capi.ImGuiTextBuffer = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTextBuffer, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTextBuffer>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTextBuffer_ImGuiTextBuffer().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10061,20 +9205,16 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
 }
 
 public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
-    public init(InputBuf!: Value<UInt8>, Filters!: ImVector_ImGuiTextRange, CountGrep!: Int32) {
-        super()
-
-        this.InputBuf = InputBuf
-        this.Filters = Filters
-        this.CountGrep = CountGrep
-    }
-
-    public init(value!: ?capi.ImGuiTextFilter = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTextFilter, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTextFilter>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init(default_filter: CStringConvertable) {
+        super(ImGuiTextFilter_ImGuiTextFilter(default_filter).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10135,14 +9275,7 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
 }
 
 public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
-    public init(LineOffsets!: ImVector_int, EndOffset!: Int32) {
-        super()
-
-        this.LineOffsets = LineOffsets
-        this.EndOffset = EndOffset
-    }
-
-    public init(value!: ?capi.ImGuiTextIndex = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTextIndex, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -10198,19 +9331,20 @@ public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
 }
 
 public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
-    public init(b!: String, e!: String) {
-        super()
-
-        this.b = b
-        this.e = e
-    }
-
-    public init(value!: ?capi.ImGuiTextRange = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTextRange, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTextRange>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTextRange_ImGuiTextRange_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(_b: CStringConvertable, _e: CStringConvertable) {
+        super(ImGuiTextRange_ImGuiTextRange_Str(_b, _e).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10249,18 +9383,7 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
 }
 
 public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectRequest> {
-    public init(Flags!: ImGuiTypingSelectFlags, SearchBufferLen!: Int32, SearchBuffer!: String, SelectRequest!: Bool, SingleCharMode!: Bool, SingleCharSize!: ImS8) {
-        super()
-
-        this.Flags = Flags
-        this.SearchBufferLen = SearchBufferLen
-        this.SearchBuffer = SearchBuffer
-        this.SelectRequest = SelectRequest
-        this.SingleCharMode = SingleCharMode
-        this.SingleCharSize = SingleCharSize
-    }
-
-    public init(value!: ?capi.ImGuiTypingSelectRequest = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTypingSelectRequest, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -10336,23 +9459,16 @@ public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectReq
 }
 
 public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState> {
-    public init(Request!: ImGuiTypingSelectRequest, SearchBuffer!: Value<UInt8>, FocusScope!: ImGuiID, LastRequestFrame!: Int32, LastRequestTime!: Float32, SingleCharModeLock!: Bool) {
-        super()
-
-        this.Request = Request
-        this.SearchBuffer = SearchBuffer
-        this.FocusScope = FocusScope
-        this.LastRequestFrame = LastRequestFrame
-        this.LastRequestTime = LastRequestTime
-        this.SingleCharModeLock = SingleCharModeLock
-    }
-
-    public init(value!: ?capi.ImGuiTypingSelectState = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiTypingSelectState, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiTypingSelectState>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiTypingSelectState_ImGuiTypingSelectState().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10427,34 +9543,16 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
 }
 
 public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
-    public init(ID!: ImGuiID, Flags!: ImGuiViewportFlags, Pos!: ImVec2, Size!: ImVec2, WorkPos!: ImVec2, WorkSize!: ImVec2, DpiScale!: Float32, ParentViewportId!: ImGuiID, DrawData!: ImDrawData, RendererUserData!: Value<Unit>, PlatformUserData!: Value<Unit>, PlatformHandle!: Value<Unit>, PlatformHandleRaw!: Value<Unit>, PlatformWindowCreated!: Bool, PlatformRequestMove!: Bool, PlatformRequestResize!: Bool, PlatformRequestClose!: Bool) {
-        super()
-
-        this.ID = ID
-        this.Flags = Flags
-        this.Pos = Pos
-        this.Size = Size
-        this.WorkPos = WorkPos
-        this.WorkSize = WorkSize
-        this.DpiScale = DpiScale
-        this.ParentViewportId = ParentViewportId
-        this.DrawData = DrawData
-        this.RendererUserData = RendererUserData
-        this.PlatformUserData = PlatformUserData
-        this.PlatformHandle = PlatformHandle
-        this.PlatformHandleRaw = PlatformHandleRaw
-        this.PlatformWindowCreated = PlatformWindowCreated
-        this.PlatformRequestMove = PlatformRequestMove
-        this.PlatformRequestResize = PlatformRequestResize
-        this.PlatformRequestClose = PlatformRequestClose
-    }
-
-    public init(value!: ?capi.ImGuiViewport = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiViewport, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiViewport>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiViewport_ImGuiViewport().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10643,39 +9741,16 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
 }
 
 public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
-    public init(_ImGuiViewport!: ImGuiViewport, Window!: Value<ImGuiWindow>, Idx!: Int32, LastFrameActive!: Int32, LastFocusedStampCount!: Int32, LastNameHash!: ImGuiID, LastPos!: ImVec2, Alpha!: Float32, LastAlpha!: Float32, LastFocusedHadNavWindow!: Bool, PlatformMonitor!: Int16, BgFgDrawListsLastFrame!: Value<Int32>, BgFgDrawLists!: Value<CPointer<capi.ImDrawList>>, DrawDataP!: ImDrawData, DrawDataBuilder!: ImDrawDataBuilder, LastPlatformPos!: ImVec2, LastPlatformSize!: ImVec2, LastRendererSize!: ImVec2, WorkOffsetMin!: ImVec2, WorkOffsetMax!: ImVec2, BuildWorkOffsetMin!: ImVec2, BuildWorkOffsetMax!: ImVec2) {
-        super()
-
-        this._ImGuiViewport = _ImGuiViewport
-        this.Window = Window
-        this.Idx = Idx
-        this.LastFrameActive = LastFrameActive
-        this.LastFocusedStampCount = LastFocusedStampCount
-        this.LastNameHash = LastNameHash
-        this.LastPos = LastPos
-        this.Alpha = Alpha
-        this.LastAlpha = LastAlpha
-        this.LastFocusedHadNavWindow = LastFocusedHadNavWindow
-        this.PlatformMonitor = PlatformMonitor
-        this.BgFgDrawListsLastFrame = BgFgDrawListsLastFrame
-        this.BgFgDrawLists = BgFgDrawLists
-        this.DrawDataP = DrawDataP
-        this.DrawDataBuilder = DrawDataBuilder
-        this.LastPlatformPos = LastPlatformPos
-        this.LastPlatformSize = LastPlatformSize
-        this.LastRendererSize = LastRendererSize
-        this.WorkOffsetMin = WorkOffsetMin
-        this.WorkOffsetMax = WorkOffsetMax
-        this.BuildWorkOffsetMin = BuildWorkOffsetMin
-        this.BuildWorkOffsetMax = BuildWorkOffsetMax
-    }
-
-    public init(value!: ?capi.ImGuiViewportP = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiViewportP, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiViewportP>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiViewportP_ImGuiViewportP().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -10934,26 +10009,16 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
 }
 
 public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
-    public init(ClassId!: ImGuiID, ParentViewportId!: ImGuiID, FocusRouteParentWindowId!: ImGuiID, ViewportFlagsOverrideSet!: ImGuiViewportFlags, ViewportFlagsOverrideClear!: ImGuiViewportFlags, TabItemFlagsOverrideSet!: ImGuiTabItemFlags, DockNodeFlagsOverrideSet!: ImGuiDockNodeFlags, DockingAlwaysTabBar!: Bool, DockingAllowUnclassed!: Bool) {
-        super()
-
-        this.ClassId = ClassId
-        this.ParentViewportId = ParentViewportId
-        this.FocusRouteParentWindowId = FocusRouteParentWindowId
-        this.ViewportFlagsOverrideSet = ViewportFlagsOverrideSet
-        this.ViewportFlagsOverrideClear = ViewportFlagsOverrideClear
-        this.TabItemFlagsOverrideSet = TabItemFlagsOverrideSet
-        this.DockNodeFlagsOverrideSet = DockNodeFlagsOverrideSet
-        this.DockingAlwaysTabBar = DockingAlwaysTabBar
-        this.DockingAllowUnclassed = DockingAllowUnclassed
-    }
-
-    public init(value!: ?capi.ImGuiWindowClass = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiWindowClass, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiWindowClass>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiWindowClass_ImGuiWindowClass().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11054,13 +10119,7 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
 }
 
 public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
-    public init(Colors!: Value<ImU32>) {
-        super()
-
-        this.Colors = Colors
-    }
-
-    public init(value!: ?capi.ImGuiWindowDockStyle = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiWindowDockStyle, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -11086,29 +10145,16 @@ public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
 }
 
 public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
-    public init(ID!: ImGuiID, Pos!: ImVec2ih, Size!: ImVec2ih, ViewportPos!: ImVec2ih, ViewportId!: ImGuiID, DockId!: ImGuiID, ClassId!: ImGuiID, DockOrder!: Int16, Collapsed!: Bool, IsChild!: Bool, WantApply!: Bool, WantDelete!: Bool) {
-        super()
-
-        this.ID = ID
-        this.Pos = Pos
-        this.Size = Size
-        this.ViewportPos = ViewportPos
-        this.ViewportId = ViewportId
-        this.DockId = DockId
-        this.ClassId = ClassId
-        this.DockOrder = DockOrder
-        this.Collapsed = Collapsed
-        this.IsChild = IsChild
-        this.WantApply = WantApply
-        this.WantDelete = WantDelete
-    }
-
-    public init(value!: ?capi.ImGuiWindowSettings = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiWindowSettings, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImGuiWindowSettings>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImGuiWindowSettings_ImGuiWindowSettings().getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11243,16 +10289,7 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
 }
 
 public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
-    public init(Window!: Value<ImGuiWindow>, ParentLastItemDataBackup!: ImGuiLastItemData, StackSizesOnBegin!: ImGuiStackSizes, DisabledOverrideReenable!: Bool) {
-        super()
-
-        this.Window = Window
-        this.ParentLastItemDataBackup = ParentLastItemDataBackup
-        this.StackSizesOnBegin = StackSizesOnBegin
-        this.DisabledOverrideReenable = DisabledOverrideReenable
-    }
-
-    public init(value!: ?capi.ImGuiWindowStackData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiWindowStackData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -11308,49 +10345,7 @@ public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
 }
 
 public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
-    public init(CursorPos!: ImVec2, CursorPosPrevLine!: ImVec2, CursorStartPos!: ImVec2, CursorMaxPos!: ImVec2, IdealMaxPos!: ImVec2, CurrLineSize!: ImVec2, PrevLineSize!: ImVec2, CurrLineTextBaseOffset!: Float32, PrevLineTextBaseOffset!: Float32, IsSameLine!: Bool, IsSetPos!: Bool, Indent!: ImVec1, ColumnsOffset!: ImVec1, GroupOffset!: ImVec1, CursorStartPosLossyness!: ImVec2, NavLayerCurrent!: ImGuiNavLayer, NavLayersActiveMask!: Int16, NavLayersActiveMaskNext!: Int16, NavIsScrollPushableX!: Bool, NavHideHighlightOneFrame!: Bool, NavWindowHasScrollY!: Bool, MenuBarAppending!: Bool, MenuBarOffset!: ImVec2, MenuColumns!: ImGuiMenuColumns, TreeDepth!: Int32, TreeJumpToParentOnPopMask!: ImU32, ChildWindows!: ImVector_ImGuiWindowPtr, StateStorage!: ImGuiStorage, CurrentColumns!: ImGuiOldColumns, CurrentTableIdx!: Int32, LayoutType!: ImGuiLayoutType, ParentLayoutType!: ImGuiLayoutType, ModalDimBgColor!: ImU32, ItemWidth!: Float32, TextWrapPos!: Float32, ItemWidthStack!: ImVector_float, TextWrapPosStack!: ImVector_float) {
-        super()
-
-        this.CursorPos = CursorPos
-        this.CursorPosPrevLine = CursorPosPrevLine
-        this.CursorStartPos = CursorStartPos
-        this.CursorMaxPos = CursorMaxPos
-        this.IdealMaxPos = IdealMaxPos
-        this.CurrLineSize = CurrLineSize
-        this.PrevLineSize = PrevLineSize
-        this.CurrLineTextBaseOffset = CurrLineTextBaseOffset
-        this.PrevLineTextBaseOffset = PrevLineTextBaseOffset
-        this.IsSameLine = IsSameLine
-        this.IsSetPos = IsSetPos
-        this.Indent = Indent
-        this.ColumnsOffset = ColumnsOffset
-        this.GroupOffset = GroupOffset
-        this.CursorStartPosLossyness = CursorStartPosLossyness
-        this.NavLayerCurrent = NavLayerCurrent
-        this.NavLayersActiveMask = NavLayersActiveMask
-        this.NavLayersActiveMaskNext = NavLayersActiveMaskNext
-        this.NavIsScrollPushableX = NavIsScrollPushableX
-        this.NavHideHighlightOneFrame = NavHideHighlightOneFrame
-        this.NavWindowHasScrollY = NavWindowHasScrollY
-        this.MenuBarAppending = MenuBarAppending
-        this.MenuBarOffset = MenuBarOffset
-        this.MenuColumns = MenuColumns
-        this.TreeDepth = TreeDepth
-        this.TreeJumpToParentOnPopMask = TreeJumpToParentOnPopMask
-        this.ChildWindows = ChildWindows
-        this.StateStorage = StateStorage
-        this.CurrentColumns = CurrentColumns
-        this.CurrentTableIdx = CurrentTableIdx
-        this.LayoutType = LayoutType
-        this.ParentLayoutType = ParentLayoutType
-        this.ModalDimBgColor = ModalDimBgColor
-        this.ItemWidth = ItemWidth
-        this.TextWrapPos = TextWrapPos
-        this.ItemWidthStack = ItemWidthStack
-        this.TextWrapPosStack = TextWrapPosStack
-    }
-
-    public init(value!: ?capi.ImGuiWindowTempData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImGuiWindowTempData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -11736,19 +10731,28 @@ public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
 }
 
 public class ImRect <: StructWrapper<capi.ImRect> {
-    public init(Min!: ImVec2, Max!: ImVec2) {
-        super()
-
-        this.Min = Min
-        this.Max = Max
-    }
-
-    public init(value!: ?capi.ImRect = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImRect, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImRect>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImRect_ImRect_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(min: ImVec2, max: ImVec2) {
+        super(ImRect_ImRect_Vec2(min, max).getCPointer(), count: None, owned: true)
+    }
+
+    public init(v: ImVec4) {
+        super(ImRect_ImRect_Vec4(v).getCPointer(), count: None, owned: true)
+    }
+
+    public init(x1: Float32, y1: Float32, x2: Float32, y2: Float32) {
+        super(ImRect_ImRect_Float(x1, y1, x2, y2).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11879,18 +10883,20 @@ public class ImRect <: StructWrapper<capi.ImRect> {
 }
 
 public class ImVec1 <: StructWrapper<capi.ImVec1> {
-    public init(x!: Float32) {
-        super()
-
-        this.x = x
-    }
-
-    public init(value!: ?capi.ImVec1 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVec1, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImVec1>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImVec1_ImVec1_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(_x: Float32) {
+        super(ImVec1_ImVec1_Float(_x).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11911,19 +10917,20 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
 }
 
 public class ImVec2 <: StructWrapper<capi.ImVec2> {
-    public init(x!: Float32, y!: Float32) {
-        super()
-
-        this.x = x
-        this.y = y
-    }
-
-    public init(value!: ?capi.ImVec2 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVec2, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImVec2>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImVec2_ImVec2_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(_x: Float32, _y: Float32) {
+        super(ImVec2_ImVec2_Float(_x, _y).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11954,19 +10961,24 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
 }
 
 public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
-    public init(x!: Int16, y!: Int16) {
-        super()
-
-        this.x = x
-        this.y = y
-    }
-
-    public init(value!: ?capi.ImVec2ih = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVec2ih, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImVec2ih>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImVec2ih_ImVec2ih_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(_x: Int16, _y: Int16) {
+        super(ImVec2ih_ImVec2ih_short(_x, _y).getCPointer(), count: None, owned: true)
+    }
+
+    public init(rhs: ImVec2) {
+        super(ImVec2ih_ImVec2ih_Vec2(rhs).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -11997,21 +11009,20 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
 }
 
 public class ImVec4 <: StructWrapper<capi.ImVec4> {
-    public init(x!: Float32, y!: Float32, z!: Float32, w!: Float32) {
-        super()
-
-        this.x = x
-        this.y = y
-        this.z = z
-        this.w = w
-    }
-
-    public init(value!: ?capi.ImVec4 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVec4, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
     public init(pointer: CPointer<capi.ImVec4>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public init() {
+        super(ImVec4_ImVec4_Nil().getCPointer(), count: None, owned: true)
+    }
+
+    public init(_x: Float32, _y: Float32, _z: Float32, _w: Float32) {
+        super(ImVec4_ImVec4_Float(_x, _y, _z, _w).getCPointer(), count: None, owned: true)
     }
 
     ~init() {
@@ -12062,26 +11073,7 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
 }
 
 public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
-    public init(cursor!: Int32, select_start!: Int32, select_end!: Int32, insert_mode!: UInt8, row_count_per_page!: Int32, cursor_at_end_of_line!: UInt8, initialized!: UInt8, has_preferred_x!: UInt8, single_line!: UInt8, padding1!: UInt8, padding2!: UInt8, padding3!: UInt8, preferred_x!: Float32, undostate!: StbUndoState) {
-        super()
-
-        this.cursor = cursor
-        this.select_start = select_start
-        this.select_end = select_end
-        this.insert_mode = insert_mode
-        this.row_count_per_page = row_count_per_page
-        this.cursor_at_end_of_line = cursor_at_end_of_line
-        this.initialized = initialized
-        this.has_preferred_x = has_preferred_x
-        this.single_line = single_line
-        this.padding1 = padding1
-        this.padding2 = padding2
-        this.padding3 = padding3
-        this.preferred_x = preferred_x
-        this.undostate = undostate
-    }
-
-    public init(value!: ?capi.STB_TexteditState = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.STB_TexteditState, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12237,18 +11229,7 @@ public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
 }
 
 public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
-    public init(x0!: Float32, x1!: Float32, baseline_y_delta!: Float32, ymin!: Float32, ymax!: Float32, num_chars!: Int32) {
-        super()
-
-        this.x0 = x0
-        this.x1 = x1
-        this.baseline_y_delta = baseline_y_delta
-        this.ymin = ymin
-        this.ymax = ymax
-        this.num_chars = num_chars
-    }
-
-    public init(value!: ?capi.StbTexteditRow = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.StbTexteditRow, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12324,16 +11305,7 @@ public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
 }
 
 public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
-    public init(`where`!: Int32, insert_length!: Int32, delete_length!: Int32, char_storage!: Int32) {
-        super()
-
-        this.`where` = `where`
-        this.insert_length = insert_length
-        this.delete_length = delete_length
-        this.char_storage = char_storage
-    }
-
-    public init(value!: ?capi.StbUndoRecord = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.StbUndoRecord, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12389,18 +11361,7 @@ public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
 }
 
 public class StbUndoState <: StructWrapper<capi.StbUndoState> {
-    public init(undo_rec!: StbUndoRecord, undo_char!: Value<ImWchar>, undo_point!: Int16, redo_point!: Int16, undo_char_point!: Int32, redo_char_point!: Int32) {
-        super()
-
-        this.undo_rec = undo_rec
-        this.undo_char = undo_char
-        this.undo_point = undo_point
-        this.redo_point = redo_point
-        this.undo_char_point = undo_char_point
-        this.redo_char_point = redo_char_point
-    }
-
-    public init(value!: ?capi.StbUndoState = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.StbUndoState, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12476,13 +11437,7 @@ public class StbUndoState <: StructWrapper<capi.StbUndoState> {
 }
 
 public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: StructWrapper<capi.ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN> {
-    public init(Storage!: Value<ImU32>) {
-        super()
-
-        this.Storage = Storage
-    }
-
-    public init(value!: ?capi.ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12508,13 +11463,7 @@ public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: 
 }
 
 public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStream_ImGuiTableSettings> {
-    public init(Buf!: ImVector_char) {
-        super()
-
-        this.Buf = Buf
-    }
-
-    public init(value!: ?capi.ImChunkStream_ImGuiTableSettings = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImChunkStream_ImGuiTableSettings, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12540,13 +11489,7 @@ public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStrea
 }
 
 public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStream_ImGuiWindowSettings> {
-    public init(Buf!: ImVector_char) {
-        super()
-
-        this.Buf = Buf
-    }
-
-    public init(value!: ?capi.ImChunkStream_ImGuiWindowSettings = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImChunkStream_ImGuiWindowSettings, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12572,16 +11515,7 @@ public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStre
 }
 
 public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
-    public init(Buf!: ImVector_ImGuiTabBar, Map!: ImGuiStorage, FreeIdx!: ImPoolIdx, AliveCount!: ImPoolIdx) {
-        super()
-
-        this.Buf = Buf
-        this.Map = Map
-        this.FreeIdx = FreeIdx
-        this.AliveCount = AliveCount
-    }
-
-    public init(value!: ?capi.ImPool_ImGuiTabBar = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImPool_ImGuiTabBar, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12637,16 +11571,7 @@ public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
 }
 
 public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
-    public init(Buf!: ImVector_ImGuiTable, Map!: ImGuiStorage, FreeIdx!: ImPoolIdx, AliveCount!: ImPoolIdx) {
-        super()
-
-        this.Buf = Buf
-        this.Map = Map
-        this.FreeIdx = FreeIdx
-        this.AliveCount = AliveCount
-    }
-
-    public init(value!: ?capi.ImPool_ImGuiTable = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImPool_ImGuiTable, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12702,14 +11627,7 @@ public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
 }
 
 public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCellData> {
-    public init(Data!: ImGuiTableCellData, DataEnd!: ImGuiTableCellData) {
-        super()
-
-        this.Data = Data
-        this.DataEnd = DataEnd
-    }
-
-    public init(value!: ?capi.ImSpan_ImGuiTableCellData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImSpan_ImGuiTableCellData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12745,14 +11663,7 @@ public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCe
 }
 
 public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColumn> {
-    public init(Data!: Value<ImGuiTableColumn>, DataEnd!: Value<ImGuiTableColumn>) {
-        super()
-
-        this.Data = Data
-        this.DataEnd = DataEnd
-    }
-
-    public init(value!: ?capi.ImSpan_ImGuiTableColumn = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImSpan_ImGuiTableColumn, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12788,14 +11699,7 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
 }
 
 public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableColumnIdx> {
-    public init(Data!: Value<ImGuiTableColumnIdx>, DataEnd!: Value<ImGuiTableColumnIdx>) {
-        super()
-
-        this.Data = Data
-        this.DataEnd = DataEnd
-    }
-
-    public init(value!: ?capi.ImSpan_ImGuiTableColumnIdx = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImSpan_ImGuiTableColumnIdx, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12831,15 +11735,7 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
 }
 
 public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawChannel) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImDrawChannel = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImDrawChannel, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12885,15 +11781,7 @@ public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel
 }
 
 public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawCmd) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImDrawCmd = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImDrawCmd, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12939,15 +11827,7 @@ public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
 }
 
 public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImDrawIdx>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImDrawIdx = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImDrawIdx, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -12993,15 +11873,7 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
 }
 
 public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImDrawList>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImDrawListPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImDrawListPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13047,15 +11919,7 @@ public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr
 }
 
 public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImDrawVert) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImDrawVert = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImDrawVert, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13101,15 +11965,7 @@ public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
 }
 
 public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImFont>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImFontPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImFontPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13155,15 +12011,7 @@ public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
 }
 
 public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFontAtlasCustomRect> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImFontAtlasCustomRect) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImFontAtlasCustomRect = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImFontAtlasCustomRect, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13209,15 +12057,7 @@ public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFon
 }
 
 public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImFontConfig) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImFontConfig = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImFontConfig, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13263,15 +12103,7 @@ public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> 
 }
 
 public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImFontGlyph>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImFontGlyph = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImFontGlyph, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13317,15 +12149,7 @@ public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
 }
 
 public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiColorMod) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiColorMod = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiColorMod, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13371,15 +12195,7 @@ public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod
 }
 
 public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiContextHook> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiContextHook) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiContextHook = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiContextHook, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13425,15 +12241,7 @@ public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiConte
 }
 
 public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGuiDockNodeSettings> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiDockNodeSettings>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiDockNodeSettings = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiDockNodeSettings, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13479,15 +12287,7 @@ public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGui
 }
 
 public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockRequest> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiDockRequest>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiDockRequest = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiDockRequest, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13533,15 +12333,7 @@ public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockR
 }
 
 public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFocusScopeData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiFocusScopeData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiFocusScopeData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiFocusScopeData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13587,15 +12379,7 @@ public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFo
 }
 
 public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiGroupData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiGroupData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiGroupData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13641,15 +12425,7 @@ public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupDa
 }
 
 public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiID>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiID = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiID, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13695,15 +12471,7 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
 }
 
 public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputEvent> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiInputEvent>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiInputEvent = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiInputEvent, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13749,15 +12517,7 @@ public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputE
 }
 
 public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFlags> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiItemFlags>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiItemFlags = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiItemFlags, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13803,15 +12563,7 @@ public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFla
 }
 
 public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKeyRoutingData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiKeyRoutingData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiKeyRoutingData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiKeyRoutingData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13857,15 +12609,7 @@ public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKe
 }
 
 public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiListClipperData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiListClipperData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiListClipperData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiListClipperData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13911,15 +12655,7 @@ public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiL
 }
 
 public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGuiListClipperRange> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiListClipperRange) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiListClipperRange = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiListClipperRange, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -13965,15 +12701,7 @@ public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGui
 }
 
 public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiNavTreeNodeData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiNavTreeNodeData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiNavTreeNodeData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiNavTreeNodeData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14019,15 +12747,7 @@ public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiN
 }
 
 public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOldColumnData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiOldColumnData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiOldColumnData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiOldColumnData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14073,15 +12793,7 @@ public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOld
 }
 
 public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldColumns> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiOldColumns) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiOldColumns = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiOldColumns, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14127,15 +12839,7 @@ public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldCol
 }
 
 public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiPlatformMonitor> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPlatformMonitor) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiPlatformMonitor = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiPlatformMonitor, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14181,15 +12885,7 @@ public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiP
 }
 
 public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPopupData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiPopupData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiPopupData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14235,15 +12931,7 @@ public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupDa
 }
 
 public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrIndex> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiPtrOrIndex) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiPtrOrIndex = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiPtrOrIndex, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14289,15 +12977,7 @@ public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrI
 }
 
 public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiSettingsHandler> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiSettingsHandler) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiSettingsHandler = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiSettingsHandler, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14343,15 +13023,7 @@ public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiS
 }
 
 public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiShrinkWidthItem> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiShrinkWidthItem) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiShrinkWidthItem = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiShrinkWidthItem, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14397,15 +13069,7 @@ public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiS
 }
 
 public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiStackLevelInfo> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStackLevelInfo>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiStackLevelInfo = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiStackLevelInfo, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14451,15 +13115,7 @@ public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiSt
 }
 
 public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStoragePair> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStoragePair>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiStoragePair = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiStoragePair, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14505,15 +13161,7 @@ public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStora
 }
 
 public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiStyleMod>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiStyleMod = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiStyleMod, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14559,15 +13207,7 @@ public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod
 }
 
 public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTabBar) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTabBar = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTabBar, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14613,15 +13253,7 @@ public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
 }
 
 public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTabItem) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTabItem = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTabItem, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14667,15 +13299,7 @@ public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> 
 }
 
 public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImGuiTable>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTable = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTable, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14721,15 +13345,7 @@ public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
 }
 
 public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_ImGuiTableColumnSortSpecs> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableColumnSortSpecs) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTableColumnSortSpecs = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTableColumnSortSpecs, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14775,15 +13391,7 @@ public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_I
 }
 
 public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiTableHeaderData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableHeaderData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTableHeaderData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTableHeaderData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14829,15 +13437,7 @@ public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiT
 }
 
 public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGuiTableInstanceData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableInstanceData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTableInstanceData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTableInstanceData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14883,15 +13483,7 @@ public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGu
 }
 
 public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTableTempData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTableTempData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTableTempData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTableTempData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14937,15 +13529,7 @@ public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTab
 }
 
 public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRange> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiTextRange) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiTextRange = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiTextRange, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -14991,15 +13575,7 @@ public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRan
 }
 
 public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewportPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImGuiViewport>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiViewportPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiViewportPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15045,15 +13621,7 @@ public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewp
 }
 
 public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiViewportPPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<capi.ImGuiViewportP>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiViewportPPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiViewportPPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15099,15 +13667,7 @@ public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiView
 }
 
 public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<CPointer<ImGuiWindow>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiWindowPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiWindowPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15153,15 +13713,7 @@ public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowP
 }
 
 public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiWindowStackData> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImGuiWindowStackData) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImGuiWindowStackData = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImGuiWindowStackData, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15207,15 +13759,7 @@ public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiW
 }
 
 public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: CPointer<ImTextureID>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImTextureID = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImTextureID, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15261,15 +13805,7 @@ public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
 }
 
 public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImU32>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImU32 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImU32, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15315,15 +13851,7 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
 }
 
 public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImVec2) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImVec2 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImVec2, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15369,15 +13897,7 @@ public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
 }
 
 public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: ImVec4) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImVec4 = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImVec4, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15423,15 +13943,7 @@ public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
 }
 
 public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<ImWchar>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_ImWchar = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_ImWchar, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15477,15 +13989,7 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
 }
 
 public class ImVector_char <: StructWrapper<capi.ImVector_char> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: String) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_char = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_char, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15531,15 +14035,7 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
 }
 
 public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<CPointer<UInt8>>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_const_charPtr = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_const_charPtr, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15585,15 +14081,7 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
 }
 
 public class ImVector_float <: StructWrapper<capi.ImVector_float> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<Float32>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_float = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_float, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15639,15 +14127,7 @@ public class ImVector_float <: StructWrapper<capi.ImVector_float> {
 }
 
 public class ImVector_int <: StructWrapper<capi.ImVector_int> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<Int32>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_int = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_int, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
@@ -15693,15 +14173,7 @@ public class ImVector_int <: StructWrapper<capi.ImVector_int> {
 }
 
 public class ImVector_unsigned_char <: StructWrapper<capi.ImVector_unsigned_char> {
-    public init(Size!: Int32, Capacity!: Int32, Data!: Value<UInt8>) {
-        super()
-
-        this.Size = Size
-        this.Capacity = Capacity
-        this.Data = Data
-    }
-
-    public init(value!: ?capi.ImVector_unsigned_char = None, count!: ?Int64 = None) {
+    public init(value!: ?capi.ImVector_unsigned_char, count!: ?Int64 = None) {
         super(value: value, count: count)
     }
 
