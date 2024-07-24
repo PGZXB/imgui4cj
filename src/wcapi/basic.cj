@@ -89,7 +89,7 @@ public class Ref<T> <: ToString where T <: CType { // For int*, float*, ... argu
         return Ref<T>(pointer, values.size, owned: true)
     }
 
-    func getCPointer(): CPointer<T> {
+    public func getCPointer(): CPointer<T> {
         return pointer
     }
 
@@ -152,6 +152,12 @@ public class Ref<T> <: ToString where T <: CType { // For int*, float*, ... argu
                 sb.toString()
             case None => valueToString(value)
         }
+    }
+}
+
+extend Ref<T> <: CStringConvertable where T <: UInt8 {
+    public func asCString(): CPointer<UInt8> {
+        return CPointer<UInt8>(this.getCPointer())
     }
 }
 

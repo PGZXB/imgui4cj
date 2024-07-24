@@ -1,0 +1,36 @@
+[dependencies]
+  # imgui4cj = { path = "../../", version = "1.0.0"}
+
+[package]
+  cjc-version = "0.51.4"
+  compile-option = ""
+  description = "nothing here"
+  link-option = ""
+  name = "basic_widgets"
+  output-type = "executable"
+  src-dir = ""
+  target-dir = "../../target"
+  version = "1.0.0"
+  package-configuration = {}
+
+# To avoid unnecessary compilation, binary dependencies are manually specified.
+# Users can use imgui4cj by directly adding `imgui4cj = { path = "/path/to/imgui4cj", version = "1.0.0" }` to their [dependencies].
+
+[ffi.c]
+  imgui4cj = { path = "../../src/libs" }
+
+[target.x86_64-unknown-linux-gnu.bin-dependencies.package-option]
+  imgui4cj_utils = "../../target/release/imgui4cj/utils.cjo"
+  imgui4cj_capi_impl = "../../target/release/imgui4cj/capi_impl.cjo"
+  imgui4cj_capi = "../../target/release/imgui4cj/capi.cjo"
+  imgui4cj_wcapi = "../../target/release/imgui4cj/wcapi.cjo"
+  imgui4cj_backends = "../../target/release/imgui4cj/backends.cjo"
+  imgui4cj_imgui = "../../target/release/imgui4cj/imgui.cjo"
+
+[target.x86_64-w64-mingw32.bin-dependencies.package-option]
+  imgui4cj_utils = "../../target/release/imgui4cj/utils.cjo"
+  imgui4cj_capi_impl = "../../target/release/imgui4cj/capi_impl.cjo"
+  imgui4cj_capi = "../../target/release/imgui4cj/capi.cjo"
+  imgui4cj_wcapi = "../../target/release/imgui4cj/wcapi.cjo"
+  imgui4cj_backends = "../../target/release/imgui4cj/backends.cjo"
+  imgui4cj_imgui = "../../target/release/imgui4cj/imgui.cjo"
