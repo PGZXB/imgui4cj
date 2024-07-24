@@ -1,5 +1,5 @@
 [dependencies]
-  # imgui4cj = { path = "../../", version = "1.0.0"}
+  # imgui4cj = { path = "../../", version = "0.1.0"}
 
 [package]
   cjc-version = "0.51.4"
@@ -14,7 +14,7 @@
   package-configuration = {}
 
 # To avoid unnecessary compilation, binary dependencies are manually specified.
-# Users can use imgui4cj by directly adding `imgui4cj = { path = "/path/to/imgui4cj", version = "1.0.0" }` to their [dependencies].
+# Users can use imgui4cj by directly adding `imgui4cj = { path = "/path/to/imgui4cj", version = "0.1.0" }` to their [dependencies].
 
 [ffi.c]
   imgui4cj = { path = "../../src/libs" }
