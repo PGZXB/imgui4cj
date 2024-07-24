@@ -38,9 +38,9 @@ public func access_ImDrawChannel__IdxBuffer(self: CPointer<ImDrawChannel>): CPoi
 
 foreign func imgui4cj_access_ImDrawCmd_ClipRect(self: CPointer<ImDrawCmd>): CPointer<ImVec4>
 foreign func imgui4cj_access_ImDrawCmd_TextureId(self: CPointer<ImDrawCmd>): CPointer<ImTextureID>
-foreign func imgui4cj_access_ImDrawCmd_VtxOffset(self: CPointer<ImDrawCmd>): CPointer<Int32>
-foreign func imgui4cj_access_ImDrawCmd_IdxOffset(self: CPointer<ImDrawCmd>): CPointer<Int32>
-foreign func imgui4cj_access_ImDrawCmd_ElemCount(self: CPointer<ImDrawCmd>): CPointer<Int32>
+foreign func imgui4cj_access_ImDrawCmd_VtxOffset(self: CPointer<ImDrawCmd>): CPointer<UInt32>
+foreign func imgui4cj_access_ImDrawCmd_IdxOffset(self: CPointer<ImDrawCmd>): CPointer<UInt32>
+foreign func imgui4cj_access_ImDrawCmd_ElemCount(self: CPointer<ImDrawCmd>): CPointer<UInt32>
 foreign func imgui4cj_access_ImDrawCmd_UserCallback(self: CPointer<ImDrawCmd>): CPointer<ImDrawCallback>
 foreign func imgui4cj_access_ImDrawCmd_UserCallbackData(self: CPointer<ImDrawCmd>): CPointer<CPointer<Unit>>
 
@@ -52,15 +52,15 @@ public func access_ImDrawCmd_TextureId(self: CPointer<ImDrawCmd>): CPointer<ImTe
     return unsafe { imgui4cj_access_ImDrawCmd_TextureId(self) }
 }
 
-public func access_ImDrawCmd_VtxOffset(self: CPointer<ImDrawCmd>): CPointer<Int32> {
+public func access_ImDrawCmd_VtxOffset(self: CPointer<ImDrawCmd>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImDrawCmd_VtxOffset(self) }
 }
 
-public func access_ImDrawCmd_IdxOffset(self: CPointer<ImDrawCmd>): CPointer<Int32> {
+public func access_ImDrawCmd_IdxOffset(self: CPointer<ImDrawCmd>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImDrawCmd_IdxOffset(self) }
 }
 
-public func access_ImDrawCmd_ElemCount(self: CPointer<ImDrawCmd>): CPointer<Int32> {
+public func access_ImDrawCmd_ElemCount(self: CPointer<ImDrawCmd>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImDrawCmd_ElemCount(self) }
 }
 
@@ -76,7 +76,7 @@ public func access_ImDrawCmd_UserCallbackData(self: CPointer<ImDrawCmd>): CPoint
 
 foreign func imgui4cj_access_ImDrawCmdHeader_ClipRect(self: CPointer<ImDrawCmdHeader>): CPointer<ImVec4>
 foreign func imgui4cj_access_ImDrawCmdHeader_TextureId(self: CPointer<ImDrawCmdHeader>): CPointer<ImTextureID>
-foreign func imgui4cj_access_ImDrawCmdHeader_VtxOffset(self: CPointer<ImDrawCmdHeader>): CPointer<Int32>
+foreign func imgui4cj_access_ImDrawCmdHeader_VtxOffset(self: CPointer<ImDrawCmdHeader>): CPointer<UInt32>
 
 public func access_ImDrawCmdHeader_ClipRect(self: CPointer<ImDrawCmdHeader>): CPointer<ImVec4> {
     return unsafe { imgui4cj_access_ImDrawCmdHeader_ClipRect(self) }
@@ -86,7 +86,7 @@ public func access_ImDrawCmdHeader_TextureId(self: CPointer<ImDrawCmdHeader>): C
     return unsafe { imgui4cj_access_ImDrawCmdHeader_TextureId(self) }
 }
 
-public func access_ImDrawCmdHeader_VtxOffset(self: CPointer<ImDrawCmdHeader>): CPointer<Int32> {
+public func access_ImDrawCmdHeader_VtxOffset(self: CPointer<ImDrawCmdHeader>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImDrawCmdHeader_VtxOffset(self) }
 }
 
@@ -157,7 +157,7 @@ foreign func imgui4cj_access_ImDrawList_CmdBuffer(self: CPointer<ImDrawList>): C
 foreign func imgui4cj_access_ImDrawList_IdxBuffer(self: CPointer<ImDrawList>): CPointer<ImVector_ImDrawIdx>
 foreign func imgui4cj_access_ImDrawList_VtxBuffer(self: CPointer<ImDrawList>): CPointer<ImVector_ImDrawVert>
 foreign func imgui4cj_access_ImDrawList_Flags(self: CPointer<ImDrawList>): CPointer<ImDrawListFlags>
-foreign func imgui4cj_access_ImDrawList__VtxCurrentIdx(self: CPointer<ImDrawList>): CPointer<Int32>
+foreign func imgui4cj_access_ImDrawList__VtxCurrentIdx(self: CPointer<ImDrawList>): CPointer<UInt32>
 foreign func imgui4cj_access_ImDrawList__Data(self: CPointer<ImDrawList>): CPointer<CPointer<ImDrawListSharedData>>
 foreign func imgui4cj_access_ImDrawList__VtxWritePtr(self: CPointer<ImDrawList>): CPointer<CPointer<ImDrawVert>>
 foreign func imgui4cj_access_ImDrawList__IdxWritePtr(self: CPointer<ImDrawList>): CPointer<CPointer<ImDrawIdx>>
@@ -185,7 +185,7 @@ public func access_ImDrawList_Flags(self: CPointer<ImDrawList>): CPointer<ImDraw
     return unsafe { imgui4cj_access_ImDrawList_Flags(self) }
 }
 
-public func access_ImDrawList__VtxCurrentIdx(self: CPointer<ImDrawList>): CPointer<Int32> {
+public func access_ImDrawList__VtxCurrentIdx(self: CPointer<ImDrawList>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImDrawList__VtxCurrentIdx(self) }
 }
 
@@ -442,7 +442,7 @@ foreign func imgui4cj_access_ImFontAtlas_UserData(self: CPointer<ImFontAtlas>): 
 foreign func imgui4cj_access_ImFontAtlas_TexReady(self: CPointer<ImFontAtlas>): CPointer<Bool>
 foreign func imgui4cj_access_ImFontAtlas_TexPixelsUseColors(self: CPointer<ImFontAtlas>): CPointer<Bool>
 foreign func imgui4cj_access_ImFontAtlas_TexPixelsAlpha8(self: CPointer<ImFontAtlas>): CPointer<CPointer<UInt8>>
-foreign func imgui4cj_access_ImFontAtlas_TexPixelsRGBA32(self: CPointer<ImFontAtlas>): CPointer<CPointer<Int32>>
+foreign func imgui4cj_access_ImFontAtlas_TexPixelsRGBA32(self: CPointer<ImFontAtlas>): CPointer<CPointer<UInt32>>
 foreign func imgui4cj_access_ImFontAtlas_TexWidth(self: CPointer<ImFontAtlas>): CPointer<Int32>
 foreign func imgui4cj_access_ImFontAtlas_TexHeight(self: CPointer<ImFontAtlas>): CPointer<Int32>
 foreign func imgui4cj_access_ImFontAtlas_TexUvScale(self: CPointer<ImFontAtlas>): CPointer<ImVec2>
@@ -452,7 +452,7 @@ foreign func imgui4cj_access_ImFontAtlas_CustomRects(self: CPointer<ImFontAtlas>
 foreign func imgui4cj_access_ImFontAtlas_ConfigData(self: CPointer<ImFontAtlas>): CPointer<ImVector_ImFontConfig>
 foreign func imgui4cj_access_ImFontAtlas_TexUvLines(self: CPointer<ImFontAtlas>): CPointer<CPointer<ImVec4>>
 foreign func imgui4cj_access_ImFontAtlas_FontBuilderIO(self: CPointer<ImFontAtlas>): CPointer<CPointer<ImFontBuilderIO>>
-foreign func imgui4cj_access_ImFontAtlas_FontBuilderFlags(self: CPointer<ImFontAtlas>): CPointer<Int32>
+foreign func imgui4cj_access_ImFontAtlas_FontBuilderFlags(self: CPointer<ImFontAtlas>): CPointer<UInt32>
 foreign func imgui4cj_access_ImFontAtlas_PackIdMouseCursors(self: CPointer<ImFontAtlas>): CPointer<Int32>
 foreign func imgui4cj_access_ImFontAtlas_PackIdLines(self: CPointer<ImFontAtlas>): CPointer<Int32>
 
@@ -492,7 +492,7 @@ public func access_ImFontAtlas_TexPixelsAlpha8(self: CPointer<ImFontAtlas>): CPo
     return unsafe { imgui4cj_access_ImFontAtlas_TexPixelsAlpha8(self) }
 }
 
-public func access_ImFontAtlas_TexPixelsRGBA32(self: CPointer<ImFontAtlas>): CPointer<CPointer<Int32>> {
+public func access_ImFontAtlas_TexPixelsRGBA32(self: CPointer<ImFontAtlas>): CPointer<CPointer<UInt32>> {
     return unsafe { imgui4cj_access_ImFontAtlas_TexPixelsRGBA32(self) }
 }
 
@@ -532,7 +532,7 @@ public func access_ImFontAtlas_FontBuilderIO(self: CPointer<ImFontAtlas>): CPoin
     return unsafe { imgui4cj_access_ImFontAtlas_FontBuilderIO(self) }
 }
 
-public func access_ImFontAtlas_FontBuilderFlags(self: CPointer<ImFontAtlas>): CPointer<Int32> {
+public func access_ImFontAtlas_FontBuilderFlags(self: CPointer<ImFontAtlas>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImFontAtlas_FontBuilderFlags(self) }
 }
 
@@ -546,32 +546,32 @@ public func access_ImFontAtlas_PackIdLines(self: CPointer<ImFontAtlas>): CPointe
 
 // struct ImFontAtlasCustomRect
 
-foreign func imgui4cj_access_ImFontAtlasCustomRect_Width(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16>
-foreign func imgui4cj_access_ImFontAtlasCustomRect_Height(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16>
-foreign func imgui4cj_access_ImFontAtlasCustomRect_X(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16>
-foreign func imgui4cj_access_ImFontAtlasCustomRect_Y(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16>
-foreign func imgui4cj_access_ImFontAtlasCustomRect_GlyphID(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int32>
+foreign func imgui4cj_access_ImFontAtlasCustomRect_Width(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16>
+foreign func imgui4cj_access_ImFontAtlasCustomRect_Height(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16>
+foreign func imgui4cj_access_ImFontAtlasCustomRect_X(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16>
+foreign func imgui4cj_access_ImFontAtlasCustomRect_Y(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16>
+foreign func imgui4cj_access_ImFontAtlasCustomRect_GlyphID(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt32>
 foreign func imgui4cj_access_ImFontAtlasCustomRect_GlyphAdvanceX(self: CPointer<ImFontAtlasCustomRect>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontAtlasCustomRect_GlyphOffset(self: CPointer<ImFontAtlasCustomRect>): CPointer<ImVec2>
 foreign func imgui4cj_access_ImFontAtlasCustomRect_Font(self: CPointer<ImFontAtlasCustomRect>): CPointer<CPointer<ImFont>>
 
-public func access_ImFontAtlasCustomRect_Width(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16> {
+public func access_ImFontAtlasCustomRect_Width(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16> {
     return unsafe { imgui4cj_access_ImFontAtlasCustomRect_Width(self) }
 }
 
-public func access_ImFontAtlasCustomRect_Height(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16> {
+public func access_ImFontAtlasCustomRect_Height(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16> {
     return unsafe { imgui4cj_access_ImFontAtlasCustomRect_Height(self) }
 }
 
-public func access_ImFontAtlasCustomRect_X(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16> {
+public func access_ImFontAtlasCustomRect_X(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16> {
     return unsafe { imgui4cj_access_ImFontAtlasCustomRect_X(self) }
 }
 
-public func access_ImFontAtlasCustomRect_Y(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int16> {
+public func access_ImFontAtlasCustomRect_Y(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt16> {
     return unsafe { imgui4cj_access_ImFontAtlasCustomRect_Y(self) }
 }
 
-public func access_ImFontAtlasCustomRect_GlyphID(self: CPointer<ImFontAtlasCustomRect>): CPointer<Int32> {
+public func access_ImFontAtlasCustomRect_GlyphID(self: CPointer<ImFontAtlasCustomRect>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImFontAtlasCustomRect_GlyphID(self) }
 }
 
@@ -611,7 +611,7 @@ foreign func imgui4cj_access_ImFontConfig_GlyphRanges(self: CPointer<ImFontConfi
 foreign func imgui4cj_access_ImFontConfig_GlyphMinAdvanceX(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_GlyphMaxAdvanceX(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_MergeMode(self: CPointer<ImFontConfig>): CPointer<Bool>
-foreign func imgui4cj_access_ImFontConfig_FontBuilderFlags(self: CPointer<ImFontConfig>): CPointer<Int32>
+foreign func imgui4cj_access_ImFontConfig_FontBuilderFlags(self: CPointer<ImFontConfig>): CPointer<UInt32>
 foreign func imgui4cj_access_ImFontConfig_RasterizerMultiply(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_RasterizerDensity(self: CPointer<ImFontConfig>): CPointer<Float32>
 foreign func imgui4cj_access_ImFontConfig_EllipsisChar(self: CPointer<ImFontConfig>): CPointer<ImWchar>
@@ -674,7 +674,7 @@ public func access_ImFontConfig_MergeMode(self: CPointer<ImFontConfig>): CPointe
     return unsafe { imgui4cj_access_ImFontConfig_MergeMode(self) }
 }
 
-public func access_ImFontConfig_FontBuilderFlags(self: CPointer<ImFontConfig>): CPointer<Int32> {
+public func access_ImFontConfig_FontBuilderFlags(self: CPointer<ImFontConfig>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImFontConfig_FontBuilderFlags(self) }
 }
 
@@ -1600,9 +1600,9 @@ public func access_ImGuiInputEventMouseWheel_MouseSource(self: CPointer<ImGuiInp
 
 // struct ImGuiInputEventText
 
-foreign func imgui4cj_access_ImGuiInputEventText_Char(self: CPointer<ImGuiInputEventText>): CPointer<Int32>
+foreign func imgui4cj_access_ImGuiInputEventText_Char(self: CPointer<ImGuiInputEventText>): CPointer<UInt32>
 
-public func access_ImGuiInputEventText_Char(self: CPointer<ImGuiInputEventText>): CPointer<Int32> {
+public func access_ImGuiInputEventText_Char(self: CPointer<ImGuiInputEventText>): CPointer<UInt32> {
     return unsafe { imgui4cj_access_ImGuiInputEventText_Char(self) }
 }
 

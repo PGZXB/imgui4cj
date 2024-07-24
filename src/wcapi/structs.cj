@@ -182,7 +182,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         }
     }
 
-    public mut prop VtxOffset: Int32 {
+    public mut prop VtxOffset: UInt32 {
         get() {
             return unsafe { capi.access_ImDrawCmd_VtxOffset(pointer).read() }
         }
@@ -192,7 +192,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         }
     }
 
-    public mut prop IdxOffset: Int32 {
+    public mut prop IdxOffset: UInt32 {
         get() {
             return unsafe { capi.access_ImDrawCmd_IdxOffset(pointer).read() }
         }
@@ -202,7 +202,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         }
     }
 
-    public mut prop ElemCount: Int32 {
+    public mut prop ElemCount: UInt32 {
         get() {
             return unsafe { capi.access_ImDrawCmd_ElemCount(pointer).read() }
         }
@@ -272,7 +272,7 @@ public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
         }
     }
 
-    public mut prop VtxOffset: Int32 {
+    public mut prop VtxOffset: UInt32 {
         get() {
             return unsafe { capi.access_ImDrawCmdHeader_VtxOffset(pointer).read() }
         }
@@ -508,7 +508,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         }
     }
 
-    public mut prop _VtxCurrentIdx: Int32 {
+    public mut prop _VtxCurrentIdx: UInt32 {
         get() {
             return unsafe { capi.access_ImDrawList__VtxCurrentIdx(pointer).read() }
         }
@@ -540,7 +540,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
 
     public mut prop _IdxWritePtr: Value<ImDrawIdx> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImDrawList__IdxWritePtr(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImDrawList__IdxWritePtr(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1410,7 +1410,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_GrowIndex(this, new_size)
     }
 
-    public func IsGlyphRangeUnused(c_begin: Int32, c_last: Int32): Bool {
+    public func IsGlyphRangeUnused(c_begin: UInt32, c_last: UInt32): Bool {
         return ImFont_IsGlyphRangeUnused(this, c_begin, c_last)
     }
 
@@ -1540,9 +1540,9 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
-    public mut prop TexPixelsRGBA32: Value<Int32> {
+    public mut prop TexPixelsRGBA32: Value<UInt32> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImFontAtlas_TexPixelsRGBA32(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImFontAtlas_TexPixelsRGBA32(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1640,7 +1640,7 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
-    public mut prop FontBuilderFlags: Int32 {
+    public mut prop FontBuilderFlags: UInt32 {
         get() {
             return unsafe { capi.access_ImFontAtlas_FontBuilderFlags(pointer).read() }
         }
@@ -1806,7 +1806,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         }
     }
 
-    public mut prop Width: Int16 {
+    public mut prop Width: UInt16 {
         get() {
             return unsafe { capi.access_ImFontAtlasCustomRect_Width(pointer).read() }
         }
@@ -1816,7 +1816,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         }
     }
 
-    public mut prop Height: Int16 {
+    public mut prop Height: UInt16 {
         get() {
             return unsafe { capi.access_ImFontAtlasCustomRect_Height(pointer).read() }
         }
@@ -1826,7 +1826,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         }
     }
 
-    public mut prop X: Int16 {
+    public mut prop X: UInt16 {
         get() {
             return unsafe { capi.access_ImFontAtlasCustomRect_X(pointer).read() }
         }
@@ -1836,7 +1836,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         }
     }
 
-    public mut prop Y: Int16 {
+    public mut prop Y: UInt16 {
         get() {
             return unsafe { capi.access_ImFontAtlasCustomRect_Y(pointer).read() }
         }
@@ -1846,7 +1846,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         }
     }
 
-    public mut prop GlyphID: Int32 {
+    public mut prop GlyphID: UInt32 {
         get() {
             return unsafe { capi.access_ImFontAtlasCustomRect_GlyphID(pointer).read() }
         }
@@ -2038,7 +2038,7 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
 
     public mut prop GlyphRanges: Value<ImWchar> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImFontConfig_GlyphRanges(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImFontConfig_GlyphRanges(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -2076,7 +2076,7 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
         }
     }
 
-    public mut prop FontBuilderFlags: Int32 {
+    public mut prop FontBuilderFlags: UInt32 {
         get() {
             return unsafe { capi.access_ImFontConfig_FontBuilderFlags(pointer).read() }
         }
@@ -3964,7 +3964,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         return ImGuiIO_AddFocusEvent(this, focused)
     }
 
-    public func AddInputCharacter(c: Int32): Unit {
+    public func AddInputCharacter(c: UInt32): Unit {
         return ImGuiIO_AddInputCharacter(this, c)
     }
 
@@ -4272,7 +4272,7 @@ public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
         }
     }
 
-    public mut prop `Char`: Int32 {
+    public mut prop `Char`: UInt32 {
         get() {
             return unsafe { capi.access_ImGuiInputEventText_Char(pointer).read() }
         }
@@ -11863,7 +11863,7 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
 
     public mut prop Data: Value<ImDrawIdx> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImVector_ImDrawIdx_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImVector_ImDrawIdx_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12461,7 +12461,7 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
 
     public mut prop Data: Value<ImGuiID> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImVector_ImGuiID_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImVector_ImGuiID_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13841,7 +13841,7 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
 
     public mut prop Data: Value<ImU32> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImVector_ImU32_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImVector_ImU32_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13979,7 +13979,7 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
 
     public mut prop Data: Value<ImWchar> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImVector_ImWchar_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImVector_ImWchar_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {

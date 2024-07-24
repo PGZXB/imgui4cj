@@ -460,39 +460,39 @@ func ImFontAtlas_GetCustomRectByIndex(self: ImFontAtlas, index: Int32): ImFontAt
 }
 
 func ImFontAtlas_GetGlyphRangesChineseFull(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesChineseFull(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesChineseFull(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesCyrillic(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesCyrillic(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesCyrillic(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesDefault(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesDefault(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesDefault(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesGreek(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesGreek(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesGreek(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesJapanese(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesJapanese(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesJapanese(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesKorean(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesKorean(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesKorean(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesThai(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesThai(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesThai(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetGlyphRangesVietnamese(self: ImFontAtlas): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesVietnamese(self.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.ImFontAtlas_GetGlyphRangesVietnamese(self.getCPointer()), count: -1, owned: false)
 }
 
 func ImFontAtlas_GetMouseCursorTexData(self: ImFontAtlas, cursor: ImGuiMouseCursor, out_offset: ImVec2, out_size: ImVec2, out_uv_border: ImVec2, out_uv_fill: ImVec2): Bool {
@@ -603,7 +603,7 @@ func ImFont_ImFont(): ImFont {
     return ImFont(capi.ImFont_ImFont(), owned: false)
 }
 
-func ImFont_IsGlyphRangeUnused(self: ImFont, c_begin: Int32, c_last: Int32): Bool {
+func ImFont_IsGlyphRangeUnused(self: ImFont, c_begin: UInt32, c_last: UInt32): Bool {
     return capi.ImFont_IsGlyphRangeUnused(self.getCPointer(), c_begin, c_last)
 }
 
@@ -651,7 +651,7 @@ func ImGuiIO_AddFocusEvent(self: ImGuiIO, focused: Bool): Unit {
     return capi.ImGuiIO_AddFocusEvent(self.getCPointer(), focused)
 }
 
-func ImGuiIO_AddInputCharacter(self: ImGuiIO, c: Int32): Unit {
+func ImGuiIO_AddInputCharacter(self: ImGuiIO, c: UInt32): Unit {
     return capi.ImGuiIO_AddInputCharacter(self.getCPointer(), c)
 }
 
@@ -1665,7 +1665,7 @@ public func CheckboxFlags_IntPtr(label: CStringConvertable, flags: Value<Int32>,
     return capi.igCheckboxFlags_IntPtr(label.asCString(), flags.getCPointer(), flags_value)
 }
 
-public func CheckboxFlags_UintPtr(label: CStringConvertable, flags: Value<Int32>, flags_value: Int32): Bool {
+public func CheckboxFlags_UintPtr(label: CStringConvertable, flags: Value<UInt32>, flags_value: UInt32): Bool {
     return capi.igCheckboxFlags_UintPtr(label.asCString(), flags.getCPointer(), flags_value)
 }
 
@@ -2876,7 +2876,7 @@ public func ImCharIsBlankA(c: UInt8): Bool {
     return capi.igImCharIsBlankA(c)
 }
 
-public func ImCharIsBlankW(c: Int32): Bool {
+public func ImCharIsBlankW(c: UInt32): Bool {
     return capi.igImCharIsBlankW(c)
 }
 
@@ -2944,7 +2944,7 @@ public func ImFontAtlasBuildPackCustomRects(atlas: ImFontAtlas, stbrp_context_op
     return capi.igImFontAtlasBuildPackCustomRects(atlas.getCPointer(), stbrp_context_opaque.getCPointer())
 }
 
-public func ImFontAtlasBuildRender32bppRectFromString(atlas: ImFontAtlas, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CStringConvertable, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit {
+public func ImFontAtlasBuildRender32bppRectFromString(atlas: ImFontAtlas, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CStringConvertable, in_marker_char: UInt8, in_marker_pixel_value: UInt32): Unit {
     return capi.igImFontAtlasBuildRender32bppRectFromString(atlas.getCPointer(), x, y, w, h, in_str.asCString(), in_marker_char, in_marker_pixel_value)
 }
 
@@ -3123,7 +3123,7 @@ public func ImStrTrimBlanks(str: CStringConvertable): Unit {
 }
 
 public func ImStrbolW(buf_mid_line: Value<ImWchar>, buf_begin: Value<ImWchar>): Value<ImWchar> {
-    return Value<Int16>.unsafeMake(capi.igImStrbolW(buf_mid_line.getCPointer(), buf_begin.getCPointer()), count: -1, owned: false)
+    return Value<UInt16>.unsafeMake(capi.igImStrbolW(buf_mid_line.getCPointer(), buf_begin.getCPointer()), count: -1, owned: false)
 }
 
 public func ImStrchrRange(str_begin: CStringConvertable, str_end: CStringConvertable, c: UInt8): String {
@@ -3162,11 +3162,11 @@ public func ImStrnicmp(str1: CStringConvertable, str2: CStringConvertable, count
     return capi.igImStrnicmp(str1.asCString(), str2.asCString(), count)
 }
 
-public func ImTextCharFromUtf8(out_char: Value<Int32>, in_text: CStringConvertable, in_text_end: CStringConvertable): Int32 {
+public func ImTextCharFromUtf8(out_char: Value<UInt32>, in_text: CStringConvertable, in_text_end: CStringConvertable): Int32 {
     return capi.igImTextCharFromUtf8(out_char.getCPointer(), in_text.asCString(), in_text_end.asCString())
 }
 
-public func ImTextCharToUtf8(out_buf: Value<UInt8>, c: Int32): String {
+public func ImTextCharToUtf8(out_buf: Value<UInt8>, c: UInt32): String {
     return CString(capi.igImTextCharToUtf8(out_buf.getCPointer(), c)).toString()
 }
 
@@ -5098,7 +5098,7 @@ public func Value_Int(prefix: CStringConvertable, v: Int32): Unit {
     return capi.igValue_Int(prefix.asCString(), v)
 }
 
-public func Value_Uint(prefix: CStringConvertable, v: Int32): Unit {
+public func Value_Uint(prefix: CStringConvertable, v: UInt32): Unit {
     return capi.igValue_Uint(prefix.asCString(), v)
 }
 

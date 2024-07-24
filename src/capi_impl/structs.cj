@@ -42,7 +42,7 @@ public struct ImDrawChannel {
 // struct ImDrawCmd
 @C
 public struct ImDrawCmd {
-    public ImDrawCmd(public var ClipRect!: ImVec4, public var TextureId!: ImTextureID, public var VtxOffset!: Int32, public var IdxOffset!: Int32, public var ElemCount!: Int32, public var UserCallback!: ImDrawCallback, public var UserCallbackData!: CPointer<Unit>) {
+    public ImDrawCmd(public var ClipRect!: ImVec4, public var TextureId!: ImTextureID, public var VtxOffset!: UInt32, public var IdxOffset!: UInt32, public var ElemCount!: UInt32, public var UserCallback!: ImDrawCallback, public var UserCallbackData!: CPointer<Unit>) {
     }
 
     public init() {
@@ -59,7 +59,7 @@ public struct ImDrawCmd {
 // struct ImDrawCmdHeader
 @C
 public struct ImDrawCmdHeader {
-    public ImDrawCmdHeader(public var ClipRect!: ImVec4, public var TextureId!: ImTextureID, public var VtxOffset!: Int32) {
+    public ImDrawCmdHeader(public var ClipRect!: ImVec4, public var TextureId!: ImTextureID, public var VtxOffset!: UInt32) {
     }
 
     public init() {
@@ -103,7 +103,7 @@ public struct ImDrawDataBuilder {
 // struct ImDrawList
 @C
 public struct ImDrawList {
-    public ImDrawList(public var CmdBuffer!: ImVector_ImDrawCmd, public var IdxBuffer!: ImVector_ImDrawIdx, public var VtxBuffer!: ImVector_ImDrawVert, public var Flags!: ImDrawListFlags, public var _VtxCurrentIdx!: Int32, public var _Data!: CPointer<ImDrawListSharedData>, public var _VtxWritePtr!: CPointer<ImDrawVert>, public var _IdxWritePtr!: CPointer<ImDrawIdx>, public var _Path!: ImVector_ImVec2, public var _CmdHeader!: ImDrawCmdHeader, public var _Splitter!: ImDrawListSplitter, public var _ClipRectStack!: ImVector_ImVec4, public var _TextureIdStack!: ImVector_ImTextureID, public var _FringeScale!: Float32, public var _OwnerName!: CPointer<UInt8>) {
+    public ImDrawList(public var CmdBuffer!: ImVector_ImDrawCmd, public var IdxBuffer!: ImVector_ImDrawIdx, public var VtxBuffer!: ImVector_ImDrawVert, public var Flags!: ImDrawListFlags, public var _VtxCurrentIdx!: UInt32, public var _Data!: CPointer<ImDrawListSharedData>, public var _VtxWritePtr!: CPointer<ImDrawVert>, public var _IdxWritePtr!: CPointer<ImDrawIdx>, public var _Path!: ImVector_ImVec2, public var _CmdHeader!: ImDrawCmdHeader, public var _Splitter!: ImDrawListSplitter, public var _ClipRectStack!: ImVector_ImVec4, public var _TextureIdStack!: ImVector_ImTextureID, public var _FringeScale!: Float32, public var _OwnerName!: CPointer<UInt8>) {
     }
 
     public init() {
@@ -206,7 +206,7 @@ public struct ImFont {
 // struct ImFontAtlas
 @C
 public struct ImFontAtlas {
-    public ImFontAtlas(public var Flags!: ImFontAtlasFlags, public var TexID!: ImTextureID, public var TexDesiredWidth!: Int32, public var TexGlyphPadding!: Int32, public var Locked!: Bool, public var UserData!: CPointer<Unit>, public var TexReady!: Bool, public var TexPixelsUseColors!: Bool, public var TexPixelsAlpha8!: CPointer<UInt8>, public var TexPixelsRGBA32!: CPointer<Int32>, public var TexWidth!: Int32, public var TexHeight!: Int32, public var TexUvScale!: ImVec2, public var TexUvWhitePixel!: ImVec2, public var Fonts!: ImVector_ImFontPtr, public var CustomRects!: ImVector_ImFontAtlasCustomRect, public var ConfigData!: ImVector_ImFontConfig, public var TexUvLines!: VArray<ImVec4, $64>, public var FontBuilderIO!: CPointer<ImFontBuilderIO>, public var FontBuilderFlags!: Int32, public var PackIdMouseCursors!: Int32, public var PackIdLines!: Int32) {
+    public ImFontAtlas(public var Flags!: ImFontAtlasFlags, public var TexID!: ImTextureID, public var TexDesiredWidth!: Int32, public var TexGlyphPadding!: Int32, public var Locked!: Bool, public var UserData!: CPointer<Unit>, public var TexReady!: Bool, public var TexPixelsUseColors!: Bool, public var TexPixelsAlpha8!: CPointer<UInt8>, public var TexPixelsRGBA32!: CPointer<UInt32>, public var TexWidth!: Int32, public var TexHeight!: Int32, public var TexUvScale!: ImVec2, public var TexUvWhitePixel!: ImVec2, public var Fonts!: ImVector_ImFontPtr, public var CustomRects!: ImVector_ImFontAtlasCustomRect, public var ConfigData!: ImVector_ImFontConfig, public var TexUvLines!: VArray<ImVec4, $64>, public var FontBuilderIO!: CPointer<ImFontBuilderIO>, public var FontBuilderFlags!: UInt32, public var PackIdMouseCursors!: Int32, public var PackIdLines!: Int32) {
     }
 
     public init() {
@@ -219,7 +219,7 @@ public struct ImFontAtlas {
         TexReady = false
         TexPixelsUseColors = false
         TexPixelsAlpha8 = CPointer<UInt8>()
-        TexPixelsRGBA32 = CPointer<Int32>()
+        TexPixelsRGBA32 = CPointer<UInt32>()
         TexWidth = 0
         TexHeight = 0
         TexUvScale = ImVec2()
@@ -238,7 +238,7 @@ public struct ImFontAtlas {
 // struct ImFontAtlasCustomRect
 @C
 public struct ImFontAtlasCustomRect {
-    public ImFontAtlasCustomRect(public var Width!: Int16, public var Height!: Int16, public var X!: Int16, public var Y!: Int16, public var GlyphID!: Int32, public var GlyphAdvanceX!: Float32, public var GlyphOffset!: ImVec2, public var Font!: CPointer<ImFont>) {
+    public ImFontAtlasCustomRect(public var Width!: UInt16, public var Height!: UInt16, public var X!: UInt16, public var Y!: UInt16, public var GlyphID!: UInt32, public var GlyphAdvanceX!: Float32, public var GlyphOffset!: ImVec2, public var Font!: CPointer<ImFont>) {
     }
 
     public init() {
@@ -267,7 +267,7 @@ public struct ImFontBuilderIO {
 // struct ImFontConfig
 @C
 public struct ImFontConfig {
-    public ImFontConfig(public var FontData!: CPointer<Unit>, public var FontDataSize!: Int32, public var FontDataOwnedByAtlas!: Bool, public var FontNo!: Int32, public var SizePixels!: Float32, public var OversampleH!: Int32, public var OversampleV!: Int32, public var PixelSnapH!: Bool, public var GlyphExtraSpacing!: ImVec2, public var GlyphOffset!: ImVec2, public var GlyphRanges!: CPointer<ImWchar>, public var GlyphMinAdvanceX!: Float32, public var GlyphMaxAdvanceX!: Float32, public var MergeMode!: Bool, public var FontBuilderFlags!: Int32, public var RasterizerMultiply!: Float32, public var RasterizerDensity!: Float32, public var EllipsisChar!: ImWchar, public var Name!: VArray<UInt8, $40>, public var DstFont!: CPointer<ImFont>) {
+    public ImFontConfig(public var FontData!: CPointer<Unit>, public var FontDataSize!: Int32, public var FontDataOwnedByAtlas!: Bool, public var FontNo!: Int32, public var SizePixels!: Float32, public var OversampleH!: Int32, public var OversampleV!: Int32, public var PixelSnapH!: Bool, public var GlyphExtraSpacing!: ImVec2, public var GlyphOffset!: ImVec2, public var GlyphRanges!: CPointer<ImWchar>, public var GlyphMinAdvanceX!: Float32, public var GlyphMaxAdvanceX!: Float32, public var MergeMode!: Bool, public var FontBuilderFlags!: UInt32, public var RasterizerMultiply!: Float32, public var RasterizerDensity!: Float32, public var EllipsisChar!: ImWchar, public var Name!: VArray<UInt8, $40>, public var DstFont!: CPointer<ImFont>) {
     }
 
     public init() {
@@ -665,7 +665,7 @@ public struct ImGuiInputEventMouseWheel {
 // struct ImGuiInputEventText
 @C
 public struct ImGuiInputEventText {
-    public ImGuiInputEventText(public var `Char`!: Int32) {
+    public ImGuiInputEventText(public var `Char`!: UInt32) {
     }
 
     public init() {

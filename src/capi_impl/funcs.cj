@@ -325,7 +325,7 @@ foreign func ImFont_GrowIndex(self: CPointer<ImFont>, new_size: Int32): Unit
 
 foreign func ImFont_ImFont(): CPointer<ImFont>
 
-foreign func ImFont_IsGlyphRangeUnused(self: CPointer<ImFont>, c_begin: Int32, c_last: Int32): Bool
+foreign func ImFont_IsGlyphRangeUnused(self: CPointer<ImFont>, c_begin: UInt32, c_last: UInt32): Bool
 
 foreign func ImFont_IsLoaded(self: CPointer<ImFont>): Bool
 
@@ -393,7 +393,7 @@ foreign func ImGuiIDStackTool_destroy(self: CPointer<ImGuiIDStackTool>): Unit
 
 foreign func ImGuiIO_AddFocusEvent(self: CPointer<ImGuiIO>, focused: Bool): Unit
 
-foreign func ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: Int32): Unit
+foreign func ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: UInt32): Unit
 
 foreign func ImGuiIO_AddInputCharacterUTF16(self: CPointer<ImGuiIO>, c: ImWchar16): Unit
 
@@ -1051,7 +1051,7 @@ foreign func igCheckbox(label: CPointer<UInt8>, v: CPointer<Bool>): Bool
 
 foreign func igCheckboxFlags_IntPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool
 
-foreign func igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool
+foreign func igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<UInt32>, flags_value: UInt32): Bool
 
 foreign func igCheckboxFlags_S64Ptr(label: CPointer<UInt8>, flags: CPointer<ImS64>, flags_value: ImS64): Bool
 
@@ -1658,7 +1658,7 @@ foreign func igImBitArrayTestBit(arr: CPointer<ImU32>, n: Int32): Bool
 
 foreign func igImCharIsBlankA(c: UInt8): Bool
 
-foreign func igImCharIsBlankW(c: Int32): Bool
+foreign func igImCharIsBlankW(c: UInt32): Bool
 
 foreign func igImClamp(pOut: CPointer<ImVec2>, v: ImVec2, mn: ImVec2, mx: ImVec2): Unit
 
@@ -1692,7 +1692,7 @@ foreign func igImFontAtlasBuildMultiplyRectAlpha8(table: CPointer<UInt8>, pixels
 
 foreign func igImFontAtlasBuildPackCustomRects(atlas: CPointer<ImFontAtlas>, stbrp_context_opaque: CPointer<Unit>): Unit
 
-foreign func igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit
+foreign func igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: UInt32): Unit
 
 foreign func igImFontAtlasBuildRender8bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: UInt8): Unit
 
@@ -1804,9 +1804,9 @@ foreign func igImStrncpy(dst: CPointer<UInt8>, src: CPointer<UInt8>, count: UInt
 
 foreign func igImStrnicmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>, count: UIntNative): Int32
 
-foreign func igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
+foreign func igImTextCharFromUtf8(out_char: CPointer<UInt32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
-foreign func igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CPointer<UInt8>
+foreign func igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: UInt32): CPointer<UInt8>
 
 foreign func igImTextCountCharsFromUtf8(in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32
 
@@ -2790,7 +2790,7 @@ foreign func igValue_Bool(prefix: CPointer<UInt8>, b: Bool): Unit
 
 foreign func igValue_Int(prefix: CPointer<UInt8>, v: Int32): Unit
 
-foreign func igValue_Uint(prefix: CPointer<UInt8>, v: Int32): Unit
+foreign func igValue_Uint(prefix: CPointer<UInt8>, v: UInt32): Unit
 
 foreign func igValue_Float(prefix: CPointer<UInt8>, v: Float32, float_format: CPointer<UInt8>): Unit
 
@@ -3440,7 +3440,7 @@ public func _capi_ImFont_ImFont(): CPointer<ImFont> {
     return unsafe { ImFont_ImFont() }
 }
 
-public func _capi_ImFont_IsGlyphRangeUnused(self: CPointer<ImFont>, c_begin: Int32, c_last: Int32): Bool {
+public func _capi_ImFont_IsGlyphRangeUnused(self: CPointer<ImFont>, c_begin: UInt32, c_last: UInt32): Bool {
     return unsafe { ImFont_IsGlyphRangeUnused(self, c_begin, c_last) }
 }
 
@@ -3576,7 +3576,7 @@ public func _capi_ImGuiIO_AddFocusEvent(self: CPointer<ImGuiIO>, focused: Bool):
     return unsafe { ImGuiIO_AddFocusEvent(self, focused) }
 }
 
-public func _capi_ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: Int32): Unit {
+public func _capi_ImGuiIO_AddInputCharacter(self: CPointer<ImGuiIO>, c: UInt32): Unit {
     return unsafe { ImGuiIO_AddInputCharacter(self, c) }
 }
 
@@ -4886,7 +4886,7 @@ public func _capi_igCheckboxFlags_IntPtr(label: CPointer<UInt8>, flags: CPointer
     return unsafe { igCheckboxFlags_IntPtr(label, flags, flags_value) }
 }
 
-public func _capi_igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<Int32>, flags_value: Int32): Bool {
+public func _capi_igCheckboxFlags_UintPtr(label: CPointer<UInt8>, flags: CPointer<UInt32>, flags_value: UInt32): Bool {
     return unsafe { igCheckboxFlags_UintPtr(label, flags, flags_value) }
 }
 
@@ -6097,7 +6097,7 @@ public func _capi_igImCharIsBlankA(c: UInt8): Bool {
     return unsafe { igImCharIsBlankA(c) }
 }
 
-public func _capi_igImCharIsBlankW(c: Int32): Bool {
+public func _capi_igImCharIsBlankW(c: UInt32): Bool {
     return unsafe { igImCharIsBlankW(c) }
 }
 
@@ -6165,7 +6165,7 @@ public func _capi_igImFontAtlasBuildPackCustomRects(atlas: CPointer<ImFontAtlas>
     return unsafe { igImFontAtlasBuildPackCustomRects(atlas, stbrp_context_opaque) }
 }
 
-public func _capi_igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: Int32): Unit {
+public func _capi_igImFontAtlasBuildRender32bppRectFromString(atlas: CPointer<ImFontAtlas>, x: Int32, y: Int32, w: Int32, h: Int32, in_str: CPointer<UInt8>, in_marker_char: UInt8, in_marker_pixel_value: UInt32): Unit {
     return unsafe { igImFontAtlasBuildRender32bppRectFromString(atlas, x, y, w, h, in_str, in_marker_char, in_marker_pixel_value) }
 }
 
@@ -6383,11 +6383,11 @@ public func _capi_igImStrnicmp(str1: CPointer<UInt8>, str2: CPointer<UInt8>, cou
     return unsafe { igImStrnicmp(str1, str2, count) }
 }
 
-public func _capi_igImTextCharFromUtf8(out_char: CPointer<Int32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
+public func _capi_igImTextCharFromUtf8(out_char: CPointer<UInt32>, in_text: CPointer<UInt8>, in_text_end: CPointer<UInt8>): Int32 {
     return unsafe { igImTextCharFromUtf8(out_char, in_text, in_text_end) }
 }
 
-public func _capi_igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: Int32): CPointer<UInt8> {
+public func _capi_igImTextCharToUtf8(out_buf: CPointer<UInt8>, c: UInt32): CPointer<UInt8> {
     return unsafe { igImTextCharToUtf8(out_buf, c) }
 }
 
@@ -8319,7 +8319,7 @@ public func _capi_igValue_Int(prefix: CPointer<UInt8>, v: Int32): Unit {
     return unsafe { igValue_Int(prefix, v) }
 }
 
-public func _capi_igValue_Uint(prefix: CPointer<UInt8>, v: Int32): Unit {
+public func _capi_igValue_Uint(prefix: CPointer<UInt8>, v: UInt32): Unit {
     return unsafe { igValue_Uint(prefix, v) }
 }
 
