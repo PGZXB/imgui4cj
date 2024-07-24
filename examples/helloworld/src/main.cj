@@ -23,7 +23,13 @@ main(): Int64 {
     )
 
     let backend = getBackend(GLFWOpenGL3)
-    backend.createWindow("Hello IMGUI4CJ", 800, 600).setBeforeRenderHook {
+    backend.createWindow("Hello IMGUI4CJ", 800, 600).setKeyCallback {
+        key: Key, scanCode: Int32, action: KeyAction, mods: ModifierKey =>
+        // Check key `space`
+        if (key == KEY_SPACE && action == KEY_PRESS) {
+            pOpen.value = !pOpen.value
+        }
+    }.setBeforeRenderHook {
         backend.setBgColor(color[0], color[1], color[2], color[3])
         GetIO().FontGlobalScale = fontGlobalScale.value
     }.run {
