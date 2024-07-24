@@ -12,7 +12,7 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
   * Install CMake, GCC/CLANG/MSVC
   * Ensure you have `cjpm` installed
 
-2. Build imgui4cj
+2. Build `imgui4cj`
   ```shell
   git clone https://github.com/PGZXB/imgui4cj
   cd imgui4cj
@@ -20,12 +20,12 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
   cjpm build -V
   ```
 
-3. Add package dependency to your cjpm.toml
+3. Add package dependency to your `cjpm.toml`
   ```toml
   [dependencies]
     imgui4cj = { path = "/path/to/imgui4cj", version = "0.1.0"}
 
-  ...
+  # ...
   ```
 
 #### Option 2. Download package from releases
@@ -42,12 +42,12 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
   [dependencies]
     imgui4cj = { path = "/path/to/imgui4cj", version = "0.1.0"}
 
-  ...
+  # ...
   ```
 
 ### Run "Hello, world!"
 
-Here is a simple example of how to create a basic window with a button and sliders:
+Here is a simple example of how to create a basic window with some basic widgets:
 
 ```cangjie
 from imgui4cj import wcapi.*
