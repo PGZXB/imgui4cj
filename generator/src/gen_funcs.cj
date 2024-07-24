@@ -161,7 +161,7 @@ func genFuncsCode(filename: String, pkgName: String, funcs: ArrayList<FuncSignat
 }
 
 func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: String, funcs: ArrayList<FuncSignature>,
-    typeAlias: HashMap<String, CjType>) where T <: OutputStream {
+    typeAlias: HashMap<String, CjType>, definedStructNames: HashSet<String>) where T <: OutputStream {
     // SOME COMMENTS ....
     //
     // package xxx
@@ -193,8 +193,10 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
         })
         if (fn.structName == "") { // global function
             fnSb.append("public func ${fn.name[2..]}(")
-        } else {
+        } else if (definedStructNames.contains(fn.structName)) {
             fnSb.append("func ${fn.name}(")
+        } else {
+            continue // Skip undefined structs' function
         }
         let callArgs = ArrayList<String>()
         for ((i, p) in withIndex(params)) {
@@ -237,10 +239,10 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
 }
 
 func genFuncsWCAPICode(filename: String, pkgName: String, capiPkgName: String, funcs: ArrayList<FuncSignature>,
-    typeAlias: HashMap<String, CjType>) {
+    typeAlias: HashMap<String, CjType>, definedStructNames: HashSet<String>) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genFuncsWCAPICode(sw, pkgName, capiPkgName, funcs, typeAlias)
+            genFuncsWCAPICode(sw, pkgName, capiPkgName, funcs, typeAlias, definedStructNames)
         }
     }
 }

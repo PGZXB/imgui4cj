@@ -631,10 +631,6 @@ func ImGuiContextHook_ImGuiContextHook(): ImGuiContextHook {
     return ImGuiContextHook(capi.ImGuiContextHook_ImGuiContextHook(), owned: false)
 }
 
-func ImGuiContext_ImGuiContext(shared_font_atlas: ImFontAtlas): Value<ImGuiContext> {
-    return Value<Unit>.unsafeMake(capi.ImGuiContext_ImGuiContext(shared_font_atlas.getCPointer()), count: -1, owned: false)
-}
-
 func ImGuiDataVarInfo_GetVarPtr(self: ImGuiDataVarInfo, parent: Value<Unit>): Value<Unit> {
     return Value<Unit>.unsafeMake(capi.ImGuiDataVarInfo_GetVarPtr(self.getCPointer(), parent.getCPointer()), count: -1, owned: false)
 }
@@ -645,58 +641,6 @@ func ImGuiDebugAllocInfo_ImGuiDebugAllocInfo(): ImGuiDebugAllocInfo {
 
 func ImGuiDockContext_ImGuiDockContext(): ImGuiDockContext {
     return ImGuiDockContext(capi.ImGuiDockContext_ImGuiDockContext(), owned: false)
-}
-
-func ImGuiDockNode_ImGuiDockNode(id: ImGuiID): Value<ImGuiDockNode> {
-    return Value<Unit>.unsafeMake(capi.ImGuiDockNode_ImGuiDockNode(id), count: -1, owned: false)
-}
-
-func ImGuiDockNode_IsCentralNode(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsCentralNode(self.getCPointer())
-}
-
-func ImGuiDockNode_IsDockSpace(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsDockSpace(self.getCPointer())
-}
-
-func ImGuiDockNode_IsEmpty(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsEmpty(self.getCPointer())
-}
-
-func ImGuiDockNode_IsFloatingNode(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsFloatingNode(self.getCPointer())
-}
-
-func ImGuiDockNode_IsHiddenTabBar(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsHiddenTabBar(self.getCPointer())
-}
-
-func ImGuiDockNode_IsLeafNode(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsLeafNode(self.getCPointer())
-}
-
-func ImGuiDockNode_IsNoTabBar(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsNoTabBar(self.getCPointer())
-}
-
-func ImGuiDockNode_IsRootNode(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsRootNode(self.getCPointer())
-}
-
-func ImGuiDockNode_IsSplitNode(self: Value<ImGuiDockNode>): Bool {
-    return capi.ImGuiDockNode_IsSplitNode(self.getCPointer())
-}
-
-func ImGuiDockNode_Rect(pOut: ImRect, self: Value<ImGuiDockNode>): Unit {
-    return capi.ImGuiDockNode_Rect(pOut.getCPointer(), self.getCPointer())
-}
-
-func ImGuiDockNode_SetLocalFlags(self: Value<ImGuiDockNode>, flags: ImGuiDockNodeFlags): Unit {
-    return capi.ImGuiDockNode_SetLocalFlags(self.getCPointer(), flags)
-}
-
-func ImGuiDockNode_UpdateMergedFlags(self: Value<ImGuiDockNode>): Unit {
-    return capi.ImGuiDockNode_UpdateMergedFlags(self.getCPointer())
 }
 
 func ImGuiIDStackTool_ImGuiIDStackTool(): ImGuiIDStackTool {
@@ -765,10 +709,6 @@ func ImGuiIO_SetAppAcceptingEvents(self: ImGuiIO, accepting_events: Bool): Unit 
 
 func ImGuiIO_SetKeyEventNativeData(self: ImGuiIO, key: ImGuiKey, native_keycode: Int32, native_scancode: Int32, native_legacy_index: Int32): Unit {
     return capi.ImGuiIO_SetKeyEventNativeData(self.getCPointer(), key, native_keycode, native_scancode, native_legacy_index)
-}
-
-func ImGuiInputEvent_ImGuiInputEvent(): Value<ImGuiInputEvent> {
-    return Value<Unit>.unsafeMake(capi.ImGuiInputEvent_ImGuiInputEvent(), count: -1, owned: false)
 }
 
 func ImGuiInputTextCallbackData_ClearSelection(self: ImGuiInputTextCallbackData): Unit {
@@ -1031,10 +971,6 @@ func ImGuiSettingsHandler_ImGuiSettingsHandler(): ImGuiSettingsHandler {
     return ImGuiSettingsHandler(capi.ImGuiSettingsHandler_ImGuiSettingsHandler(), owned: false)
 }
 
-func ImGuiStackLevelInfo_ImGuiStackLevelInfo(): Value<ImGuiStackLevelInfo> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStackLevelInfo_ImGuiStackLevelInfo(), count: -1, owned: false)
-}
-
 func ImGuiStackSizes_CompareWithContextState(self: ImGuiStackSizes, ctx: Value<ImGuiContext>): Unit {
     return capi.ImGuiStackSizes_CompareWithContextState(self.getCPointer(), ctx.getCPointer())
 }
@@ -1045,18 +981,6 @@ func ImGuiStackSizes_ImGuiStackSizes(): ImGuiStackSizes {
 
 func ImGuiStackSizes_SetToContextState(self: ImGuiStackSizes, ctx: Value<ImGuiContext>): Unit {
     return capi.ImGuiStackSizes_SetToContextState(self.getCPointer(), ctx.getCPointer())
-}
-
-func ImGuiStoragePair_ImGuiStoragePair_Int(_key: ImGuiID, _val: Int32): Value<ImGuiStoragePair> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStoragePair_ImGuiStoragePair_Int(_key, _val), count: -1, owned: false)
-}
-
-func ImGuiStoragePair_ImGuiStoragePair_Float(_key: ImGuiID, _val: Float32): Value<ImGuiStoragePair> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStoragePair_ImGuiStoragePair_Float(_key, _val), count: -1, owned: false)
-}
-
-func ImGuiStoragePair_ImGuiStoragePair_Ptr(_key: ImGuiID, _val: Value<Unit>): Value<ImGuiStoragePair> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStoragePair_ImGuiStoragePair_Ptr(_key, _val.getCPointer()), count: -1, owned: false)
 }
 
 func ImGuiStorage_BuildSortByKey(self: ImGuiStorage): Unit {
@@ -1119,18 +1043,6 @@ func ImGuiStorage_SetVoidPtr(self: ImGuiStorage, key: ImGuiID, val: Value<Unit>)
     return capi.ImGuiStorage_SetVoidPtr(self.getCPointer(), key, val.getCPointer())
 }
 
-func ImGuiStyleMod_ImGuiStyleMod_Int(idx: ImGuiStyleVar, v: Int32): Value<ImGuiStyleMod> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStyleMod_ImGuiStyleMod_Int(idx, v), count: -1, owned: false)
-}
-
-func ImGuiStyleMod_ImGuiStyleMod_Float(idx: ImGuiStyleVar, v: Float32): Value<ImGuiStyleMod> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStyleMod_ImGuiStyleMod_Float(idx, v), count: -1, owned: false)
-}
-
-func ImGuiStyleMod_ImGuiStyleMod_Vec2(idx: ImGuiStyleVar, v: ImVec2): Value<ImGuiStyleMod> {
-    return Value<Unit>.unsafeMake(capi.ImGuiStyleMod_ImGuiStyleMod_Vec2(idx, unsafe { v.getCPointer().read() }), count: -1, owned: false)
-}
-
 func ImGuiStyle_ImGuiStyle(): ImGuiStyle {
     return ImGuiStyle(capi.ImGuiStyle_ImGuiStyle(), owned: false)
 }
@@ -1147,16 +1059,8 @@ func ImGuiTabItem_ImGuiTabItem(): ImGuiTabItem {
     return ImGuiTabItem(capi.ImGuiTabItem_ImGuiTabItem(), owned: false)
 }
 
-func ImGuiTableColumnSettings_ImGuiTableColumnSettings(): Value<ImGuiTableColumnSettings> {
-    return Value<Unit>.unsafeMake(capi.ImGuiTableColumnSettings_ImGuiTableColumnSettings(), count: -1, owned: false)
-}
-
 func ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs(): ImGuiTableColumnSortSpecs {
     return ImGuiTableColumnSortSpecs(capi.ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs(), owned: false)
-}
-
-func ImGuiTableColumn_ImGuiTableColumn(): Value<ImGuiTableColumn> {
-    return Value<Unit>.unsafeMake(capi.ImGuiTableColumn_ImGuiTableColumn(), count: -1, owned: false)
 }
 
 func ImGuiTableInstanceData_ImGuiTableInstanceData(): ImGuiTableInstanceData {
@@ -1177,10 +1081,6 @@ func ImGuiTableSortSpecs_ImGuiTableSortSpecs(): ImGuiTableSortSpecs {
 
 func ImGuiTableTempData_ImGuiTableTempData(): ImGuiTableTempData {
     return ImGuiTableTempData(capi.ImGuiTableTempData_ImGuiTableTempData(), owned: false)
-}
-
-func ImGuiTable_ImGuiTable(): Value<ImGuiTable> {
-    return Value<Unit>.unsafeMake(capi.ImGuiTable_ImGuiTable(), count: -1, owned: false)
 }
 
 func ImGuiTextBuffer_ImGuiTextBuffer(): ImGuiTextBuffer {
@@ -1348,42 +1248,6 @@ func ImGuiWindowSettings_GetName(self: ImGuiWindowSettings): String {
 
 func ImGuiWindowSettings_ImGuiWindowSettings(): ImGuiWindowSettings {
     return ImGuiWindowSettings(capi.ImGuiWindowSettings_ImGuiWindowSettings(), owned: false)
-}
-
-func ImGuiWindow_CalcFontSize(self: Value<ImGuiWindow>): Float32 {
-    return capi.ImGuiWindow_CalcFontSize(self.getCPointer())
-}
-
-func ImGuiWindow_GetID_Str(self: Value<ImGuiWindow>, str: CStringConvertable, str_end: CStringConvertable): ImGuiID {
-    return capi.ImGuiWindow_GetID_Str(self.getCPointer(), str.asCString(), str_end.asCString())
-}
-
-func ImGuiWindow_GetID_Ptr(self: Value<ImGuiWindow>, ptr: Value<Unit>): ImGuiID {
-    return capi.ImGuiWindow_GetID_Ptr(self.getCPointer(), ptr.getCPointer())
-}
-
-func ImGuiWindow_GetID_Int(self: Value<ImGuiWindow>, n: Int32): ImGuiID {
-    return capi.ImGuiWindow_GetID_Int(self.getCPointer(), n)
-}
-
-func ImGuiWindow_GetIDFromRectangle(self: Value<ImGuiWindow>, r_abs: ImRect): ImGuiID {
-    return capi.ImGuiWindow_GetIDFromRectangle(self.getCPointer(), unsafe { r_abs.getCPointer().read() })
-}
-
-func ImGuiWindow_ImGuiWindow(context: Value<ImGuiContext>, name: CStringConvertable): Value<ImGuiWindow> {
-    return Value<Unit>.unsafeMake(capi.ImGuiWindow_ImGuiWindow(context.getCPointer(), name.asCString()), count: -1, owned: false)
-}
-
-func ImGuiWindow_MenuBarRect(pOut: ImRect, self: Value<ImGuiWindow>): Unit {
-    return capi.ImGuiWindow_MenuBarRect(pOut.getCPointer(), self.getCPointer())
-}
-
-func ImGuiWindow_Rect(pOut: ImRect, self: Value<ImGuiWindow>): Unit {
-    return capi.ImGuiWindow_Rect(pOut.getCPointer(), self.getCPointer())
-}
-
-func ImGuiWindow_TitleBarRect(pOut: ImRect, self: Value<ImGuiWindow>): Unit {
-    return capi.ImGuiWindow_TitleBarRect(pOut.getCPointer(), self.getCPointer())
 }
 
 func ImRect_Add_Vec2(self: ImRect, p: ImVec2): Unit {

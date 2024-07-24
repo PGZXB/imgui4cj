@@ -164,7 +164,7 @@ main(args: Array<String>): Int64 {
     // Generate cimgui funcs wcapi -> src/wcapi/funcs.cj
     let funcsWCAPICodeFilename = "${wcapiOutputDir}/funcs.cj"
     println("Generating cimgui funcs wcapi -> ${funcsWCAPICodeFilename} ...")
-    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias)
+    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias, definedStructNames)
     println("Generated cimgui funcs wcapi -> ${funcsWCAPICodeFilename}")
 
     // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj
