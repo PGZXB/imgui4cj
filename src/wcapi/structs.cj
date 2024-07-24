@@ -222,9 +222,9 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
         }
     }
 
-    public mut prop UserCallbackData: Value<Unit> {
+    public mut prop UserCallbackData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImDrawCmd_UserCallbackData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImDrawCmd_UserCallbackData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -428,9 +428,9 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
         }
     }
 
-    public mut prop Layers: Value<CPointer<capi.ImVector_ImDrawListPtr>> {
+    public mut prop Layers: Ref<CPointer<capi.ImVector_ImDrawListPtr>> {
         get() {
-            return unsafe { Value<CPointer<capi.ImVector_ImDrawListPtr>>.unsafeMake(capi.access_ImDrawDataBuilder_Layers(pointer).read(), count: 2, owned: false) }
+            return unsafe { Ref<CPointer<capi.ImVector_ImDrawListPtr>>.unsafeMake(capi.access_ImDrawDataBuilder_Layers(pointer).read(), count: 2, owned: false) }
         }
 
         set(value) {
@@ -538,9 +538,9 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         }
     }
 
-    public mut prop _IdxWritePtr: Value<ImDrawIdx> {
+    public mut prop _IdxWritePtr: Ref<ImDrawIdx> {
         get() {
-            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImDrawList__IdxWritePtr(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt16>.unsafeMake(capi.access_ImDrawList__IdxWritePtr(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -626,7 +626,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddBezierQuadratic(this, p1, p2, p3, col, thickness, num_segments)
     }
 
-    public func AddCallback(callback: ImDrawCallback, callback_data: Value<Unit>): Unit {
+    public func AddCallback(callback: ImDrawCallback, callback_data: Ref<Unit>): Unit {
         return ImDrawList_AddCallback(this, callback, callback_data)
     }
 
@@ -1006,9 +1006,9 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
         }
     }
 
-    public mut prop CircleSegmentCounts: Value<ImU8> {
+    public mut prop CircleSegmentCounts: Ref<ImU8> {
         get() {
-            return unsafe { Value<ImU8>.unsafeMake(capi.access_ImDrawListSharedData_CircleSegmentCounts(pointer).read(), count: 64, owned: false) }
+            return unsafe { Ref<ImU8>.unsafeMake(capi.access_ImDrawListSharedData_CircleSegmentCounts(pointer).read(), count: 64, owned: false) }
         }
 
         set(value) {
@@ -1216,9 +1216,9 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         }
     }
 
-    public mut prop FallbackGlyph: Value<ImFontGlyph> {
+    public mut prop FallbackGlyph: Ref<ImFontGlyph> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImFont_FallbackGlyph(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImFont_FallbackGlyph(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1356,9 +1356,9 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         }
     }
 
-    public mut prop Used4kPagesMap: Value<ImU8> {
+    public mut prop Used4kPagesMap: Ref<ImU8> {
         get() {
-            return unsafe { Value<ImU8>.unsafeMake(capi.access_ImFont_Used4kPagesMap(pointer).read(), count: 2, owned: false) }
+            return unsafe { Ref<ImU8>.unsafeMake(capi.access_ImFont_Used4kPagesMap(pointer).read(), count: 2, owned: false) }
         }
 
         set(value) {
@@ -1378,7 +1378,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_BuildLookupTable(this)
     }
 
-    public func CalcTextSizeA(pOut: ImVec2, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Value<CPointer<UInt8>>): Unit {
+    public func CalcTextSizeA(pOut: ImVec2, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Ref<CPointer<UInt8>>): Unit {
         return ImFont_CalcTextSizeA(pOut, this, size, max_width, wrap_width, text_begin, text_end, remaining)
     }
 
@@ -1390,11 +1390,11 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_ClearOutputData(this)
     }
 
-    public func FindGlyph(c: ImWchar): Value<ImFontGlyph> {
+    public func FindGlyph(c: ImWchar): Ref<ImFontGlyph> {
         return ImFont_FindGlyph(this, c)
     }
 
-    public func FindGlyphNoFallback(c: ImWchar): Value<ImFontGlyph> {
+    public func FindGlyphNoFallback(c: ImWchar): Ref<ImFontGlyph> {
         return ImFont_FindGlyphNoFallback(this, c)
     }
 
@@ -1500,9 +1500,9 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImFontAtlas_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImFontAtlas_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1530,9 +1530,9 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
-    public mut prop TexPixelsAlpha8: Value<UInt8> {
+    public mut prop TexPixelsAlpha8: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImFontAtlas_TexPixelsAlpha8(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImFontAtlas_TexPixelsAlpha8(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1540,9 +1540,9 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
-    public mut prop TexPixelsRGBA32: Value<UInt32> {
+    public mut prop TexPixelsRGBA32: Ref<UInt32> {
         get() {
-            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImFontAtlas_TexPixelsRGBA32(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt32>.unsafeMake(capi.access_ImFontAtlas_TexPixelsRGBA32(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -1686,19 +1686,19 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_AddFontDefault(this, font_cfg)
     }
 
-    public func AddFontFromFileTTF(filename: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+    public func AddFontFromFileTTF(filename: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromFileTTF(this, filename, size_pixels, font_cfg, glyph_ranges)
     }
 
-    public func AddFontFromMemoryCompressedBase85TTF(compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+    public func AddFontFromMemoryCompressedBase85TTF(compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(this, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges)
     }
 
-    public func AddFontFromMemoryCompressedTTF(compressed_font_data: Value<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+    public func AddFontFromMemoryCompressedTTF(compressed_font_data: Ref<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryCompressedTTF(this, compressed_font_data, compressed_font_data_size, size_pixels, font_cfg, glyph_ranges)
     }
 
-    public func AddFontFromMemoryTTF(font_data: Value<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Value<ImWchar>): ImFont {
+    public func AddFontFromMemoryTTF(font_data: Ref<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryTTF(this, font_data, font_data_size, size_pixels, font_cfg, glyph_ranges)
     }
 
@@ -1730,39 +1730,39 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_GetCustomRectByIndex(this, index)
     }
 
-    public func GetGlyphRangesChineseFull(): Value<ImWchar> {
+    public func GetGlyphRangesChineseFull(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesChineseFull(this)
     }
 
-    public func GetGlyphRangesChineseSimplifiedCommon(): Value<ImWchar> {
+    public func GetGlyphRangesChineseSimplifiedCommon(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(this)
     }
 
-    public func GetGlyphRangesCyrillic(): Value<ImWchar> {
+    public func GetGlyphRangesCyrillic(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesCyrillic(this)
     }
 
-    public func GetGlyphRangesDefault(): Value<ImWchar> {
+    public func GetGlyphRangesDefault(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesDefault(this)
     }
 
-    public func GetGlyphRangesGreek(): Value<ImWchar> {
+    public func GetGlyphRangesGreek(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesGreek(this)
     }
 
-    public func GetGlyphRangesJapanese(): Value<ImWchar> {
+    public func GetGlyphRangesJapanese(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesJapanese(this)
     }
 
-    public func GetGlyphRangesKorean(): Value<ImWchar> {
+    public func GetGlyphRangesKorean(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesKorean(this)
     }
 
-    public func GetGlyphRangesThai(): Value<ImWchar> {
+    public func GetGlyphRangesThai(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesThai(this)
     }
 
-    public func GetGlyphRangesVietnamese(): Value<ImWchar> {
+    public func GetGlyphRangesVietnamese(): Ref<ImWchar> {
         return ImFontAtlas_GetGlyphRangesVietnamese(this)
     }
 
@@ -1770,11 +1770,11 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_GetMouseCursorTexData(this, cursor, out_offset, out_size, out_uv_border, out_uv_fill)
     }
 
-    public func GetTexDataAsAlpha8(out_pixels: CPointer<CPointer<UInt8>>, out_width: Value<Int32>, out_height: Value<Int32>, out_bytes_per_pixel: Value<Int32>): Unit {
+    public func GetTexDataAsAlpha8(out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
         return ImFontAtlas_GetTexDataAsAlpha8(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
     }
 
-    public func GetTexDataAsRGBA32(out_pixels: CPointer<CPointer<UInt8>>, out_width: Value<Int32>, out_height: Value<Int32>, out_bytes_per_pixel: Value<Int32>): Unit {
+    public func GetTexDataAsRGBA32(out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
         return ImFontAtlas_GetTexDataAsRGBA32(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
     }
 
@@ -1936,9 +1936,9 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
         }
     }
 
-    public mut prop FontData: Value<Unit> {
+    public mut prop FontData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImFontConfig_FontData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImFontConfig_FontData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -2036,9 +2036,9 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
         }
     }
 
-    public mut prop GlyphRanges: Value<ImWchar> {
+    public mut prop GlyphRanges: Ref<ImWchar> {
         get() {
-            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImFontConfig_GlyphRanges(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt16>.unsafeMake(capi.access_ImFontConfig_GlyphRanges(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -2116,9 +2116,9 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
         }
     }
 
-    public mut prop Name: Value<UInt8> {
+    public mut prop Name: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImFontConfig_Name(pointer).read(), count: 40, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImFontConfig_Name(pointer).read(), count: 40, owned: false) }
         }
 
         set(value) {
@@ -2170,7 +2170,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
         return ImFontGlyphRangesBuilder_AddChar(this, c)
     }
 
-    public func AddRanges(ranges: Value<ImWchar>): Unit {
+    public func AddRanges(ranges: Ref<ImWchar>): Unit {
         return ImFontGlyphRangesBuilder_AddRanges(this, ranges)
     }
 
@@ -2370,9 +2370,9 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiContextHook_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiContextHook_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -2452,9 +2452,9 @@ public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
         }
     }
 
-    public mut prop Data: Value<ImU8> {
+    public mut prop Data: Ref<ImU8> {
         get() {
-            return unsafe { Value<ImU8>.unsafeMake(capi.access_ImGuiDataTypeStorage_Data(pointer).read(), count: 8, owned: false) }
+            return unsafe { Ref<ImU8>.unsafeMake(capi.access_ImGuiDataTypeStorage_Data(pointer).read(), count: 8, owned: false) }
         }
 
         set(value) {
@@ -2508,7 +2508,7 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
         }
     }
 
-    public func GetVarPtr(parent: Value<Unit>): Value<Unit> {
+    public func GetVarPtr(parent: Ref<Unit>): Ref<Unit> {
         return ImGuiDataVarInfo_GetVarPtr(this, parent)
     }
 }
@@ -3030,9 +3030,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3380,9 +3380,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop BackendPlatformUserData: Value<Unit> {
+    public mut prop BackendPlatformUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_BackendPlatformUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_BackendPlatformUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3390,9 +3390,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop BackendRendererUserData: Value<Unit> {
+    public mut prop BackendRendererUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_BackendRendererUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_BackendRendererUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3400,9 +3400,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop BackendLanguageUserData: Value<Unit> {
+    public mut prop BackendLanguageUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_BackendLanguageUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_BackendLanguageUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3430,9 +3430,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop ClipboardUserData: Value<Unit> {
+    public mut prop ClipboardUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_ClipboardUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_ClipboardUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3590,9 +3590,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop Ctx: Value<ImGuiContext> {
+    public mut prop Ctx: Ref<ImGuiContext> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiIO_Ctx(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiIO_Ctx(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -3610,9 +3610,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDown: Value<Bool> {
+    public mut prop MouseDown: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDown(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDown(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3750,9 +3750,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseClickedTime: Value<Float64> {
+    public mut prop MouseClickedTime: Ref<Float64> {
         get() {
-            return unsafe { Value<Float64>.unsafeMake(capi.access_ImGuiIO_MouseClickedTime(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Float64>.unsafeMake(capi.access_ImGuiIO_MouseClickedTime(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3760,9 +3760,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseClicked: Value<Bool> {
+    public mut prop MouseClicked: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseClicked(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseClicked(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3770,9 +3770,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDoubleClicked: Value<Bool> {
+    public mut prop MouseDoubleClicked: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDoubleClicked(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDoubleClicked(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3780,9 +3780,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseClickedCount: Value<ImU16> {
+    public mut prop MouseClickedCount: Ref<ImU16> {
         get() {
-            return unsafe { Value<ImU16>.unsafeMake(capi.access_ImGuiIO_MouseClickedCount(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<ImU16>.unsafeMake(capi.access_ImGuiIO_MouseClickedCount(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3790,9 +3790,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseClickedLastCount: Value<ImU16> {
+    public mut prop MouseClickedLastCount: Ref<ImU16> {
         get() {
-            return unsafe { Value<ImU16>.unsafeMake(capi.access_ImGuiIO_MouseClickedLastCount(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<ImU16>.unsafeMake(capi.access_ImGuiIO_MouseClickedLastCount(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3800,9 +3800,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseReleased: Value<Bool> {
+    public mut prop MouseReleased: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseReleased(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseReleased(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3810,9 +3810,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDownOwned: Value<Bool> {
+    public mut prop MouseDownOwned: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDownOwned(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDownOwned(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3820,9 +3820,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDownOwnedUnlessPopupClose: Value<Bool> {
+    public mut prop MouseDownOwnedUnlessPopupClose: Ref<Bool> {
         get() {
-            return unsafe { Value<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDownOwnedUnlessPopupClose(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Bool>.unsafeMake(capi.access_ImGuiIO_MouseDownOwnedUnlessPopupClose(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3850,9 +3850,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDownDuration: Value<Float32> {
+    public mut prop MouseDownDuration: Ref<Float32> {
         get() {
-            return unsafe { Value<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDownDuration(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDownDuration(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3860,9 +3860,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDownDurationPrev: Value<Float32> {
+    public mut prop MouseDownDurationPrev: Ref<Float32> {
         get() {
-            return unsafe { Value<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDownDurationPrev(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDownDurationPrev(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -3880,9 +3880,9 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         }
     }
 
-    public mut prop MouseDragMaxDistanceSqr: Value<Float32> {
+    public mut prop MouseDragMaxDistanceSqr: Ref<Float32> {
         get() {
-            return unsafe { Value<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDragMaxDistanceSqr(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<Float32>.unsafeMake(capi.access_ImGuiIO_MouseDragMaxDistanceSqr(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -4302,9 +4302,9 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
         }
     }
 
-    public mut prop Ctx: Value<ImGuiContext> {
+    public mut prop Ctx: Ref<ImGuiContext> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiInputTextCallbackData_Ctx(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiInputTextCallbackData_Ctx(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -4332,9 +4332,9 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiInputTextCallbackData_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiInputTextCallbackData_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -4516,9 +4516,9 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
         }
     }
 
-    public mut prop Ctx: Value<ImGuiContext> {
+    public mut prop Ctx: Ref<ImGuiContext> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiInputTextState_Ctx(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiInputTextState_Ctx(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -4986,9 +4986,9 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
         }
     }
 
-    public mut prop Index: Value<ImGuiKeyRoutingIndex> {
+    public mut prop Index: Ref<ImGuiKeyRoutingIndex> {
         get() {
-            return unsafe { Value<ImGuiKeyRoutingIndex>.unsafeMake(capi.access_ImGuiKeyRoutingTable_Index(pointer).read(), count: 154, owned: false) }
+            return unsafe { Ref<ImGuiKeyRoutingIndex>.unsafeMake(capi.access_ImGuiKeyRoutingTable_Index(pointer).read(), count: 154, owned: false) }
         }
 
         set(value) {
@@ -5140,9 +5140,9 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
         }
     }
 
-    public mut prop Ctx: Value<ImGuiContext> {
+    public mut prop Ctx: Ref<ImGuiContext> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiListClipper_Ctx(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiListClipper_Ctx(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -5200,9 +5200,9 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
         }
     }
 
-    public mut prop TempData: Value<Unit> {
+    public mut prop TempData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiListClipper_TempData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiListClipper_TempData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -5504,9 +5504,9 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
         }
     }
 
-    public mut prop Widths: Value<ImU16> {
+    public mut prop Widths: Ref<ImU16> {
         get() {
-            return unsafe { Value<ImU16>.unsafeMake(capi.access_ImGuiMenuColumns_Widths(pointer).read(), count: 4, owned: false) }
+            return unsafe { Ref<ImU16>.unsafeMake(capi.access_ImGuiMenuColumns_Widths(pointer).read(), count: 4, owned: false) }
         }
 
         set(value) {
@@ -5702,9 +5702,9 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
         }
     }
 
-    public mut prop Window: Value<ImGuiWindow> {
+    public mut prop Window: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiNavItemData_Window(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiNavItemData_Window(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -6126,9 +6126,9 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
         }
     }
 
-    public mut prop SizeCallbackUserData: Value<Unit> {
+    public mut prop SizeCallbackUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiNextWindowData_SizeCallbackUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiNextWindowData_SizeCallbackUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -6500,9 +6500,9 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
         }
     }
 
-    public mut prop Data: Value<Unit> {
+    public mut prop Data: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiPayload_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiPayload_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -6550,9 +6550,9 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
         }
     }
 
-    public mut prop DataType: Value<UInt8> {
+    public mut prop DataType: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImGuiPayload_DataType(pointer).read(), count: 33, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImGuiPayload_DataType(pointer).read(), count: 33, owned: false) }
         }
 
         set(value) {
@@ -6986,9 +6986,9 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
         }
     }
 
-    public mut prop PlatformHandle: Value<Unit> {
+    public mut prop PlatformHandle: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiPlatformMonitor_PlatformHandle(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiPlatformMonitor_PlatformHandle(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7026,9 +7026,9 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
         }
     }
 
-    public mut prop Window: Value<ImGuiWindow> {
+    public mut prop Window: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiPopupData_Window(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiPopupData_Window(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7036,9 +7036,9 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
         }
     }
 
-    public mut prop RestoreNavWindow: Value<ImGuiWindow> {
+    public mut prop RestoreNavWindow: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiPopupData_RestoreNavWindow(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiPopupData_RestoreNavWindow(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7106,7 +7106,7 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
         super(pointer, count: count, owned: owned)
     }
 
-    public init(ptr: Value<Unit>) {
+    public init(ptr: Ref<Unit>) {
         super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(ptr).getCPointer(), count: None, owned: true)
     }
 
@@ -7120,9 +7120,9 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
         }
     }
 
-    public mut prop Ptr: Value<Unit> {
+    public mut prop Ptr: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiPtrOrIndex_Ptr(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiPtrOrIndex_Ptr(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7240,9 +7240,9 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiSettingsHandler_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiSettingsHandler_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7312,9 +7312,9 @@ public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> 
         }
     }
 
-    public mut prop UserData: Value<Unit> {
+    public mut prop UserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiSizeCallbackData_UserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiSizeCallbackData_UserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -7462,11 +7462,11 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
         }
     }
 
-    public func CompareWithContextState(ctx: Value<ImGuiContext>): Unit {
+    public func CompareWithContextState(ctx: Ref<ImGuiContext>): Unit {
         return ImGuiStackSizes_CompareWithContextState(this, ctx)
     }
 
-    public func SetToContextState(ctx: Value<ImGuiContext>): Unit {
+    public func SetToContextState(ctx: Ref<ImGuiContext>): Unit {
         return ImGuiStackSizes_SetToContextState(this, ctx)
     }
 }
@@ -7508,7 +7508,7 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_GetBool(this, key, default_val)
     }
 
-    public func GetBoolRef(key: ImGuiID, default_val: Bool): Value<Bool> {
+    public func GetBoolRef(key: ImGuiID, default_val: Bool): Ref<Bool> {
         return ImGuiStorage_GetBoolRef(this, key, default_val)
     }
 
@@ -7516,7 +7516,7 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_GetFloat(this, key, default_val)
     }
 
-    public func GetFloatRef(key: ImGuiID, default_val: Float32): Value<Float32> {
+    public func GetFloatRef(key: ImGuiID, default_val: Float32): Ref<Float32> {
         return ImGuiStorage_GetFloatRef(this, key, default_val)
     }
 
@@ -7524,15 +7524,15 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_GetInt(this, key, default_val)
     }
 
-    public func GetIntRef(key: ImGuiID, default_val: Int32): Value<Int32> {
+    public func GetIntRef(key: ImGuiID, default_val: Int32): Ref<Int32> {
         return ImGuiStorage_GetIntRef(this, key, default_val)
     }
 
-    public func GetVoidPtr(key: ImGuiID): Value<Unit> {
+    public func GetVoidPtr(key: ImGuiID): Ref<Unit> {
         return ImGuiStorage_GetVoidPtr(this, key)
     }
 
-    public func GetVoidPtrRef(key: ImGuiID, default_val: Value<Unit>): CPointer<CPointer<Unit>> {
+    public func GetVoidPtrRef(key: ImGuiID, default_val: Ref<Unit>): CPointer<CPointer<Unit>> {
         return ImGuiStorage_GetVoidPtrRef(this, key, default_val)
     }
 
@@ -7552,7 +7552,7 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_SetInt(this, key, val)
     }
 
-    public func SetVoidPtr(key: ImGuiID, val: Value<Unit>): Unit {
+    public func SetVoidPtr(key: ImGuiID, val: Ref<Unit>): Unit {
         return ImGuiStorage_SetVoidPtr(this, key, val)
     }
 }
@@ -8500,9 +8500,9 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
         }
     }
 
-    public mut prop Window: Value<ImGuiWindow> {
+    public mut prop Window: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiTabItem_Window(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiTabItem_Window(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -8922,7 +8922,7 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
         }
     }
 
-    public func GetColumnSettings(): Value<ImGuiTableColumnSettings> {
+    public func GetColumnSettings(): Ref<ImGuiTableColumnSettings> {
         return ImGuiTableSettings_GetColumnSettings(this)
     }
 }
@@ -9223,9 +9223,9 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
         }
     }
 
-    public mut prop InputBuf: Value<UInt8> {
+    public mut prop InputBuf: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImGuiTextFilter_InputBuf(pointer).read(), count: 256, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImGuiTextFilter_InputBuf(pointer).read(), count: 256, owned: false) }
         }
 
         set(value) {
@@ -9487,9 +9487,9 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
         }
     }
 
-    public mut prop SearchBuffer: Value<UInt8> {
+    public mut prop SearchBuffer: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImGuiTypingSelectState_SearchBuffer(pointer).read(), count: 64, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImGuiTypingSelectState_SearchBuffer(pointer).read(), count: 64, owned: false) }
         }
 
         set(value) {
@@ -9651,9 +9651,9 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         }
     }
 
-    public mut prop RendererUserData: Value<Unit> {
+    public mut prop RendererUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiViewport_RendererUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiViewport_RendererUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -9661,9 +9661,9 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         }
     }
 
-    public mut prop PlatformUserData: Value<Unit> {
+    public mut prop PlatformUserData: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformUserData(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformUserData(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -9671,9 +9671,9 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         }
     }
 
-    public mut prop PlatformHandle: Value<Unit> {
+    public mut prop PlatformHandle: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformHandle(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformHandle(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -9681,9 +9681,9 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
         }
     }
 
-    public mut prop PlatformHandleRaw: Value<Unit> {
+    public mut prop PlatformHandleRaw: Ref<Unit> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformHandleRaw(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiViewport_PlatformHandleRaw(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -9769,9 +9769,9 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
         }
     }
 
-    public mut prop Window: Value<ImGuiWindow> {
+    public mut prop Window: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiViewportP_Window(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiViewportP_Window(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -9869,9 +9869,9 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
         }
     }
 
-    public mut prop BgFgDrawListsLastFrame: Value<Int32> {
+    public mut prop BgFgDrawListsLastFrame: Ref<Int32> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImGuiViewportP_BgFgDrawListsLastFrame(pointer).read(), count: 2, owned: false) }
+            return unsafe { Ref<Int32>.unsafeMake(capi.access_ImGuiViewportP_BgFgDrawListsLastFrame(pointer).read(), count: 2, owned: false) }
         }
 
         set(value) {
@@ -9879,9 +9879,9 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
         }
     }
 
-    public mut prop BgFgDrawLists: Value<CPointer<capi.ImDrawList>> {
+    public mut prop BgFgDrawLists: Ref<CPointer<capi.ImDrawList>> {
         get() {
-            return unsafe { Value<CPointer<capi.ImDrawList>>.unsafeMake(capi.access_ImGuiViewportP_BgFgDrawLists(pointer).read(), count: 2, owned: false) }
+            return unsafe { Ref<CPointer<capi.ImDrawList>>.unsafeMake(capi.access_ImGuiViewportP_BgFgDrawLists(pointer).read(), count: 2, owned: false) }
         }
 
         set(value) {
@@ -10133,9 +10133,9 @@ public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
         }
     }
 
-    public mut prop Colors: Value<ImU32> {
+    public mut prop Colors: Ref<ImU32> {
         get() {
-            return unsafe { Value<ImU32>.unsafeMake(capi.access_ImGuiWindowDockStyle_Colors(pointer).read(), count: 6, owned: false) }
+            return unsafe { Ref<ImU32>.unsafeMake(capi.access_ImGuiWindowDockStyle_Colors(pointer).read(), count: 6, owned: false) }
         }
 
         set(value) {
@@ -10303,9 +10303,9 @@ public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
         }
     }
 
-    public mut prop Window: Value<ImGuiWindow> {
+    public mut prop Window: Ref<ImGuiWindow> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImGuiWindowStackData_Window(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImGuiWindowStackData_Window(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -11385,9 +11385,9 @@ public class StbUndoState <: StructWrapper<capi.StbUndoState> {
         }
     }
 
-    public mut prop undo_char: Value<ImWchar> {
+    public mut prop undo_char: Ref<ImWchar> {
         get() {
-            return unsafe { Value<ImWchar>.unsafeMake(capi.access_StbUndoState_undo_char(pointer).read(), count: 999, owned: false) }
+            return unsafe { Ref<ImWchar>.unsafeMake(capi.access_StbUndoState_undo_char(pointer).read(), count: 999, owned: false) }
         }
 
         set(value) {
@@ -11451,9 +11451,9 @@ public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: 
         }
     }
 
-    public mut prop Storage: Value<ImU32> {
+    public mut prop Storage: Ref<ImU32> {
         get() {
-            return unsafe { Value<ImU32>.unsafeMake(capi.access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(pointer).read(), count: 5, owned: false) }
+            return unsafe { Ref<ImU32>.unsafeMake(capi.access_ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN_Storage(pointer).read(), count: 5, owned: false) }
         }
 
         set(value) {
@@ -11677,9 +11677,9 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
         }
     }
 
-    public mut prop Data: Value<ImGuiTableColumn> {
+    public mut prop Data: Ref<ImGuiTableColumn> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImSpan_ImGuiTableColumn_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImSpan_ImGuiTableColumn_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -11687,9 +11687,9 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
         }
     }
 
-    public mut prop DataEnd: Value<ImGuiTableColumn> {
+    public mut prop DataEnd: Ref<ImGuiTableColumn> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImSpan_ImGuiTableColumn_DataEnd(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImSpan_ImGuiTableColumn_DataEnd(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -11713,9 +11713,9 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
         }
     }
 
-    public mut prop Data: Value<ImGuiTableColumnIdx> {
+    public mut prop Data: Ref<ImGuiTableColumnIdx> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImSpan_ImGuiTableColumnIdx_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Int16>.unsafeMake(capi.access_ImSpan_ImGuiTableColumnIdx_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -11723,9 +11723,9 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
         }
     }
 
-    public mut prop DataEnd: Value<ImGuiTableColumnIdx> {
+    public mut prop DataEnd: Ref<ImGuiTableColumnIdx> {
         get() {
-            return unsafe { Value<Int16>.unsafeMake(capi.access_ImSpan_ImGuiTableColumnIdx_DataEnd(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Int16>.unsafeMake(capi.access_ImSpan_ImGuiTableColumnIdx_DataEnd(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -11861,9 +11861,9 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
         }
     }
 
-    public mut prop Data: Value<ImDrawIdx> {
+    public mut prop Data: Ref<ImDrawIdx> {
         get() {
-            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImVector_ImDrawIdx_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt16>.unsafeMake(capi.access_ImVector_ImDrawIdx_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12137,9 +12137,9 @@ public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
         }
     }
 
-    public mut prop Data: Value<ImFontGlyph> {
+    public mut prop Data: Ref<ImFontGlyph> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImFontGlyph_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImFontGlyph_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12275,9 +12275,9 @@ public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGui
         }
     }
 
-    public mut prop Data: Value<ImGuiDockNodeSettings> {
+    public mut prop Data: Ref<ImGuiDockNodeSettings> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiDockNodeSettings_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiDockNodeSettings_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12321,9 +12321,9 @@ public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockR
         }
     }
 
-    public mut prop Data: Value<ImGuiDockRequest> {
+    public mut prop Data: Ref<ImGuiDockRequest> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiDockRequest_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiDockRequest_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12459,9 +12459,9 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
         }
     }
 
-    public mut prop Data: Value<ImGuiID> {
+    public mut prop Data: Ref<ImGuiID> {
         get() {
-            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImVector_ImGuiID_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt32>.unsafeMake(capi.access_ImVector_ImGuiID_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12505,9 +12505,9 @@ public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputE
         }
     }
 
-    public mut prop Data: Value<ImGuiInputEvent> {
+    public mut prop Data: Ref<ImGuiInputEvent> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiInputEvent_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiInputEvent_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -12551,9 +12551,9 @@ public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFla
         }
     }
 
-    public mut prop Data: Value<ImGuiItemFlags> {
+    public mut prop Data: Ref<ImGuiItemFlags> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImVector_ImGuiItemFlags_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Int32>.unsafeMake(capi.access_ImVector_ImGuiItemFlags_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13103,9 +13103,9 @@ public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiSt
         }
     }
 
-    public mut prop Data: Value<ImGuiStackLevelInfo> {
+    public mut prop Data: Ref<ImGuiStackLevelInfo> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiStackLevelInfo_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiStackLevelInfo_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13149,9 +13149,9 @@ public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStora
         }
     }
 
-    public mut prop Data: Value<ImGuiStoragePair> {
+    public mut prop Data: Ref<ImGuiStoragePair> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiStoragePair_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiStoragePair_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13195,9 +13195,9 @@ public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod
         }
     }
 
-    public mut prop Data: Value<ImGuiStyleMod> {
+    public mut prop Data: Ref<ImGuiStyleMod> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiStyleMod_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiStyleMod_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13333,9 +13333,9 @@ public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
         }
     }
 
-    public mut prop Data: Value<ImGuiTable> {
+    public mut prop Data: Ref<ImGuiTable> {
         get() {
-            return unsafe { Value<Unit>.unsafeMake(capi.access_ImVector_ImGuiTable_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Unit>.unsafeMake(capi.access_ImVector_ImGuiTable_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13839,9 +13839,9 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
         }
     }
 
-    public mut prop Data: Value<ImU32> {
+    public mut prop Data: Ref<ImU32> {
         get() {
-            return unsafe { Value<UInt32>.unsafeMake(capi.access_ImVector_ImU32_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt32>.unsafeMake(capi.access_ImVector_ImU32_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -13977,9 +13977,9 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
         }
     }
 
-    public mut prop Data: Value<ImWchar> {
+    public mut prop Data: Ref<ImWchar> {
         get() {
-            return unsafe { Value<UInt16>.unsafeMake(capi.access_ImVector_ImWchar_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt16>.unsafeMake(capi.access_ImVector_ImWchar_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -14069,9 +14069,9 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
         }
     }
 
-    public mut prop Data: Value<CPointer<UInt8>> {
+    public mut prop Data: Ref<CPointer<UInt8>> {
         get() {
-            return unsafe { Value<CPointer<UInt8>>.unsafeMake(capi.access_ImVector_const_charPtr_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<CPointer<UInt8>>.unsafeMake(capi.access_ImVector_const_charPtr_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -14115,9 +14115,9 @@ public class ImVector_float <: StructWrapper<capi.ImVector_float> {
         }
     }
 
-    public mut prop Data: Value<Float32> {
+    public mut prop Data: Ref<Float32> {
         get() {
-            return unsafe { Value<Float32>.unsafeMake(capi.access_ImVector_float_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Float32>.unsafeMake(capi.access_ImVector_float_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -14161,9 +14161,9 @@ public class ImVector_int <: StructWrapper<capi.ImVector_int> {
         }
     }
 
-    public mut prop Data: Value<Int32> {
+    public mut prop Data: Ref<Int32> {
         get() {
-            return unsafe { Value<Int32>.unsafeMake(capi.access_ImVector_int_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<Int32>.unsafeMake(capi.access_ImVector_int_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {
@@ -14207,9 +14207,9 @@ public class ImVector_unsigned_char <: StructWrapper<capi.ImVector_unsigned_char
         }
     }
 
-    public mut prop Data: Value<UInt8> {
+    public mut prop Data: Ref<UInt8> {
         get() {
-            return unsafe { Value<UInt8>.unsafeMake(capi.access_ImVector_unsigned_char_Data(pointer).read(), count: -1, owned: false) }
+            return unsafe { Ref<UInt8>.unsafeMake(capi.access_ImVector_unsigned_char_Data(pointer).read(), count: -1, owned: false) }
         }
 
         set(value) {

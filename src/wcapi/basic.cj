@@ -34,8 +34,8 @@ extend CPointer<T> <: CStringConvertable where T <: UInt8 {
     }
 }
 
-public class Value<T> <: ToString where T <: CType { // For int*, float*, ... arguments
-    private Value(private let pointer: CPointer<T>, private let count: ?Int64, private let owned!: Bool) {
+public class Ref<T> <: ToString where T <: CType { // For int*, float*, ... arguments
+    private Ref(private let pointer: CPointer<T>, private let count: ?Int64, private let owned!: Bool) {
     }
 
     ~init() {
@@ -44,26 +44,26 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
         }
     }
 
-    static func unsafeMake(pointer: CPointer<T>, count!: ?Int64, owned!: Bool): Value<T> {
-        return Value<T>(pointer, count, owned: owned)
+    static func unsafeMake(pointer: CPointer<T>, count!: ?Int64, owned!: Bool): Ref<T> {
+        return Ref<T>(pointer, count, owned: owned)
     }
 
-    public static func null(): Value<T> {
-        return Value<T>(CPointer<T>(), None, owned: false)
+    public static func null(): Ref<T> {
+        return Ref<T>(CPointer<T>(), None, owned: false)
     }
 
-    public static func make(): Value<T> {
+    public static func make(): Ref<T> {
         let pointer = unsafe { LibC.malloc<T>() }
-        return Value<T>(pointer, None, owned: true)
+        return Ref<T>(pointer, None, owned: true)
     }
 
-    public static func make(value: T): Value<T> {
+    public static func make(value: T): Ref<T> {
         let ret = make()
         unsafe { ret.pointer.write(value) }
         return ret
     }
 
-    public static func makeArray(count: Int64, item!: ?T = None): Value<T> {
+    public static func makeArray(count: Int64, item!: ?T = None): Ref<T> {
         let pointer = unsafe { LibC.malloc<T>(count: count) }
         if (let Some(v) <- item) {
             unsafe {
@@ -74,10 +74,10 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
                 }
             }
         }
-        return Value<T>(pointer, count, owned: true)
+        return Ref<T>(pointer, count, owned: true)
     }
 
-    public static func fromArray(values: Array<T>): Value<T> {
+    public static func fromArray(values: Array<T>): Ref<T> {
         let pointer = unsafe { LibC.malloc<T>(count: values.size) }
         unsafe {
             var p = pointer
@@ -86,7 +86,7 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
                 p += 1
             }
         }
-        return Value<T>(pointer, values.size, owned: true)
+        return Ref<T>(pointer, values.size, owned: true)
     }
 
     func getCPointer(): CPointer<T> {
@@ -156,11 +156,11 @@ public class Value<T> <: ToString where T <: CType { // For int*, float*, ... ar
 }
 
 public func vaule<T>(val: T) where T <: CType {
-    return Value<T>.make(val)
+    return Ref<T>.make(val)
 }
 
 public func array<T>(arr: Array<T>) where T <: CType {
-    let ret = Value<T>.makeArray(arr.size)
+    let ret = Ref<T>.makeArray(arr.size)
     for (i in 0..ret.size) {
         ret[i] = arr[i]
     }
@@ -168,7 +168,7 @@ public func array<T>(arr: Array<T>) where T <: CType {
 }
 
 public func null<T>() where T <: CType {
-    return Value<T>.null()
+    return Ref<T>.null()
 }
 
 public let bool = vaule<Bool>

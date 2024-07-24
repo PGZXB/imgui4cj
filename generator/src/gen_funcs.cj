@@ -192,9 +192,9 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             item => !(item.name == "..." && item.ty == "...")
         })
         if (fn.structName == "") { // global function
-            fnSb.append("public func ${fn.name[2..]}(")
+            fnSb.append("public func ${fn.originalName}(") // public using original names
         } else if (definedStructNames.contains(fn.structName)) {
-            fnSb.append("func ${fn.name}(")
+            fnSb.append("func ${fn.name}(") // internal using capi names
         } else {
             continue // Skip undefined structs' function
         }

@@ -11,7 +11,7 @@ main(): Int64 {
     let selectedItemIndex = i32(0)
     let selected = bool(true)
 
-    let items = Value<CPointer<UInt8>>.fromArray(
+    let items = Ref<CPointer<UInt8>>.fromArray(
         [
             "AAAA".asCString(),
             "BBBB".asCString(),
@@ -30,11 +30,11 @@ main(): Int64 {
         if (pOpen.value) {
             Begin("Hello World", pOpen, ImGuiWindowFlags_AlwaysAutoResize)
 
-            if (RadioButton_Bool("Radio button1", selected.value)) {
+            if (RadioButton("Radio button1", selected.value)) {
                 selected.value = true
             }
             SameLine(0.0, -1.0)
-            if (RadioButton_Bool("Radio button2", !selected.value)) {
+            if (RadioButton("Radio button2", !selected.value)) {
                 selected.value = false
             }
 
@@ -44,7 +44,7 @@ main(): Int64 {
                 clickCount.value += 1
             }
 
-            Combo_Str_arr("combo", selectedItemIndex, items, Int32(items.size), -1)
+            Combo("combo", selectedItemIndex, items, Int32(items.size), -1)
             Text("Int Value: ${value}")
             SliderInt("Int Value", value, 0, 200, "%d", 0)
             DragInt("Int Value", value, 1.0, 0, 200, "%d", 0)
