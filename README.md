@@ -80,6 +80,8 @@ main(): Int64 {
 }
 ```
 
+![readme_example.png](./assets/readme_example.png)
+
 > [!NOTE]  
 > For more detailed examples and usage patterns, please refer to the [examples directory](./examples/) in the repository.
 
