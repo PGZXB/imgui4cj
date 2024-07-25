@@ -47,12 +47,12 @@ class State {
 }
 
 func makeHelp(desc: String): Unit {
-    TextDisabled("(?)");
+    TextDisabled("(?)")
     if (BeginItemTooltip()) {
-        PushTextWrapPos(GetFontSize() * 35.0);
+        PushTextWrapPos(GetFontSize() * 35.0)
         TextUnformatted(desc, null<UInt8>())
-        PopTextWrapPos();
-        EndTooltip();
+        PopTextWrapPos()
+        EndTooltip()
     }
 }
 
@@ -132,12 +132,12 @@ func showBasicWidgetsDemoWindow(state: State): Unit {
 
     LabelText("label", "Value")
 
-    SeparatorText("Inputs");
+    SeparatorText("Inputs")
 
     // To wire InputText() with std::string or any other custom string type,
     // see the "Text Input > Resize Callback" section of this demo, and the misc/cpp/imgui_stdlib.h file.
     InputText("input text", state.str0, UIntNative(state.str0.size), 0,
-        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>());
+        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>())
     SameLine(0.0, -1.0)
 
     makeHelp(
@@ -152,10 +152,10 @@ ESCAPE to revert.
 
 PROGRAMMER:
 You can use the ImGuiInputTextFlags_CallbackResize facility if you need to wire InputText() to a dynamic string type. See misc/cpp/imgui_stdlib.h for an example (this is not demonstrated in imgui_demo.cpp)."""
-    );
+    )
 
     InputTextWithHint("input text (w/ hint)", "enter text here", state.str1, UIntNative(state.str1.size), 0,
-        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>());
+        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>())
 
     InputInt("input int", state.i0, 1, 100, 0)
     InputFloat("input float", state.f0, 0.01, 1.0, "%.3f", 0)
@@ -164,11 +164,11 @@ You can use the ImGuiInputTextFlags_CallbackResize facility if you need to wire 
     SameLine(0.0, -1.0)
     makeHelp("""
 You can input value using the scientific notation,
-  e.g. \"1e+8\" becomes \"100000000\".""");
+  e.g. \"1e+8\" becomes \"100000000\".""")
 
-    InputFloat3("input float3", state.vec4a, "%.3f", 0);
+    InputFloat3("input float3", state.vec4a, "%.3f", 0)
 
-    SeparatorText("Drags");
+    SeparatorText("Drags")
 
     DragInt("drag int", state.i1, 1.0, 0, 0, "%d", 0)
     SameLine(0.0, -1.0)
@@ -177,42 +177,42 @@ You can input value using the scientific notation,
 Click and drag to edit value.
 Hold SHIFT/ALT for faster/slower edit.
 Double-click or CTRL+click to input value."""
-    );
+    )
 
-    DragInt("drag int 0..100", state.i2, 1.0, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp);
+    DragInt("drag int 0..100", state.i2, 1.0, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp)
 
-    DragFloat("drag float", state.f2, 0.005, 0.0, 0.0, "%.3f", 0);
-    DragFloat("drag small float", state.f3, 0.0001, 0.0, 0.0, "%.06f ns", 0);
+    DragFloat("drag float", state.f2, 0.005, 0.0, 0.0, "%.3f", 0)
+    DragFloat("drag small float", state.f3, 0.0001, 0.0, 0.0, "%.06f ns", 0)
 
     SeparatorText("Sliders")
 
-    SliderInt("slider int", state.i3, -1, 3, "%d", 0);
+    SliderInt("slider int", state.i3, -1, 3, "%d", 0)
     SameLine(0.0, -1.0)
-    makeHelp("CTRL+click to input value.");
+    makeHelp("CTRL+click to input value.")
 
-    SliderFloat("slider float", state.f4, 0.0, 1.0, "ratio = %.3f", 0);
-    SliderFloat("slider float (log)", state.f5, -10.0, 10.0, "%.4f", ImGuiSliderFlags_Logarithmic);
+    SliderFloat("slider float", state.f4, 0.0, 1.0, "ratio = %.3f", 0)
+    SliderFloat("slider float (log)", state.f5, -10.0, 10.0, "%.4f", ImGuiSliderFlags_Logarithmic)
 
-    SliderAngle("slider angle", state.angle, -360.0, 360.0, "%.0f deg", 0);
+    SliderAngle("slider angle", state.angle, -360.0, 360.0, "%.0f deg", 0)
 
     // Using the format string to display a name instead of an integer.
     // Here we completely omit '%d' from the format string, so it'll only display a name.
     // This technique can also be used with DragInt().
-    // enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUNT };
-    let elemsNames = ["Fire", "Earth", "Air", "Water"];
+    // enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUNT }
+    let elemsNames = ["Fire", "Earth", "Air", "Water"]
     let elemName = if (state.elem.value >= 0 && state.elem.value < state.Element_COUNT) {
         elemsNames[Int64(state.elem.value)]
     } else {
         "Unknown"
-    };
-    SliderInt("slider enum", state.elem, 0, state.Element_COUNT - 1, elemName, 0); // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
+    }
+    SliderInt("slider enum", state.elem, 0, state.Element_COUNT - 1, elemName, 0) // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
 
     SameLine(0.0, -1.0)
-    makeHelp("Using the format string parameter to display a name instead of the underlying integer.");
+    makeHelp("Using the format string parameter to display a name instead of the underlying integer.")
 
-    SeparatorText("Selectors/Pickers");
+    SeparatorText("Selectors/Pickers")
 
-    ColorEdit3("color 1", state.col1, 0);
+    ColorEdit3("color 1", state.col1, 0)
     SameLine(0.0, -1.0)
     makeHelp(
         """
@@ -220,29 +220,29 @@ Click on the color square to open a color picker.
 Click and hold to use drag and drop.
 Right-click on the color square to show options.
 CTRL+click on individual component to input value."""
-    );
+    )
 
-    ColorEdit4("color 2", state.col2, 0);
+    ColorEdit4("color 2", state.col2, 0)
 
     // Using the _simplified_ one-liner Combo() api here
     // See "Combo" section for examples of how to use the more flexible BeginCombo()/EndCombo() api.
-    Combo("combo", state.itemCurrent, state.items, Int32(state.items.size), -1);
+    Combo("combo", state.itemCurrent, state.items, Int32(state.items.size), -1)
     SameLine(0.0, -1.0)
     makeHelp(
         """
 Using the simplified one-liner Combo API here.
 Refer to the \"Combo\" section below for an explanation of how to use the more flexible and general BeginCombo/EndCombo API."""
-    );
+    )
 
     // Using the _simplified_ one-liner ListBox() api here
     // See "List boxes" section for examples of how to use the more flexible BeginListBox()/EndListBox() api.
-    ListBox("listbox", state.listBoxItemCurrent, state.items, Int32(state.items.size), 4);
+    ListBox("listbox", state.listBoxItemCurrent, state.items, Int32(state.items.size), 4)
     SameLine(0.0, -1.0)
     makeHelp(
         """
 Using the simplified one-liner ListBox API here.
 Refer to the \"List boxes\" section below for an explanation of how to use the more flexible and general BeginListBox/EndListBox API."""
-    );
+    )
 
     End()
 }
