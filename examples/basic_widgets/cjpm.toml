@@ -9,7 +9,7 @@
   name = "basic_widgets"
   output-type = "executable"
   src-dir = ""
-  target-dir = "../../target"
+  target-dir = ""
   version = "1.0.0"
   package-configuration = {}
 
