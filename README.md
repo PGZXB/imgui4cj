@@ -8,9 +8,13 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
 
 #### Option 1. Build from source
 
-1. Prepare tools
-  * Install CMake, GCC/CLANG/MSVC
+1. Prepare tools/dependencies
+  * Install CMake, G++/CLANG/MSVC
   * Ensure you have `cjpm` installed
+  * For Unix-like systems, follow the [GLFW compilation guide](https://www.glfw.org/docs/latest/compile.html) to install the necessary dependencies:
+    * On Debian-based distributions (e.g., Ubuntu, Linux Mint): `sudo apt install libwayland-dev libxkbcommon-dev xorg-dev`
+    * On Fedora-based distributions (e.g., Red Hat): `sudo dnf install wayland-devel libxkbcommon-devel libXcursor-devel libXi-devel libXinerama-devel libXrandr-devel`
+    * On FreeBSD: `pkg install wayland libxkbcommon evdev-proto xorgproto`
 
 2. Build `imgui4cj`
   ```shell
