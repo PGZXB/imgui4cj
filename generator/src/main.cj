@@ -1,4 +1,4 @@
-package cimgui_generator
+package imgui4cj_generator
 
 import std.collection.{ArrayList, HashMap, HashSet}
 import std.argopt.*

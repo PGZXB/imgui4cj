@@ -5,7 +5,7 @@
   compile-option = ""
   description = "nothing here"
   link-option = ""
-  name = "cimgui_generator"
+  name = "imgui4cj_generator"
   output-type = "executable"
   src-dir = ""
   target-dir = ""
