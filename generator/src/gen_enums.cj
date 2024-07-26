@@ -1,9 +1,9 @@
 package cimgui_generator
 
-from encoding import json.*
-from std import collection.ArrayList
-from std import io.{OutputStream, StringWriter}
-from std import fs.{File, OpenOption}
+import std.collection.ArrayList
+import std.io.{OutputStream, StringWriter}
+import std.fs.{File, OpenOption}
+import encoding.json.*
 
 struct EnumValueDef {
     public EnumValueDef(let calcValue: Int32, let name: String, let value: String) {

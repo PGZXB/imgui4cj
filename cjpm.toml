@@ -1,7 +1,7 @@
 [dependencies]
 
 [package]
-  cjc-version = "0.51.4"
+  cjc-version = "0.53.4"
   compile-option = ""
   description = "nothing here"
   link-option = ""
@@ -13,4 +13,4 @@
   package-configuration = {}
 
 [ffi.c]
-  imgui4cj = { path = "src/libs" }
+  imgui4cj_c_lib = { path = "src/libs" }

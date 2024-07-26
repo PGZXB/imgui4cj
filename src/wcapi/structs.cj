@@ -3,9 +3,9 @@
 // +      FROM: https://github.com/PGZXB/imgui4cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package wcapi
+package imgui4cj.wcapi
 
-import capi.*
+import imgui4cj.capi
 
 public class ImBitVector <: StructWrapper<capi.ImBitVector> {
     public init(value!: ?capi.ImBitVector, count!: ?Int64 = None) {
@@ -84,7 +84,7 @@ public class ImColor <: StructWrapper<capi.ImColor> {
 
     ~init() {
         if (owned) {
-            ImColor_destroy(this.pointer)
+            capi.ImColor_destroy(this.pointer)
         }
     }
 
@@ -158,7 +158,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
 
     ~init() {
         if (owned) {
-            ImDrawCmd_destroy(this.pointer)
+            capi.ImDrawCmd_destroy(this.pointer)
         }
     }
 
@@ -298,7 +298,7 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
 
     ~init() {
         if (owned) {
-            ImDrawData_destroy(this.pointer)
+            capi.ImDrawData_destroy(this.pointer)
         }
     }
 
@@ -424,7 +424,7 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
 
     ~init() {
         if (owned) {
-            ImDrawDataBuilder_destroy(this.pointer)
+            capi.ImDrawDataBuilder_destroy(this.pointer)
         }
     }
 
@@ -464,7 +464,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
 
     ~init() {
         if (owned) {
-            ImDrawList_destroy(this.pointer)
+            capi.ImDrawList_destroy(this.pointer)
         }
     }
 
@@ -902,7 +902,7 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
 
     ~init() {
         if (owned) {
-            ImDrawListSharedData_destroy(this.pointer)
+            capi.ImDrawListSharedData_destroy(this.pointer)
         }
     }
 
@@ -1046,7 +1046,7 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
 
     ~init() {
         if (owned) {
-            ImDrawListSplitter_destroy(this.pointer)
+            capi.ImDrawListSplitter_destroy(this.pointer)
         }
     }
 
@@ -1162,7 +1162,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
 
     ~init() {
         if (owned) {
-            ImFont_destroy(this.pointer)
+            capi.ImFont_destroy(this.pointer)
         }
     }
 
@@ -1446,7 +1446,7 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
 
     ~init() {
         if (owned) {
-            ImFontAtlas_destroy(this.pointer)
+            capi.ImFontAtlas_destroy(this.pointer)
         }
     }
 
@@ -1802,7 +1802,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
 
     ~init() {
         if (owned) {
-            ImFontAtlasCustomRect_destroy(this.pointer)
+            capi.ImFontAtlasCustomRect_destroy(this.pointer)
         }
     }
 
@@ -1932,7 +1932,7 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
 
     ~init() {
         if (owned) {
-            ImFontConfig_destroy(this.pointer)
+            capi.ImFontConfig_destroy(this.pointer)
         }
     }
 
@@ -2152,7 +2152,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
 
     ~init() {
         if (owned) {
-            ImFontGlyphRangesBuilder_destroy(this.pointer)
+            capi.ImFontGlyphRangesBuilder_destroy(this.pointer)
         }
     }
 
@@ -2246,7 +2246,7 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
 
     ~init() {
         if (owned) {
-            ImGuiComboPreviewData_destroy(this.pointer)
+            capi.ImGuiComboPreviewData_destroy(this.pointer)
         }
     }
 
@@ -2326,7 +2326,7 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
 
     ~init() {
         if (owned) {
-            ImGuiContextHook_destroy(this.pointer)
+            capi.ImGuiContextHook_destroy(this.pointer)
         }
     }
 
@@ -2574,7 +2574,7 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
 
     ~init() {
         if (owned) {
-            ImGuiDebugAllocInfo_destroy(this.pointer)
+            capi.ImGuiDebugAllocInfo_destroy(this.pointer)
         }
     }
 
@@ -2634,7 +2634,7 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
 
     ~init() {
         if (owned) {
-            ImGuiDockContext_destroy(this.pointer)
+            capi.ImGuiDockContext_destroy(this.pointer)
         }
     }
 
@@ -2876,7 +2876,7 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
 
     ~init() {
         if (owned) {
-            ImGuiIDStackTool_destroy(this.pointer)
+            capi.ImGuiIDStackTool_destroy(this.pointer)
         }
     }
 
@@ -2956,7 +2956,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     ~init() {
         if (owned) {
-            ImGuiIO_destroy(this.pointer)
+            capi.ImGuiIO_destroy(this.pointer)
         }
     }
 
@@ -4298,7 +4298,7 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
 
     ~init() {
         if (owned) {
-            ImGuiInputTextCallbackData_destroy(this.pointer)
+            capi.ImGuiInputTextCallbackData_destroy(this.pointer)
         }
     }
 
@@ -4468,7 +4468,7 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
 
     ~init() {
         if (owned) {
-            ImGuiInputTextDeactivatedState_destroy(this.pointer)
+            capi.ImGuiInputTextDeactivatedState_destroy(this.pointer)
         }
     }
 
@@ -4512,7 +4512,7 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
 
     ~init() {
         if (owned) {
-            ImGuiInputTextState_destroy(this.pointer)
+            capi.ImGuiInputTextState_destroy(this.pointer)
         }
     }
 
@@ -4842,7 +4842,7 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
 
     ~init() {
         if (owned) {
-            ImGuiKeyOwnerData_destroy(this.pointer)
+            capi.ImGuiKeyOwnerData_destroy(this.pointer)
         }
     }
 
@@ -4902,7 +4902,7 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
 
     ~init() {
         if (owned) {
-            ImGuiKeyRoutingData_destroy(this.pointer)
+            capi.ImGuiKeyRoutingData_destroy(this.pointer)
         }
     }
 
@@ -4982,7 +4982,7 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
 
     ~init() {
         if (owned) {
-            ImGuiKeyRoutingTable_destroy(this.pointer)
+            capi.ImGuiKeyRoutingTable_destroy(this.pointer)
         }
     }
 
@@ -5036,7 +5036,7 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
 
     ~init() {
         if (owned) {
-            ImGuiLastItemData_destroy(this.pointer)
+            capi.ImGuiLastItemData_destroy(this.pointer)
         }
     }
 
@@ -5136,7 +5136,7 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
 
     ~init() {
         if (owned) {
-            ImGuiListClipper_destroy(this.pointer)
+            capi.ImGuiListClipper_destroy(this.pointer)
         }
     }
 
@@ -5246,7 +5246,7 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
 
     ~init() {
         if (owned) {
-            ImGuiListClipperData_destroy(this.pointer)
+            capi.ImGuiListClipperData_destroy(this.pointer)
         }
     }
 
@@ -5430,7 +5430,7 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
 
     ~init() {
         if (owned) {
-            ImGuiMenuColumns_destroy(this.pointer)
+            capi.ImGuiMenuColumns_destroy(this.pointer)
         }
     }
 
@@ -5698,7 +5698,7 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
 
     ~init() {
         if (owned) {
-            ImGuiNavItemData_destroy(this.pointer)
+            capi.ImGuiNavItemData_destroy(this.pointer)
         }
     }
 
@@ -5858,7 +5858,7 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
 
     ~init() {
         if (owned) {
-            ImGuiNextItemData_destroy(this.pointer)
+            capi.ImGuiNextItemData_destroy(this.pointer)
         }
     }
 
@@ -5972,7 +5972,7 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
 
     ~init() {
         if (owned) {
-            ImGuiNextWindowData_destroy(this.pointer)
+            capi.ImGuiNextWindowData_destroy(this.pointer)
         }
     }
 
@@ -6216,7 +6216,7 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
 
     ~init() {
         if (owned) {
-            ImGuiOldColumnData_destroy(this.pointer)
+            capi.ImGuiOldColumnData_destroy(this.pointer)
         }
     }
 
@@ -6276,7 +6276,7 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
 
     ~init() {
         if (owned) {
-            ImGuiOldColumns_destroy(this.pointer)
+            capi.ImGuiOldColumns_destroy(this.pointer)
         }
     }
 
@@ -6466,7 +6466,7 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
 
     ~init() {
         if (owned) {
-            ImGuiOnceUponAFrame_destroy(this.pointer)
+            capi.ImGuiOnceUponAFrame_destroy(this.pointer)
         }
     }
 
@@ -6496,7 +6496,7 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
 
     ~init() {
         if (owned) {
-            ImGuiPayload_destroy(this.pointer)
+            capi.ImGuiPayload_destroy(this.pointer)
         }
     }
 
@@ -6612,7 +6612,7 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
 
     ~init() {
         if (owned) {
-            ImGuiPlatformIO_destroy(this.pointer)
+            capi.ImGuiPlatformIO_destroy(this.pointer)
         }
     }
 
@@ -6882,7 +6882,7 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
 
     ~init() {
         if (owned) {
-            ImGuiPlatformImeData_destroy(this.pointer)
+            capi.ImGuiPlatformImeData_destroy(this.pointer)
         }
     }
 
@@ -6932,7 +6932,7 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
 
     ~init() {
         if (owned) {
-            ImGuiPlatformMonitor_destroy(this.pointer)
+            capi.ImGuiPlatformMonitor_destroy(this.pointer)
         }
     }
 
@@ -7012,7 +7012,7 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
 
     ~init() {
         if (owned) {
-            ImGuiPopupData_destroy(this.pointer)
+            capi.ImGuiPopupData_destroy(this.pointer)
         }
     }
 
@@ -7116,7 +7116,7 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
 
     ~init() {
         if (owned) {
-            ImGuiPtrOrIndex_destroy(this.pointer)
+            capi.ImGuiPtrOrIndex_destroy(this.pointer)
         }
     }
 
@@ -7156,7 +7156,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
 
     ~init() {
         if (owned) {
-            ImGuiSettingsHandler_destroy(this.pointer)
+            capi.ImGuiSettingsHandler_destroy(this.pointer)
         }
     }
 
@@ -7368,7 +7368,7 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
 
     ~init() {
         if (owned) {
-            ImGuiStackSizes_destroy(this.pointer)
+            capi.ImGuiStackSizes_destroy(this.pointer)
         }
     }
 
@@ -7572,7 +7572,7 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
 
     ~init() {
         if (owned) {
-            ImGuiStyle_destroy(this.pointer)
+            capi.ImGuiStyle_destroy(this.pointer)
         }
     }
 
@@ -8126,7 +8126,7 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
 
     ~init() {
         if (owned) {
-            ImGuiTabBar_destroy(this.pointer)
+            capi.ImGuiTabBar_destroy(this.pointer)
         }
     }
 
@@ -8476,7 +8476,7 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
 
     ~init() {
         if (owned) {
-            ImGuiTabItem_destroy(this.pointer)
+            capi.ImGuiTabItem_destroy(this.pointer)
         }
     }
 
@@ -8662,7 +8662,7 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
 
     ~init() {
         if (owned) {
-            ImGuiTableColumnSortSpecs_destroy(this.pointer)
+            capi.ImGuiTableColumnSortSpecs_destroy(this.pointer)
         }
     }
 
@@ -8778,7 +8778,7 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
 
     ~init() {
         if (owned) {
-            ImGuiTableInstanceData_destroy(this.pointer)
+            capi.ImGuiTableInstanceData_destroy(this.pointer)
         }
     }
 
@@ -8858,7 +8858,7 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
 
     ~init() {
         if (owned) {
-            ImGuiTableSettings_destroy(this.pointer)
+            capi.ImGuiTableSettings_destroy(this.pointer)
         }
     }
 
@@ -8942,7 +8942,7 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
 
     ~init() {
         if (owned) {
-            ImGuiTableSortSpecs_destroy(this.pointer)
+            capi.ImGuiTableSortSpecs_destroy(this.pointer)
         }
     }
 
@@ -8992,7 +8992,7 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
 
     ~init() {
         if (owned) {
-            ImGuiTableTempData_destroy(this.pointer)
+            capi.ImGuiTableTempData_destroy(this.pointer)
         }
     }
 
@@ -9152,7 +9152,7 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
 
     ~init() {
         if (owned) {
-            ImGuiTextBuffer_destroy(this.pointer)
+            capi.ImGuiTextBuffer_destroy(this.pointer)
         }
     }
 
@@ -9219,7 +9219,7 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
 
     ~init() {
         if (owned) {
-            ImGuiTextFilter_destroy(this.pointer)
+            capi.ImGuiTextFilter_destroy(this.pointer)
         }
     }
 
@@ -9349,7 +9349,7 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
 
     ~init() {
         if (owned) {
-            ImGuiTextRange_destroy(this.pointer)
+            capi.ImGuiTextRange_destroy(this.pointer)
         }
     }
 
@@ -9473,7 +9473,7 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
 
     ~init() {
         if (owned) {
-            ImGuiTypingSelectState_destroy(this.pointer)
+            capi.ImGuiTypingSelectState_destroy(this.pointer)
         }
     }
 
@@ -9557,7 +9557,7 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
 
     ~init() {
         if (owned) {
-            ImGuiViewport_destroy(this.pointer)
+            capi.ImGuiViewport_destroy(this.pointer)
         }
     }
 
@@ -9755,7 +9755,7 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
 
     ~init() {
         if (owned) {
-            ImGuiViewportP_destroy(this.pointer)
+            capi.ImGuiViewportP_destroy(this.pointer)
         }
     }
 
@@ -10023,7 +10023,7 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
 
     ~init() {
         if (owned) {
-            ImGuiWindowClass_destroy(this.pointer)
+            capi.ImGuiWindowClass_destroy(this.pointer)
         }
     }
 
@@ -10159,7 +10159,7 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
 
     ~init() {
         if (owned) {
-            ImGuiWindowSettings_destroy(this.pointer)
+            capi.ImGuiWindowSettings_destroy(this.pointer)
         }
     }
 
@@ -10757,7 +10757,7 @@ public class ImRect <: StructWrapper<capi.ImRect> {
 
     ~init() {
         if (owned) {
-            ImRect_destroy(this.pointer)
+            capi.ImRect_destroy(this.pointer)
         }
     }
 
@@ -10901,7 +10901,7 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
 
     ~init() {
         if (owned) {
-            ImVec1_destroy(this.pointer)
+            capi.ImVec1_destroy(this.pointer)
         }
     }
 
@@ -10935,7 +10935,7 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
 
     ~init() {
         if (owned) {
-            ImVec2_destroy(this.pointer)
+            capi.ImVec2_destroy(this.pointer)
         }
     }
 
@@ -10983,7 +10983,7 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
 
     ~init() {
         if (owned) {
-            ImVec2ih_destroy(this.pointer)
+            capi.ImVec2ih_destroy(this.pointer)
         }
     }
 
@@ -11027,7 +11027,7 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
 
     ~init() {
         if (owned) {
-            ImVec4_destroy(this.pointer)
+            capi.ImVec4_destroy(this.pointer)
         }
     }
 

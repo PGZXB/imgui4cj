@@ -75,7 +75,7 @@ if(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
 endif(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
 
 # Add library and link
-set(IMGUI4CJ_LIB imgui4cj)
+set(IMGUI4CJ_LIB imgui4cj_c_lib)
 if (IMGUI_STATIC)
     add_library(${IMGUI4CJ_LIB} STATIC ${IMGUI_SOURCES})
 else (IMGUI_STATIC)

@@ -1,7 +1,9 @@
 package cimgui_generator
 
-from std import io.{OutputStream, StringWriter}
-from std import fs.{File, OpenOption}
+import std.collection.ArrayList
+import std.io.{OutputStream, StringWriter}
+import std.fs.{File, OpenOption}
+import encoding.json.*
 
 struct TypeDef {
     TypeDef(let alias: String, let typename: String) {

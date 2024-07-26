@@ -1,10 +1,10 @@
 package cimgui_generator
 
-from std import fs.*
-from std import argopt.*
-from encoding import json.*
+import std.collection.{ArrayList, HashMap, HashSet}
+import std.argopt.*
 
-extend ArrayList<T> {
+// ArrayList + ArrayList
+extend<T> ArrayList<T> {
     operator func +(other: Collection<T>): ArrayList<T> {
         let result = this.clone()
         result.appendAll(other)

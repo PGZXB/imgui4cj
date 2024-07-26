@@ -1,29 +1,9 @@
 package cimgui_generator
 
-from std import collection.{HashMap, LinkedList, withIndex, forEach, all}
-from std import io.{OutputStream, StringWriter}
-from std import fs.{File, OpenOption}
-from std import convert.*
-from std import ast.*
-
-extend ArrayList<T> {
-    static func fromIterator(iter: Iterable<T>): ArrayList<T> {
-        let result = ArrayList<T>()
-        iter |> forEach {
-            val => result.append(val)
-        }
-        return result
-    }
-}
-
-extend HashMap<K, V> {
-    func getOrPut(key: K, putVL: () -> V): V {
-        if (!this.contains(key)) {
-            this[key] = putVL()
-        }
-        return this[key]
-    }
-}
+import std.collection.{ArrayList, HashMap, LinkedList, forEach, filter, all}
+import std.io.{OutputStream, StringWriter}
+import std.fs.{File, OpenOption}
+import encoding.json.*
 
 struct StructMemberDef {
     let ty: String
@@ -516,7 +496,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     //
     // package xxx
     //
-    // import capiPkgName.*
+    // import capiPkgName
     //
     // public class StructName0 <: StructWrapper<capiPkgName.StructName0> {
     //     public init(...) {
@@ -581,10 +561,10 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     os.writeln()
     os.writeln("package ${pkgName}")
     os.writeln()
-    os.writeln("import ${capiPkgName}.*")
+    os.writeln("import ${capiPkgName}")
     for (def in structDefs) {
         os.writeln()
-        os.writeln("public class ${def.name} <: StructWrapper<${capiPkgName}.${def.name}> {")
+        os.writeln("public class ${def.name} <: StructWrapper<${getPkgName(capiPkgName)}.${def.name}> {")
         // // Init from fields
         // os.write("    public init(")
         // for ((i, mDef) in withIndex(def.members)) {
@@ -607,13 +587,13 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         // os.writeln("    }")
         // os.writeln()
         // Init from nil or value
-        os.writeln("    public init(value!: ?${capiPkgName}.${def.name}, count!: ?Int64 = None) {")
+        os.writeln("    public init(value!: ?${getPkgName(capiPkgName)}.${def.name}, count!: ?Int64 = None) {")
         os.writeln("        super(value: value, count: count)")
         os.writeln("    }")
         os.writeln()
         // Init from pointer
         os.writeln(
-            "    public init(pointer: CPointer<${capiPkgName}.${def.name}>, count!: ?Int64 = None, owned!: Bool = false) {"
+            "    public init(pointer: CPointer<${getPkgName(capiPkgName)}.${def.name}>, count!: ?Int64 = None, owned!: Bool = false) {"
         )
         os.writeln("        super(pointer, count: count, owned: owned)")
         os.writeln("    }")
@@ -629,7 +609,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         os.writeln("    ~init() {")
         if (let Some(d) <- destructorTable.get(def.name)) {
             os.writeln("        if (owned) {")
-            os.writeln("            ${d.name}(this.pointer)")
+            os.writeln("            ${getPkgName(capiPkgName)}.${d.name}(this.pointer)")
             os.writeln("        }")
         } else {
             os.writeln("        if (owned) {")
@@ -641,9 +621,9 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         for (mDef in def.members) {
             let mCjName = getCjStructMemberName(mDef)
             let mCjType = CjType.fromCType(mDef.ty, size: getIntValue(mDef.size))
-            let accessCall = "${capiPkgName}.access_${def.name}_${mCjName}(pointer)"
+            let accessCall = "${getPkgName(capiPkgName)}.access_${def.name}_${mCjName}(pointer)"
             let (wcapiMemberTy, read, write) = getWCAPIMemberAccess(mCjType, accessCall, "value", typeAlias,
-                makeCType: {name => "${capiPkgName}.${name}"})
+                makeCType: {name => "${getPkgName(capiPkgName)}.${name}"})
             os.writeln()
             os.writeln("    public mut prop ${getValidCjIdentifier(mCjName)}: ${wcapiMemberTy} {")
             os.writeln("        get() {")

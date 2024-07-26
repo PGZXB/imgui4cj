@@ -1,5 +1,9 @@
 package cimgui_generator
 
+import std.collection.ArrayList
+import std.io.{OutputStream, StringWriter}
+import std.fs.{File, OpenOption}
+
 func genReExportCode<T>(os: StringWriter<T>, pkgName: String, implPkgName: String, symbols: ArrayList<String>) where T <: OutputStream {
     // SOME COMMENTS ....
     //

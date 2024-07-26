@@ -1,6 +1,14 @@
-from imgui4cj import capi.ImGuiInputTextCallbackData as CImGuiInputTextCallbackData
-from imgui4cj import wcapi.*
-from imgui4cj import backends.*
+package basic_widgets
+
+import imgui4cj.capi.ImGuiInputTextCallbackData as CImGuiInputTextCallbackData
+import imgui4cj.*
+import imgui4cj.capi
+
+const Element_Fire: Int32 = 0
+const Element_Earth: Int32 = 1
+const Element_Air: Int32 = 2
+const Element_Water: Int32 = 3
+const Element_COUNT: Int32 = 4
 
 class State {
     var windowOpen: Ref<Bool> = bool(true)
@@ -23,14 +31,7 @@ class State {
     var f4: Ref<Float32> = f32(0.123)
     var f5: Ref<Float32> = f32(0.0)
     var angle: Ref<Float32> = f32(0.0)
-
-    const Element_Fire: Int32 = 0
-    const Element_Earth: Int32 = 1
-    const Element_Air: Int32 = 2
-    const Element_Water: Int32 = 3
-    const Element_COUNT: Int32 = 4
     var elem: Ref<Int32> = i32(Element_Fire)
-
     var col1: Ref<Float32> = array<Float32>([1.0, 0.0, 0.2])
     var col2: Ref<Float32> = array<Float32>([0.4, 0.7, 0.0, 0.5])
 
@@ -200,12 +201,12 @@ Double-click or CTRL+click to input value."""
     // This technique can also be used with DragInt().
     // enum Element { Element_Fire, Element_Earth, Element_Air, Element_Water, Element_COUNT }
     let elemsNames = ["Fire", "Earth", "Air", "Water"]
-    let elemName = if (state.elem.value >= 0 && state.elem.value < state.Element_COUNT) {
+    let elemName = if (state.elem.value >= 0 && state.elem.value < Element_COUNT) {
         elemsNames[Int64(state.elem.value)]
     } else {
         "Unknown"
     }
-    SliderInt("slider enum", state.elem, 0, state.Element_COUNT - 1, elemName, 0) // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
+    SliderInt("slider enum", state.elem, 0, Element_COUNT - 1, elemName, 0) // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
 
     SameLine(0.0, -1.0)
     makeHelp("Using the format string parameter to display a name instead of the underlying integer.")

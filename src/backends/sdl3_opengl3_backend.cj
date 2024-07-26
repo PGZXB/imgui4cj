@@ -1,5 +1,5 @@
-package backends
+package imgui4cj.backends
 
-// public class SDL2OpenGL3Backend <: Backend {
+// class SDL2OpenGL3Backend <: Backend {
 
 // }

@@ -3,7 +3,7 @@
 // +      FROM: https://github.com/PGZXB/imgui4cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package capi_impl
+package imgui4cj.capi_impl
 
 public type ImBitArrayForNamedKeys = ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN
 public type ImBitArrayPtr = CPointer<ImU32>

@@ -1,5 +1,6 @@
-from imgui4cj import wcapi.*
-from imgui4cj import backends.*
+package helloworld
+
+import imgui4cj.*
 
 main(): Int64 {
     let clickCount = i64(0)

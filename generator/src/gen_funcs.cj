@@ -1,6 +1,9 @@
 package cimgui_generator
 
-from std import collection.{map, filter}
+import std.collection.{ArrayList, HashMap, HashSet, map, filter}
+import std.io.{OutputStream, StringWriter}
+import std.fs.{File, OpenOption}
+import encoding.json.*
 
 struct FuncParameter {
     FuncParameter(let name: String, let ty: String) {
@@ -166,7 +169,7 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
     //
     // package xxx
     //
-    // import capiPkgName.*
+    // import capiPkgName
     //
     // public func funcName0(param0: Param0, param1: Param1 ...): RetType {
     //    capiPkgName.funcName0(param0.xxx(), param1.xxx())
@@ -178,7 +181,7 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
     os.writeln()
     os.writeln("package ${pkgName}")
     os.writeln()
-    os.writeln("import ${capiPkgName}.*")
+    os.writeln("import ${capiPkgName}")
     os.writeln()
     for (fn in funcs) {
         if (fn.isDestructor) {
@@ -218,7 +221,7 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             os.writeln("// ${fnSb.toString()} ...")
         } else {
             let capiCall = StringBuilder()
-            capiCall.append("${capiPkgName}.${fn.name}(")
+            capiCall.append("${getPkgName(capiPkgName)}.${fn.name}(")
             for ((i, arg) in withIndex(callArgs)) {
                 capiCall.append(arg)
                 if (i != callArgs.size - 1) {

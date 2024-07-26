@@ -3,7 +3,7 @@
 // +      FROM: https://github.com/PGZXB/imgui4cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package capi_impl
+package imgui4cj.capi_impl
 
 public type ImFontGlyph = Unit
 public type ImGuiContext = Unit

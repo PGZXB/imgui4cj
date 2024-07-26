@@ -1,7 +1,7 @@
-package wcapi
+package imgui4cj.wcapi
 
-from std import collection.*
-from std import reflect.TypeInfo
+import std.collection.*
+import std.reflect.TypeInfo
 
 let STRING_POOL = HashMap<String, CPointer<UInt8>>()
 
@@ -28,7 +28,7 @@ extend CString <: CStringConvertable {
     }
 }
 
-extend CPointer<T> <: CStringConvertable where T <: UInt8 {
+extend<T> CPointer<T> <: CStringConvertable where T <: UInt8 {
     public func asCString(): CPointer<UInt8> {
         return CPointer<UInt8>(this)
     }
@@ -155,7 +155,7 @@ public class Ref<T> <: ToString where T <: CType { // For int*, float*, ... argu
     }
 }
 
-extend Ref<T> <: CStringConvertable where T <: UInt8 {
+extend<T> Ref<T> <: CStringConvertable where T <: UInt8 {
     public func asCString(): CPointer<UInt8> {
         return CPointer<UInt8>(this.getCPointer())
     }

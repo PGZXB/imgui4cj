@@ -1,7 +1,7 @@
-package backends
+package imgui4cj.backends
 
-import capi.ImVec4
-import utils.Image
+import imgui4cj.capi.ImVec4
+import imgui4cj.utils.Image
 
 public type WindowFlags = Int32
 
@@ -229,7 +229,7 @@ public interface Backend {
     // TextureManager  // TODO: impl or remove it
 }
 
-public func getBackend(backend: BackendName) {
+public func getBackend(backend: BackendName): Backend {
     match (backend) {
         case GLFWOpenGL3 => GLFWOpenGL3Backend.getInstance()
         case _ => throw UnsupportedException("unsupported backend `${backend}`")

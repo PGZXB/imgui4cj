@@ -1,8 +1,8 @@
-package utils
+package imgui4cj.utils
 
-from std import fs.File
-from std import io.InputStream
-from std import collection.ArrayList
+import std.fs.File
+import std.io.InputStream
+import std.collection.ArrayList
 
 // TODO: Replace Image and related functions with std/3rd library used to process image
 

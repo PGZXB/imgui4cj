@@ -3,9 +3,9 @@
 // +      FROM: https://github.com/PGZXB/imgui4cj       +
 // +------------------- DO NOT EDIT. -------------------+
 
-package wcapi
+package imgui4cj.wcapi
 
-import capi.*
+import imgui4cj.capi
 
 func ImBitVector_Clear(self: ImBitVector): Unit {
     return capi.ImBitVector_Clear(self.getCPointer())
