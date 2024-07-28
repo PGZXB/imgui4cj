@@ -99,3 +99,7 @@ We welcome contributions to `imgui4cj`! If you have suggestions, bug reports, or
 3. Submit a pull request with a clear description of your changes.
 
 For bug reports or feature requests, please open an issue on the [GitHub issues page](https://github.com/PGZXB/imgui4cj/issues).
+
+## Development Status
+
+This library is currently under active development. As Cangjie's syntax and API continue to evolve, breaking changes may occur. However, once Cangjie reaches a stable release, we will strive to maintain backward compatibility. Please report any issues you encounter and consider contributing to the project. Your feedback is invaluable in helping us improve `imgui4cj`.
