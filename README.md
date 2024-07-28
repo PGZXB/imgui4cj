@@ -54,8 +54,7 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
 Here is a simple example of how to create a basic window with some basic widgets:
 
 ```cangjie
-from imgui4cj import wcapi.*
-from imgui4cj import backends.*
+import imgui4cj.*
 
 main(): Int64 {
     let pOpen: Ref<Bool> = bool(true)
