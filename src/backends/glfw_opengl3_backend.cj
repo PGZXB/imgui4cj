@@ -331,6 +331,7 @@ class GLFWOpenGL3Backend <: Backend {
 
     private init() {
         glfwWindowContext = unsafe { LibC.malloc<GLFWWindowContext>() }
+        unsafe { glfwWindowContext.write(GLFWWindowContext()) }
     }
 
     ~init() {
