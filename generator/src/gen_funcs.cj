@@ -13,7 +13,7 @@ struct FuncParameter {
 struct FuncSignature {
     FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String, let structName: String,
         let isClassStaticMethod: Bool, let isConstructor: Bool, let isDestructor: Bool, let originalName: String,
-        let nonUDT: Bool) {
+        let nonUDT: Bool, let imguiFuncDecl: String, let cimguiFuncDecl: String) {
     }
 }
 
@@ -29,6 +29,11 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
             if (fnSig.get("constructor")?.asBool().getValue() ?? false) {
                 // ret type is `StructType*`
                 fnSig.put("ret", JsonString(fnSig["stname"].asString().getValue() + "*"))
+            }
+            if (fnSig.get("destructor")?.asBool().getValue() ?? false) {
+                // ~StructType
+                fnSig.put("funcname", JsonString("~" + fnSig["stname"].asString().getValue()))
+                fnSig.put("argsoriginal", JsonString("()"))
             }
             result.append(
                 FuncSignature(
@@ -53,8 +58,10 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
                     fnSig.get("is_static_function")?.asBool().getValue() ?? false, // isClassStaticMethod
                     fnSig.get("constructor")?.asBool().getValue() ?? false, // isConstructor
                     fnSig.get("destructor")?.asBool().getValue() ?? false, // isDestructor
-                    fnSig.get("funcname")?.asString().getValue() ?? "", // originalName
-                    (fnSig.get("nonUDT")?.asInt().getValue() ?? 0) == 1 // nonUDT
+                    fnSig["funcname"].asString().getValue(), // originalName
+                    (fnSig.get("nonUDT")?.asInt().getValue() ?? 0) == 1, // nonUDT
+                    "${fnSig["ret"].asString().getValue()} ${fnSig["funcname"].asString().getValue()}${fnSig["argsoriginal"].asString().getValue()}", // imguiFuncDecl
+                    "${fnSig["ret"].asString().getValue()} ${fnSig["ov_cimguiname"].asString().getValue()}${fnSig["args"].asString().getValue()}" // cimguiFuncDecl
                 )
             )
         }
@@ -163,8 +170,15 @@ func genFuncsCode(filename: String, pkgName: String, funcs: ArrayList<FuncSignat
     throw IllegalStateException("illegal state")
 }
 
-func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: String, funcs: ArrayList<FuncSignature>,
-    typeAlias: HashMap<String, CjType>, definedStructNames: HashSet<String>) where T <: OutputStream {
+func genFuncsWCAPICode<T>(
+    os: StringWriter<T>,
+    pkgName: String,
+    capiPkgName: String,
+    funcs: ArrayList<FuncSignature>,
+    typeAlias: HashMap<String, CjType>,
+    definedStructNames: HashSet<String>,
+    apiInfo: APIInfo
+) where T <: OutputStream {
     // SOME COMMENTS ....
     //
     // package xxx
@@ -210,11 +224,18 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             let (wcapiTy, wcapiArg) = getWCAPIArgument(ty, p.name, typeAlias)
             fnSb.append("${getValidCjIdentifier(p.name)}: ${wcapiTy}")
             callArgs.append(wcapiArg)
+            if (!hasVaList && fn.structName == "") {
+                apiInfo.updateArgMappingForGlobalFunction(p.ty, wcapiTy)
+            }
             if (i != params.size - 1) {
                 fnSb.append(", ")
             }
         }
         fnSb.append(")")
+
+        if (hasVaList && fn.structName == "") {
+            apiInfo.addUncoveredGlobalFunction(fn.imguiFuncDecl)
+        }
 
         if (hasVaList) {
             os.writeln("// Cangjie does not support `va_list`")
@@ -233,6 +254,18 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
             let retTy = CjType.fromCType(fn.retType, cArrayAsPointer: true)
             let (wcapiRetTy, wcapiRet) = getWCAPIReturn(retTy, capiCall.toString(), typeAlias)
 
+            if (fn.structName == "") {
+                let cjSig = "${fnSb.toString()}: ${wcapiRetTy}"
+                apiInfo.updateRetMappingForGlobalFunction(fn.retType, wcapiRetTy)
+                apiInfo.addDescForGlobalFunction(
+                    cjSig,
+                    FunctionDesc(
+                        originalFunctionDecl: fn.imguiFuncDecl,
+                        cimguiFunctionDecl: fn.cimguiFuncDecl,
+                    )
+                )
+            }
+
             os.writeln("${fnSb.toString()}: ${wcapiRetTy} {")
             os.writeln("    return ${wcapiRet}")
             os.writeln("}")
@@ -241,11 +274,18 @@ func genFuncsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: Str
     }
 }
 
-func genFuncsWCAPICode(filename: String, pkgName: String, capiPkgName: String, funcs: ArrayList<FuncSignature>,
-    typeAlias: HashMap<String, CjType>, definedStructNames: HashSet<String>) {
+func genFuncsWCAPICode(
+    filename: String,
+    pkgName: String,
+    capiPkgName: String,
+    funcs: ArrayList<FuncSignature>,
+    typeAlias: HashMap<String, CjType>,
+    definedStructNames: HashSet<String>,
+    apiInfo: APIInfo
+) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genFuncsWCAPICode(sw, pkgName, capiPkgName, funcs, typeAlias, definedStructNames)
+            genFuncsWCAPICode(sw, pkgName, capiPkgName, funcs, typeAlias, definedStructNames, apiInfo)
         }
     }
 }

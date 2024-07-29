@@ -1,7 +1,8 @@
 package imgui4cj_generator
 
 import std.collection.{HashSet, any, map}
-import std.collection.{ArrayList, HashMap, forEach, enumerate}
+import std.collection.{ArrayList, HashMap, TreeMap, forEach, enumerate}
+import std.io.{OutputStream, StringWriter}
 import std.fs.{File, OpenOption}
 import std.ast
 import std.convert.*
@@ -722,6 +723,79 @@ func getWCAPIMemberAccess(ty: CjType, accessCall: String, writeArg: String, type
                     case CPointerType => (rename(ty, false).toString(), "${accessCall}.read()",
                         "${accessCall}.write(${writeArg})")
                 }
+            }
+        }
+    }
+}
+
+struct FunctionDesc {
+    FunctionDesc(
+        let originalFunctionDecl!: String,
+        let cimguiFunctionDecl!: String
+    ) {
+    }
+}
+
+class APIInfo {
+    private let argMappingOfGlobalFunctions = TreeMap<String, String>() // original type => cangjie type
+    private let retMappingOfGlobalFunctions = TreeMap<String, String>() // original type => cangjie type
+    private let descOfGlobalFunctions = TreeMap<String, FunctionDesc>() // cangjie signature => desc of this function
+    private let uncoveredGlobalFunctions = ArrayList<String>()
+
+    func updateArgMappingForGlobalFunction(ori: String, cj: String) {
+        argMappingOfGlobalFunctions.put(ori, cj)
+    }
+
+    func updateRetMappingForGlobalFunction(ori: String, cj: String) {
+        retMappingOfGlobalFunctions.put(ori, cj)
+    }
+
+    func addDescForGlobalFunction(cjSig: String, desc: FunctionDesc) {
+        descOfGlobalFunctions.put(cjSig, desc)
+    }
+
+    func addUncoveredGlobalFunction(fn: String) {
+        uncoveredGlobalFunctions.append(fn)
+    }
+
+    func generateDocumentForGlobalFunctions<T>(os: StringWriter<T>) where T <: OutputStream {
+        os.writeln("# Global Functions")
+        os.writeln()
+        os.writeln("## Parameter Type Mapping Table")
+        os.writeln()
+        os.writeln("| Original Type | Cangjie Type |")
+        os.writeln("|---------------|--------------|")
+        for ((ori, cj) in argMappingOfGlobalFunctions) {
+            os.writeln("| `${ori}` | `${cj}` |")
+        }
+        os.writeln()
+        os.writeln("## Return Type Mapping Table")
+        os.writeln()
+        os.writeln("| Original Type | Cangjie Type |")
+        os.writeln("|---------------|--------------|")
+        for ((ori, cj) in retMappingOfGlobalFunctions) {
+            os.writeln("| `${ori}` | `${cj}` |")
+        }
+        os.writeln()
+        os.writeln("## All Functions")
+        for ((fn, desc) in descOfGlobalFunctions) {
+            os.writeln()
+            os.writeln("### `${fn}`")
+            os.writeln("* original function: `${desc.originalFunctionDecl}`")
+            os.writeln("* cimgui function: `${desc.cimguiFunctionDecl}`")
+        }
+        os.writeln()
+        os.writeln("## Uncovered Functions")
+        os.writeln()
+        for (fn in uncoveredGlobalFunctions) {
+            os.writeln("* `${fn}`")
+        }
+    }
+
+    func generateDocumentForGlobalFunctions(filename: String) {
+        try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+            try (sw = StringWriter(fp)) {
+                generateDocumentForGlobalFunctions(sw)
             }
         }
     }

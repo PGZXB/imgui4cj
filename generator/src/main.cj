@@ -27,7 +27,8 @@ main(args: Array<String>): Int64 {
             "--capi-pkg-name=",
             "--c-src-path=",
             "--wcapi-pkg-path=",
-            "--wcapi-pkg-name="
+            "--wcapi-pkg-name=",
+            "--doc-path="
         ]
     )
 
@@ -42,6 +43,9 @@ main(args: Array<String>): Int64 {
     let cSrcOutputDir = argopt.getArg("c-src-path").getOrThrow()
     let wcapiOutputDir = argopt.getArg("wcapi-pkg-path").getOrThrow()
     let wcapiPkgName = argopt.getArg("wcapi-pkg-name").getOrThrow()
+    let docOutputDir = argopt.getArg("doc-path").getOrThrow()
+
+    let apiInfo = APIInfo()
 
     // Generate cimgui typedefs -> src/capi/typedefs.cj
     let typedefsCodeFilename = "${capiImplOutputDir}/typedefs.cj"
@@ -164,7 +168,8 @@ main(args: Array<String>): Int64 {
     // Generate cimgui funcs wcapi -> src/wcapi/funcs.cj
     let funcsWCAPICodeFilename = "${wcapiOutputDir}/funcs.cj"
     println("Generating cimgui funcs wcapi -> ${funcsWCAPICodeFilename} ...")
-    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias, definedStructNames)
+    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias, definedStructNames,
+        apiInfo)
     println("Generated cimgui funcs wcapi -> ${funcsWCAPICodeFilename}")
 
     // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj
@@ -180,6 +185,9 @@ main(args: Array<String>): Int64 {
     genReExportCode(reExportsWCAPICodeFilename, wcapiPkgName, capiPkgName,
         typeDefSymbols + enumSymbols + undefStructSymbols)
     println("Generated re-exports wcapi -> ${reExportsWCAPICodeFilename}")
+
+    // Generate documents -> docs/*.md
+    apiInfo.generateDocumentForGlobalFunctions("${docOutputDir}/imgui_global_functions.md")
 
     return 0
 }
