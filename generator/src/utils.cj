@@ -766,7 +766,7 @@ class APIInfo {
         os.writeln("| Original Type | Cangjie Type |")
         os.writeln("|---------------|--------------|")
         for ((ori, cj) in argMappingOfGlobalFunctions) {
-            os.writeln("| `${ori}` | `${cj}` |")
+            os.writeln("| `${ori}` | `${cj.replace("`", "")}` |")
         }
         os.writeln()
         os.writeln("## Return Type Mapping Table")
@@ -774,13 +774,13 @@ class APIInfo {
         os.writeln("| Original Type | Cangjie Type |")
         os.writeln("|---------------|--------------|")
         for ((ori, cj) in retMappingOfGlobalFunctions) {
-            os.writeln("| `${ori}` | `${cj}` |")
+            os.writeln("| `${ori}` | `${cj.replace("`", "")}` |")
         }
         os.writeln()
         os.writeln("## All Functions")
         for ((fn, desc) in descOfGlobalFunctions) {
             os.writeln()
-            os.writeln("### `${fn}`")
+            os.writeln("### `${fn.replace("`", "")}`")
             os.writeln("* original function: `${desc.originalFunctionDecl}`")
             os.writeln("* cimgui function: `${desc.cimguiFunctionDecl}`")
         }

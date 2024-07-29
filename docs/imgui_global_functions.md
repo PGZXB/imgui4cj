@@ -230,7 +230,7 @@
 
 ## All Functions
 
-### `public func AcceptDragDropPayload(`type`: CStringConvertable, flags: ImGuiDragDropFlags): ImGuiPayload`
+### `public func AcceptDragDropPayload(type: CStringConvertable, flags: ImGuiDragDropFlags): ImGuiPayload`
 * original function: `const ImGuiPayload* AcceptDragDropPayload(const char* type,ImGuiDragDropFlags flags=0)`
 * cimgui function: `const ImGuiPayload* igAcceptDragDropPayload(const char* type,ImGuiDragDropFlags flags)`
 
@@ -478,7 +478,7 @@
 * original function: `float CalcWrapWidthForPos(const ImVec2& pos,float wrap_pos_x)`
 * cimgui function: `float igCalcWrapWidthForPos(const ImVec2 pos,float wrap_pos_x)`
 
-### `public func CallContextHooks(context: Ref<ImGuiContext>, `type`: ImGuiContextHookType): Unit`
+### `public func CallContextHooks(context: Ref<ImGuiContext>, type: ImGuiContextHookType): Unit`
 * original function: `void CallContextHooks(ImGuiContext* context,ImGuiContextHookType type)`
 * cimgui function: `void igCallContextHooks(ImGuiContext* context,ImGuiContextHookType type)`
 
@@ -554,7 +554,7 @@
 * original function: `bool ColorButton(const char* desc_id,const ImVec4& col,ImGuiColorEditFlags flags=0,const ImVec2& size=ImVec2(0,0))`
 * cimgui function: `bool igColorButton(const char* desc_id,const ImVec4 col,ImGuiColorEditFlags flags,const ImVec2 size)`
 
-### `public func ColorConvertFloat4ToU32(`in`: ImVec4): ImU32`
+### `public func ColorConvertFloat4ToU32(in: ImVec4): ImU32`
 * original function: `ImU32 ColorConvertFloat4ToU32(const ImVec4& in)`
 * cimgui function: `ImU32 igColorConvertFloat4ToU32(const ImVec4 in)`
 
@@ -566,7 +566,7 @@
 * original function: `void ColorConvertRGBtoHSV(float r,float g,float b,float& out_h,float& out_s,float& out_v)`
 * cimgui function: `void igColorConvertRGBtoHSV(float r,float g,float b,float* out_h,float* out_s,float* out_v)`
 
-### `public func ColorConvertU32ToFloat4(pOut: ImVec4, `in`: ImU32): Unit`
+### `public func ColorConvertU32ToFloat4(pOut: ImVec4, in: ImU32): Unit`
 * original function: `void ColorConvertU32ToFloat4(ImU32 in)`
 * cimgui function: `void igColorConvertU32ToFloat4(ImVec4 *pOut,ImU32 in)`
 
@@ -2430,7 +2430,7 @@
 * original function: `void LocalizeRegisterEntries(const ImGuiLocEntry* entries,int count)`
 * cimgui function: `void igLocalizeRegisterEntries(const ImGuiLocEntry* entries,int count)`
 
-### `public func LogBegin(`type`: ImGuiLogType, auto_open_depth: Int32): Unit`
+### `public func LogBegin(type: ImGuiLogType, auto_open_depth: Int32): Unit`
 * original function: `void LogBegin(ImGuiLogType type,int auto_open_depth)`
 * cimgui function: `void igLogBegin(ImGuiLogType type,int auto_open_depth)`
 
@@ -2962,7 +2962,7 @@
 * original function: `void SetCursorScreenPos(const ImVec2& pos)`
 * cimgui function: `void igSetCursorScreenPos(const ImVec2 pos)`
 
-### `public func SetDragDropPayload(`type`: CStringConvertable, data: Ref<Unit>, sz: UIntNative, cond: ImGuiCond): Bool`
+### `public func SetDragDropPayload(type: CStringConvertable, data: Ref<Unit>, sz: UIntNative, cond: ImGuiCond): Bool`
 * original function: `bool SetDragDropPayload(const char* type,const void* data,size_t sz,ImGuiCond cond=0)`
 * cimgui function: `bool igSetDragDropPayload(const char* type,const void* data,size_t sz,ImGuiCond cond)`
 
@@ -3790,7 +3790,7 @@
 * original function: `bool TreeNodeEx(const char* str_id,ImGuiTreeNodeFlags flags,const char* fmt,...)`
 * cimgui function: `bool igTreeNodeEx_StrStr(const char* str_id,ImGuiTreeNodeFlags flags,const char* fmt,...)`
 
-### `public func TreeNodeSetOpen(id: ImGuiID, `open`: Bool): Unit`
+### `public func TreeNodeSetOpen(id: ImGuiID, open: Bool): Unit`
 * original function: `void TreeNodeSetOpen(ImGuiID id,bool open)`
 * cimgui function: `void igTreeNodeSetOpen(ImGuiID id,bool open)`
 
