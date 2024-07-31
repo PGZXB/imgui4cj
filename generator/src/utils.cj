@@ -811,8 +811,8 @@ class APIInfo {
         }
     }
 
-    func addUncoveredStruct(fn: String) {
-        uncoveredStructs.append(fn)
+    func addUncoveredStruct(structName: String) {
+        uncoveredStructs.append(structName)
     }
 
     func generateDocumentForGlobalFunctions<T>(os: StringWriter<T>) where T <: OutputStream {
@@ -926,6 +926,10 @@ class APIInfo {
         }
         os.writeln()
         os.writeln("## Uncovered Structs")
+        os.writeln(
+            "These structs don't have a wrapper class; instead, they are typedef'd as `Unit`, " +
+            "which allows their pointers (`CPointer<Struct>`) to be used as function parameters/return " +
+            "but prevents direct access to their members.")
         os.writeln()
         for (s in uncoveredStructs) {
             os.writeln("* `${s}`")

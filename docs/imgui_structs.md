@@ -3356,4 +3356,20 @@
 #### functions:
 
 ## Uncovered Structs
+These structs don't have a wrapper class; instead, they are typedef'd as `Unit`, which allows their pointers (`CPointer<Struct>`) to be used as function parameters/return but prevents direct access to their members.
 
+* `ImFontGlyph`
+* `ImGuiContext`
+* `ImGuiDockNode`
+* `ImGuiDockNodeSettings`
+* `ImGuiDockRequest`
+* `ImGuiInputEvent`
+* `ImGuiInputTextDeactivateData`
+* `ImGuiStackLevelInfo`
+* `ImGuiStoragePair`
+* `ImGuiStyleMod`
+* `ImGuiTable`
+* `ImGuiTableColumn`
+* `ImGuiTableColumnSettings`
+* `ImGuiTableColumnsSettings`
+* `ImGuiWindow`

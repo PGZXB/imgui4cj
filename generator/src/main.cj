@@ -127,6 +127,7 @@ main(args: Array<String>): Int64 {
             case StructType(name) => if (!definedStructNames.contains(name)) {
                 undefStructTypedefs.append(TypeDef(alias, "void"))
                 typeAlias.put(alias, UnitType)
+                apiInfo.addUncoveredStruct(name)
             }
             case _ => continue
         }
