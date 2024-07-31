@@ -1,0 +1,122 @@
+name: Build and Package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+            device_info: "windows-x86_64"
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+            device_info: "linux-x86_64"
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+            device_info: "linux-x86_64"
+          - os: macOS-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+            device_info: "darwin-x86_64"
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
+          - os: macOS-latest
+            c_compiler: gcc
+          - os: macOS-latest
+            c_compiler: cl
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+
+    - name: Install dependencies (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: sudo apt update && sudo apt install -y libwayland-dev libxkbcommon-dev xorg-dev
+      shell: bash
+
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo "built-package-name=imgui4cj-${{ github.sha }}-${{ matrix.device_info }}" >> "$GITHUB_OUTPUT"
+
+    - name: Configure CMake
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -S ${{ github.workspace }}
+
+    - name: Build
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      
+    - name: Copy built library to src/libs (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        Copy-Item "${{ steps.strings.outputs.build-output-dir }}\Release\imgui4cj_c_lib.dll" -Destination "${{ github.workspace }}\src\libs\imgui4cj_c_lib.dll"
+        Copy-Item "${{ steps.strings.outputs.build-output-dir }}\Release\imgui4cj_c_lib.dll" -Destination "${{ github.workspace }}\src\libs\libimgui4cj_c_lib.dll"
+      shell: powershell
+
+    - name: Copy built library to src/libs (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.so ${{ github.workspace }}/src/libs/imgui4cj_c_lib.so
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.so ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.so
+      shell: bash
+
+    - name: Copy built library to src/libs (MacOS)
+      if: matrix.os == 'macOS-latest'
+      run: |
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.dylib ${{ github.workspace }}/src/libs/imgui4cj_c_lib.dylib
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.dylib ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.dylib
+      shell: bash
+
+    - name: Package files (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        New-Item -Path . -Name ${{ steps.strings.outputs.built-package-name }} -ItemType Directory
+        Copy-Item -Path cjpm.toml -Destination ${{ steps.strings.outputs.built-package-name }}\
+        Copy-Item -Path src -Destination ${{ steps.strings.outputs.built-package-name }}\ -Recurse
+        Compress-Archive -Path ${{ steps.strings.outputs.built-package-name }} -DestinationPath ${{ steps.strings.outputs.built-package-name }}.zip
+      shell: powershell
+
+    - name: Package files (Ubuntu, MacOS)
+      if: matrix.os != 'windows-latest'
+      run: |
+        mkdir -p ${{ steps.strings.outputs.built-package-name }}
+        cp cjpm.toml ${{ steps.strings.outputs.built-package-name }}/
+        cp -r src ${{ steps.strings.outputs.built-package-name }}/
+        tar -czvf ${{ steps.strings.outputs.built-package-name }}.tar.gz ${{ steps.strings.outputs.built-package-name }}/
+      shell: bash
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact
+        path: |
+          ${{ steps.strings.outputs.built-package-name }}.zip
+          ${{ steps.strings.outputs.built-package-name }}.tar.gz

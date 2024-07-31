@@ -44,11 +44,13 @@ if(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
 
     # OpenGL3
     list(APPEND IMGUI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/backends/imgui_impl_opengl3.cpp)
-    if (WIN32) # Windows
-        list(APPEND IMGUI_LIBRARIES opengl32)
-    else (WIN32) # Unix
-        list(APPEND IMGUI_LIBRARIES GL)
-    endif (WIN32)
+    
+    find_package(OpenGL REQUIRED)
+    if (OPENGL_FOUND)
+        list(APPEND IMGUI_LIBRARIES ${OPENGL_gl_LIBRARY})
+    else (OPENGL_FOUND)
+        message(FATAL_ERROR "OpenGL not found")
+    endif()
 
     # GLFW
     list(APPEND IMGUI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui/backends/imgui_impl_glfw.cpp)
