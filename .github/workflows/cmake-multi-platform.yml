@@ -30,15 +30,19 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
+            device-info: "x86_64-w64-mingw32"
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
+            device-info: "x86_64-unknown-linux-gnu"
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
+            device-info: "x86_64-unknown-linux-gnu"
           - os: macOS-latest
             c_compiler: clang
             cpp_compiler: clang++
+            device-info: "darwin_x64"
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -67,6 +71,8 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo "version-name=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+        echo "built-package-name=imgui4cj-${{ steps.strings.outputs.version-name }}-${{ matrix.device-info }}" >> "$GITHUB_OUTPUT"
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -81,3 +87,50 @@ jobs:
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      
+    - name: Copy built library to src/libs (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        cp ${{ steps.strings.outputs.build-output-dir }}/Release/imgui4cj_c_lib.dll ${{ github.workspace }}/src/libs/imgui4cj_c_lib.dll
+        cp ${{ steps.strings.outputs.build-output-dir }}/Release/imgui4cj_c_lib.dll ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.dll
+      shell: bash
+
+    - name: Copy built library to src/libs (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.so ${{ github.workspace }}/src/libs/imgui4cj_c_lib.so
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.so ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.so
+      shell: bash
+
+    - name: Copy built library to src/libs (MacOS)
+      if: matrix.os == 'macOS-latest'
+      run: |
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.dylib ${{ github.workspace }}/src/libs/imgui4cj_c_lib.dylib
+        cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.dylib ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.dylib
+      shell: bash
+
+    - name: Package files (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        New-Item -Path . -Name ${{ matrix.built-package-name }} -ItemType Directory
+        Copy-Item -Path cjpm.toml -Destination ${{ matrix.built-package-name }}\
+        Copy-Item -Path src -Destination ${{ matrix.built-package-name }}\ -Recurse
+        Compress-Archive -Path ${{ matrix.built-package-name }} -DestinationPath ${{ matrix.built-package-name }}.zip
+      shell: powershell
+
+    - name: Package files (Ubuntu, MacOS)
+      if: matrix.os != 'windows-latest'
+      run: |
+        mkdir -p ${{ matrix.built-package-name }}
+        cp cjpm.toml ${{ matrix.built-package-name }}/
+        cp -r src ${{ matrix.built-package-name }}/
+        tar -czvf ${{ matrix.built-package-name }}.tar.gz ${{ matrix.built-package-name }}/
+      shell: bash
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact
+        path: |
+          ${{ matrix.built-package-name }}.zip
+          ${{ matrix.built-package-name }}.tar.gz
