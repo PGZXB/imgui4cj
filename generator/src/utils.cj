@@ -736,11 +736,24 @@ struct FunctionDesc {
     }
 }
 
+struct StructDesc {
+    StructDesc(
+        let members!: ArrayList<(String, String, String)>,
+        let functions!: ArrayList<(String, FunctionDesc)>
+    ) {
+    }
+}
+
 class APIInfo {
     private let argMappingOfGlobalFunctions = TreeMap<String, String>() // original type => cangjie type
     private let retMappingOfGlobalFunctions = TreeMap<String, String>() // original type => cangjie type
     private let descOfGlobalFunctions = TreeMap<String, FunctionDesc>() // cangjie signature => desc of this function
     private let uncoveredGlobalFunctions = ArrayList<String>()
+    private let mappingOfStructMembers = TreeMap<String, String>() // original type => cangjie type
+    private let argMappingOfStructFunctions = TreeMap<String, String>() // original type => cangjie type
+    private let retMappingOfStructFunctions = TreeMap<String, String>() // original type => cangjie type
+    private let descOfStructs = TreeMap<String, StructDesc>() // cangjie signature => desc of this function
+    private let uncoveredStructs = ArrayList<String>()
 
     func updateArgMappingForGlobalFunction(ori: String, cj: String) {
         argMappingOfGlobalFunctions.put(ori, cj)
@@ -756,6 +769,50 @@ class APIInfo {
 
     func addUncoveredGlobalFunction(fn: String) {
         uncoveredGlobalFunctions.append(fn)
+    }
+
+    func updateMappingForStructMembers(ori: String, cj: String) {
+        mappingOfStructMembers.put(ori, cj)
+    }
+
+    func updateArgMappingForStructFunction(ori: String, cj: String) {
+        argMappingOfStructFunctions.put(ori, cj)
+    }
+
+    func updateRetMappingForStructFunction(ori: String, cj: String) {
+        retMappingOfStructFunctions.put(ori, cj)
+    }
+
+    func addMemberDescForStruct(structName: String, member: (String, String, String)) {
+        if (descOfStructs.contains(structName)) {
+            descOfStructs[structName].members.append(member)
+        } else {
+            descOfStructs.put(
+                structName,
+                StructDesc(
+                    members: ArrayList<(String, String, String)>([member]),
+                    functions: ArrayList<(String, FunctionDesc)>()
+                )
+            )
+        }
+    }
+
+    func addMethodDescForStruct(structName: String, md: (String, FunctionDesc)) {
+        if (descOfStructs.contains(structName)) {
+            descOfStructs[structName].functions.append(md)
+        } else {
+            descOfStructs.put(
+                structName,
+                StructDesc(
+                    members: ArrayList<(String, String, String)>(),
+                    functions: ArrayList<(String, FunctionDesc)>([md])
+                )
+            )
+        }
+    }
+
+    func addUncoveredStruct(fn: String) {
+        uncoveredStructs.append(fn)
     }
 
     func generateDocumentForGlobalFunctions<T>(os: StringWriter<T>) where T <: OutputStream {
@@ -796,6 +853,89 @@ class APIInfo {
         try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
             try (sw = StringWriter(fp)) {
                 generateDocumentForGlobalFunctions(sw)
+            }
+        }
+    }
+
+    func generateDocumentForStructs<T>(os: StringWriter<T>) where T <: OutputStream {
+        /*
+        # Structs
+
+        ## Member Variable Type Mapping Table
+
+        ## Member/Static Function Parameter Type Mapping Table
+
+        ## Member/Static Function Return Type Mapping Table
+
+        ## All Struct Wrappers
+
+        ### `public class XXXX`
+        #### members:
+         * YYYY: YYYY_TYPE (ORIGINAL_YYYY_TYPE)
+         * ...
+        #### functions:
+         * Ret func(p0: P0, ...)
+         * original function: xxx
+         * cimgui function: xxx
+
+        ## Uncovered Structs
+
+         */
+        os.writeln("# Structs")
+        os.writeln()
+        os.writeln("## Member Variable Type Mapping Table")
+        os.writeln()
+        os.writeln("| Original Type | Cangjie Type |")
+        os.writeln("|---------------|--------------|")
+        for ((ori, cj) in mappingOfStructMembers) {
+            os.writeln("| `${ori}` | `${cj.replace("`", "")}` |")
+        }
+        os.writeln()
+        os.writeln("## Member/Static Function Parameter Type Mapping Table")
+        os.writeln()
+        os.writeln("| Original Type | Cangjie Type |")
+        os.writeln("|---------------|--------------|")
+        for ((ori, cj) in argMappingOfStructFunctions) {
+            os.writeln("| `${ori}` | `${cj.replace("`", "")}` |")
+        }
+        os.writeln()
+        os.writeln("## Member/Static Function Return Type Mapping Table")
+        os.writeln()
+        os.writeln("| Original Type | Cangjie Type |")
+        os.writeln("|---------------|--------------|")
+        for ((ori, cj) in retMappingOfStructFunctions) {
+            os.writeln("| `${ori}` | `${cj.replace("`", "")}` |")
+        }
+        os.writeln()
+        os.writeln("## All Struct Wrappers")
+        for ((fn, desc) in descOfStructs) {
+            os.writeln()
+            os.writeln("### class `${fn.replace("`", "")}`")
+            os.writeln()
+            os.writeln("#### members:")
+            for ((name, ty, cty) in desc.members) {
+                os.writeln("* `${name}`: `${ty}` // `${cty}`")
+            }
+            os.writeln()
+            os.writeln("#### functions:")
+            for ((name, fn) in desc.functions) {
+                os.writeln("* `${name}`")
+                os.writeln("    * original function: `${fn.originalFunctionDecl}`")
+                os.writeln("    * cimgui function: `${fn.cimguiFunctionDecl}`")
+            }
+        }
+        os.writeln()
+        os.writeln("## Uncovered Structs")
+        os.writeln()
+        for (s in uncoveredStructs) {
+            os.writeln("* `${s}`")
+        }
+    }
+
+    func generateDocumentForStructs(filename: String) {
+        try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+            try (sw = StringWriter(fp)) {
+                generateDocumentForStructs(sw)
             }
         }
     }

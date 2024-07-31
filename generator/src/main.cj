@@ -176,7 +176,7 @@ main(args: Array<String>): Int64 {
     let structsWCAPICodeFilename = "${wcapiOutputDir}/structs.cj"
     println("Generating cimgui funcs wcapi -> ${structsWCAPICodeFilename} ...")
     genStructsWCAPICode(structsWCAPICodeFilename, wcapiPkgName, capiPkgName, structDefs, funcsSigs, typeAlias,
-        globalConstants: globalConstants)
+        globalConstants, apiInfo)
     println("Generated cimgui funcs wcapi -> ${structsWCAPICodeFilename}")
 
     // Generate re-exports wcapi -> src/wcapi/re_exports.cj
@@ -188,6 +188,7 @@ main(args: Array<String>): Int64 {
 
     // Generate documents -> docs/*.md
     apiInfo.generateDocumentForGlobalFunctions("${docOutputDir}/imgui_global_functions.md")
+    apiInfo.generateDocumentForStructs("${docOutputDir}/imgui_structs.md")
 
     return 0
 }

@@ -419,7 +419,8 @@ func genStructAccessorFuncsCode(filename: String, pkgName: String, structDefs: A
     throw IllegalStateException("illegal state")
 }
 
-func genStructWCAPIMethod<T>(os: StringWriter<T>, md: FuncSignature, typeAlias: HashMap<String, CjType>) where T <: OutputStream {
+func genStructWCAPIMethod<T>(os: StringWriter<T>, structName: String, md: FuncSignature,
+    typeAlias: HashMap<String, CjType>, apiInfo: APIInfo) where T <: OutputStream {
     let params = ArrayList<FuncParameter>.fromIterator(
         md.params |> filter {
         item => !(item.name == "..." && item.ty == "...")
@@ -435,24 +436,26 @@ func genStructWCAPIMethod<T>(os: StringWriter<T>, md: FuncSignature, typeAlias: 
             let ty = CjType.fromCType(p.ty, cArrayAsPointer: true)
             let (wcapiTy, _) = getWCAPIArgument(ty, "DONT_CARE", typeAlias)
             callArgs.append((getValidCjIdentifier(p.name), wcapiTy))
+            apiInfo.updateArgMappingForStructFunction(p.ty, wcapiTy)
         }
 
-        os.write("    public ")
+        let fnSb = StringBuilder()
+        fnSb.append("public ")
         if (md.isClassStaticMethod) {
-            os.write("static ")
+            fnSb.append("static ")
         }
         if (md.isConstructor) {
-            os.write("init(")
+            fnSb.append("init(")
         } else {
-            os.write("func ${md.originalName}(")
+            fnSb.append("func ${md.originalName}(")
         }
         for ((i, (arg, ty)) in withIndex(callArgs)) {
-            os.write("${arg}: ${ty}")
+            fnSb.append("${arg}: ${ty}")
             if (i != callArgs.size - 1) {
-                os.write(", ")
+                fnSb.append(", ")
             }
         }
-        os.write(")")
+        fnSb.append(")")
 
         if (!md.isClassStaticMethod && !md.isConstructor) {
             if (selfIdx == 0) {
@@ -464,11 +467,18 @@ func genStructWCAPIMethod<T>(os: StringWriter<T>, md: FuncSignature, typeAlias: 
 
         let retTy = CjType.fromCType(md.retType, cArrayAsPointer: true)
         let (wcapiRetTy, _) = getWCAPIReturn(retTy, "DONT_CARE", typeAlias)
-        if (md.isConstructor) {
-            os.writeln(" {")
-        } else {
-            os.writeln(": ${wcapiRetTy} {")
+        if (!md.isConstructor) {
+            fnSb.append(": ${wcapiRetTy}")
+            apiInfo.updateRetMappingForStructFunction(md.retType, wcapiRetTy)
         }
+        apiInfo.addMethodDescForStruct(
+            structName,
+            (fnSb.toString(), FunctionDesc(
+                    originalFunctionDecl: md.imguiFuncDecl,
+                    cimguiFunctionDecl: md.cimguiFuncDecl
+                ))
+        )
+        os.writeln("    ${fnSb.toString()} {")
         if (md.isConstructor) {
             os.write("        super(")
         } else {
@@ -491,7 +501,8 @@ func genStructWCAPIMethod<T>(os: StringWriter<T>, md: FuncSignature, typeAlias: 
 }
 
 func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: String, structDefs: ArrayList<StructDef>,
-    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>) where T <: OutputStream {
+    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>,
+    apiInfo: APIInfo) where T <: OutputStream {
     // SOME COMMENTS ....
     //
     // package xxx
@@ -601,7 +612,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         // Inits defined in cimgui
         if (let Some(constructors) <- constructorTable.get(def.name)) {
             for (c in constructors) {
-                genStructWCAPIMethod(os, c, typeAlias)
+                genStructWCAPIMethod(os, def.name, c, typeAlias, apiInfo)
                 os.writeln()
             }
         }
@@ -619,6 +630,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
         os.writeln("    }")
         // Props for accessing fields
         for (mDef in def.members) {
+            let cFullTy = "${mDef.ty}${if (let Some(size) <- mDef.size) { "[${size}]" } else {""}}"
             let mCjName = getCjStructMemberName(mDef)
             let mCjType = CjType.fromCType(mDef.ty, size: getIntValue(mDef.size))
             let accessCall = "${getPkgName(capiPkgName)}.access_${def.name}_${mCjName}(pointer)"
@@ -634,12 +646,14 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
             os.writeln("            unsafe { ${write} }")
             os.writeln("        }")
             os.writeln("    }")
+            apiInfo.updateMappingForStructMembers(cFullTy, wcapiMemberTy)
+            apiInfo.addMemberDescForStruct(def.name, (mCjName, wcapiMemberTy, cFullTy))
         }
         // Member/Static methods
         if (let Some(methods) <- methodTable.get(def.name)) {
             for (md in methods) {
                 os.writeln()
-                genStructWCAPIMethod(os, md, typeAlias)
+                genStructWCAPIMethod(os, def.name, md, typeAlias, apiInfo)
             }
         }
         os.writeln("}")
@@ -647,11 +661,11 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
 }
 
 func genStructsWCAPICode(filename: String, pkgName: String, capiPkgName: String, structDefs: ArrayList<StructDef>,
-    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>,
-    globalConstants!: ?HashMap<String, String> = None) {
+    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>,
+    apiInfo: APIInfo) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genStructsWCAPICode(sw, pkgName, capiPkgName, structDefs, funcs, typeAlias, globalConstants)
+            genStructsWCAPICode(sw, pkgName, capiPkgName, structDefs, funcs, typeAlias, globalConstants, apiInfo)
         }
     }
 }
