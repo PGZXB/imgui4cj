@@ -61,7 +61,8 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-        echo "built-package-name=imgui4cj-${{ github.sha }}-${{ matrix.device_info }}" >> "$GITHUB_OUTPUT"
+        echo "upload-artifact-name=imgui4cj-${{ matrix.device_info }}" >> "$GITHUB_OUTPUT"
+        echo "built-package-name=imgui4cj-$(git rev-parse --short HEAD)-${{ matrix.device_info }}" >> "$GITHUB_OUTPUT"
 
     - name: Configure CMake
       run: >
@@ -95,28 +96,16 @@ jobs:
         cp ${{ steps.strings.outputs.build-output-dir }}/imgui4cj_c_lib.dylib ${{ github.workspace }}/src/libs/libimgui4cj_c_lib.dylib
       shell: bash
 
-    - name: Package files (Windows)
-      if: matrix.os == 'windows-latest'
+    - name: Package files
       run: |
-        New-Item -Path . -Name ${{ steps.strings.outputs.built-package-name }} -ItemType Directory
-        Copy-Item -Path cjpm.toml -Destination ${{ steps.strings.outputs.built-package-name }}\
-        Copy-Item -Path src -Destination ${{ steps.strings.outputs.built-package-name }}\ -Recurse
-        Compress-Archive -Path ${{ steps.strings.outputs.built-package-name }} -DestinationPath ${{ steps.strings.outputs.built-package-name }}.zip
-      shell: powershell
-
-    - name: Package files (Ubuntu, MacOS)
-      if: matrix.os != 'windows-latest'
-      run: |
-        mkdir -p ${{ steps.strings.outputs.built-package-name }}
-        cp cjpm.toml ${{ steps.strings.outputs.built-package-name }}/
-        cp -r src ${{ steps.strings.outputs.built-package-name }}/
-        tar -czvf ${{ steps.strings.outputs.built-package-name }}.tar.gz ${{ steps.strings.outputs.built-package-name }}/
+        mkdir -p tmp_built/${{ steps.strings.outputs.built-package-name }}
+        cp cjpm.toml tmp_built/${{ steps.strings.outputs.built-package-name }}/
+        cp -r src tmp_built/${{ steps.strings.outputs.built-package-name }}/
       shell: bash
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: build-artifact
+        name: ${{ steps.strings.outputs.upload-artifact-name }}
         path: |
-          ${{ steps.strings.outputs.built-package-name }}.zip
-          ${{ steps.strings.outputs.built-package-name }}.tar.gz
+          tmp_built
