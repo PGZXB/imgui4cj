@@ -32,14 +32,19 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
   # ...
   ```
 
-#### Option 2. Download package from releases
+#### Option 2. Download package with built C library
 
 > [!NOTE]  
 > Currently, this library provides releases only for Windows and Linux. We are working on making it available for macOS in the future.
 
 1. Download & Extract
-  * [imgui4cj-x86_64-w64-mingw32.zip](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-w64-mingw32.zip) for Windows
-  * [imgui4cj-x86_64-unknown-linux-gnu.tar.gz](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-unknown-linux-gnu.tar.gz) for Linux
+  * From releases:
+    * [imgui4cj-x86_64-w64-mingw32.zip](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-w64-mingw32.zip) for Windows
+    * [imgui4cj-x86_64-unknown-linux-gnu.tar.gz](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-unknown-linux-gnu.tar.gz) for Linux
+  * From latest commit:
+    * [imgui4cj-windows-x86_64.zip](https://nightly.link/PGZXB/imgui4cj/workflows/build-and-package/main/imgui4cj-windows-x86_64.zip) for Windows
+    * [imgui4cj-linux-x86_64.zip](https://nightly.link/PGZXB/imgui4cj/workflows/build-and-package/main/imgui4cj-linux-x86_64.zip) for Linux
+    * [imgui4cj-darwin-x86_64.zip](https://nightly.link/PGZXB/imgui4cj/workflows/build-and-package/main/imgui4cj-darwin-x86_64.zip) for macOS
 
 2. Add package dependency to your `cjpm.toml`
   ```toml
