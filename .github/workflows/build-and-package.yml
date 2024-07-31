@@ -21,19 +21,19 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
-            device_info: "x86_64-w64-mingw32"
+            device_info: "windows-x86_64"
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-            device_info: "x86_64-unknown-linux-gnu"
+            device_info: "linux-x86_64"
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
-            device_info: "x86_64-unknown-linux-gnu"
+            device_info: "linux-x86_64"
           - os: macOS-latest
             c_compiler: clang
             cpp_compiler: clang++
-            device_info: "darwin_x64"
+            device_info: "darwin-x86_64"
         exclude:
           - os: windows-latest
             c_compiler: gcc
