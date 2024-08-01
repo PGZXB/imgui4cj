@@ -13,11 +13,21 @@ struct FuncParameter {
 struct FuncSignature {
     FuncSignature(let name: String, let params: ArrayList<FuncParameter>, let retType: String, let structName: String,
         let isClassStaticMethod: Bool, let isConstructor: Bool, let isDestructor: Bool, let originalName: String,
-        let nonUDT: Bool, let imguiFuncDecl: String, let cimguiFuncDecl: String) {
+        let nonUDT: Bool, let defaultaArgs: HashMap<String, String>, let imguiFuncDecl: String,
+        let cimguiFuncDecl: String) {
     }
 }
 
 func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
+    let j2map = {
+        object: JsonObject =>
+        let result = HashMap<String, String>()
+        for ((k, v) in object.getFields()) {
+            result[k] = v.asString().getValue()
+        }
+        return result
+    }
+
     let result = ArrayList<FuncSignature>()
 
     for ((_, fnOverloads) in funcsJson.asObject().getFields()) {
@@ -34,6 +44,9 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
                 // ~StructType
                 fnSig.put("funcname", JsonString("~" + fnSig["stname"].asString().getValue()))
                 fnSig.put("argsoriginal", JsonString("()"))
+            }
+            if (!fnSig.containsKey("defaults")) {
+                fnSig.put("defaults", JsonObject())
             }
             result.append(
                 FuncSignature(
@@ -60,6 +73,7 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
                     fnSig.get("destructor")?.asBool().getValue() ?? false, // isDestructor
                     fnSig["funcname"].asString().getValue(), // originalName
                     (fnSig.get("nonUDT")?.asInt().getValue() ?? 0) == 1, // nonUDT
+                    j2map(fnSig["defaults"].asObject()), // defaultaArgs
                     "${fnSig["ret"].asString().getValue()} ${fnSig["funcname"].asString().getValue()}${fnSig["argsoriginal"].asString().getValue()}", // imguiFuncDecl
                     "${fnSig["ret"].asString().getValue()} ${fnSig["ov_cimguiname"].asString().getValue()}${fnSig["args"].asString().getValue()}" // cimguiFuncDecl
                 )
@@ -174,6 +188,7 @@ func genFuncsWCAPICode<T>(
     os: StringWriter<T>,
     pkgName: String,
     capiPkgName: String,
+    macrosPkgName: String,
     funcs: ArrayList<FuncSignature>,
     typeAlias: HashMap<String, CjType>,
     definedStructNames: HashSet<String>,
@@ -196,6 +211,8 @@ func genFuncsWCAPICode<T>(
     os.writeln("package ${pkgName}")
     os.writeln()
     os.writeln("import ${capiPkgName}")
+    os.writeln("import ${macrosPkgName}.*")
+    os.writeln("import std.math.* // for MathExtension")
     os.writeln()
     for (fn in funcs) {
         if (fn.isDestructor) {
@@ -266,6 +283,25 @@ func genFuncsWCAPICode<T>(
                 )
             }
 
+
+            if (!fn.defaultaArgs.isEmpty()) {
+                let defaultArgs = ArrayList<String>()
+                for (p in params) {
+                    if (let Some(arg) <- fn.defaultaArgs.get(p.name)) {
+                        defaultArgs.append(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
+                    }
+                }
+
+                os.write("@DefaultArgs[")
+                for ((i, arg) in withIndex(defaultArgs)) {
+                    os.write(arg)
+                    if (i != defaultArgs.size - 1) {
+                        os.write(", ")
+                    }
+                }
+                os.writeln("]")
+            }
+
             os.writeln("${fnSb.toString()}: ${wcapiRetTy} {")
             os.writeln("    return ${wcapiRet}")
             os.writeln("}")
@@ -278,6 +314,7 @@ func genFuncsWCAPICode(
     filename: String,
     pkgName: String,
     capiPkgName: String,
+    macrosPkgName: String,
     funcs: ArrayList<FuncSignature>,
     typeAlias: HashMap<String, CjType>,
     definedStructNames: HashSet<String>,
@@ -285,7 +322,7 @@ func genFuncsWCAPICode(
 ) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genFuncsWCAPICode(sw, pkgName, capiPkgName, funcs, typeAlias, definedStructNames, apiInfo)
+            genFuncsWCAPICode(sw, pkgName, capiPkgName, macrosPkgName, funcs, typeAlias, definedStructNames, apiInfo)
         }
     }
 }

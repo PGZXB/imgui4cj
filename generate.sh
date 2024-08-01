@@ -14,6 +14,7 @@ run_args="$run_args --capi-pkg-name='imgui4cj.capi'"
 run_args="$run_args --c-src-path='$path/c_src'"
 run_args="$run_args --wcapi-pkg-path='$path/src/wcapi'"
 run_args="$run_args --wcapi-pkg-name='imgui4cj.wcapi'"
+run_args="$run_args --macros-pkg-name='imgui4cj.macros'"
 run_args="$run_args --doc-path='$path/docs'"
 
 cd "$path/generator" && \

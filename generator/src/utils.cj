@@ -944,3 +944,94 @@ class APIInfo {
         }
     }
 }
+
+func transLiteralFromCToWCAPI(cArg: String, cType: String, typeAlias: HashMap<String, CjType>): String {
+    // NOTE: simple but enough for imgui
+    // FIXME: fix hardcode if needed
+
+    let getTypeName = {
+        cjType: CjType => return match (cjType) {
+            case TypeAlias(name) => typeAlias.get(name)?.toString() ?? name
+            case _ => cjType.toString()
+        }
+    }
+
+    let cjType = CjType.fromCType(cType, cArrayAsPointer: true)
+
+    // FLT_MAX
+    if (cArg == "FLT_MAX") {
+        return "Float32.Max"
+    }
+
+    // sizeof(float)
+    if (cArg == "sizeof(float)") {
+        return "${getTypeName(cjType)}(sizeOf<Float32>())"
+    }
+
+    // NULL
+    if (cArg == "NULL") {
+        return match (cType.replace("const ", "")) {
+            case "ImFontAtlas*" => "ImFontAtlas.null()"
+            case "ImFontConfig*" => "ImFontConfig.null()"
+            case "ImGuiContext*" => "null<ImGuiContext>()"
+            case "ImGuiInputTextCallback" => "ImGuiInputTextCallbackNull"
+            case "ImGuiSizeCallback" => "ImGuiSizeCallbackNull"
+            case "ImGuiStyle*" => "ImGuiStyle.null()"
+            case "ImGuiViewport*" => "ImGuiViewport.null()"
+            case "ImGuiWindowClass*" => "ImGuiWindowClass.null()"
+            case "ImRect*" => "ImRect.null()"
+            case "ImVec2*" => "ImVec2.null()"
+            case "ImVec4*" => "ImVec4.null()"
+            case "ImWchar*" => "null<ImWchar>()"
+            case "bool*" => "null<Bool>()"
+            case "char*" => "null<UInt8>()"
+            case "char**" => "null<CPointer<UInt8>>()"
+            case "float*" => "null<Float32>()"
+            case "int*" => "null<Int32>()"
+            case "size_t*" => "null<UIntNative>()"
+            case "void*" => "null<Unit>()"
+            case _ => throw IllegalArgumentException("unknow type for NULL: `${cType}`")
+        }
+    }
+
+    if (cArg == "ImVec2(-FLT_MIN,0)") {
+        return "ImVec2(-Float32.Min, 0.0)"
+    }
+
+    if (cArg == "ImVec2(0,0)") {
+        return "ImVec2(0.0, 0.0)"
+    }
+
+    if (cArg == "ImVec2(0,1)") {
+        return "ImVec2(0.0, 1.0)"
+    }
+
+    if (cArg == "ImVec2(0.0f,0.0f)") {
+        return "ImVec2(0.0, 0.0)"
+    }
+
+    if (cArg == "ImVec2(1,0)") {
+        return "ImVec2(1.0, 0.0)"
+    }
+
+    if (cArg == "ImVec2(1,1)") {
+        return "ImVec2(1.0, 1.0)"
+    }
+
+    if (cArg == "ImVec4(0,0,0,0)") {
+        return "ImVec4(0.0, 0.0, 0.0, 0.0)"
+    }
+
+    if (cArg == "ImVec4(1,1,1,1)") {
+        return "ImVec4(1.0, 1.0, 1.0, 1.0)"
+    }
+
+    // number
+    let numberArg = cArg.trimRight("f").trimLeft("+")
+    if (Int64.tryParse(numberArg).isSome() || Float64.tryParse(numberArg).isSome()) {
+        return "${getTypeName(cjType)}(${numberArg})"
+    }
+
+    // string, true, false, enum
+    return cArg
+}

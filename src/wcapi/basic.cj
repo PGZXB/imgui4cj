@@ -2,6 +2,7 @@ package imgui4cj.wcapi
 
 import std.collection.*
 import std.reflect.TypeInfo
+import imgui4cj.capi
 
 let STRING_POOL = HashMap<String, CPointer<UInt8>>()
 
@@ -220,3 +221,7 @@ public open class StructWrapper<T> <: ToString where T <: CType {
         return "${TypeInfo.of<T>()}@${pointer.toUIntNative()}"
     }
 }
+
+// NOTE: hardcode because parseExpr(cangjieLex("dummyFn(ImVec2(0.0, 0.0), Int32(0), CFunc<(data: CPointer<capi.ImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>())")) failed
+let ImGuiInputTextCallbackNull = CFunc<(data: CPointer<capi.ImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>())
+let ImGuiSizeCallbackNull = CFunc<(data: CPointer<capi.ImGuiSizeCallbackData>) -> Unit>(CPointer<Unit>())

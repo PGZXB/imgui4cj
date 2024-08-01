@@ -51,7 +51,7 @@ func makeHelp(desc: String): Unit {
     TextDisabled("(?)")
     if (BeginItemTooltip()) {
         PushTextWrapPos(GetFontSize() * 35.0)
-        TextUnformatted(desc, null<UInt8>())
+        TextUnformatted(desc)
         PopTextWrapPos()
         EndTooltip()
     }
@@ -66,26 +66,26 @@ func showBasicWidgetsDemoWindow(state: State): Unit {
 
     SeparatorText("General")
 
-    if (Button("Button", ImVec2(0.0, 0.0))) {
+    if (Button("Button")) {
         state.clicked++
     }
     if ((state.clicked & 1) != 0) {
-        SameLine(0.0, -1.0)
+        SameLine()
         Text("Thanks for clicking me!")
     }
 
     Checkbox("checkbox", state.check)
 
     RadioButton("radio a", state.e, 0)
-    SameLine(0.0, -1.0)
+    SameLine()
     RadioButton("radio b", state.e, 1)
-    SameLine(0.0, -1.0)
+    SameLine()
     RadioButton("radio c", state.e, 2)
 
     // Color buttons, demonstrate using PushID() to add unique identifier in the ID stack, and changing style.
     for (i in 0..7) {
         if (i > 0) {
-            SameLine(0.0, -1.0)
+            SameLine()
         }
         PushID(Int32(i))
 
@@ -112,7 +112,7 @@ func showBasicWidgetsDemoWindow(state: State): Unit {
     // See 'Demo->Layout->Text Baseline Alignment' for details.
     AlignTextToFramePadding()
     Text("Hold to repeat:")
-    SameLine(0.0, -1.0)
+    SameLine()
 
     // Arrow buttons with Repeater
     let spacing = GetStyle().ItemInnerSpacing.x
@@ -125,7 +125,7 @@ func showBasicWidgetsDemoWindow(state: State): Unit {
         state.counter++
     }
     PopButtonRepeat()
-    SameLine(0.0, -1.0)
+    SameLine()
     Text("${state.counter}")
 
     Button("Tooltip", ImVec2(0.0, 0.0))
@@ -137,9 +137,8 @@ func showBasicWidgetsDemoWindow(state: State): Unit {
 
     // To wire InputText() with std::string or any other custom string type,
     // see the "Text Input > Resize Callback" section of this demo, and the misc/cpp/imgui_stdlib.h file.
-    InputText("input text", state.str0, UIntNative(state.str0.size), 0,
-        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>())
-    SameLine(0.0, -1.0)
+    InputText("input text", state.str0, UIntNative(state.str0.size))
+    SameLine()
 
     makeHelp(
         """
@@ -155,24 +154,23 @@ PROGRAMMER:
 You can use the ImGuiInputTextFlags_CallbackResize facility if you need to wire InputText() to a dynamic string type. See misc/cpp/imgui_stdlib.h for an example (this is not demonstrated in imgui_demo.cpp)."""
     )
 
-    InputTextWithHint("input text (w/ hint)", "enter text here", state.str1, UIntNative(state.str1.size), 0,
-        CFunc<(data: CPointer<CImGuiInputTextCallbackData>) -> Int32>(CPointer<Unit>()), null<Unit>())
+    InputTextWithHint("input text (w/ hint)", "enter text here", state.str1, UIntNative(state.str1.size))
 
-    InputInt("input int", state.i0, 1, 100, 0)
-    InputFloat("input float", state.f0, 0.01, 1.0, "%.3f", 0)
-    InputDouble("input double", state.d0, 0.01, 1.0, "%.8f", 0)
-    InputFloat("input scientific", state.f1, 0.0, 0.0, "%e", 0)
-    SameLine(0.0, -1.0)
+    InputInt("input int", state.i0)
+    InputFloat("input float", state.f0, 0.01, 1.0, "%.3f")
+    InputDouble("input double", state.d0, 0.01, 1.0, "%.8f")
+    InputFloat("input scientific", state.f1, 0.0, 0.0, "%e")
+    SameLine()
     makeHelp("""
 You can input value using the scientific notation,
   e.g. \"1e+8\" becomes \"100000000\".""")
 
-    InputFloat3("input float3", state.vec4a, "%.3f", 0)
+    InputFloat3("input float3", state.vec4a)
 
     SeparatorText("Drags")
 
     DragInt("drag int", state.i1, 1.0, 0, 0, "%d", 0)
-    SameLine(0.0, -1.0)
+    SameLine()
     makeHelp(
         """
 Click and drag to edit value.
@@ -182,19 +180,19 @@ Double-click or CTRL+click to input value."""
 
     DragInt("drag int 0..100", state.i2, 1.0, 0, 100, "%d%%", ImGuiSliderFlags_AlwaysClamp)
 
-    DragFloat("drag float", state.f2, 0.005, 0.0, 0.0, "%.3f", 0)
-    DragFloat("drag small float", state.f3, 0.0001, 0.0, 0.0, "%.06f ns", 0)
+    DragFloat("drag float", state.f2, 0.005, 0.0, 0.0, "%.3f")
+    DragFloat("drag small float", state.f3, 0.0001, 0.0, 0.0, "%.06f ns")
 
     SeparatorText("Sliders")
 
-    SliderInt("slider int", state.i3, -1, 3, "%d", 0)
-    SameLine(0.0, -1.0)
+    SliderInt("slider int", state.i3, -1, 3)
+    SameLine()
     makeHelp("CTRL+click to input value.")
 
-    SliderFloat("slider float", state.f4, 0.0, 1.0, "ratio = %.3f", 0)
+    SliderFloat("slider float", state.f4, 0.0, 1.0, "ratio = %.3f")
     SliderFloat("slider float (log)", state.f5, -10.0, 10.0, "%.4f", ImGuiSliderFlags_Logarithmic)
 
-    SliderAngle("slider angle", state.angle, -360.0, 360.0, "%.0f deg", 0)
+    SliderAngle("slider angle", state.angle, -360.0, 360.0)
 
     // Using the format string to display a name instead of an integer.
     // Here we completely omit '%d' from the format string, so it'll only display a name.
@@ -206,15 +204,15 @@ Double-click or CTRL+click to input value."""
     } else {
         "Unknown"
     }
-    SliderInt("slider enum", state.elem, 0, Element_COUNT - 1, elemName, 0) // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
+    SliderInt("slider enum", state.elem, 0, Element_COUNT - 1, elemName) // Use ImGuiSliderFlags_NoInput flag to disable CTRL+Click here.
 
-    SameLine(0.0, -1.0)
+    SameLine()
     makeHelp("Using the format string parameter to display a name instead of the underlying integer.")
 
     SeparatorText("Selectors/Pickers")
 
-    ColorEdit3("color 1", state.col1, 0)
-    SameLine(0.0, -1.0)
+    ColorEdit3("color 1", state.col1)
+    SameLine()
     makeHelp(
         """
 Click on the color square to open a color picker.
@@ -223,12 +221,12 @@ Right-click on the color square to show options.
 CTRL+click on individual component to input value."""
     )
 
-    ColorEdit4("color 2", state.col2, 0)
+    ColorEdit4("color 2", state.col2)
 
     // Using the _simplified_ one-liner Combo() api here
     // See "Combo" section for examples of how to use the more flexible BeginCombo()/EndCombo() api.
-    Combo("combo", state.itemCurrent, state.items, Int32(state.items.size), -1)
-    SameLine(0.0, -1.0)
+    Combo("combo", state.itemCurrent, state.items, Int32(state.items.size))
+    SameLine()
     makeHelp(
         """
 Using the simplified one-liner Combo API here.
@@ -238,7 +236,7 @@ Refer to the \"Combo\" section below for an explanation of how to use the more f
     // Using the _simplified_ one-liner ListBox() api here
     // See "List boxes" section for examples of how to use the more flexible BeginListBox()/EndListBox() api.
     ListBox("listbox", state.listBoxItemCurrent, state.items, Int32(state.items.size), 4)
-    SameLine(0.0, -1.0)
+    SameLine()
     makeHelp(
         """
 Using the simplified one-liner ListBox API here.

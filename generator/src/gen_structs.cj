@@ -616,6 +616,12 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
                 os.writeln()
             }
         }
+        // Create NULL
+        os.writeln("    public static func null(): ${def.name} {")
+        os.writeln("        return ${def.name}(CPointer<${getPkgName(capiPkgName)}.${def.name}>(),")
+        os.writeln("                           count: None, owned: false)")
+        os.writeln("    }")
+        os.writeln()
         // Finalizer for releasing managed pointer
         os.writeln("    ~init() {")
         if (let Some(d) <- destructorTable.get(def.name)) {

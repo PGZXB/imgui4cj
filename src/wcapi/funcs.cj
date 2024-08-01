@@ -6,6 +6,8 @@
 package imgui4cj.wcapi
 
 import imgui4cj.capi
+import imgui4cj.macros.*
+import std.math.* // for MathExtension
 
 func ImBitVector_Clear(self: ImBitVector): Unit {
     return capi.ImBitVector_Clear(self.getCPointer())
@@ -27,6 +29,7 @@ func ImBitVector_TestBit(self: ImBitVector, n: Int32): Bool {
     return capi.ImBitVector_TestBit(self.getCPointer(), n)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImColor_HSV(pOut: ImColor, h: Float32, s: Float32, v: Float32, a: Float32): Unit {
     return capi.ImColor_HSV(pOut.getCPointer(), h, s, v, a)
 }
@@ -35,6 +38,7 @@ func ImColor_ImColor_Nil(): ImColor {
     return ImColor(capi.ImColor_ImColor_Nil(), owned: false)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImColor_ImColor_Float(r: Float32, g: Float32, b: Float32, a: Float32): ImColor {
     return ImColor(capi.ImColor_ImColor_Float(r, g, b, a), owned: false)
 }
@@ -43,6 +47,7 @@ func ImColor_ImColor_Vec4(col: ImVec4): ImColor {
     return ImColor(capi.ImColor_ImColor_Vec4(unsafe { col.getCPointer().read() }), owned: false)
 }
 
+@DefaultArgs[Int32(255)]
 func ImColor_ImColor_Int(r: Int32, g: Int32, b: Int32, a: Int32): ImColor {
     return ImColor(capi.ImColor_ImColor_Int(r, g, b, a), owned: false)
 }
@@ -51,6 +56,7 @@ func ImColor_ImColor_U32(rgba: ImU32): ImColor {
     return ImColor(capi.ImColor_ImColor_U32(rgba), owned: false)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImColor_SetHSV(self: ImColor, h: Float32, s: Float32, v: Float32, a: Float32): Unit {
     return capi.ImColor_SetHSV(self.getCPointer(), h, s, v, a)
 }
@@ -119,10 +125,12 @@ func ImDrawListSplitter_Split(self: ImDrawListSplitter, draw_list: ImDrawList, c
     return capi.ImDrawListSplitter_Split(self.getCPointer(), draw_list.getCPointer(), count)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_AddBezierCubic(self: ImDrawList, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
     return capi.ImDrawList_AddBezierCubic(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, unsafe { p4.getCPointer().read() }, col, thickness, num_segments)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_AddBezierQuadratic(self: ImDrawList, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
     return capi.ImDrawList_AddBezierQuadratic(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, col, thickness, num_segments)
 }
@@ -131,10 +139,12 @@ func ImDrawList_AddCallback(self: ImDrawList, callback: ImDrawCallback, callback
     return capi.ImDrawList_AddCallback(self.getCPointer(), callback, callback_data.getCPointer())
 }
 
+@DefaultArgs[Int32(0), Float32(1.0)]
 func ImDrawList_AddCircle(self: ImDrawList, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
     return capi.ImDrawList_AddCircle(self.getCPointer(), unsafe { center.getCPointer().read() }, radius, col, num_segments, thickness)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_AddCircleFilled(self: ImDrawList, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit {
     return capi.ImDrawList_AddCircleFilled(self.getCPointer(), unsafe { center.getCPointer().read() }, radius, col, num_segments)
 }
@@ -151,30 +161,37 @@ func ImDrawList_AddDrawCmd(self: ImDrawList): Unit {
     return capi.ImDrawList_AddDrawCmd(self.getCPointer())
 }
 
+@DefaultArgs[Float32(0.0), Int32(0), Float32(1.0)]
 func ImDrawList_AddEllipse(self: ImDrawList, center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32, thickness: Float32): Unit {
     return capi.ImDrawList_AddEllipse(self.getCPointer(), unsafe { center.getCPointer().read() }, unsafe { radius.getCPointer().read() }, col, rot, num_segments, thickness)
 }
 
+@DefaultArgs[Float32(0.0), Int32(0)]
 func ImDrawList_AddEllipseFilled(self: ImDrawList, center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32): Unit {
     return capi.ImDrawList_AddEllipseFilled(self.getCPointer(), unsafe { center.getCPointer().read() }, unsafe { radius.getCPointer().read() }, col, rot, num_segments)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 1.0), UInt32(4294967295)]
 func ImDrawList_AddImage(self: ImDrawList, user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32): Unit {
     return capi.ImDrawList_AddImage(self.getCPointer(), user_texture_id, unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, unsafe { uv_min.getCPointer().read() }, unsafe { uv_max.getCPointer().read() }, col)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 0.0), ImVec2(1.0, 1.0), ImVec2(0.0, 1.0), UInt32(4294967295)]
 func ImDrawList_AddImageQuad(self: ImDrawList, user_texture_id: ImTextureID, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, uv1: ImVec2, uv2: ImVec2, uv3: ImVec2, uv4: ImVec2, col: ImU32): Unit {
     return capi.ImDrawList_AddImageQuad(self.getCPointer(), user_texture_id, unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, unsafe { p4.getCPointer().read() }, unsafe { uv1.getCPointer().read() }, unsafe { uv2.getCPointer().read() }, unsafe { uv3.getCPointer().read() }, unsafe { uv4.getCPointer().read() }, col)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_AddImageRounded(self: ImDrawList, user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
     return capi.ImDrawList_AddImageRounded(self.getCPointer(), user_texture_id, unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, unsafe { uv_min.getCPointer().read() }, unsafe { uv_max.getCPointer().read() }, col, rounding, flags)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImDrawList_AddLine(self: ImDrawList, p1: ImVec2, p2: ImVec2, col: ImU32, thickness: Float32): Unit {
     return capi.ImDrawList_AddLine(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, col, thickness)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImDrawList_AddNgon(self: ImDrawList, center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
     return capi.ImDrawList_AddNgon(self.getCPointer(), unsafe { center.getCPointer().read() }, radius, col, num_segments, thickness)
 }
@@ -187,6 +204,7 @@ func ImDrawList_AddPolyline(self: ImDrawList, points: ImVec2, num_points: Int32,
     return capi.ImDrawList_AddPolyline(self.getCPointer(), points.getCPointer(), num_points, col, flags, thickness)
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImDrawList_AddQuad(self: ImDrawList, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32): Unit {
     return capi.ImDrawList_AddQuad(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, unsafe { p4.getCPointer().read() }, col, thickness)
 }
@@ -195,10 +213,12 @@ func ImDrawList_AddQuadFilled(self: ImDrawList, p1: ImVec2, p2: ImVec2, p3: ImVe
     return capi.ImDrawList_AddQuadFilled(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, unsafe { p4.getCPointer().read() }, col)
 }
 
+@DefaultArgs[Float32(0.0), Int32(0), Float32(1.0)]
 func ImDrawList_AddRect(self: ImDrawList, p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags, thickness: Float32): Unit {
     return capi.ImDrawList_AddRect(self.getCPointer(), unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, col, rounding, flags, thickness)
 }
 
+@DefaultArgs[Float32(0.0), Int32(0)]
 func ImDrawList_AddRectFilled(self: ImDrawList, p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
     return capi.ImDrawList_AddRectFilled(self.getCPointer(), unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, col, rounding, flags)
 }
@@ -207,14 +227,17 @@ func ImDrawList_AddRectFilledMultiColor(self: ImDrawList, p_min: ImVec2, p_max: 
     return capi.ImDrawList_AddRectFilledMultiColor(self.getCPointer(), unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, col_upr_left, col_upr_right, col_bot_right, col_bot_left)
 }
 
+@DefaultArgs[null<UInt8>()]
 func ImDrawList_AddText_Vec2(self: ImDrawList, pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable): Unit {
     return capi.ImDrawList_AddText_Vec2(self.getCPointer(), unsafe { pos.getCPointer().read() }, col, text_begin.asCString(), text_end.asCString())
 }
 
+@DefaultArgs[null<UInt8>(), Float32(0.0), ImVec4.null()]
 func ImDrawList_AddText_FontPtr(self: ImDrawList, font: ImFont, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip_rect: ImVec4): Unit {
     return capi.ImDrawList_AddText_FontPtr(self.getCPointer(), font.getCPointer(), font_size, unsafe { pos.getCPointer().read() }, col, text_begin.asCString(), text_end.asCString(), wrap_width, cpu_fine_clip_rect.getCPointer())
 }
 
+@DefaultArgs[Float32(1.0)]
 func ImDrawList_AddTriangle(self: ImDrawList, p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32): Unit {
     return capi.ImDrawList_AddTriangle(self.getCPointer(), unsafe { p1.getCPointer().read() }, unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, col, thickness)
 }
@@ -251,6 +274,7 @@ func ImDrawList_ImDrawList(shared_data: ImDrawListSharedData): ImDrawList {
     return ImDrawList(capi.ImDrawList_ImDrawList(shared_data.getCPointer()), owned: false)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_PathArcTo(self: ImDrawList, center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
     return capi.ImDrawList_PathArcTo(self.getCPointer(), unsafe { center.getCPointer().read() }, radius, a_min, a_max, num_segments)
 }
@@ -259,10 +283,12 @@ func ImDrawList_PathArcToFast(self: ImDrawList, center: ImVec2, radius: Float32,
     return capi.ImDrawList_PathArcToFast(self.getCPointer(), unsafe { center.getCPointer().read() }, radius, a_min_of_12, a_max_of_12)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_PathBezierCubicCurveTo(self: ImDrawList, p2: ImVec2, p3: ImVec2, p4: ImVec2, num_segments: Int32): Unit {
     return capi.ImDrawList_PathBezierCubicCurveTo(self.getCPointer(), unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, unsafe { p4.getCPointer().read() }, num_segments)
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_PathBezierQuadraticCurveTo(self: ImDrawList, p2: ImVec2, p3: ImVec2, num_segments: Int32): Unit {
     return capi.ImDrawList_PathBezierQuadraticCurveTo(self.getCPointer(), unsafe { p2.getCPointer().read() }, unsafe { p3.getCPointer().read() }, num_segments)
 }
@@ -271,6 +297,7 @@ func ImDrawList_PathClear(self: ImDrawList): Unit {
     return capi.ImDrawList_PathClear(self.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 func ImDrawList_PathEllipticalArcTo(self: ImDrawList, center: ImVec2, radius: ImVec2, rot: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
     return capi.ImDrawList_PathEllipticalArcTo(self.getCPointer(), unsafe { center.getCPointer().read() }, unsafe { radius.getCPointer().read() }, rot, a_min, a_max, num_segments)
 }
@@ -291,10 +318,12 @@ func ImDrawList_PathLineToMergeDuplicate(self: ImDrawList, pos: ImVec2): Unit {
     return capi.ImDrawList_PathLineToMergeDuplicate(self.getCPointer(), unsafe { pos.getCPointer().read() })
 }
 
+@DefaultArgs[Float32(0.0), Int32(0)]
 func ImDrawList_PathRect(self: ImDrawList, rect_min: ImVec2, rect_max: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit {
     return capi.ImDrawList_PathRect(self.getCPointer(), unsafe { rect_min.getCPointer().read() }, unsafe { rect_max.getCPointer().read() }, rounding, flags)
 }
 
+@DefaultArgs[Int32(0), Float32(1.0)]
 func ImDrawList_PathStroke(self: ImDrawList, col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit {
     return capi.ImDrawList_PathStroke(self.getCPointer(), col, flags, thickness)
 }
@@ -339,6 +368,7 @@ func ImDrawList_PrimWriteVtx(self: ImDrawList, pos: ImVec2, uv: ImVec2, col: ImU
     return capi.ImDrawList_PrimWriteVtx(self.getCPointer(), unsafe { pos.getCPointer().read() }, unsafe { uv.getCPointer().read() }, col)
 }
 
+@DefaultArgs[false]
 func ImDrawList_PushClipRect(self: ImDrawList, clip_rect_min: ImVec2, clip_rect_max: ImVec2, intersect_with_current_clip_rect: Bool): Unit {
     return capi.ImDrawList_PushClipRect(self.getCPointer(), unsafe { clip_rect_min.getCPointer().read() }, unsafe { clip_rect_max.getCPointer().read() }, intersect_with_current_clip_rect)
 }
@@ -399,6 +429,7 @@ func ImFontAtlasCustomRect_IsPacked(self: ImFontAtlasCustomRect): Bool {
     return capi.ImFontAtlasCustomRect_IsPacked(self.getCPointer())
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0)]
 func ImFontAtlas_AddCustomRectFontGlyph(self: ImFontAtlas, font: ImFont, id: ImWchar, width: Int32, height: Int32, advance_x: Float32, offset: ImVec2): Int32 {
     return capi.ImFontAtlas_AddCustomRectFontGlyph(self.getCPointer(), font.getCPointer(), id, width, height, advance_x, unsafe { offset.getCPointer().read() })
 }
@@ -411,22 +442,27 @@ func ImFontAtlas_AddFont(self: ImFontAtlas, font_cfg: ImFontConfig): ImFont {
     return ImFont(capi.ImFontAtlas_AddFont(self.getCPointer(), font_cfg.getCPointer()), owned: false)
 }
 
+@DefaultArgs[ImFontConfig.null()]
 func ImFontAtlas_AddFontDefault(self: ImFontAtlas, font_cfg: ImFontConfig): ImFont {
     return ImFont(capi.ImFontAtlas_AddFontDefault(self.getCPointer(), font_cfg.getCPointer()), owned: false)
 }
 
+@DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
 func ImFontAtlas_AddFontFromFileTTF(self: ImFontAtlas, filename: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
     return ImFont(capi.ImFontAtlas_AddFontFromFileTTF(self.getCPointer(), filename.asCString(), size_pixels, font_cfg.getCPointer(), glyph_ranges.getCPointer()), owned: false)
 }
 
+@DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
 func ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self: ImFontAtlas, compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
     return ImFont(capi.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self.getCPointer(), compressed_font_data_base85.asCString(), size_pixels, font_cfg.getCPointer(), glyph_ranges.getCPointer()), owned: false)
 }
 
+@DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
 func ImFontAtlas_AddFontFromMemoryCompressedTTF(self: ImFontAtlas, compressed_font_data: Ref<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
     return ImFont(capi.ImFontAtlas_AddFontFromMemoryCompressedTTF(self.getCPointer(), compressed_font_data.getCPointer(), compressed_font_data_size, size_pixels, font_cfg.getCPointer(), glyph_ranges.getCPointer()), owned: false)
 }
 
+@DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
 func ImFontAtlas_AddFontFromMemoryTTF(self: ImFontAtlas, font_data: Ref<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
     return ImFont(capi.ImFontAtlas_AddFontFromMemoryTTF(self.getCPointer(), font_data.getCPointer(), font_data_size, size_pixels, font_cfg.getCPointer(), glyph_ranges.getCPointer()), owned: false)
 }
@@ -499,10 +535,12 @@ func ImFontAtlas_GetMouseCursorTexData(self: ImFontAtlas, cursor: ImGuiMouseCurs
     return capi.ImFontAtlas_GetMouseCursorTexData(self.getCPointer(), cursor, out_offset.getCPointer(), out_size.getCPointer(), out_uv_border.getCPointer(), out_uv_fill.getCPointer())
 }
 
+@DefaultArgs[null<Int32>()]
 func ImFontAtlas_GetTexDataAsAlpha8(self: ImFontAtlas, out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
     return capi.ImFontAtlas_GetTexDataAsAlpha8(self.getCPointer(), out_pixels, out_width.getCPointer(), out_height.getCPointer(), out_bytes_per_pixel.getCPointer())
 }
 
+@DefaultArgs[null<Int32>()]
 func ImFontAtlas_GetTexDataAsRGBA32(self: ImFontAtlas, out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
     return capi.ImFontAtlas_GetTexDataAsRGBA32(self.getCPointer(), out_pixels, out_width.getCPointer(), out_height.getCPointer(), out_bytes_per_pixel.getCPointer())
 }
@@ -531,6 +569,7 @@ func ImFontGlyphRangesBuilder_AddRanges(self: ImFontGlyphRangesBuilder, ranges: 
     return capi.ImFontGlyphRangesBuilder_AddRanges(self.getCPointer(), ranges.getCPointer())
 }
 
+@DefaultArgs[null<UInt8>()]
 func ImFontGlyphRangesBuilder_AddText(self: ImFontGlyphRangesBuilder, text: CStringConvertable, text_end: CStringConvertable): Unit {
     return capi.ImFontGlyphRangesBuilder_AddText(self.getCPointer(), text.asCString(), text_end.asCString())
 }
@@ -559,6 +598,7 @@ func ImFont_AddGlyph(self: ImFont, src_cfg: ImFontConfig, c: ImWchar, x0: Float3
     return capi.ImFont_AddGlyph(self.getCPointer(), src_cfg.getCPointer(), c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x)
 }
 
+@DefaultArgs[true]
 func ImFont_AddRemapChar(self: ImFont, dst: ImWchar, src: ImWchar, overwrite_dst: Bool): Unit {
     return capi.ImFont_AddRemapChar(self.getCPointer(), dst, src, overwrite_dst)
 }
@@ -567,6 +607,7 @@ func ImFont_BuildLookupTable(self: ImFont): Unit {
     return capi.ImFont_BuildLookupTable(self.getCPointer())
 }
 
+@DefaultArgs[null<UInt8>(), null<CPointer<UInt8>>()]
 func ImFont_CalcTextSizeA(pOut: ImVec2, self: ImFont, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Ref<CPointer<UInt8>>): Unit {
     return capi.ImFont_CalcTextSizeA(pOut.getCPointer(), self.getCPointer(), size, max_width, wrap_width, text_begin.asCString(), text_end.asCString(), remaining.getCPointer())
 }
@@ -615,6 +656,7 @@ func ImFont_RenderChar(self: ImFont, draw_list: ImDrawList, size: Float32, pos: 
     return capi.ImFont_RenderChar(self.getCPointer(), draw_list.getCPointer(), size, unsafe { pos.getCPointer().read() }, col, c)
 }
 
+@DefaultArgs[Float32(0.0), false]
 func ImFont_RenderText(self: ImFont, draw_list: ImDrawList, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip: Bool): Unit {
     return capi.ImFont_RenderText(self.getCPointer(), draw_list.getCPointer(), size, unsafe { pos.getCPointer().read() }, col, unsafe { clip_rect.getCPointer().read() }, text_begin.asCString(), text_end.asCString(), wrap_width, cpu_fine_clip)
 }
@@ -707,6 +749,7 @@ func ImGuiIO_SetAppAcceptingEvents(self: ImGuiIO, accepting_events: Bool): Unit 
     return capi.ImGuiIO_SetAppAcceptingEvents(self.getCPointer(), accepting_events)
 }
 
+@DefaultArgs[Int32(-1)]
 func ImGuiIO_SetKeyEventNativeData(self: ImGuiIO, key: ImGuiKey, native_keycode: Int32, native_scancode: Int32, native_legacy_index: Int32): Unit {
     return capi.ImGuiIO_SetKeyEventNativeData(self.getCPointer(), key, native_keycode, native_scancode, native_legacy_index)
 }
@@ -727,6 +770,7 @@ func ImGuiInputTextCallbackData_ImGuiInputTextCallbackData(): ImGuiInputTextCall
     return ImGuiInputTextCallbackData(capi.ImGuiInputTextCallbackData_ImGuiInputTextCallbackData(), owned: false)
 }
 
+@DefaultArgs[null<UInt8>()]
 func ImGuiInputTextCallbackData_InsertChars(self: ImGuiInputTextCallbackData, pos: Int32, text: CStringConvertable, text_end: CStringConvertable): Unit {
     return capi.ImGuiInputTextCallbackData_InsertChars(self.getCPointer(), pos, text.asCString(), text_end.asCString())
 }
@@ -847,6 +891,7 @@ func ImGuiListClipperRange_FromPositions(y1: Float32, y2: Float32, off_min: Int3
     return ImGuiListClipperRange(value: Some(capi.ImGuiListClipperRange_FromPositions(y1, y2, off_min, off_max)))
 }
 
+@DefaultArgs[Float32(-1.0)]
 func ImGuiListClipper_Begin(self: ImGuiListClipper, items_count: Int32, items_height: Float32): Unit {
     return capi.ImGuiListClipper_Begin(self.getCPointer(), items_count, items_height)
 }
@@ -991,26 +1036,32 @@ func ImGuiStorage_Clear(self: ImGuiStorage): Unit {
     return capi.ImGuiStorage_Clear(self.getCPointer())
 }
 
+@DefaultArgs[false]
 func ImGuiStorage_GetBool(self: ImGuiStorage, key: ImGuiID, default_val: Bool): Bool {
     return capi.ImGuiStorage_GetBool(self.getCPointer(), key, default_val)
 }
 
+@DefaultArgs[false]
 func ImGuiStorage_GetBoolRef(self: ImGuiStorage, key: ImGuiID, default_val: Bool): Ref<Bool> {
     return Ref<Bool>.unsafeMake(capi.ImGuiStorage_GetBoolRef(self.getCPointer(), key, default_val), count: -1, owned: false)
 }
 
+@DefaultArgs[Float32(0.0)]
 func ImGuiStorage_GetFloat(self: ImGuiStorage, key: ImGuiID, default_val: Float32): Float32 {
     return capi.ImGuiStorage_GetFloat(self.getCPointer(), key, default_val)
 }
 
+@DefaultArgs[Float32(0.0)]
 func ImGuiStorage_GetFloatRef(self: ImGuiStorage, key: ImGuiID, default_val: Float32): Ref<Float32> {
     return Ref<Float32>.unsafeMake(capi.ImGuiStorage_GetFloatRef(self.getCPointer(), key, default_val), count: -1, owned: false)
 }
 
+@DefaultArgs[Int32(0)]
 func ImGuiStorage_GetInt(self: ImGuiStorage, key: ImGuiID, default_val: Int32): Int32 {
     return capi.ImGuiStorage_GetInt(self.getCPointer(), key, default_val)
 }
 
+@DefaultArgs[Int32(0)]
 func ImGuiStorage_GetIntRef(self: ImGuiStorage, key: ImGuiID, default_val: Int32): Ref<Int32> {
     return Ref<Int32>.unsafeMake(capi.ImGuiStorage_GetIntRef(self.getCPointer(), key, default_val), count: -1, owned: false)
 }
@@ -1019,6 +1070,7 @@ func ImGuiStorage_GetVoidPtr(self: ImGuiStorage, key: ImGuiID): Ref<Unit> {
     return Ref<Unit>.unsafeMake(capi.ImGuiStorage_GetVoidPtr(self.getCPointer(), key), count: -1, owned: false)
 }
 
+@DefaultArgs[null<Unit>()]
 func ImGuiStorage_GetVoidPtrRef(self: ImGuiStorage, key: ImGuiID, default_val: Ref<Unit>): CPointer<CPointer<Unit>> {
     return capi.ImGuiStorage_GetVoidPtrRef(self.getCPointer(), key, default_val.getCPointer())
 }
@@ -1087,6 +1139,7 @@ func ImGuiTextBuffer_ImGuiTextBuffer(): ImGuiTextBuffer {
     return ImGuiTextBuffer(capi.ImGuiTextBuffer_ImGuiTextBuffer(), owned: false)
 }
 
+@DefaultArgs[null<UInt8>()]
 func ImGuiTextBuffer_append(self: ImGuiTextBuffer, str: CStringConvertable, str_end: CStringConvertable): Unit {
     return capi.ImGuiTextBuffer_append(self.getCPointer(), str.asCString(), str_end.asCString())
 }
@@ -1134,10 +1187,12 @@ func ImGuiTextFilter_Clear(self: ImGuiTextFilter): Unit {
     return capi.ImGuiTextFilter_Clear(self.getCPointer())
 }
 
+@DefaultArgs["Filter(inc,-exc)", Float32(0.0)]
 func ImGuiTextFilter_Draw(self: ImGuiTextFilter, label: CStringConvertable, width: Float32): Bool {
     return capi.ImGuiTextFilter_Draw(self.getCPointer(), label.asCString(), width)
 }
 
+@DefaultArgs[""]
 func ImGuiTextFilter_ImGuiTextFilter(default_filter: CStringConvertable): ImGuiTextFilter {
     return ImGuiTextFilter(capi.ImGuiTextFilter_ImGuiTextFilter(default_filter.asCString()), owned: false)
 }
@@ -1146,6 +1201,7 @@ func ImGuiTextFilter_IsActive(self: ImGuiTextFilter): Bool {
     return capi.ImGuiTextFilter_IsActive(self.getCPointer())
 }
 
+@DefaultArgs[null<UInt8>()]
 func ImGuiTextFilter_PassFilter(self: ImGuiTextFilter, text: CStringConvertable, text_end: CStringConvertable): Bool {
     return capi.ImGuiTextFilter_PassFilter(self.getCPointer(), text.asCString(), text_end.asCString())
 }
@@ -1402,6 +1458,7 @@ func ImVec4_ImVec4_Float(_x: Float32, _y: Float32, _z: Float32, _w: Float32): Im
     return ImVec4(capi.ImVec4_ImVec4_Float(_x, _y, _z, _w), owned: false)
 }
 
+@DefaultArgs[Int32(0)]
 public func AcceptDragDropPayload(`type`: CStringConvertable, flags: ImGuiDragDropFlags): ImGuiPayload {
     return ImGuiPayload(capi.igAcceptDragDropPayload(`type`.asCString(), flags), owned: false)
 }
@@ -1430,18 +1487,22 @@ public func ArrowButton(str_id: CStringConvertable, dir: ImGuiDir): Bool {
     return capi.igArrowButton(str_id.asCString(), dir)
 }
 
+@DefaultArgs[Int32(0)]
 public func ArrowButtonEx(str_id: CStringConvertable, dir: ImGuiDir, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
     return capi.igArrowButtonEx(str_id.asCString(), dir, unsafe { size_arg.getCPointer().read() }, flags)
 }
 
+@DefaultArgs[null<Bool>(), Int32(0)]
 public func Begin(name: CStringConvertable, p_open: Ref<Bool>, flags: ImGuiWindowFlags): Bool {
     return capi.igBegin(name.asCString(), p_open.getCPointer(), flags)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), Int32(0), Int32(0)]
 public func BeginChild(str_id: CStringConvertable, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
     return capi.igBeginChild_Str(str_id.asCString(), unsafe { size.getCPointer().read() }, child_flags, window_flags)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), Int32(0), Int32(0)]
 public func BeginChild(id: ImGuiID, size: ImVec2, child_flags: ImGuiChildFlags, window_flags: ImGuiWindowFlags): Bool {
     return capi.igBeginChild_ID(id, unsafe { size.getCPointer().read() }, child_flags, window_flags)
 }
@@ -1450,10 +1511,12 @@ public func BeginChildEx(name: CStringConvertable, id: ImGuiID, size_arg: ImVec2
     return capi.igBeginChildEx(name.asCString(), id, unsafe { size_arg.getCPointer().read() }, child_flags, window_flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func BeginColumns(str_id: CStringConvertable, count: Int32, flags: ImGuiOldColumnFlags): Unit {
     return capi.igBeginColumns(str_id.asCString(), count, flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func BeginCombo(label: CStringConvertable, preview_value: CStringConvertable, flags: ImGuiComboFlags): Bool {
     return capi.igBeginCombo(label.asCString(), preview_value.asCString(), flags)
 }
@@ -1466,6 +1529,7 @@ public func BeginComboPreview(): Bool {
     return capi.igBeginComboPreview()
 }
 
+@DefaultArgs[true]
 public func BeginDisabled(disabled: Bool): Unit {
     return capi.igBeginDisabled(disabled)
 }
@@ -1486,6 +1550,7 @@ public func BeginDocked(window: Ref<ImGuiWindow>, p_open: Ref<Bool>): Unit {
     return capi.igBeginDocked(window.getCPointer(), p_open.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func BeginDragDropSource(flags: ImGuiDragDropFlags): Bool {
     return capi.igBeginDragDropSource(flags)
 }
@@ -1506,6 +1571,7 @@ public func BeginItemTooltip(): Bool {
     return capi.igBeginItemTooltip()
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0)]
 public func BeginListBox(label: CStringConvertable, size: ImVec2): Bool {
     return capi.igBeginListBox(label.asCString(), unsafe { size.getCPointer().read() })
 }
@@ -1514,6 +1580,7 @@ public func BeginMainMenuBar(): Bool {
     return capi.igBeginMainMenuBar()
 }
 
+@DefaultArgs[true]
 public func BeginMenu(label: CStringConvertable, enabled: Bool): Bool {
     return capi.igBeginMenu(label.asCString(), enabled)
 }
@@ -1522,22 +1589,27 @@ public func BeginMenuBar(): Bool {
     return capi.igBeginMenuBar()
 }
 
+@DefaultArgs[true]
 public func BeginMenuEx(label: CStringConvertable, icon: CStringConvertable, enabled: Bool): Bool {
     return capi.igBeginMenuEx(label.asCString(), icon.asCString(), enabled)
 }
 
+@DefaultArgs[Int32(0)]
 public func BeginPopup(str_id: CStringConvertable, flags: ImGuiWindowFlags): Bool {
     return capi.igBeginPopup(str_id.asCString(), flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(1)]
 public func BeginPopupContextItem(str_id: CStringConvertable, popup_flags: ImGuiPopupFlags): Bool {
     return capi.igBeginPopupContextItem(str_id.asCString(), popup_flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(1)]
 public func BeginPopupContextVoid(str_id: CStringConvertable, popup_flags: ImGuiPopupFlags): Bool {
     return capi.igBeginPopupContextVoid(str_id.asCString(), popup_flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(1)]
 public func BeginPopupContextWindow(str_id: CStringConvertable, popup_flags: ImGuiPopupFlags): Bool {
     return capi.igBeginPopupContextWindow(str_id.asCString(), popup_flags)
 }
@@ -1546,10 +1618,12 @@ public func BeginPopupEx(id: ImGuiID, extra_flags: ImGuiWindowFlags): Bool {
     return capi.igBeginPopupEx(id, extra_flags)
 }
 
+@DefaultArgs[null<Bool>(), Int32(0)]
 public func BeginPopupModal(name: CStringConvertable, p_open: Ref<Bool>, flags: ImGuiWindowFlags): Bool {
     return capi.igBeginPopupModal(name.asCString(), p_open.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func BeginTabBar(str_id: CStringConvertable, flags: ImGuiTabBarFlags): Bool {
     return capi.igBeginTabBar(str_id.asCString(), flags)
 }
@@ -1558,14 +1632,17 @@ public func BeginTabBarEx(tab_bar: ImGuiTabBar, bb: ImRect, flags: ImGuiTabBarFl
     return capi.igBeginTabBarEx(tab_bar.getCPointer(), unsafe { bb.getCPointer().read() }, flags)
 }
 
+@DefaultArgs[null<Bool>(), Int32(0)]
 public func BeginTabItem(label: CStringConvertable, p_open: Ref<Bool>, flags: ImGuiTabItemFlags): Bool {
     return capi.igBeginTabItem(label.asCString(), p_open.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0), ImVec2(0.0, 0.0), Float32(0.0)]
 public func BeginTable(str_id: CStringConvertable, column: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
     return capi.igBeginTable(str_id.asCString(), column, flags, unsafe { outer_size.getCPointer().read() }, inner_width)
 }
 
+@DefaultArgs[Int32(0), ImVec2(0.0, 0.0), Float32(0.0)]
 public func BeginTableEx(name: CStringConvertable, id: ImGuiID, columns_count: Int32, flags: ImGuiTableFlags, outer_size: ImVec2, inner_width: Float32): Bool {
     return capi.igBeginTableEx(name.asCString(), id, columns_count, flags, unsafe { outer_size.getCPointer().read() }, inner_width)
 }
@@ -1613,14 +1690,17 @@ public func BulletText(fmt: CStringConvertable): Unit {
 // Cangjie does not support `va_list`
 // public func BulletTextV(fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[ImVec2(0.0, 0.0)]
 public func Button(label: CStringConvertable, size: ImVec2): Bool {
     return capi.igButton(label.asCString(), unsafe { size.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func ButtonBehavior(bb: ImRect, id: ImGuiID, out_hovered: Ref<Bool>, out_held: Ref<Bool>, flags: ImGuiButtonFlags): Bool {
     return capi.igButtonBehavior(unsafe { bb.getCPointer().read() }, id, out_hovered.getCPointer(), out_held.getCPointer(), flags)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), Int32(0)]
 public func ButtonEx(label: CStringConvertable, size_arg: ImVec2, flags: ImGuiButtonFlags): Bool {
     return capi.igButtonEx(label.asCString(), unsafe { size_arg.getCPointer().read() }, flags)
 }
@@ -1637,6 +1717,7 @@ public func CalcRoundingFlagsForRectInRect(r_in: ImRect, r_outer: ImRect, thresh
     return capi.igCalcRoundingFlagsForRectInRect(unsafe { r_in.getCPointer().read() }, unsafe { r_outer.getCPointer().read() }, threshold)
 }
 
+@DefaultArgs[null<UInt8>(), false, Float32(-1.0)]
 public func CalcTextSize(pOut: ImVec2, text: CStringConvertable, text_end: CStringConvertable, hide_text_after_double_hash: Bool, wrap_width: Float32): Unit {
     return capi.igCalcTextSize(pOut.getCPointer(), text.asCString(), text_end.asCString(), hide_text_after_double_hash, wrap_width)
 }
@@ -1717,14 +1798,17 @@ public func CollapseButton(id: ImGuiID, pos: ImVec2, dock_node: Ref<ImGuiDockNod
     return capi.igCollapseButton(id, unsafe { pos.getCPointer().read() }, dock_node.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func CollapsingHeader(label: CStringConvertable, flags: ImGuiTreeNodeFlags): Bool {
     return capi.igCollapsingHeader_TreeNodeFlags(label.asCString(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func CollapsingHeader(label: CStringConvertable, p_visible: Ref<Bool>, flags: ImGuiTreeNodeFlags): Bool {
     return capi.igCollapsingHeader_BoolPtr(label.asCString(), p_visible.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0), ImVec2(0.0, 0.0)]
 public func ColorButton(desc_id: CStringConvertable, col: ImVec4, flags: ImGuiColorEditFlags, size: ImVec2): Bool {
     return capi.igColorButton(desc_id.asCString(), unsafe { col.getCPointer().read() }, flags, unsafe { size.getCPointer().read() })
 }
@@ -1745,10 +1829,12 @@ public func ColorConvertU32ToFloat4(pOut: ImVec4, `in`: ImU32): Unit {
     return capi.igColorConvertU32ToFloat4(pOut.getCPointer(), `in`)
 }
 
+@DefaultArgs[Int32(0)]
 public func ColorEdit3(label: CStringConvertable, col: Ref<Float32>, flags: ImGuiColorEditFlags): Bool {
     return capi.igColorEdit3(label.asCString(), col.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func ColorEdit4(label: CStringConvertable, col: Ref<Float32>, flags: ImGuiColorEditFlags): Bool {
     return capi.igColorEdit4(label.asCString(), col.getCPointer(), flags)
 }
@@ -1757,10 +1843,12 @@ public func ColorEditOptionsPopup(col: Ref<Float32>, flags: ImGuiColorEditFlags)
     return capi.igColorEditOptionsPopup(col.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func ColorPicker3(label: CStringConvertable, col: Ref<Float32>, flags: ImGuiColorEditFlags): Bool {
     return capi.igColorPicker3(label.asCString(), col.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0), null<Float32>()]
 public func ColorPicker4(label: CStringConvertable, col: Ref<Float32>, flags: ImGuiColorEditFlags, ref_col: Ref<Float32>): Bool {
     return capi.igColorPicker4(label.asCString(), col.getCPointer(), flags, ref_col.getCPointer())
 }
@@ -1773,18 +1861,22 @@ public func ColorTooltip(text: CStringConvertable, col: Ref<Float32>, flags: ImG
     return capi.igColorTooltip(text.asCString(), col.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(1), null<UInt8>(), true]
 public func Columns(count: Int32, id: CStringConvertable, border: Bool): Unit {
     return capi.igColumns(count, id.asCString(), border)
 }
 
+@DefaultArgs[Int32(-1)]
 public func Combo(label: CStringConvertable, current_item: Ref<Int32>, items: Ref<CPointer<UInt8>>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return capi.igCombo_Str_arr(label.asCString(), current_item.getCPointer(), items.getCPointer(), items_count, popup_max_height_in_items)
 }
 
+@DefaultArgs[Int32(-1)]
 public func Combo(label: CStringConvertable, current_item: Ref<Int32>, items_separated_by_zeros: CStringConvertable, popup_max_height_in_items: Int32): Bool {
     return capi.igCombo_Str(label.asCString(), current_item.getCPointer(), items_separated_by_zeros.asCString(), popup_max_height_in_items)
 }
 
+@DefaultArgs[Int32(-1)]
 public func Combo(label: CStringConvertable, current_item: Ref<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: Ref<Unit>, items_count: Int32, popup_max_height_in_items: Int32): Bool {
     return capi.igCombo_FnStrPtr(label.asCString(), current_item.getCPointer(), getter, user_data.getCPointer(), items_count, popup_max_height_in_items)
 }
@@ -1793,6 +1885,7 @@ public func ConvertSingleModFlagToKey(key: ImGuiKey): ImGuiKey {
     return capi.igConvertSingleModFlagToKey(key)
 }
 
+@DefaultArgs[ImFontAtlas.null()]
 public func CreateContext(shared_font_atlas: ImFontAtlas): Ref<ImGuiContext> {
     return Ref<Unit>.unsafeMake(capi.igCreateContext(shared_font_atlas.getCPointer()), count: -1, owned: false)
 }
@@ -1801,6 +1894,7 @@ public func CreateNewWindowSettings(name: CStringConvertable): ImGuiWindowSettin
     return ImGuiWindowSettings(capi.igCreateNewWindowSettings(name.asCString()), owned: false)
 }
 
+@DefaultArgs[null<Unit>()]
 public func DataTypeApplyFromText(buf: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, format: CStringConvertable, p_data_when_empty: Ref<Unit>): Bool {
     return capi.igDataTypeApplyFromText(buf.asCString(), data_type, p_data.getCPointer(), format.asCString(), p_data_when_empty.getCPointer())
 }
@@ -1845,14 +1939,17 @@ public func DebugCheckVersionAndDataLayout(version_str: CStringConvertable, sz_i
     return capi.igDebugCheckVersionAndDataLayout(version_str.asCString(), sz_io, sz_style, sz_vec2, sz_vec4, sz_drawvert, sz_drawidx)
 }
 
+@DefaultArgs[UInt32(4278190335)]
 public func DebugDrawCursorPos(col: ImU32): Unit {
     return capi.igDebugDrawCursorPos(col)
 }
 
+@DefaultArgs[UInt32(4278190335)]
 public func DebugDrawItemRect(col: ImU32): Unit {
     return capi.igDebugDrawItemRect(col)
 }
 
+@DefaultArgs[UInt32(4278190335)]
 public func DebugDrawLineExtents(col: ImU32): Unit {
     return capi.igDebugDrawLineExtents(col)
 }
@@ -1972,6 +2069,7 @@ public func DebugTextUnformattedWithLocateItem(line_begin: CStringConvertable, l
     return capi.igDebugTextUnformattedWithLocateItem(line_begin.asCString(), line_end.asCString())
 }
 
+@DefaultArgs[null<ImGuiContext>()]
 public func DestroyContext(ctx: Ref<ImGuiContext>): Unit {
     return capi.igDestroyContext(ctx.getCPointer())
 }
@@ -1984,6 +2082,7 @@ public func DestroyPlatformWindows(): Unit {
     return capi.igDestroyPlatformWindows()
 }
 
+@DefaultArgs[UInt32(0), Int32(0)]
 public func DockBuilderAddNode(node_id: ImGuiID, flags: ImGuiDockNodeFlags): ImGuiID {
     return capi.igDockBuilderAddNode(node_id, flags)
 }
@@ -2024,6 +2123,7 @@ public func DockBuilderRemoveNodeChildNodes(node_id: ImGuiID): Unit {
     return capi.igDockBuilderRemoveNodeChildNodes(node_id)
 }
 
+@DefaultArgs[true]
 public func DockBuilderRemoveNodeDockedWindows(node_id: ImGuiID, clear_settings_refs: Bool): Unit {
     return capi.igDockBuilderRemoveNodeDockedWindows(node_id, clear_settings_refs)
 }
@@ -2076,6 +2176,7 @@ public func DockContextProcessUndockNode(ctx: Ref<ImGuiContext>, node: Ref<ImGui
     return capi.igDockContextProcessUndockNode(ctx.getCPointer(), node.getCPointer())
 }
 
+@DefaultArgs[true]
 public func DockContextProcessUndockWindow(ctx: Ref<ImGuiContext>, window: Ref<ImGuiWindow>, clear_persistent_docking_ref: Bool): Unit {
     return capi.igDockContextProcessUndockWindow(ctx.getCPointer(), window.getCPointer(), clear_persistent_docking_ref)
 }
@@ -2128,10 +2229,12 @@ public func DockNodeWindowMenuHandler_Default(ctx: Ref<ImGuiContext>, node: Ref<
     return capi.igDockNodeWindowMenuHandler_Default(ctx.getCPointer(), node.getCPointer(), tab_bar.getCPointer())
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), Int32(0), ImGuiWindowClass.null()]
 public func DockSpace(dockspace_id: ImGuiID, size: ImVec2, flags: ImGuiDockNodeFlags, window_class: ImGuiWindowClass): ImGuiID {
     return capi.igDockSpace(dockspace_id, unsafe { size.getCPointer().read() }, flags, window_class.getCPointer())
 }
 
+@DefaultArgs[UInt32(0), ImGuiViewport.null(), Int32(0), ImGuiWindowClass.null()]
 public func DockSpaceOverViewport(dockspace_id: ImGuiID, viewport: ImGuiViewport, flags: ImGuiDockNodeFlags, window_class: ImGuiWindowClass): ImGuiID {
     return capi.igDockSpaceOverViewport(dockspace_id, viewport.getCPointer(), flags, window_class.getCPointer())
 }
@@ -2140,50 +2243,62 @@ public func DragBehavior(id: ImGuiID, data_type: ImGuiDataType, p_v: Ref<Unit>, 
     return capi.igDragBehavior(id, data_type, p_v.getCPointer(), v_speed, p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Float32(0.0), Float32(0.0), "%.3f", Int32(0)]
 public func DragFloat(label: CStringConvertable, v: Ref<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragFloat(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Float32(0.0), Float32(0.0), "%.3f", Int32(0)]
 public func DragFloat2(label: CStringConvertable, v: Ref<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragFloat2(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Float32(0.0), Float32(0.0), "%.3f", Int32(0)]
 public func DragFloat3(label: CStringConvertable, v: Ref<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragFloat3(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Float32(0.0), Float32(0.0), "%.3f", Int32(0)]
 public func DragFloat4(label: CStringConvertable, v: Ref<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragFloat4(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Float32(0.0), Float32(0.0), "%.3f", null<UInt8>(), Int32(0)]
 public func DragFloatRange2(label: CStringConvertable, v_current_min: Ref<Float32>, v_current_max: Ref<Float32>, v_speed: Float32, v_min: Float32, v_max: Float32, format: CStringConvertable, format_max: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragFloatRange2(label.asCString(), v_current_min.getCPointer(), v_current_max.getCPointer(), v_speed, v_min, v_max, format.asCString(), format_max.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Int32(0), Int32(0), "%d", Int32(0)]
 public func DragInt(label: CStringConvertable, v: Ref<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragInt(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Int32(0), Int32(0), "%d", Int32(0)]
 public func DragInt2(label: CStringConvertable, v: Ref<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragInt2(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Int32(0), Int32(0), "%d", Int32(0)]
 public func DragInt3(label: CStringConvertable, v: Ref<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragInt3(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Int32(0), Int32(0), "%d", Int32(0)]
 public func DragInt4(label: CStringConvertable, v: Ref<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragInt4(label.asCString(), v.getCPointer(), v_speed, v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), Int32(0), Int32(0), "%d", null<UInt8>(), Int32(0)]
 public func DragIntRange2(label: CStringConvertable, v_current_min: Ref<Int32>, v_current_max: Ref<Int32>, v_speed: Float32, v_min: Int32, v_max: Int32, format: CStringConvertable, format_max: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragIntRange2(label.asCString(), v_current_min.getCPointer(), v_current_max.getCPointer(), v_speed, v_min, v_max, format.asCString(), format_max.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), null<Unit>(), null<Unit>(), null<UInt8>(), Int32(0)]
 public func DragScalar(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, v_speed: Float32, p_min: Ref<Unit>, p_max: Ref<Unit>, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragScalar(label.asCString(), data_type, p_data.getCPointer(), v_speed, p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(1.0), null<Unit>(), null<Unit>(), null<UInt8>(), Int32(0)]
 public func DragScalarN(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, components: Int32, v_speed: Float32, p_min: Ref<Unit>, p_max: Ref<Unit>, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igDragScalarN(label.asCString(), data_type, p_data.getCPointer(), components, v_speed, p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
@@ -2272,10 +2387,12 @@ public func EndTooltip(): Unit {
     return capi.igEndTooltip()
 }
 
+@DefaultArgs[null<Unit>()]
 public func ErrorCheckEndFrameRecover(log_callback: ImGuiErrorLogCallback, user_data: Ref<Unit>): Unit {
     return capi.igErrorCheckEndFrameRecover(log_callback, user_data.getCPointer())
 }
 
+@DefaultArgs[null<Unit>()]
 public func ErrorCheckEndWindowRecover(log_callback: ImGuiErrorLogCallback, user_data: Ref<Unit>): Unit {
     return capi.igErrorCheckEndWindowRecover(log_callback, user_data.getCPointer())
 }
@@ -2312,6 +2429,7 @@ public func FindOrCreateColumns(window: Ref<ImGuiWindow>, id: ImGuiID): ImGuiOld
     return ImGuiOldColumns(capi.igFindOrCreateColumns(window.getCPointer(), id), owned: false)
 }
 
+@DefaultArgs[null<UInt8>()]
 public func FindRenderedTextEnd(text: CStringConvertable, text_end: CStringConvertable): String {
     return CString(capi.igFindRenderedTextEnd(text.asCString(), text_end.asCString())).toString()
 }
@@ -2360,6 +2478,7 @@ public func FocusTopMostWindowUnderOne(under_this_window: Ref<ImGuiWindow>, igno
     return capi.igFocusTopMostWindowUnderOne(under_this_window.getCPointer(), ignore_window.getCPointer(), filter_viewport.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func FocusWindow(window: Ref<ImGuiWindow>, flags: ImGuiFocusRequestFlags): Unit {
     return capi.igFocusWindow(window.getCPointer(), flags)
 }
@@ -2396,6 +2515,7 @@ public func GetClipboardText(): String {
     return CString(capi.igGetClipboardText()).toString()
 }
 
+@DefaultArgs[Float32(1.0)]
 public func GetColorU32(idx: ImGuiCol, alpha_mul: Float32): ImU32 {
     return capi.igGetColorU32_Col(idx, alpha_mul)
 }
@@ -2404,6 +2524,7 @@ public func GetColorU32(col: ImVec4): ImU32 {
     return capi.igGetColorU32_Vec4(unsafe { col.getCPointer().read() })
 }
 
+@DefaultArgs[Float32(1.0)]
 public func GetColorU32(col: ImU32, alpha_mul: Float32): ImU32 {
     return capi.igGetColorU32_U32(col, alpha_mul)
 }
@@ -2416,6 +2537,7 @@ public func GetColumnNormFromOffset(columns: ImGuiOldColumns, offset: Float32): 
     return capi.igGetColumnNormFromOffset(columns.getCPointer(), offset)
 }
 
+@DefaultArgs[Int32(-1)]
 public func GetColumnOffset(column_index: Int32): Float32 {
     return capi.igGetColumnOffset(column_index)
 }
@@ -2424,6 +2546,7 @@ public func GetColumnOffsetFromNorm(columns: ImGuiOldColumns, offset_norm: Float
     return capi.igGetColumnOffsetFromNorm(columns.getCPointer(), offset_norm)
 }
 
+@DefaultArgs[Int32(-1)]
 public func GetColumnWidth(column_index: Int32): Float32 {
     return capi.igGetColumnWidth(column_index)
 }
@@ -2648,6 +2771,7 @@ public func GetMouseCursor(): ImGuiMouseCursor {
     return capi.igGetMouseCursor()
 }
 
+@DefaultArgs[Int32(0), Float32(-1.0)]
 public func GetMouseDragDelta(pOut: ImVec2, button: ImGuiMouseButton, lock_threshold: Float32): Unit {
     return capi.igGetMouseDragDelta(pOut.getCPointer(), button, lock_threshold)
 }
@@ -2740,6 +2864,7 @@ public func GetTypematicRepeatRate(flags: ImGuiInputFlags, repeat_delay: Ref<Flo
     return capi.igGetTypematicRepeatRate(flags, repeat_delay.getCPointer(), repeat_rate.getCPointer())
 }
 
+@DefaultArgs[ImGuiTypingSelectFlags_None]
 public func GetTypingSelectRequest(flags: ImGuiTypingSelectFlags): ImGuiTypingSelectRequest {
     return ImGuiTypingSelectRequest(capi.igGetTypingSelectRequest(flags), owned: false)
 }
@@ -2900,6 +3025,7 @@ public func ImFileGetSize(file: ImFileHandle): ImU64 {
     return capi.igImFileGetSize(file)
 }
 
+@DefaultArgs[null<UIntNative>(), Int32(0)]
 public func ImFileLoadToMemory(filename: CStringConvertable, mode: CStringConvertable, out_file_size: Ref<UIntNative>, padding_bytes: Int32): Ref<Unit> {
     return Ref<Unit>.unsafeMake(capi.igImFileLoadToMemory(filename.asCString(), mode.asCString(), out_file_size.getCPointer(), padding_bytes), count: -1, owned: false)
 }
@@ -2978,10 +3104,12 @@ public func ImFormatStringToTempBuffer(out_buf: Ref<CPointer<UInt8>>, out_buf_en
 // Cangjie does not support `va_list`
 // public func ImFormatStringV(buf: CStringConvertable, buf_size: UIntNative, fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[UInt32(0)]
 public func ImHashData(data: Ref<Unit>, data_size: UIntNative, seed: ImGuiID): ImGuiID {
     return capi.igImHashData(data.getCPointer(), data_size, seed)
 }
 
+@DefaultArgs[UIntNative(0), UInt32(0)]
 public func ImHashStr(data: CStringConvertable, data_size: UIntNative, seed: ImGuiID): ImGuiID {
     return capi.igImHashStr(data.asCString(), data_size, seed)
 }
@@ -3190,6 +3318,7 @@ public func ImTextFindPreviousUtf8Codepoint(in_text_start: CStringConvertable, i
     return CString(capi.igImTextFindPreviousUtf8Codepoint(in_text_start.asCString(), in_text_curr.asCString())).toString()
 }
 
+@DefaultArgs[null<CPointer<UInt8>>()]
 public func ImTextStrFromUtf8(out_buf: Ref<ImWchar>, out_buf_size: Int32, in_text: CStringConvertable, in_text_end: CStringConvertable, in_remaining: Ref<CPointer<UInt8>>): Int32 {
     return capi.igImTextStrFromUtf8(out_buf.getCPointer(), out_buf_size, in_text.asCString(), in_text_end.asCString(), in_remaining.getCPointer())
 }
@@ -3234,18 +3363,22 @@ public func ImUpperPowerOfTwo(v: Int32): Int32 {
     return capi.igImUpperPowerOfTwo(v)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 1.0), ImVec4(1.0, 1.0, 1.0, 1.0), ImVec4(0.0, 0.0, 0.0, 0.0)]
 public func Image(user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, tint_col: ImVec4, border_col: ImVec4): Unit {
     return capi.igImage(user_texture_id, unsafe { image_size.getCPointer().read() }, unsafe { uv0.getCPointer().read() }, unsafe { uv1.getCPointer().read() }, unsafe { tint_col.getCPointer().read() }, unsafe { border_col.getCPointer().read() })
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 1.0), ImVec4(0.0, 0.0, 0.0, 0.0), ImVec4(1.0, 1.0, 1.0, 1.0)]
 public func ImageButton(str_id: CStringConvertable, user_texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4): Bool {
     return capi.igImageButton(str_id.asCString(), user_texture_id, unsafe { image_size.getCPointer().read() }, unsafe { uv0.getCPointer().read() }, unsafe { uv1.getCPointer().read() }, unsafe { bg_col.getCPointer().read() }, unsafe { tint_col.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func ImageButtonEx(id: ImGuiID, texture_id: ImTextureID, image_size: ImVec2, uv0: ImVec2, uv1: ImVec2, bg_col: ImVec4, tint_col: ImVec4, flags: ImGuiButtonFlags): Bool {
     return capi.igImageButtonEx(id, texture_id, unsafe { image_size.getCPointer().read() }, unsafe { uv0.getCPointer().read() }, unsafe { uv1.getCPointer().read() }, unsafe { bg_col.getCPointer().read() }, unsafe { tint_col.getCPointer().read() }, flags)
 }
 
+@DefaultArgs[Float32(0.0)]
 public func Indent(indent_w: Float32): Unit {
     return capi.igIndent(indent_w)
 }
@@ -3254,50 +3387,62 @@ public func Initialize(): Unit {
     return capi.igInitialize()
 }
 
+@DefaultArgs[Float64(0.0), Float64(0.0), "%.6f", Int32(0)]
 public func InputDouble(label: CStringConvertable, v: Ref<Float64>, step: Float64, step_fast: Float64, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputDouble(label.asCString(), v.getCPointer(), step, step_fast, format.asCString(), flags)
 }
 
+@DefaultArgs[Float32(0.0), Float32(0.0), "%.3f", Int32(0)]
 public func InputFloat(label: CStringConvertable, v: Ref<Float32>, step: Float32, step_fast: Float32, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputFloat(label.asCString(), v.getCPointer(), step, step_fast, format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func InputFloat2(label: CStringConvertable, v: Ref<Float32>, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputFloat2(label.asCString(), v.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func InputFloat3(label: CStringConvertable, v: Ref<Float32>, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputFloat3(label.asCString(), v.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func InputFloat4(label: CStringConvertable, v: Ref<Float32>, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputFloat4(label.asCString(), v.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[Int32(1), Int32(100), Int32(0)]
 public func InputInt(label: CStringConvertable, v: Ref<Int32>, step: Int32, step_fast: Int32, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputInt(label.asCString(), v.getCPointer(), step, step_fast, flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func InputInt2(label: CStringConvertable, v: Ref<Int32>, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputInt2(label.asCString(), v.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func InputInt3(label: CStringConvertable, v: Ref<Int32>, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputInt3(label.asCString(), v.getCPointer(), flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func InputInt4(label: CStringConvertable, v: Ref<Int32>, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputInt4(label.asCString(), v.getCPointer(), flags)
 }
 
+@DefaultArgs[null<Unit>(), null<Unit>(), null<UInt8>(), Int32(0)]
 public func InputScalar(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, p_step: Ref<Unit>, p_step_fast: Ref<Unit>, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputScalar(label.asCString(), data_type, p_data.getCPointer(), p_step.getCPointer(), p_step_fast.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[null<Unit>(), null<Unit>(), null<UInt8>(), Int32(0)]
 public func InputScalarN(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, components: Int32, p_step: Ref<Unit>, p_step_fast: Ref<Unit>, format: CStringConvertable, flags: ImGuiInputTextFlags): Bool {
     return capi.igInputScalarN(label.asCString(), data_type, p_data.getCPointer(), components, p_step.getCPointer(), p_step_fast.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[Int32(0), ImGuiInputTextCallbackNull, null<Unit>()]
 public func InputText(label: CStringConvertable, buf: CStringConvertable, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: Ref<Unit>): Bool {
     return capi.igInputText(label.asCString(), buf.asCString(), buf_size, flags, callback, user_data.getCPointer())
 }
@@ -3306,18 +3451,22 @@ public func InputTextDeactivateHook(id: ImGuiID): Unit {
     return capi.igInputTextDeactivateHook(id)
 }
 
+@DefaultArgs[ImGuiInputTextCallbackNull, null<Unit>()]
 public func InputTextEx(label: CStringConvertable, hint: CStringConvertable, buf: CStringConvertable, buf_size: Int32, size_arg: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: Ref<Unit>): Bool {
     return capi.igInputTextEx(label.asCString(), hint.asCString(), buf.asCString(), buf_size, unsafe { size_arg.getCPointer().read() }, flags, callback, user_data.getCPointer())
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), Int32(0), ImGuiInputTextCallbackNull, null<Unit>()]
 public func InputTextMultiline(label: CStringConvertable, buf: CStringConvertable, buf_size: UIntNative, size: ImVec2, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: Ref<Unit>): Bool {
     return capi.igInputTextMultiline(label.asCString(), buf.asCString(), buf_size, unsafe { size.getCPointer().read() }, flags, callback, user_data.getCPointer())
 }
 
+@DefaultArgs[Int32(0), ImGuiInputTextCallbackNull, null<Unit>()]
 public func InputTextWithHint(label: CStringConvertable, hint: CStringConvertable, buf: CStringConvertable, buf_size: UIntNative, flags: ImGuiInputTextFlags, callback: ImGuiInputTextCallback, user_data: Ref<Unit>): Bool {
     return capi.igInputTextWithHint(label.asCString(), hint.asCString(), buf.asCString(), buf_size, flags, callback, user_data.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func InvisibleButton(str_id: CStringConvertable, size: ImVec2, flags: ImGuiButtonFlags): Bool {
     return capi.igInvisibleButton(str_id.asCString(), unsafe { size.getCPointer().read() }, flags)
 }
@@ -3370,6 +3519,7 @@ public func IsItemActive(): Bool {
     return capi.igIsItemActive()
 }
 
+@DefaultArgs[Int32(0)]
 public func IsItemClicked(mouse_button: ImGuiMouseButton): Bool {
     return capi.igIsItemClicked(mouse_button)
 }
@@ -3390,6 +3540,7 @@ public func IsItemFocused(): Bool {
     return capi.igIsItemFocused()
 }
 
+@DefaultArgs[Int32(0)]
 public func IsItemHovered(flags: ImGuiHoveredFlags): Bool {
     return capi.igIsItemHovered(flags)
 }
@@ -3410,6 +3561,7 @@ public func IsKeyChordPressed(key_chord: ImGuiKeyChord): Bool {
     return capi.igIsKeyChordPressed_Nil(key_chord)
 }
 
+@DefaultArgs[UInt32(0)]
 public func IsKeyChordPressed(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool {
     return capi.igIsKeyChordPressed_InputFlags(key_chord, flags, owner_id)
 }
@@ -3422,10 +3574,12 @@ public func IsKeyDown(key: ImGuiKey, owner_id: ImGuiID): Bool {
     return capi.igIsKeyDown_ID(key, owner_id)
 }
 
+@DefaultArgs[true]
 public func IsKeyPressed(key: ImGuiKey, repeat: Bool): Bool {
     return capi.igIsKeyPressed_Bool(key, repeat)
 }
 
+@DefaultArgs[UInt32(0)]
 public func IsKeyPressed(key: ImGuiKey, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool {
     return capi.igIsKeyPressed_InputFlags(key, flags, owner_id)
 }
@@ -3450,10 +3604,12 @@ public func IsModKey(key: ImGuiKey): Bool {
     return capi.igIsModKey(key)
 }
 
+@DefaultArgs[false]
 public func IsMouseClicked(button: ImGuiMouseButton, repeat: Bool): Bool {
     return capi.igIsMouseClicked_Bool(button, repeat)
 }
 
+@DefaultArgs[UInt32(0)]
 public func IsMouseClicked(button: ImGuiMouseButton, flags: ImGuiInputFlags, owner_id: ImGuiID): Bool {
     return capi.igIsMouseClicked_InputFlags(button, flags, owner_id)
 }
@@ -3474,14 +3630,17 @@ public func IsMouseDown(button: ImGuiMouseButton, owner_id: ImGuiID): Bool {
     return capi.igIsMouseDown_ID(button, owner_id)
 }
 
+@DefaultArgs[Float32(-1.0)]
 public func IsMouseDragPastThreshold(button: ImGuiMouseButton, lock_threshold: Float32): Bool {
     return capi.igIsMouseDragPastThreshold(button, lock_threshold)
 }
 
+@DefaultArgs[Float32(-1.0)]
 public func IsMouseDragging(button: ImGuiMouseButton, lock_threshold: Float32): Bool {
     return capi.igIsMouseDragging(button, lock_threshold)
 }
 
+@DefaultArgs[true]
 public func IsMouseHoveringRect(r_min: ImVec2, r_max: ImVec2, clip: Bool): Bool {
     return capi.igIsMouseHoveringRect(unsafe { r_min.getCPointer().read() }, unsafe { r_max.getCPointer().read() }, clip)
 }
@@ -3490,6 +3649,7 @@ public func IsMouseKey(key: ImGuiKey): Bool {
     return capi.igIsMouseKey(key)
 }
 
+@DefaultArgs[ImVec2.null()]
 public func IsMousePosValid(mouse_pos: ImVec2): Bool {
     return capi.igIsMousePosValid(mouse_pos.getCPointer())
 }
@@ -3510,6 +3670,7 @@ public func IsNamedKeyOrMod(key: ImGuiKey): Bool {
     return capi.igIsNamedKeyOrMod(key)
 }
 
+@DefaultArgs[Int32(0)]
 public func IsPopupOpen(str_id: CStringConvertable, flags: ImGuiPopupFlags): Bool {
     return capi.igIsPopupOpen_Str(str_id.asCString(), flags)
 }
@@ -3542,6 +3703,7 @@ public func IsWindowCollapsed(): Bool {
     return capi.igIsWindowCollapsed()
 }
 
+@DefaultArgs[Int32(0)]
 public func IsWindowContentHoverable(window: Ref<ImGuiWindow>, flags: ImGuiHoveredFlags): Bool {
     return capi.igIsWindowContentHoverable(window.getCPointer(), flags)
 }
@@ -3550,10 +3712,12 @@ public func IsWindowDocked(): Bool {
     return capi.igIsWindowDocked()
 }
 
+@DefaultArgs[Int32(0)]
 public func IsWindowFocused(flags: ImGuiFocusedFlags): Bool {
     return capi.igIsWindowFocused(flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func IsWindowHovered(flags: ImGuiHoveredFlags): Bool {
     return capi.igIsWindowHovered(flags)
 }
@@ -3566,6 +3730,7 @@ public func IsWindowWithinBeginStackOf(window: Ref<ImGuiWindow>, potential_paren
     return capi.igIsWindowWithinBeginStackOf(window.getCPointer(), potential_parent.getCPointer())
 }
 
+@DefaultArgs[ImRect.null(), Int32(0)]
 public func ItemAdd(bb: ImRect, id: ImGuiID, nav_bb: ImRect, extra_flags: ImGuiItemFlags): Bool {
     return capi.igItemAdd(unsafe { bb.getCPointer().read() }, id, nav_bb.getCPointer(), extra_flags)
 }
@@ -3574,10 +3739,12 @@ public func ItemHoverable(bb: ImRect, id: ImGuiID, item_flags: ImGuiItemFlags): 
     return capi.igItemHoverable(unsafe { bb.getCPointer().read() }, id, item_flags)
 }
 
+@DefaultArgs[Float32(-1.0)]
 public func ItemSize(size: ImVec2, text_baseline_y: Float32): Unit {
     return capi.igItemSize_Vec2(unsafe { size.getCPointer().read() }, text_baseline_y)
 }
 
+@DefaultArgs[Float32(-1.0)]
 public func ItemSize(bb: ImRect, text_baseline_y: Float32): Unit {
     return capi.igItemSize_Rect(unsafe { bb.getCPointer().read() }, text_baseline_y)
 }
@@ -3593,10 +3760,12 @@ public func LabelText(label: CStringConvertable, fmt: CStringConvertable): Unit 
 // Cangjie does not support `va_list`
 // public func LabelTextV(label: CStringConvertable, fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[Int32(-1)]
 public func ListBox(label: CStringConvertable, current_item: Ref<Int32>, items: Ref<CPointer<UInt8>>, items_count: Int32, height_in_items: Int32): Bool {
     return capi.igListBox_Str_arr(label.asCString(), current_item.getCPointer(), items.getCPointer(), items_count, height_in_items)
 }
 
+@DefaultArgs[Int32(-1)]
 public func ListBox(label: CStringConvertable, current_item: Ref<Int32>, getter: CFunc<(user_data: CPointer<Unit>, idx: Int32) -> CPointer<UInt8>>, user_data: Ref<Unit>, items_count: Int32, height_in_items: Int32): Bool {
     return capi.igListBox_FnStrPtr(label.asCString(), current_item.getCPointer(), getter, user_data.getCPointer(), items_count, height_in_items)
 }
@@ -3605,6 +3774,7 @@ public func LoadIniSettingsFromDisk(ini_filename: CStringConvertable): Unit {
     return capi.igLoadIniSettingsFromDisk(ini_filename.asCString())
 }
 
+@DefaultArgs[UIntNative(0)]
 public func LoadIniSettingsFromMemory(ini_data: CStringConvertable, ini_size: UIntNative): Unit {
     return capi.igLoadIniSettingsFromMemory(ini_data.asCString(), ini_size)
 }
@@ -3629,6 +3799,7 @@ public func LogFinish(): Unit {
     return capi.igLogFinish()
 }
 
+@DefaultArgs[null<UInt8>()]
 public func LogRenderedText(ref_pos: ImVec2, text: CStringConvertable, text_end: CStringConvertable): Unit {
     return capi.igLogRenderedText(ref_pos.getCPointer(), text.asCString(), text_end.asCString())
 }
@@ -3644,18 +3815,22 @@ public func LogText(fmt: CStringConvertable): Unit {
 // Cangjie does not support `va_list`
 // public func LogTextV(fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[Int32(-1)]
 public func LogToBuffer(auto_open_depth: Int32): Unit {
     return capi.igLogToBuffer(auto_open_depth)
 }
 
+@DefaultArgs[Int32(-1)]
 public func LogToClipboard(auto_open_depth: Int32): Unit {
     return capi.igLogToClipboard(auto_open_depth)
 }
 
+@DefaultArgs[Int32(-1), null<UInt8>()]
 public func LogToFile(auto_open_depth: Int32, filename: CStringConvertable): Unit {
     return capi.igLogToFile(auto_open_depth, filename.asCString())
 }
 
+@DefaultArgs[Int32(-1)]
 public func LogToTTY(auto_open_depth: Int32): Unit {
     return capi.igLogToTTY(auto_open_depth)
 }
@@ -3680,14 +3855,17 @@ public func MemFree(ptr: Ref<Unit>): Unit {
     return capi.igMemFree(ptr.getCPointer())
 }
 
+@DefaultArgs[null<UInt8>(), false, true]
 public func MenuItem(label: CStringConvertable, shortcut: CStringConvertable, selected: Bool, enabled: Bool): Bool {
     return capi.igMenuItem_Bool(label.asCString(), shortcut.asCString(), selected, enabled)
 }
 
+@DefaultArgs[true]
 public func MenuItem(label: CStringConvertable, shortcut: CStringConvertable, p_selected: Ref<Bool>, enabled: Bool): Bool {
     return capi.igMenuItem_BoolPtr(label.asCString(), shortcut.asCString(), p_selected.getCPointer(), enabled)
 }
 
+@DefaultArgs[null<UInt8>(), false, true]
 public func MenuItemEx(label: CStringConvertable, icon: CStringConvertable, shortcut: CStringConvertable, selected: Bool, enabled: Bool): Bool {
     return capi.igMenuItemEx(label.asCString(), icon.asCString(), shortcut.asCString(), selected, enabled)
 }
@@ -3764,18 +3942,22 @@ public func NextColumn(): Unit {
     return capi.igNextColumn()
 }
 
+@DefaultArgs[Int32(0)]
 public func OpenPopup(str_id: CStringConvertable, popup_flags: ImGuiPopupFlags): Unit {
     return capi.igOpenPopup_Str(str_id.asCString(), popup_flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func OpenPopup(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit {
     return capi.igOpenPopup_ID(id, popup_flags)
 }
 
+@DefaultArgs[ImGuiPopupFlags_None]
 public func OpenPopupEx(id: ImGuiID, popup_flags: ImGuiPopupFlags): Unit {
     return capi.igOpenPopupEx(id, popup_flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(1)]
 public func OpenPopupOnItemClick(str_id: CStringConvertable, popup_flags: ImGuiPopupFlags): Unit {
     return capi.igOpenPopupOnItemClick(str_id.asCString(), popup_flags)
 }
@@ -3784,18 +3966,22 @@ public func PlotEx(plot_type: ImGuiPlotType, label: CStringConvertable, values_g
     return capi.igPlotEx(plot_type, label.asCString(), values_getter, data.getCPointer(), values_count, values_offset, overlay_text.asCString(), scale_min, scale_max, unsafe { size_arg.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0), null<UInt8>(), Float32.Max, Float32.Max, ImVec2(0.0, 0.0), Int32(sizeOf<Float32>())]
 public func PlotHistogram(label: CStringConvertable, values: Ref<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CStringConvertable, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
     return capi.igPlotHistogram_FloatPtr(label.asCString(), values.getCPointer(), values_count, values_offset, overlay_text.asCString(), scale_min, scale_max, unsafe { graph_size.getCPointer().read() }, stride)
 }
 
+@DefaultArgs[Int32(0), null<UInt8>(), Float32.Max, Float32.Max, ImVec2(0.0, 0.0)]
 public func PlotHistogram(label: CStringConvertable, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: Ref<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CStringConvertable, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
     return capi.igPlotHistogram_FnFloatPtr(label.asCString(), values_getter, data.getCPointer(), values_count, values_offset, overlay_text.asCString(), scale_min, scale_max, unsafe { graph_size.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0), null<UInt8>(), Float32.Max, Float32.Max, ImVec2(0.0, 0.0), Int32(sizeOf<Float32>())]
 public func PlotLines(label: CStringConvertable, values: Ref<Float32>, values_count: Int32, values_offset: Int32, overlay_text: CStringConvertable, scale_min: Float32, scale_max: Float32, graph_size: ImVec2, stride: Int32): Unit {
     return capi.igPlotLines_FloatPtr(label.asCString(), values.getCPointer(), values_count, values_offset, overlay_text.asCString(), scale_min, scale_max, unsafe { graph_size.getCPointer().read() }, stride)
 }
 
+@DefaultArgs[Int32(0), null<UInt8>(), Float32.Max, Float32.Max, ImVec2(0.0, 0.0)]
 public func PlotLines(label: CStringConvertable, values_getter: CFunc<(data: CPointer<Unit>, idx: Int32) -> Float32>, data: Ref<Unit>, values_count: Int32, values_offset: Int32, overlay_text: CStringConvertable, scale_min: Float32, scale_max: Float32, graph_size: ImVec2): Unit {
     return capi.igPlotLines_FnFloatPtr(label.asCString(), values_getter, data.getCPointer(), values_count, values_offset, overlay_text.asCString(), scale_min, scale_max, unsafe { graph_size.getCPointer().read() })
 }
@@ -3832,10 +4018,12 @@ public func PopItemWidth(): Unit {
     return capi.igPopItemWidth()
 }
 
+@DefaultArgs[Int32(1)]
 public func PopStyleColor(count: Int32): Unit {
     return capi.igPopStyleColor(count)
 }
 
+@DefaultArgs[Int32(1)]
 public func PopStyleVar(count: Int32): Unit {
     return capi.igPopStyleVar(count)
 }
@@ -3848,6 +4036,7 @@ public func PopTextWrapPos(): Unit {
     return capi.igPopTextWrapPos()
 }
 
+@DefaultArgs[ImVec2(-Float32.Min, 0.0), null<UInt8>()]
 public func ProgressBar(fraction: Float32, size_arg: ImVec2, overlay: CStringConvertable): Unit {
     return capi.igProgressBar(fraction, unsafe { size_arg.getCPointer().read() }, overlay.asCString())
 }
@@ -3928,6 +4117,7 @@ public func PushTabStop(tab_stop: Bool): Unit {
     return capi.igPushTabStop(tab_stop)
 }
 
+@DefaultArgs[Float32(0.0)]
 public func PushTextWrapPos(wrap_local_pos_x: Float32): Unit {
     return capi.igPushTextWrapPos(wrap_local_pos_x)
 }
@@ -3952,6 +4142,7 @@ public func Render(): Unit {
     return capi.igRender()
 }
 
+@DefaultArgs[Float32(1.0)]
 public func RenderArrow(draw_list: ImDrawList, pos: ImVec2, col: ImU32, dir: ImGuiDir, scale: Float32): Unit {
     return capi.igRenderArrow(draw_list.getCPointer(), unsafe { pos.getCPointer().read() }, col, dir, scale)
 }
@@ -3972,6 +4163,7 @@ public func RenderCheckMark(draw_list: ImDrawList, pos: ImVec2, col: ImU32, sz: 
     return capi.igRenderCheckMark(draw_list.getCPointer(), unsafe { pos.getCPointer().read() }, col, sz)
 }
 
+@DefaultArgs[Float32(0.0), Int32(0)]
 public func RenderColorRectWithAlphaCheckerboard(draw_list: ImDrawList, p_min: ImVec2, p_max: ImVec2, fill_col: ImU32, grid_step: Float32, grid_off: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit {
     return capi.igRenderColorRectWithAlphaCheckerboard(draw_list.getCPointer(), unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, fill_col, grid_step, unsafe { grid_off.getCPointer().read() }, rounding, flags)
 }
@@ -3980,10 +4172,12 @@ public func RenderDragDropTargetRect(bb: ImRect, item_clip_rect: ImRect): Unit {
     return capi.igRenderDragDropTargetRect(unsafe { bb.getCPointer().read() }, unsafe { item_clip_rect.getCPointer().read() })
 }
 
+@DefaultArgs[true, Float32(0.0)]
 public func RenderFrame(p_min: ImVec2, p_max: ImVec2, fill_col: ImU32, border: Bool, rounding: Float32): Unit {
     return capi.igRenderFrame(unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, fill_col, border, rounding)
 }
 
+@DefaultArgs[Float32(0.0)]
 public func RenderFrameBorder(p_min: ImVec2, p_max: ImVec2, rounding: Float32): Unit {
     return capi.igRenderFrameBorder(unsafe { p_min.getCPointer().read() }, unsafe { p_max.getCPointer().read() }, rounding)
 }
@@ -3992,10 +4186,12 @@ public func RenderMouseCursor(pos: ImVec2, scale: Float32, mouse_cursor: ImGuiMo
     return capi.igRenderMouseCursor(unsafe { pos.getCPointer().read() }, scale, mouse_cursor, col_fill, col_border, col_shadow)
 }
 
+@DefaultArgs[ImGuiNavHighlightFlags_None]
 public func RenderNavHighlight(bb: ImRect, id: ImGuiID, flags: ImGuiNavHighlightFlags): Unit {
     return capi.igRenderNavHighlight(unsafe { bb.getCPointer().read() }, id, flags)
 }
 
+@DefaultArgs[null<Unit>(), null<Unit>()]
 public func RenderPlatformWindowsDefault(platform_render_arg: Ref<Unit>, renderer_render_arg: Ref<Unit>): Unit {
     return capi.igRenderPlatformWindowsDefault(platform_render_arg.getCPointer(), renderer_render_arg.getCPointer())
 }
@@ -4008,14 +4204,17 @@ public func RenderRectFilledWithHole(draw_list: ImDrawList, outer: ImRect, inner
     return capi.igRenderRectFilledWithHole(draw_list.getCPointer(), unsafe { outer.getCPointer().read() }, unsafe { inner.getCPointer().read() }, col, rounding)
 }
 
+@DefaultArgs[null<UInt8>(), true]
 public func RenderText(pos: ImVec2, text: CStringConvertable, text_end: CStringConvertable, hide_text_after_hash: Bool): Unit {
     return capi.igRenderText(unsafe { pos.getCPointer().read() }, text.asCString(), text_end.asCString(), hide_text_after_hash)
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImRect.null()]
 public func RenderTextClipped(pos_min: ImVec2, pos_max: ImVec2, text: CStringConvertable, text_end: CStringConvertable, text_size_if_known: ImVec2, align: ImVec2, clip_rect: ImRect): Unit {
     return capi.igRenderTextClipped(unsafe { pos_min.getCPointer().read() }, unsafe { pos_max.getCPointer().read() }, text.asCString(), text_end.asCString(), text_size_if_known.getCPointer(), unsafe { align.getCPointer().read() }, clip_rect.getCPointer())
 }
 
+@DefaultArgs[ImVec2(0.0, 0.0), ImRect.null()]
 public func RenderTextClippedEx(draw_list: ImDrawList, pos_min: ImVec2, pos_max: ImVec2, text: CStringConvertable, text_end: CStringConvertable, text_size_if_known: ImVec2, align: ImVec2, clip_rect: ImRect): Unit {
     return capi.igRenderTextClippedEx(draw_list.getCPointer(), unsafe { pos_min.getCPointer().read() }, unsafe { pos_max.getCPointer().read() }, text.asCString(), text_end.asCString(), text_size_if_known.getCPointer(), unsafe { align.getCPointer().read() }, clip_rect.getCPointer())
 }
@@ -4028,10 +4227,12 @@ public func RenderTextWrapped(pos: ImVec2, text: CStringConvertable, text_end: C
     return capi.igRenderTextWrapped(unsafe { pos.getCPointer().read() }, text.asCString(), text_end.asCString(), wrap_width)
 }
 
+@DefaultArgs[Int32(0)]
 public func ResetMouseDragDelta(button: ImGuiMouseButton): Unit {
     return capi.igResetMouseDragDelta(button)
 }
 
+@DefaultArgs[Float32(0.0), Float32(-1.0)]
 public func SameLine(offset_from_start_x: Float32, spacing: Float32): Unit {
     return capi.igSameLine(offset_from_start_x, spacing)
 }
@@ -4040,6 +4241,7 @@ public func SaveIniSettingsToDisk(ini_filename: CStringConvertable): Unit {
     return capi.igSaveIniSettingsToDisk(ini_filename.asCString())
 }
 
+@DefaultArgs[null<UIntNative>()]
 public func SaveIniSettingsToMemory(out_ini_size: Ref<UIntNative>): String {
     return CString(capi.igSaveIniSettingsToMemory(out_ini_size.getCPointer())).toString()
 }
@@ -4052,14 +4254,17 @@ public func ScrollToBringRectIntoView(window: Ref<ImGuiWindow>, rect: ImRect): U
     return capi.igScrollToBringRectIntoView(window.getCPointer(), unsafe { rect.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func ScrollToItem(flags: ImGuiScrollFlags): Unit {
     return capi.igScrollToItem(flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func ScrollToRect(window: Ref<ImGuiWindow>, rect: ImRect, flags: ImGuiScrollFlags): Unit {
     return capi.igScrollToRect(window.getCPointer(), unsafe { rect.getCPointer().read() }, flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func ScrollToRectEx(pOut: ImVec2, window: Ref<ImGuiWindow>, rect: ImRect, flags: ImGuiScrollFlags): Unit {
     return capi.igScrollToRectEx(pOut.getCPointer(), window.getCPointer(), unsafe { rect.getCPointer().read() }, flags)
 }
@@ -4072,10 +4277,12 @@ public func ScrollbarEx(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, p_scroll_v: Re
     return capi.igScrollbarEx(unsafe { bb.getCPointer().read() }, id, axis, p_scroll_v.getCPointer(), avail_v, contents_v, flags)
 }
 
+@DefaultArgs[false, Int32(0), ImVec2(0.0, 0.0)]
 public func Selectable(label: CStringConvertable, selected: Bool, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
     return capi.igSelectable_Bool(label.asCString(), selected, flags, unsafe { size.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0), ImVec2(0.0, 0.0)]
 public func Selectable(label: CStringConvertable, p_selected: Ref<Bool>, flags: ImGuiSelectableFlags, size: ImVec2): Bool {
     return capi.igSelectable_BoolPtr(label.asCString(), p_selected.getCPointer(), flags, unsafe { size.getCPointer().read() })
 }
@@ -4084,6 +4291,7 @@ public func Separator(): Unit {
     return capi.igSeparator()
 }
 
+@DefaultArgs[Float32(1.0)]
 public func SeparatorEx(flags: ImGuiSeparatorFlags, thickness: Float32): Unit {
     return capi.igSeparatorEx(flags, thickness)
 }
@@ -4104,6 +4312,7 @@ public func SetActiveIdUsingAllKeyboardKeys(): Unit {
     return capi.igSetActiveIdUsingAllKeyboardKeys()
 }
 
+@DefaultArgs[null<Unit>()]
 public func SetAllocatorFunctions(alloc_func: ImGuiMemAllocFunc, free_func: ImGuiMemFreeFunc, user_data: Ref<Unit>): Unit {
     return capi.igSetAllocatorFunctions(alloc_func, free_func, user_data.getCPointer())
 }
@@ -4152,6 +4361,7 @@ public func SetCursorScreenPos(pos: ImVec2): Unit {
     return capi.igSetCursorScreenPos(unsafe { pos.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func SetDragDropPayload(`type`: CStringConvertable, data: Ref<Unit>, sz: UIntNative, cond: ImGuiCond): Bool {
     return capi.igSetDragDropPayload(`type`.asCString(), data.getCPointer(), sz, cond)
 }
@@ -4168,6 +4378,7 @@ public func SetItemDefaultFocus(): Unit {
     return capi.igSetItemDefaultFocus()
 }
 
+@DefaultArgs[Int32(0)]
 public func SetItemKeyOwner(key: ImGuiKey, flags: ImGuiInputFlags): Unit {
     return capi.igSetItemKeyOwner(key, flags)
 }
@@ -4179,14 +4390,17 @@ public func SetItemTooltip(fmt: CStringConvertable): Unit {
 // Cangjie does not support `va_list`
 // public func SetItemTooltipV(fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[Int32(0)]
 public func SetKeyOwner(key: ImGuiKey, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit {
     return capi.igSetKeyOwner(key, owner_id, flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetKeyOwnersForKeyChord(key: ImGuiKeyChord, owner_id: ImGuiID, flags: ImGuiInputFlags): Unit {
     return capi.igSetKeyOwnersForKeyChord(key, owner_id, flags)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetKeyboardFocusHere(offset: Int32): Unit {
     return capi.igSetKeyboardFocusHere(offset)
 }
@@ -4223,6 +4437,7 @@ public func SetNextItemAllowOverlap(): Unit {
     return capi.igSetNextItemAllowOverlap()
 }
 
+@DefaultArgs[Int32(0)]
 public func SetNextItemOpen(is_open: Bool, cond: ImGuiCond): Unit {
     return capi.igSetNextItemOpen(is_open, cond)
 }
@@ -4235,6 +4450,7 @@ public func SetNextItemSelectionUserData(selection_user_data: ImGuiSelectionUser
     return capi.igSetNextItemSelectionUserData(selection_user_data)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetNextItemShortcut(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags): Unit {
     return capi.igSetNextItemShortcut(key_chord, flags)
 }
@@ -4251,6 +4467,7 @@ public func SetNextWindowClass(window_class: ImGuiWindowClass): Unit {
     return capi.igSetNextWindowClass(window_class.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func SetNextWindowCollapsed(collapsed: Bool, cond: ImGuiCond): Unit {
     return capi.igSetNextWindowCollapsed(collapsed, cond)
 }
@@ -4259,6 +4476,7 @@ public func SetNextWindowContentSize(size: ImVec2): Unit {
     return capi.igSetNextWindowContentSize(unsafe { size.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func SetNextWindowDockID(dock_id: ImGuiID, cond: ImGuiCond): Unit {
     return capi.igSetNextWindowDockID(dock_id, cond)
 }
@@ -4267,6 +4485,7 @@ public func SetNextWindowFocus(): Unit {
     return capi.igSetNextWindowFocus()
 }
 
+@DefaultArgs[Int32(0), ImVec2(0.0, 0.0)]
 public func SetNextWindowPos(pos: ImVec2, cond: ImGuiCond, pivot: ImVec2): Unit {
     return capi.igSetNextWindowPos(unsafe { pos.getCPointer().read() }, cond, unsafe { pivot.getCPointer().read() })
 }
@@ -4279,10 +4498,12 @@ public func SetNextWindowScroll(scroll: ImVec2): Unit {
     return capi.igSetNextWindowScroll(unsafe { scroll.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func SetNextWindowSize(size: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetNextWindowSize(unsafe { size.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[ImGuiSizeCallbackNull, null<Unit>()]
 public func SetNextWindowSizeConstraints(size_min: ImVec2, size_max: ImVec2, custom_callback: ImGuiSizeCallback, custom_callback_data: Ref<Unit>): Unit {
     return capi.igSetNextWindowSizeConstraints(unsafe { size_min.getCPointer().read() }, unsafe { size_max.getCPointer().read() }, custom_callback, custom_callback_data.getCPointer())
 }
@@ -4291,6 +4512,7 @@ public func SetNextWindowViewport(viewport_id: ImGuiID): Unit {
     return capi.igSetNextWindowViewport(viewport_id)
 }
 
+@DefaultArgs[Float32(0.5)]
 public func SetScrollFromPosX(local_x: Float32, center_x_ratio: Float32): Unit {
     return capi.igSetScrollFromPosX_Float(local_x, center_x_ratio)
 }
@@ -4299,6 +4521,7 @@ public func SetScrollFromPosX(window: Ref<ImGuiWindow>, local_x: Float32, center
     return capi.igSetScrollFromPosX_WindowPtr(window.getCPointer(), local_x, center_x_ratio)
 }
 
+@DefaultArgs[Float32(0.5)]
 public func SetScrollFromPosY(local_y: Float32, center_y_ratio: Float32): Unit {
     return capi.igSetScrollFromPosY_Float(local_y, center_y_ratio)
 }
@@ -4307,10 +4530,12 @@ public func SetScrollFromPosY(window: Ref<ImGuiWindow>, local_y: Float32, center
     return capi.igSetScrollFromPosY_WindowPtr(window.getCPointer(), local_y, center_y_ratio)
 }
 
+@DefaultArgs[Float32(0.5)]
 public func SetScrollHereX(center_x_ratio: Float32): Unit {
     return capi.igSetScrollHereX(center_x_ratio)
 }
 
+@DefaultArgs[Float32(0.5)]
 public func SetScrollHereY(center_y_ratio: Float32): Unit {
     return capi.igSetScrollHereY(center_y_ratio)
 }
@@ -4354,14 +4579,17 @@ public func SetWindowClipRectBeforeSetChannel(window: Ref<ImGuiWindow>, clip_rec
     return capi.igSetWindowClipRectBeforeSetChannel(window.getCPointer(), unsafe { clip_rect.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowCollapsed(collapsed: Bool, cond: ImGuiCond): Unit {
     return capi.igSetWindowCollapsed_Bool(collapsed, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowCollapsed(name: CStringConvertable, collapsed: Bool, cond: ImGuiCond): Unit {
     return capi.igSetWindowCollapsed_Str(name.asCString(), collapsed, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowCollapsed(window: Ref<ImGuiWindow>, collapsed: Bool, cond: ImGuiCond): Unit {
     return capi.igSetWindowCollapsed_WindowPtr(window.getCPointer(), collapsed, cond)
 }
@@ -4394,26 +4622,32 @@ public func SetWindowParentWindowForFocusRoute(window: Ref<ImGuiWindow>, parent_
     return capi.igSetWindowParentWindowForFocusRoute(window.getCPointer(), parent_window.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowPos(pos: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowPos_Vec2(unsafe { pos.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowPos(name: CStringConvertable, pos: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowPos_Str(name.asCString(), unsafe { pos.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowPos(window: Ref<ImGuiWindow>, pos: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowPos_WindowPtr(window.getCPointer(), unsafe { pos.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowSize(size: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowSize_Vec2(unsafe { size.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowSize(name: CStringConvertable, size: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowSize_Str(name.asCString(), unsafe { size.getCPointer().read() }, cond)
 }
 
+@DefaultArgs[Int32(0)]
 public func SetWindowSize(window: Ref<ImGuiWindow>, size: ImVec2, cond: ImGuiCond): Unit {
     return capi.igSetWindowSize_WindowPtr(window.getCPointer(), unsafe { size.getCPointer().read() }, cond)
 }
@@ -4434,6 +4668,7 @@ public func ShadeVertsTransformPos(draw_list: ImDrawList, vert_start_idx: Int32,
     return capi.igShadeVertsTransformPos(draw_list.getCPointer(), vert_start_idx, vert_end_idx, unsafe { pivot_in.getCPointer().read() }, cos_a, sin_a, unsafe { pivot_out.getCPointer().read() })
 }
 
+@DefaultArgs[Int32(0)]
 public func Shortcut(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags): Bool {
     return capi.igShortcut_Nil(key_chord, flags)
 }
@@ -4442,14 +4677,17 @@ public func Shortcut(key_chord: ImGuiKeyChord, flags: ImGuiInputFlags, owner_id:
     return capi.igShortcut_ID(key_chord, flags, owner_id)
 }
 
+@DefaultArgs[null<Bool>()]
 public func ShowAboutWindow(p_open: Ref<Bool>): Unit {
     return capi.igShowAboutWindow(p_open.getCPointer())
 }
 
+@DefaultArgs[null<Bool>()]
 public func ShowDebugLogWindow(p_open: Ref<Bool>): Unit {
     return capi.igShowDebugLogWindow(p_open.getCPointer())
 }
 
+@DefaultArgs[null<Bool>()]
 public func ShowDemoWindow(p_open: Ref<Bool>): Unit {
     return capi.igShowDemoWindow(p_open.getCPointer())
 }
@@ -4462,14 +4700,17 @@ public func ShowFontSelector(label: CStringConvertable): Unit {
     return capi.igShowFontSelector(label.asCString())
 }
 
+@DefaultArgs[null<Bool>()]
 public func ShowIDStackToolWindow(p_open: Ref<Bool>): Unit {
     return capi.igShowIDStackToolWindow(p_open.getCPointer())
 }
 
+@DefaultArgs[null<Bool>()]
 public func ShowMetricsWindow(p_open: Ref<Bool>): Unit {
     return capi.igShowMetricsWindow(p_open.getCPointer())
 }
 
+@DefaultArgs[ImGuiStyle.null()]
 public func ShowStyleEditor(ref: ImGuiStyle): Unit {
     return capi.igShowStyleEditor(ref.getCPointer())
 }
@@ -4490,6 +4731,7 @@ public func Shutdown(): Unit {
     return capi.igShutdown()
 }
 
+@DefaultArgs[Float32(-360.0), Float32(360.0), "%.0f deg", Int32(0)]
 public func SliderAngle(label: CStringConvertable, v_rad: Ref<Float32>, v_degrees_min: Float32, v_degrees_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderAngle(label.asCString(), v_rad.getCPointer(), v_degrees_min, v_degrees_max, format.asCString(), flags)
 }
@@ -4498,42 +4740,52 @@ public func SliderBehavior(bb: ImRect, id: ImGuiID, data_type: ImGuiDataType, p_
     return capi.igSliderBehavior(unsafe { bb.getCPointer().read() }, id, data_type, p_v.getCPointer(), p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags, out_grab_bb.getCPointer())
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func SliderFloat(label: CStringConvertable, v: Ref<Float32>, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderFloat(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func SliderFloat2(label: CStringConvertable, v: Ref<Float32>, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderFloat2(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func SliderFloat3(label: CStringConvertable, v: Ref<Float32>, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderFloat3(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func SliderFloat4(label: CStringConvertable, v: Ref<Float32>, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderFloat4(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%d", Int32(0)]
 public func SliderInt(label: CStringConvertable, v: Ref<Int32>, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderInt(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%d", Int32(0)]
 public func SliderInt2(label: CStringConvertable, v: Ref<Int32>, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderInt2(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%d", Int32(0)]
 public func SliderInt3(label: CStringConvertable, v: Ref<Int32>, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderInt3(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%d", Int32(0)]
 public func SliderInt4(label: CStringConvertable, v: Ref<Int32>, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderInt4(label.asCString(), v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(0)]
 public func SliderScalar(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, p_min: Ref<Unit>, p_max: Ref<Unit>, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderScalar(label.asCString(), data_type, p_data.getCPointer(), p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(0)]
 public func SliderScalarN(label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, components: Int32, p_min: Ref<Unit>, p_max: Ref<Unit>, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igSliderScalarN(label.asCString(), data_type, p_data.getCPointer(), components, p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
@@ -4546,6 +4798,7 @@ public func Spacing(): Unit {
     return capi.igSpacing()
 }
 
+@DefaultArgs[Float32(0.0), Float32(0.0), UInt32(0)]
 public func SplitterBehavior(bb: ImRect, id: ImGuiID, axis: ImGuiAxis, size1: Ref<Float32>, size2: Ref<Float32>, min_size1: Float32, min_size2: Float32, hover_extend: Float32, hover_visibility_delay: Float32, bg_col: ImU32): Bool {
     return capi.igSplitterBehavior(unsafe { bb.getCPointer().read() }, id, axis, size1.getCPointer(), size2.getCPointer(), min_size1, min_size2, hover_extend, hover_visibility_delay, bg_col)
 }
@@ -4558,14 +4811,17 @@ public func StartMouseMovingWindowOrNode(window: Ref<ImGuiWindow>, node: Ref<ImG
     return capi.igStartMouseMovingWindowOrNode(window.getCPointer(), node.getCPointer(), undock)
 }
 
+@DefaultArgs[ImGuiStyle.null()]
 public func StyleColorsClassic(dst: ImGuiStyle): Unit {
     return capi.igStyleColorsClassic(dst.getCPointer())
 }
 
+@DefaultArgs[ImGuiStyle.null()]
 public func StyleColorsDark(dst: ImGuiStyle): Unit {
     return capi.igStyleColorsDark(dst.getCPointer())
 }
 
+@DefaultArgs[ImGuiStyle.null()]
 public func StyleColorsLight(dst: ImGuiStyle): Unit {
     return capi.igStyleColorsLight(dst.getCPointer())
 }
@@ -4626,6 +4882,7 @@ public func TabItemBackground(draw_list: ImDrawList, bb: ImRect, flags: ImGuiTab
     return capi.igTabItemBackground(draw_list.getCPointer(), unsafe { bb.getCPointer().read() }, flags, col)
 }
 
+@DefaultArgs[Int32(0)]
 public func TabItemButton(label: CStringConvertable, flags: ImGuiTabItemFlags): Bool {
     return capi.igTabItemButton(label.asCString(), flags)
 }
@@ -4722,6 +4979,7 @@ public func TableGetColumnCount(): Int32 {
     return capi.igTableGetColumnCount()
 }
 
+@DefaultArgs[Int32(-1)]
 public func TableGetColumnFlags(column_n: Int32): ImGuiTableColumnFlags {
     return capi.igTableGetColumnFlags(column_n)
 }
@@ -4730,6 +4988,7 @@ public func TableGetColumnIndex(): Int32 {
     return capi.igTableGetColumnIndex()
 }
 
+@DefaultArgs[Int32(-1)]
 public func TableGetColumnName(column_n: Int32): String {
     return CString(capi.igTableGetColumnName_Int(column_n)).toString()
 }
@@ -4742,6 +5001,7 @@ public func TableGetColumnNextSortDirection(column: Ref<ImGuiTableColumn>): ImGu
     return capi.igTableGetColumnNextSortDirection(column.getCPointer())
 }
 
+@DefaultArgs[Int32(0)]
 public func TableGetColumnResizeID(table: Ref<ImGuiTable>, column_n: Int32, instance_no: Int32): ImGuiID {
     return capi.igTableGetColumnResizeID(table.getCPointer(), column_n, instance_no)
 }
@@ -4806,10 +5066,12 @@ public func TableNextColumn(): Bool {
     return capi.igTableNextColumn()
 }
 
+@DefaultArgs[Int32(0), Float32(0.0)]
 public func TableNextRow(row_flags: ImGuiTableRowFlags, min_row_height: Float32): Unit {
     return capi.igTableNextRow(row_flags, min_row_height)
 }
 
+@DefaultArgs[Int32(-1)]
 public func TableOpenContextMenu(column_n: Int32): Unit {
     return capi.igTableOpenContextMenu(column_n)
 }
@@ -4834,6 +5096,7 @@ public func TableSaveSettings(table: Ref<ImGuiTable>): Unit {
     return capi.igTableSaveSettings(table.getCPointer())
 }
 
+@DefaultArgs[Int32(-1)]
 public func TableSetBgColor(target: ImGuiTableBgTarget, color: ImU32, column_n: Int32): Unit {
     return capi.igTableSetBgColor(target, color, column_n)
 }
@@ -4874,6 +5137,7 @@ public func TableSettingsFindByID(id: ImGuiID): ImGuiTableSettings {
     return ImGuiTableSettings(capi.igTableSettingsFindByID(id), owned: false)
 }
 
+@DefaultArgs[Int32(0), Float32(0.0), UInt32(0)]
 public func TableSetupColumn(label: CStringConvertable, flags: ImGuiTableColumnFlags, init_width_or_weight: Float32, user_id: ImGuiID): Unit {
     return capi.igTableSetupColumn(label.asCString(), flags, init_width_or_weight, user_id)
 }
@@ -4914,6 +5178,7 @@ public func TempInputIsActive(id: ImGuiID): Bool {
     return capi.igTempInputIsActive(id)
 }
 
+@DefaultArgs[null<Unit>(), null<Unit>()]
 public func TempInputScalar(bb: ImRect, id: ImGuiID, label: CStringConvertable, data_type: ImGuiDataType, p_data: Ref<Unit>, format: CStringConvertable, p_clamp_min: Ref<Unit>, p_clamp_max: Ref<Unit>): Bool {
     return capi.igTempInputScalar(unsafe { bb.getCPointer().read() }, id, label.asCString(), data_type, p_data.getCPointer(), format.asCString(), p_clamp_min.getCPointer(), p_clamp_max.getCPointer())
 }
@@ -4948,10 +5213,12 @@ public func TextDisabled(fmt: CStringConvertable): Unit {
 // Cangjie does not support `va_list`
 // public func TextDisabledV(fmt: CStringConvertable, args: va_list) ...
 
+@DefaultArgs[null<UInt8>(), Int32(0)]
 public func TextEx(text: CStringConvertable, text_end: CStringConvertable, flags: ImGuiTextFlags): Unit {
     return capi.igTextEx(text.asCString(), text_end.asCString(), flags)
 }
 
+@DefaultArgs[null<UInt8>()]
 public func TextUnformatted(text: CStringConvertable, text_end: CStringConvertable): Unit {
     return capi.igTextUnformatted(text.asCString(), text_end.asCString())
 }
@@ -4982,10 +5249,12 @@ public func TreeNode(ptr_id: Ref<Unit>, fmt: CStringConvertable): Bool {
     return capi.igTreeNode_Ptr(ptr_id.getCPointer(), fmt.asCString())
 }
 
+@DefaultArgs[null<UInt8>()]
 public func TreeNodeBehavior(id: ImGuiID, flags: ImGuiTreeNodeFlags, label: CStringConvertable, label_end: CStringConvertable): Bool {
     return capi.igTreeNodeBehavior(id, flags, label.asCString(), label_end.asCString())
 }
 
+@DefaultArgs[Int32(0)]
 public func TreeNodeEx(label: CStringConvertable, flags: ImGuiTreeNodeFlags): Bool {
     return capi.igTreeNodeEx_Str(label.asCString(), flags)
 }
@@ -5046,6 +5315,7 @@ public func TypingSelectFindNextSingleCharMatch(req: ImGuiTypingSelectRequest, i
     return capi.igTypingSelectFindNextSingleCharMatch(req.getCPointer(), items_count, get_item_name_func, user_data.getCPointer(), nav_item_idx)
 }
 
+@DefaultArgs[Float32(0.0)]
 public func Unindent(indent_w: Float32): Unit {
     return capi.igUnindent(indent_w)
 }
@@ -5078,14 +5348,17 @@ public func UpdateWindowSkipRefresh(window: Ref<ImGuiWindow>): Unit {
     return capi.igUpdateWindowSkipRefresh(window.getCPointer())
 }
 
+@DefaultArgs["%.3f", Int32(0)]
 public func VSliderFloat(label: CStringConvertable, size: ImVec2, v: Ref<Float32>, v_min: Float32, v_max: Float32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igVSliderFloat(label.asCString(), unsafe { size.getCPointer().read() }, v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs["%d", Int32(0)]
 public func VSliderInt(label: CStringConvertable, size: ImVec2, v: Ref<Int32>, v_min: Int32, v_max: Int32, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igVSliderInt(label.asCString(), unsafe { size.getCPointer().read() }, v.getCPointer(), v_min, v_max, format.asCString(), flags)
 }
 
+@DefaultArgs[null<UInt8>(), Int32(0)]
 public func VSliderScalar(label: CStringConvertable, size: ImVec2, data_type: ImGuiDataType, p_data: Ref<Unit>, p_min: Ref<Unit>, p_max: Ref<Unit>, format: CStringConvertable, flags: ImGuiSliderFlags): Bool {
     return capi.igVSliderScalar(label.asCString(), unsafe { size.getCPointer().read() }, data_type, p_data.getCPointer(), p_min.getCPointer(), p_max.getCPointer(), format.asCString(), flags)
 }
@@ -5102,6 +5375,7 @@ public func Value(prefix: CStringConvertable, v: UInt32): Unit {
     return capi.igValue_Uint(prefix.asCString(), v)
 }
 
+@DefaultArgs[null<UInt8>()]
 public func Value(prefix: CStringConvertable, v: Float32, float_format: CStringConvertable): Unit {
     return capi.igValue_Float(prefix.asCString(), v, float_format.asCString())
 }

@@ -47,17 +47,17 @@ main(): Int64 {
 
             Text("Click Count: ${clickCount}")
             SameLine(0.0, -1.0)
-            if (Button("Click Me!", ImVec2(0.0, 0.0))) {
+            if (Button("Click Me!")) {
                 clickCount.value += 1
             }
 
-            Combo("combo", selectedItemIndex, items, Int32(items.size), -1)
+            Combo("combo", selectedItemIndex, items, Int32(items.size))
             Text("Int Value: ${value}")
-            SliderInt("Int Value", value, 0, 200, "%d", 0)
-            DragInt("Int Value", value, 1.0, 0, 200, "%d", 0)
+            SliderInt("Int Value", value, 0, 200)
+            DragInt("Int Value", value, 1.0, 0, 200)
 
-            InputFloat("Font global scale", fontGlobalScale, 0.0, 0.0, "%.2f", 0)
-            ColorEdit4("Background Color", color, 0)
+            InputFloat("Font global scale", fontGlobalScale, 0.0, 0.0, "%.2f")
+            ColorEdit4("Background Color", color)
 
             End()
         }

@@ -28,6 +28,7 @@ main(args: Array<String>): Int64 {
             "--c-src-path=",
             "--wcapi-pkg-path=",
             "--wcapi-pkg-name=",
+            "--macros-pkg-name=",
             "--doc-path="
         ]
     )
@@ -43,6 +44,7 @@ main(args: Array<String>): Int64 {
     let cSrcOutputDir = argopt.getArg("c-src-path").getOrThrow()
     let wcapiOutputDir = argopt.getArg("wcapi-pkg-path").getOrThrow()
     let wcapiPkgName = argopt.getArg("wcapi-pkg-name").getOrThrow()
+    let macrosPkgName = argopt.getArg("macros-pkg-name").getOrThrow()
     let docOutputDir = argopt.getArg("doc-path").getOrThrow()
 
     let apiInfo = APIInfo()
@@ -169,8 +171,8 @@ main(args: Array<String>): Int64 {
     // Generate cimgui funcs wcapi -> src/wcapi/funcs.cj
     let funcsWCAPICodeFilename = "${wcapiOutputDir}/funcs.cj"
     println("Generating cimgui funcs wcapi -> ${funcsWCAPICodeFilename} ...")
-    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, funcsSigs, typeAlias, definedStructNames,
-        apiInfo)
+    genFuncsWCAPICode(funcsWCAPICodeFilename, wcapiPkgName, capiPkgName, macrosPkgName, funcsSigs, typeAlias,
+        definedStructNames, apiInfo)
     println("Generated cimgui funcs wcapi -> ${funcsWCAPICodeFilename}")
 
     // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj

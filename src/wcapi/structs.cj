@@ -16,6 +16,11 @@ public class ImBitVector <: StructWrapper<capi.ImBitVector> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImBitVector {
+        return ImBitVector(CPointer<capi.ImBitVector>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -82,6 +87,11 @@ public class ImColor <: StructWrapper<capi.ImColor> {
         super(ImColor_ImColor_U32(rgba).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImColor {
+        return ImColor(CPointer<capi.ImColor>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImColor_destroy(this.pointer)
@@ -114,6 +124,11 @@ public class ImDrawChannel <: StructWrapper<capi.ImDrawChannel> {
 
     public init(pointer: CPointer<capi.ImDrawChannel>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImDrawChannel {
+        return ImDrawChannel(CPointer<capi.ImDrawChannel>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -154,6 +169,11 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
 
     public init() {
         super(ImDrawCmd_ImDrawCmd().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImDrawCmd {
+        return ImDrawCmd(CPointer<capi.ImDrawCmd>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -246,6 +266,11 @@ public class ImDrawCmdHeader <: StructWrapper<capi.ImDrawCmdHeader> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImDrawCmdHeader {
+        return ImDrawCmdHeader(CPointer<capi.ImDrawCmdHeader>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -294,6 +319,11 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
 
     public init() {
         super(ImDrawData_ImDrawData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImDrawData {
+        return ImDrawData(CPointer<capi.ImDrawData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -422,6 +452,11 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
         super(ImDrawDataBuilder_ImDrawDataBuilder().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImDrawDataBuilder {
+        return ImDrawDataBuilder(CPointer<capi.ImDrawDataBuilder>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImDrawDataBuilder_destroy(this.pointer)
@@ -460,6 +495,11 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
 
     public init(shared_data: ImDrawListSharedData) {
         super(ImDrawList_ImDrawList(shared_data).getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImDrawList {
+        return ImDrawList(CPointer<capi.ImDrawList>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -900,6 +940,11 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
         super(ImDrawListSharedData_ImDrawListSharedData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImDrawListSharedData {
+        return ImDrawListSharedData(CPointer<capi.ImDrawListSharedData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImDrawListSharedData_destroy(this.pointer)
@@ -1044,6 +1089,11 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
         super(ImDrawListSplitter_ImDrawListSplitter().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImDrawListSplitter {
+        return ImDrawListSplitter(CPointer<capi.ImDrawListSplitter>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImDrawListSplitter_destroy(this.pointer)
@@ -1110,6 +1160,11 @@ public class ImDrawVert <: StructWrapper<capi.ImDrawVert> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImDrawVert {
+        return ImDrawVert(CPointer<capi.ImDrawVert>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -1158,6 +1213,11 @@ public class ImFont <: StructWrapper<capi.ImFont> {
 
     public init() {
         super(ImFont_ImFont().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImFont {
+        return ImFont(CPointer<capi.ImFont>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -1442,6 +1502,11 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
 
     public init() {
         super(ImFontAtlas_ImFontAtlas().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImFontAtlas {
+        return ImFontAtlas(CPointer<capi.ImFontAtlas>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -1800,6 +1865,11 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
         super(ImFontAtlasCustomRect_ImFontAtlasCustomRect().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImFontAtlasCustomRect {
+        return ImFontAtlasCustomRect(CPointer<capi.ImFontAtlasCustomRect>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImFontAtlasCustomRect_destroy(this.pointer)
@@ -1900,6 +1970,11 @@ public class ImFontBuilderIO <: StructWrapper<capi.ImFontBuilderIO> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImFontBuilderIO {
+        return ImFontBuilderIO(CPointer<capi.ImFontBuilderIO>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -1928,6 +2003,11 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
 
     public init() {
         super(ImFontConfig_ImFontConfig().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImFontConfig {
+        return ImFontConfig(CPointer<capi.ImFontConfig>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -2150,6 +2230,11 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
         super(ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImFontGlyphRangesBuilder {
+        return ImFontGlyphRangesBuilder(CPointer<capi.ImFontGlyphRangesBuilder>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImFontGlyphRangesBuilder_destroy(this.pointer)
@@ -2204,6 +2289,11 @@ public class ImGuiColorMod <: StructWrapper<capi.ImGuiColorMod> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiColorMod {
+        return ImGuiColorMod(CPointer<capi.ImGuiColorMod>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -2242,6 +2332,11 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
 
     public init() {
         super(ImGuiComboPreviewData_ImGuiComboPreviewData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiComboPreviewData {
+        return ImGuiComboPreviewData(CPointer<capi.ImGuiComboPreviewData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -2324,6 +2419,11 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
         super(ImGuiContextHook_ImGuiContextHook().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiContextHook {
+        return ImGuiContextHook(CPointer<capi.ImGuiContextHook>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiContextHook_destroy(this.pointer)
@@ -2390,6 +2490,11 @@ public class ImGuiDataTypeInfo <: StructWrapper<capi.ImGuiDataTypeInfo> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiDataTypeInfo {
+        return ImGuiDataTypeInfo(CPointer<capi.ImGuiDataTypeInfo>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -2446,6 +2551,11 @@ public class ImGuiDataTypeStorage <: StructWrapper<capi.ImGuiDataTypeStorage> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiDataTypeStorage {
+        return ImGuiDataTypeStorage(CPointer<capi.ImGuiDataTypeStorage>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -2470,6 +2580,11 @@ public class ImGuiDataVarInfo <: StructWrapper<capi.ImGuiDataVarInfo> {
 
     public init(pointer: CPointer<capi.ImGuiDataVarInfo>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiDataVarInfo {
+        return ImGuiDataVarInfo(CPointer<capi.ImGuiDataVarInfo>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -2522,6 +2637,11 @@ public class ImGuiDebugAllocEntry <: StructWrapper<capi.ImGuiDebugAllocEntry> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiDebugAllocEntry {
+        return ImGuiDebugAllocEntry(CPointer<capi.ImGuiDebugAllocEntry>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -2570,6 +2690,11 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
 
     public init() {
         super(ImGuiDebugAllocInfo_ImGuiDebugAllocInfo().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiDebugAllocInfo {
+        return ImGuiDebugAllocInfo(CPointer<capi.ImGuiDebugAllocInfo>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -2632,6 +2757,11 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
         super(ImGuiDockContext_ImGuiDockContext().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiDockContext {
+        return ImGuiDockContext(CPointer<capi.ImGuiDockContext>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiDockContext_destroy(this.pointer)
@@ -2688,6 +2818,11 @@ public class ImGuiFocusScopeData <: StructWrapper<capi.ImGuiFocusScopeData> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiFocusScopeData {
+        return ImGuiFocusScopeData(CPointer<capi.ImGuiFocusScopeData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -2722,6 +2857,11 @@ public class ImGuiGroupData <: StructWrapper<capi.ImGuiGroupData> {
 
     public init(pointer: CPointer<capi.ImGuiGroupData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiGroupData {
+        return ImGuiGroupData(CPointer<capi.ImGuiGroupData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -2874,6 +3014,11 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
         super(ImGuiIDStackTool_ImGuiIDStackTool().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiIDStackTool {
+        return ImGuiIDStackTool(CPointer<capi.ImGuiIDStackTool>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiIDStackTool_destroy(this.pointer)
@@ -2952,6 +3097,11 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
 
     public init() {
         super(ImGuiIO_ImGuiIO().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiIO {
+        return ImGuiIO(CPointer<capi.ImGuiIO>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4030,6 +4180,11 @@ public class ImGuiInputEventAppFocused <: StructWrapper<capi.ImGuiInputEventAppF
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiInputEventAppFocused {
+        return ImGuiInputEventAppFocused(CPointer<capi.ImGuiInputEventAppFocused>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -4054,6 +4209,11 @@ public class ImGuiInputEventKey <: StructWrapper<capi.ImGuiInputEventKey> {
 
     public init(pointer: CPointer<capi.ImGuiInputEventKey>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiInputEventKey {
+        return ImGuiInputEventKey(CPointer<capi.ImGuiInputEventKey>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4102,6 +4262,11 @@ public class ImGuiInputEventMouseButton <: StructWrapper<capi.ImGuiInputEventMou
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiInputEventMouseButton {
+        return ImGuiInputEventMouseButton(CPointer<capi.ImGuiInputEventMouseButton>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -4146,6 +4311,11 @@ public class ImGuiInputEventMousePos <: StructWrapper<capi.ImGuiInputEventMouseP
 
     public init(pointer: CPointer<capi.ImGuiInputEventMousePos>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiInputEventMousePos {
+        return ImGuiInputEventMousePos(CPointer<capi.ImGuiInputEventMousePos>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4194,6 +4364,11 @@ public class ImGuiInputEventMouseViewport <: StructWrapper<capi.ImGuiInputEventM
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiInputEventMouseViewport {
+        return ImGuiInputEventMouseViewport(CPointer<capi.ImGuiInputEventMouseViewport>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -4218,6 +4393,11 @@ public class ImGuiInputEventMouseWheel <: StructWrapper<capi.ImGuiInputEventMous
 
     public init(pointer: CPointer<capi.ImGuiInputEventMouseWheel>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiInputEventMouseWheel {
+        return ImGuiInputEventMouseWheel(CPointer<capi.ImGuiInputEventMouseWheel>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4266,6 +4446,11 @@ public class ImGuiInputEventText <: StructWrapper<capi.ImGuiInputEventText> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiInputEventText {
+        return ImGuiInputEventText(CPointer<capi.ImGuiInputEventText>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -4294,6 +4479,11 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
 
     public init() {
         super(ImGuiInputTextCallbackData_ImGuiInputTextCallbackData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiInputTextCallbackData {
+        return ImGuiInputTextCallbackData(CPointer<capi.ImGuiInputTextCallbackData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4466,6 +4656,11 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
         super(ImGuiInputTextDeactivatedState_ImGuiInputTextDeactivatedState().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiInputTextDeactivatedState {
+        return ImGuiInputTextDeactivatedState(CPointer<capi.ImGuiInputTextDeactivatedState>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiInputTextDeactivatedState_destroy(this.pointer)
@@ -4508,6 +4703,11 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
 
     public init() {
         super(ImGuiInputTextState_ImGuiInputTextState().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiInputTextState {
+        return ImGuiInputTextState(CPointer<capi.ImGuiInputTextState>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4780,6 +4980,11 @@ public class ImGuiKeyData <: StructWrapper<capi.ImGuiKeyData> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiKeyData {
+        return ImGuiKeyData(CPointer<capi.ImGuiKeyData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -4840,6 +5045,11 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
         super(ImGuiKeyOwnerData_ImGuiKeyOwnerData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiKeyOwnerData {
+        return ImGuiKeyOwnerData(CPointer<capi.ImGuiKeyOwnerData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiKeyOwnerData_destroy(this.pointer)
@@ -4898,6 +5108,11 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
 
     public init() {
         super(ImGuiKeyRoutingData_ImGuiKeyRoutingData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiKeyRoutingData {
+        return ImGuiKeyRoutingData(CPointer<capi.ImGuiKeyRoutingData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -4980,6 +5195,11 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
         super(ImGuiKeyRoutingTable_ImGuiKeyRoutingTable().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiKeyRoutingTable {
+        return ImGuiKeyRoutingTable(CPointer<capi.ImGuiKeyRoutingTable>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiKeyRoutingTable_destroy(this.pointer)
@@ -5032,6 +5252,11 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
 
     public init() {
         super(ImGuiLastItemData_ImGuiLastItemData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiLastItemData {
+        return ImGuiLastItemData(CPointer<capi.ImGuiLastItemData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5132,6 +5357,11 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
 
     public init() {
         super(ImGuiListClipper_ImGuiListClipper().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiListClipper {
+        return ImGuiListClipper(CPointer<capi.ImGuiListClipper>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5244,6 +5474,11 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
         super(ImGuiListClipperData_ImGuiListClipperData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiListClipperData {
+        return ImGuiListClipperData(CPointer<capi.ImGuiListClipperData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiListClipperData_destroy(this.pointer)
@@ -5312,6 +5547,11 @@ public class ImGuiListClipperRange <: StructWrapper<capi.ImGuiListClipperRange> 
 
     public init(pointer: CPointer<capi.ImGuiListClipperRange>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiListClipperRange {
+        return ImGuiListClipperRange(CPointer<capi.ImGuiListClipperRange>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5388,6 +5628,11 @@ public class ImGuiLocEntry <: StructWrapper<capi.ImGuiLocEntry> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiLocEntry {
+        return ImGuiLocEntry(CPointer<capi.ImGuiLocEntry>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -5426,6 +5671,11 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
 
     public init() {
         super(ImGuiMenuColumns_ImGuiMenuColumns().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiMenuColumns {
+        return ImGuiMenuColumns(CPointer<capi.ImGuiMenuColumns>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5534,6 +5784,11 @@ public class ImGuiMetricsConfig <: StructWrapper<capi.ImGuiMetricsConfig> {
 
     public init(pointer: CPointer<capi.ImGuiMetricsConfig>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiMetricsConfig {
+        return ImGuiMetricsConfig(CPointer<capi.ImGuiMetricsConfig>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5696,6 +5951,11 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
         super(ImGuiNavItemData_ImGuiNavItemData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiNavItemData {
+        return ImGuiNavItemData(CPointer<capi.ImGuiNavItemData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiNavItemData_destroy(this.pointer)
@@ -5806,6 +6066,11 @@ public class ImGuiNavTreeNodeData <: StructWrapper<capi.ImGuiNavTreeNodeData> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiNavTreeNodeData {
+        return ImGuiNavTreeNodeData(CPointer<capi.ImGuiNavTreeNodeData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -5854,6 +6119,11 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
 
     public init() {
         super(ImGuiNextItemData_ImGuiNextItemData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiNextItemData {
+        return ImGuiNextItemData(CPointer<capi.ImGuiNextItemData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -5968,6 +6238,11 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
 
     public init() {
         super(ImGuiNextWindowData_ImGuiNextWindowData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiNextWindowData {
+        return ImGuiNextWindowData(CPointer<capi.ImGuiNextWindowData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -6214,6 +6489,11 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
         super(ImGuiOldColumnData_ImGuiOldColumnData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiOldColumnData {
+        return ImGuiOldColumnData(CPointer<capi.ImGuiOldColumnData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiOldColumnData_destroy(this.pointer)
@@ -6272,6 +6552,11 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
 
     public init() {
         super(ImGuiOldColumns_ImGuiOldColumns().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiOldColumns {
+        return ImGuiOldColumns(CPointer<capi.ImGuiOldColumns>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -6464,6 +6749,11 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
         super(ImGuiOnceUponAFrame_ImGuiOnceUponAFrame().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiOnceUponAFrame {
+        return ImGuiOnceUponAFrame(CPointer<capi.ImGuiOnceUponAFrame>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiOnceUponAFrame_destroy(this.pointer)
@@ -6492,6 +6782,11 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
 
     public init() {
         super(ImGuiPayload_ImGuiPayload().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiPayload {
+        return ImGuiPayload(CPointer<capi.ImGuiPayload>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -6608,6 +6903,11 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
 
     public init() {
         super(ImGuiPlatformIO_ImGuiPlatformIO().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiPlatformIO {
+        return ImGuiPlatformIO(CPointer<capi.ImGuiPlatformIO>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -6880,6 +7180,11 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
         super(ImGuiPlatformImeData_ImGuiPlatformImeData().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiPlatformImeData {
+        return ImGuiPlatformImeData(CPointer<capi.ImGuiPlatformImeData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiPlatformImeData_destroy(this.pointer)
@@ -6928,6 +7233,11 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
 
     public init() {
         super(ImGuiPlatformMonitor_ImGuiPlatformMonitor().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiPlatformMonitor {
+        return ImGuiPlatformMonitor(CPointer<capi.ImGuiPlatformMonitor>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -7008,6 +7318,11 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
 
     public init() {
         super(ImGuiPopupData_ImGuiPopupData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiPopupData {
+        return ImGuiPopupData(CPointer<capi.ImGuiPopupData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -7114,6 +7429,11 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
         super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(index).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiPtrOrIndex {
+        return ImGuiPtrOrIndex(CPointer<capi.ImGuiPtrOrIndex>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiPtrOrIndex_destroy(this.pointer)
@@ -7152,6 +7472,11 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
 
     public init() {
         super(ImGuiSettingsHandler_ImGuiSettingsHandler().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiSettingsHandler {
+        return ImGuiSettingsHandler(CPointer<capi.ImGuiSettingsHandler>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -7260,6 +7585,11 @@ public class ImGuiShrinkWidthItem <: StructWrapper<capi.ImGuiShrinkWidthItem> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiShrinkWidthItem {
+        return ImGuiShrinkWidthItem(CPointer<capi.ImGuiShrinkWidthItem>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -7304,6 +7634,11 @@ public class ImGuiSizeCallbackData <: StructWrapper<capi.ImGuiSizeCallbackData> 
 
     public init(pointer: CPointer<capi.ImGuiSizeCallbackData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiSizeCallbackData {
+        return ImGuiSizeCallbackData(CPointer<capi.ImGuiSizeCallbackData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -7364,6 +7699,11 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
 
     public init() {
         super(ImGuiStackSizes_ImGuiStackSizes().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiStackSizes {
+        return ImGuiStackSizes(CPointer<capi.ImGuiStackSizes>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -7480,6 +7820,11 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiStorage {
+        return ImGuiStorage(CPointer<capi.ImGuiStorage>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -7568,6 +7913,11 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
 
     public init() {
         super(ImGuiStyle_ImGuiStyle().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiStyle {
+        return ImGuiStyle(CPointer<capi.ImGuiStyle>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -8124,6 +8474,11 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
         super(ImGuiTabBar_ImGuiTabBar().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiTabBar {
+        return ImGuiTabBar(CPointer<capi.ImGuiTabBar>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiTabBar_destroy(this.pointer)
@@ -8474,6 +8829,11 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
         super(ImGuiTabItem_ImGuiTabItem().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiTabItem {
+        return ImGuiTabItem(CPointer<capi.ImGuiTabItem>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiTabItem_destroy(this.pointer)
@@ -8620,6 +8980,11 @@ public class ImGuiTableCellData <: StructWrapper<capi.ImGuiTableCellData> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiTableCellData {
+        return ImGuiTableCellData(CPointer<capi.ImGuiTableCellData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -8658,6 +9023,11 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
 
     public init() {
         super(ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTableColumnSortSpecs {
+        return ImGuiTableColumnSortSpecs(CPointer<capi.ImGuiTableColumnSortSpecs>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -8714,6 +9084,11 @@ public class ImGuiTableHeaderData <: StructWrapper<capi.ImGuiTableHeaderData> {
 
     public init(pointer: CPointer<capi.ImGuiTableHeaderData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiTableHeaderData {
+        return ImGuiTableHeaderData(CPointer<capi.ImGuiTableHeaderData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -8774,6 +9149,11 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
 
     public init() {
         super(ImGuiTableInstanceData_ImGuiTableInstanceData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTableInstanceData {
+        return ImGuiTableInstanceData(CPointer<capi.ImGuiTableInstanceData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -8854,6 +9234,11 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
 
     public init() {
         super(ImGuiTableSettings_ImGuiTableSettings().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTableSettings {
+        return ImGuiTableSettings(CPointer<capi.ImGuiTableSettings>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -8940,6 +9325,11 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
         super(ImGuiTableSortSpecs_ImGuiTableSortSpecs().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiTableSortSpecs {
+        return ImGuiTableSortSpecs(CPointer<capi.ImGuiTableSortSpecs>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiTableSortSpecs_destroy(this.pointer)
@@ -8988,6 +9378,11 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
 
     public init() {
         super(ImGuiTableTempData_ImGuiTableTempData().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTableTempData {
+        return ImGuiTableTempData(CPointer<capi.ImGuiTableTempData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -9150,6 +9545,11 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
         super(ImGuiTextBuffer_ImGuiTextBuffer().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiTextBuffer {
+        return ImGuiTextBuffer(CPointer<capi.ImGuiTextBuffer>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiTextBuffer_destroy(this.pointer)
@@ -9215,6 +9615,11 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
 
     public init(default_filter: CStringConvertable) {
         super(ImGuiTextFilter_ImGuiTextFilter(default_filter).getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTextFilter {
+        return ImGuiTextFilter(CPointer<capi.ImGuiTextFilter>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -9283,6 +9688,11 @@ public class ImGuiTextIndex <: StructWrapper<capi.ImGuiTextIndex> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiTextIndex {
+        return ImGuiTextIndex(CPointer<capi.ImGuiTextIndex>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -9347,6 +9757,11 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
         super(ImGuiTextRange_ImGuiTextRange_Str(_b, _e).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiTextRange {
+        return ImGuiTextRange(CPointer<capi.ImGuiTextRange>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiTextRange_destroy(this.pointer)
@@ -9389,6 +9804,11 @@ public class ImGuiTypingSelectRequest <: StructWrapper<capi.ImGuiTypingSelectReq
 
     public init(pointer: CPointer<capi.ImGuiTypingSelectRequest>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiTypingSelectRequest {
+        return ImGuiTypingSelectRequest(CPointer<capi.ImGuiTypingSelectRequest>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -9469,6 +9889,11 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
 
     public init() {
         super(ImGuiTypingSelectState_ImGuiTypingSelectState().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiTypingSelectState {
+        return ImGuiTypingSelectState(CPointer<capi.ImGuiTypingSelectState>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -9553,6 +9978,11 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
 
     public init() {
         super(ImGuiViewport_ImGuiViewport().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiViewport {
+        return ImGuiViewport(CPointer<capi.ImGuiViewport>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -9751,6 +10181,11 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
 
     public init() {
         super(ImGuiViewportP_ImGuiViewportP().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiViewportP {
+        return ImGuiViewportP(CPointer<capi.ImGuiViewportP>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -10021,6 +10456,11 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
         super(ImGuiWindowClass_ImGuiWindowClass().getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImGuiWindowClass {
+        return ImGuiWindowClass(CPointer<capi.ImGuiWindowClass>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImGuiWindowClass_destroy(this.pointer)
@@ -10127,6 +10567,11 @@ public class ImGuiWindowDockStyle <: StructWrapper<capi.ImGuiWindowDockStyle> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiWindowDockStyle {
+        return ImGuiWindowDockStyle(CPointer<capi.ImGuiWindowDockStyle>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -10155,6 +10600,11 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
 
     public init() {
         super(ImGuiWindowSettings_ImGuiWindowSettings().getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImGuiWindowSettings {
+        return ImGuiWindowSettings(CPointer<capi.ImGuiWindowSettings>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -10297,6 +10747,11 @@ public class ImGuiWindowStackData <: StructWrapper<capi.ImGuiWindowStackData> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImGuiWindowStackData {
+        return ImGuiWindowStackData(CPointer<capi.ImGuiWindowStackData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -10351,6 +10806,11 @@ public class ImGuiWindowTempData <: StructWrapper<capi.ImGuiWindowTempData> {
 
     public init(pointer: CPointer<capi.ImGuiWindowTempData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImGuiWindowTempData {
+        return ImGuiWindowTempData(CPointer<capi.ImGuiWindowTempData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -10755,6 +11215,11 @@ public class ImRect <: StructWrapper<capi.ImRect> {
         super(ImRect_ImRect_Float(x1, y1, x2, y2).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImRect {
+        return ImRect(CPointer<capi.ImRect>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImRect_destroy(this.pointer)
@@ -10899,6 +11364,11 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
         super(ImVec1_ImVec1_Float(_x).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImVec1 {
+        return ImVec1(CPointer<capi.ImVec1>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImVec1_destroy(this.pointer)
@@ -10931,6 +11401,11 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
 
     public init(_x: Float32, _y: Float32) {
         super(ImVec2_ImVec2_Float(_x, _y).getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImVec2 {
+        return ImVec2(CPointer<capi.ImVec2>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -10981,6 +11456,11 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
         super(ImVec2ih_ImVec2ih_Vec2(rhs).getCPointer(), count: None, owned: true)
     }
 
+    public static func null(): ImVec2ih {
+        return ImVec2ih(CPointer<capi.ImVec2ih>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             capi.ImVec2ih_destroy(this.pointer)
@@ -11023,6 +11503,11 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
 
     public init(_x: Float32, _y: Float32, _z: Float32, _w: Float32) {
         super(ImVec4_ImVec4_Float(_x, _y, _z, _w).getCPointer(), count: None, owned: true)
+    }
+
+    public static func null(): ImVec4 {
+        return ImVec4(CPointer<capi.ImVec4>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11079,6 +11564,11 @@ public class STB_TexteditState <: StructWrapper<capi.STB_TexteditState> {
 
     public init(pointer: CPointer<capi.STB_TexteditState>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): STB_TexteditState {
+        return STB_TexteditState(CPointer<capi.STB_TexteditState>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11237,6 +11727,11 @@ public class StbTexteditRow <: StructWrapper<capi.StbTexteditRow> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): StbTexteditRow {
+        return StbTexteditRow(CPointer<capi.StbTexteditRow>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11313,6 +11808,11 @@ public class StbUndoRecord <: StructWrapper<capi.StbUndoRecord> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): StbUndoRecord {
+        return StbUndoRecord(CPointer<capi.StbUndoRecord>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11367,6 +11867,11 @@ public class StbUndoState <: StructWrapper<capi.StbUndoState> {
 
     public init(pointer: CPointer<capi.StbUndoState>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): StbUndoState {
+        return StbUndoState(CPointer<capi.StbUndoState>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11445,6 +11950,11 @@ public class ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN <: 
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN {
+        return ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN(CPointer<capi.ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11469,6 +11979,11 @@ public class ImChunkStream_ImGuiTableSettings <: StructWrapper<capi.ImChunkStrea
 
     public init(pointer: CPointer<capi.ImChunkStream_ImGuiTableSettings>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImChunkStream_ImGuiTableSettings {
+        return ImChunkStream_ImGuiTableSettings(CPointer<capi.ImChunkStream_ImGuiTableSettings>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11497,6 +12012,11 @@ public class ImChunkStream_ImGuiWindowSettings <: StructWrapper<capi.ImChunkStre
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImChunkStream_ImGuiWindowSettings {
+        return ImChunkStream_ImGuiWindowSettings(CPointer<capi.ImChunkStream_ImGuiWindowSettings>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11521,6 +12041,11 @@ public class ImPool_ImGuiTabBar <: StructWrapper<capi.ImPool_ImGuiTabBar> {
 
     public init(pointer: CPointer<capi.ImPool_ImGuiTabBar>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImPool_ImGuiTabBar {
+        return ImPool_ImGuiTabBar(CPointer<capi.ImPool_ImGuiTabBar>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11579,6 +12104,11 @@ public class ImPool_ImGuiTable <: StructWrapper<capi.ImPool_ImGuiTable> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImPool_ImGuiTable {
+        return ImPool_ImGuiTable(CPointer<capi.ImPool_ImGuiTable>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11635,6 +12165,11 @@ public class ImSpan_ImGuiTableCellData <: StructWrapper<capi.ImSpan_ImGuiTableCe
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImSpan_ImGuiTableCellData {
+        return ImSpan_ImGuiTableCellData(CPointer<capi.ImSpan_ImGuiTableCellData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11669,6 +12204,11 @@ public class ImSpan_ImGuiTableColumn <: StructWrapper<capi.ImSpan_ImGuiTableColu
 
     public init(pointer: CPointer<capi.ImSpan_ImGuiTableColumn>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImSpan_ImGuiTableColumn {
+        return ImSpan_ImGuiTableColumn(CPointer<capi.ImSpan_ImGuiTableColumn>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11707,6 +12247,11 @@ public class ImSpan_ImGuiTableColumnIdx <: StructWrapper<capi.ImSpan_ImGuiTableC
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImSpan_ImGuiTableColumnIdx {
+        return ImSpan_ImGuiTableColumnIdx(CPointer<capi.ImSpan_ImGuiTableColumnIdx>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11741,6 +12286,11 @@ public class ImVector_ImDrawChannel <: StructWrapper<capi.ImVector_ImDrawChannel
 
     public init(pointer: CPointer<capi.ImVector_ImDrawChannel>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImDrawChannel {
+        return ImVector_ImDrawChannel(CPointer<capi.ImVector_ImDrawChannel>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11789,6 +12339,11 @@ public class ImVector_ImDrawCmd <: StructWrapper<capi.ImVector_ImDrawCmd> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImDrawCmd {
+        return ImVector_ImDrawCmd(CPointer<capi.ImVector_ImDrawCmd>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11833,6 +12388,11 @@ public class ImVector_ImDrawIdx <: StructWrapper<capi.ImVector_ImDrawIdx> {
 
     public init(pointer: CPointer<capi.ImVector_ImDrawIdx>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImDrawIdx {
+        return ImVector_ImDrawIdx(CPointer<capi.ImVector_ImDrawIdx>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11881,6 +12441,11 @@ public class ImVector_ImDrawListPtr <: StructWrapper<capi.ImVector_ImDrawListPtr
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImDrawListPtr {
+        return ImVector_ImDrawListPtr(CPointer<capi.ImVector_ImDrawListPtr>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -11925,6 +12490,11 @@ public class ImVector_ImDrawVert <: StructWrapper<capi.ImVector_ImDrawVert> {
 
     public init(pointer: CPointer<capi.ImVector_ImDrawVert>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImDrawVert {
+        return ImVector_ImDrawVert(CPointer<capi.ImVector_ImDrawVert>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -11973,6 +12543,11 @@ public class ImVector_ImFontPtr <: StructWrapper<capi.ImVector_ImFontPtr> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImFontPtr {
+        return ImVector_ImFontPtr(CPointer<capi.ImVector_ImFontPtr>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12017,6 +12592,11 @@ public class ImVector_ImFontAtlasCustomRect <: StructWrapper<capi.ImVector_ImFon
 
     public init(pointer: CPointer<capi.ImVector_ImFontAtlasCustomRect>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImFontAtlasCustomRect {
+        return ImVector_ImFontAtlasCustomRect(CPointer<capi.ImVector_ImFontAtlasCustomRect>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12065,6 +12645,11 @@ public class ImVector_ImFontConfig <: StructWrapper<capi.ImVector_ImFontConfig> 
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImFontConfig {
+        return ImVector_ImFontConfig(CPointer<capi.ImVector_ImFontConfig>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12109,6 +12694,11 @@ public class ImVector_ImFontGlyph <: StructWrapper<capi.ImVector_ImFontGlyph> {
 
     public init(pointer: CPointer<capi.ImVector_ImFontGlyph>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImFontGlyph {
+        return ImVector_ImFontGlyph(CPointer<capi.ImVector_ImFontGlyph>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12157,6 +12747,11 @@ public class ImVector_ImGuiColorMod <: StructWrapper<capi.ImVector_ImGuiColorMod
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiColorMod {
+        return ImVector_ImGuiColorMod(CPointer<capi.ImVector_ImGuiColorMod>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12201,6 +12796,11 @@ public class ImVector_ImGuiContextHook <: StructWrapper<capi.ImVector_ImGuiConte
 
     public init(pointer: CPointer<capi.ImVector_ImGuiContextHook>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiContextHook {
+        return ImVector_ImGuiContextHook(CPointer<capi.ImVector_ImGuiContextHook>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12249,6 +12849,11 @@ public class ImVector_ImGuiDockNodeSettings <: StructWrapper<capi.ImVector_ImGui
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiDockNodeSettings {
+        return ImVector_ImGuiDockNodeSettings(CPointer<capi.ImVector_ImGuiDockNodeSettings>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12293,6 +12898,11 @@ public class ImVector_ImGuiDockRequest <: StructWrapper<capi.ImVector_ImGuiDockR
 
     public init(pointer: CPointer<capi.ImVector_ImGuiDockRequest>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiDockRequest {
+        return ImVector_ImGuiDockRequest(CPointer<capi.ImVector_ImGuiDockRequest>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12341,6 +12951,11 @@ public class ImVector_ImGuiFocusScopeData <: StructWrapper<capi.ImVector_ImGuiFo
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiFocusScopeData {
+        return ImVector_ImGuiFocusScopeData(CPointer<capi.ImVector_ImGuiFocusScopeData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12385,6 +13000,11 @@ public class ImVector_ImGuiGroupData <: StructWrapper<capi.ImVector_ImGuiGroupDa
 
     public init(pointer: CPointer<capi.ImVector_ImGuiGroupData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiGroupData {
+        return ImVector_ImGuiGroupData(CPointer<capi.ImVector_ImGuiGroupData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12433,6 +13053,11 @@ public class ImVector_ImGuiID <: StructWrapper<capi.ImVector_ImGuiID> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiID {
+        return ImVector_ImGuiID(CPointer<capi.ImVector_ImGuiID>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12477,6 +13102,11 @@ public class ImVector_ImGuiInputEvent <: StructWrapper<capi.ImVector_ImGuiInputE
 
     public init(pointer: CPointer<capi.ImVector_ImGuiInputEvent>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiInputEvent {
+        return ImVector_ImGuiInputEvent(CPointer<capi.ImVector_ImGuiInputEvent>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12525,6 +13155,11 @@ public class ImVector_ImGuiItemFlags <: StructWrapper<capi.ImVector_ImGuiItemFla
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiItemFlags {
+        return ImVector_ImGuiItemFlags(CPointer<capi.ImVector_ImGuiItemFlags>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12569,6 +13204,11 @@ public class ImVector_ImGuiKeyRoutingData <: StructWrapper<capi.ImVector_ImGuiKe
 
     public init(pointer: CPointer<capi.ImVector_ImGuiKeyRoutingData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiKeyRoutingData {
+        return ImVector_ImGuiKeyRoutingData(CPointer<capi.ImVector_ImGuiKeyRoutingData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12617,6 +13257,11 @@ public class ImVector_ImGuiListClipperData <: StructWrapper<capi.ImVector_ImGuiL
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiListClipperData {
+        return ImVector_ImGuiListClipperData(CPointer<capi.ImVector_ImGuiListClipperData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12661,6 +13306,11 @@ public class ImVector_ImGuiListClipperRange <: StructWrapper<capi.ImVector_ImGui
 
     public init(pointer: CPointer<capi.ImVector_ImGuiListClipperRange>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiListClipperRange {
+        return ImVector_ImGuiListClipperRange(CPointer<capi.ImVector_ImGuiListClipperRange>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12709,6 +13359,11 @@ public class ImVector_ImGuiNavTreeNodeData <: StructWrapper<capi.ImVector_ImGuiN
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiNavTreeNodeData {
+        return ImVector_ImGuiNavTreeNodeData(CPointer<capi.ImVector_ImGuiNavTreeNodeData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12753,6 +13408,11 @@ public class ImVector_ImGuiOldColumnData <: StructWrapper<capi.ImVector_ImGuiOld
 
     public init(pointer: CPointer<capi.ImVector_ImGuiOldColumnData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiOldColumnData {
+        return ImVector_ImGuiOldColumnData(CPointer<capi.ImVector_ImGuiOldColumnData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12801,6 +13461,11 @@ public class ImVector_ImGuiOldColumns <: StructWrapper<capi.ImVector_ImGuiOldCol
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiOldColumns {
+        return ImVector_ImGuiOldColumns(CPointer<capi.ImVector_ImGuiOldColumns>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12845,6 +13510,11 @@ public class ImVector_ImGuiPlatformMonitor <: StructWrapper<capi.ImVector_ImGuiP
 
     public init(pointer: CPointer<capi.ImVector_ImGuiPlatformMonitor>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiPlatformMonitor {
+        return ImVector_ImGuiPlatformMonitor(CPointer<capi.ImVector_ImGuiPlatformMonitor>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12893,6 +13563,11 @@ public class ImVector_ImGuiPopupData <: StructWrapper<capi.ImVector_ImGuiPopupDa
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiPopupData {
+        return ImVector_ImGuiPopupData(CPointer<capi.ImVector_ImGuiPopupData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -12937,6 +13612,11 @@ public class ImVector_ImGuiPtrOrIndex <: StructWrapper<capi.ImVector_ImGuiPtrOrI
 
     public init(pointer: CPointer<capi.ImVector_ImGuiPtrOrIndex>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiPtrOrIndex {
+        return ImVector_ImGuiPtrOrIndex(CPointer<capi.ImVector_ImGuiPtrOrIndex>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -12985,6 +13665,11 @@ public class ImVector_ImGuiSettingsHandler <: StructWrapper<capi.ImVector_ImGuiS
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiSettingsHandler {
+        return ImVector_ImGuiSettingsHandler(CPointer<capi.ImVector_ImGuiSettingsHandler>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13029,6 +13714,11 @@ public class ImVector_ImGuiShrinkWidthItem <: StructWrapper<capi.ImVector_ImGuiS
 
     public init(pointer: CPointer<capi.ImVector_ImGuiShrinkWidthItem>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiShrinkWidthItem {
+        return ImVector_ImGuiShrinkWidthItem(CPointer<capi.ImVector_ImGuiShrinkWidthItem>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13077,6 +13767,11 @@ public class ImVector_ImGuiStackLevelInfo <: StructWrapper<capi.ImVector_ImGuiSt
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiStackLevelInfo {
+        return ImVector_ImGuiStackLevelInfo(CPointer<capi.ImVector_ImGuiStackLevelInfo>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13121,6 +13816,11 @@ public class ImVector_ImGuiStoragePair <: StructWrapper<capi.ImVector_ImGuiStora
 
     public init(pointer: CPointer<capi.ImVector_ImGuiStoragePair>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiStoragePair {
+        return ImVector_ImGuiStoragePair(CPointer<capi.ImVector_ImGuiStoragePair>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13169,6 +13869,11 @@ public class ImVector_ImGuiStyleMod <: StructWrapper<capi.ImVector_ImGuiStyleMod
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiStyleMod {
+        return ImVector_ImGuiStyleMod(CPointer<capi.ImVector_ImGuiStyleMod>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13213,6 +13918,11 @@ public class ImVector_ImGuiTabBar <: StructWrapper<capi.ImVector_ImGuiTabBar> {
 
     public init(pointer: CPointer<capi.ImVector_ImGuiTabBar>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiTabBar {
+        return ImVector_ImGuiTabBar(CPointer<capi.ImVector_ImGuiTabBar>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13261,6 +13971,11 @@ public class ImVector_ImGuiTabItem <: StructWrapper<capi.ImVector_ImGuiTabItem> 
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiTabItem {
+        return ImVector_ImGuiTabItem(CPointer<capi.ImVector_ImGuiTabItem>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13305,6 +14020,11 @@ public class ImVector_ImGuiTable <: StructWrapper<capi.ImVector_ImGuiTable> {
 
     public init(pointer: CPointer<capi.ImVector_ImGuiTable>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiTable {
+        return ImVector_ImGuiTable(CPointer<capi.ImVector_ImGuiTable>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13353,6 +14073,11 @@ public class ImVector_ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImVector_I
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiTableColumnSortSpecs {
+        return ImVector_ImGuiTableColumnSortSpecs(CPointer<capi.ImVector_ImGuiTableColumnSortSpecs>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13397,6 +14122,11 @@ public class ImVector_ImGuiTableHeaderData <: StructWrapper<capi.ImVector_ImGuiT
 
     public init(pointer: CPointer<capi.ImVector_ImGuiTableHeaderData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiTableHeaderData {
+        return ImVector_ImGuiTableHeaderData(CPointer<capi.ImVector_ImGuiTableHeaderData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13445,6 +14175,11 @@ public class ImVector_ImGuiTableInstanceData <: StructWrapper<capi.ImVector_ImGu
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiTableInstanceData {
+        return ImVector_ImGuiTableInstanceData(CPointer<capi.ImVector_ImGuiTableInstanceData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13489,6 +14224,11 @@ public class ImVector_ImGuiTableTempData <: StructWrapper<capi.ImVector_ImGuiTab
 
     public init(pointer: CPointer<capi.ImVector_ImGuiTableTempData>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiTableTempData {
+        return ImVector_ImGuiTableTempData(CPointer<capi.ImVector_ImGuiTableTempData>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13537,6 +14277,11 @@ public class ImVector_ImGuiTextRange <: StructWrapper<capi.ImVector_ImGuiTextRan
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiTextRange {
+        return ImVector_ImGuiTextRange(CPointer<capi.ImVector_ImGuiTextRange>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13581,6 +14326,11 @@ public class ImVector_ImGuiViewportPtr <: StructWrapper<capi.ImVector_ImGuiViewp
 
     public init(pointer: CPointer<capi.ImVector_ImGuiViewportPtr>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiViewportPtr {
+        return ImVector_ImGuiViewportPtr(CPointer<capi.ImVector_ImGuiViewportPtr>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13629,6 +14379,11 @@ public class ImVector_ImGuiViewportPPtr <: StructWrapper<capi.ImVector_ImGuiView
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiViewportPPtr {
+        return ImVector_ImGuiViewportPPtr(CPointer<capi.ImVector_ImGuiViewportPPtr>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13673,6 +14428,11 @@ public class ImVector_ImGuiWindowPtr <: StructWrapper<capi.ImVector_ImGuiWindowP
 
     public init(pointer: CPointer<capi.ImVector_ImGuiWindowPtr>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImGuiWindowPtr {
+        return ImVector_ImGuiWindowPtr(CPointer<capi.ImVector_ImGuiWindowPtr>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13721,6 +14481,11 @@ public class ImVector_ImGuiWindowStackData <: StructWrapper<capi.ImVector_ImGuiW
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImGuiWindowStackData {
+        return ImVector_ImGuiWindowStackData(CPointer<capi.ImVector_ImGuiWindowStackData>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13765,6 +14530,11 @@ public class ImVector_ImTextureID <: StructWrapper<capi.ImVector_ImTextureID> {
 
     public init(pointer: CPointer<capi.ImVector_ImTextureID>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImTextureID {
+        return ImVector_ImTextureID(CPointer<capi.ImVector_ImTextureID>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13813,6 +14583,11 @@ public class ImVector_ImU32 <: StructWrapper<capi.ImVector_ImU32> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImU32 {
+        return ImVector_ImU32(CPointer<capi.ImVector_ImU32>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13857,6 +14632,11 @@ public class ImVector_ImVec2 <: StructWrapper<capi.ImVector_ImVec2> {
 
     public init(pointer: CPointer<capi.ImVector_ImVec2>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImVec2 {
+        return ImVector_ImVec2(CPointer<capi.ImVector_ImVec2>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13905,6 +14685,11 @@ public class ImVector_ImVec4 <: StructWrapper<capi.ImVector_ImVec4> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_ImVec4 {
+        return ImVector_ImVec4(CPointer<capi.ImVector_ImVec4>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -13949,6 +14734,11 @@ public class ImVector_ImWchar <: StructWrapper<capi.ImVector_ImWchar> {
 
     public init(pointer: CPointer<capi.ImVector_ImWchar>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_ImWchar {
+        return ImVector_ImWchar(CPointer<capi.ImVector_ImWchar>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -13997,6 +14787,11 @@ public class ImVector_char <: StructWrapper<capi.ImVector_char> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_char {
+        return ImVector_char(CPointer<capi.ImVector_char>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -14041,6 +14836,11 @@ public class ImVector_const_charPtr <: StructWrapper<capi.ImVector_const_charPtr
 
     public init(pointer: CPointer<capi.ImVector_const_charPtr>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_const_charPtr {
+        return ImVector_const_charPtr(CPointer<capi.ImVector_const_charPtr>(),
+                           count: None, owned: false)
     }
 
     ~init() {
@@ -14089,6 +14889,11 @@ public class ImVector_float <: StructWrapper<capi.ImVector_float> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_float {
+        return ImVector_float(CPointer<capi.ImVector_float>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -14135,6 +14940,11 @@ public class ImVector_int <: StructWrapper<capi.ImVector_int> {
         super(pointer, count: count, owned: owned)
     }
 
+    public static func null(): ImVector_int {
+        return ImVector_int(CPointer<capi.ImVector_int>(),
+                           count: None, owned: false)
+    }
+
     ~init() {
         if (owned) {
             unsafe { LibC.free(this.pointer) }
@@ -14179,6 +14989,11 @@ public class ImVector_unsigned_char <: StructWrapper<capi.ImVector_unsigned_char
 
     public init(pointer: CPointer<capi.ImVector_unsigned_char>, count!: ?Int64 = None, owned!: Bool = false) {
         super(pointer, count: count, owned: owned)
+    }
+
+    public static func null(): ImVector_unsigned_char {
+        return ImVector_unsigned_char(CPointer<capi.ImVector_unsigned_char>(),
+                           count: None, owned: false)
     }
 
     ~init() {
