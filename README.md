@@ -39,8 +39,8 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
 
 1. Download & Extract
   * From releases:
-    * [imgui4cj-x86_64-w64-mingw32.zip](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-w64-mingw32.zip) for Windows
-    * [imgui4cj-x86_64-unknown-linux-gnu.tar.gz](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-x86_64-unknown-linux-gnu.tar.gz) for Linux
+    * [imgui4cj-windows-x86_64.zip](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-windows-x86_64.zip) for Windows
+    * [imgui4cj-linux-x86_64.zip](https://github.com/PGZXB/imgui4cj/releases/latest/download/imgui4cj-linux-x86_64.zip) for Linux
   * From latest commit:
     * [imgui4cj-windows-x86_64.zip](https://nightly.link/PGZXB/imgui4cj/workflows/build-and-package/main/imgui4cj-windows-x86_64.zip) for Windows
     * [imgui4cj-linux-x86_64.zip](https://nightly.link/PGZXB/imgui4cj/workflows/build-and-package/main/imgui4cj-linux-x86_64.zip) for Linux
