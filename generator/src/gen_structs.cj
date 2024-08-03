@@ -419,8 +419,13 @@ func genStructAccessorFuncsCode(filename: String, pkgName: String, structDefs: A
     throw IllegalStateException("illegal state")
 }
 
-func genStructWCAPIMethod<T>(os: StringWriter<T>, structName: String, md: FuncSignature,
-    typeAlias: HashMap<String, CjType>, apiInfo: APIInfo) where T <: OutputStream {
+func genStructWCAPIMethod<T>(
+    os: StringWriter<T>,
+    structName: String,
+    md: FuncSignature,
+    typeAlias: HashMap<String, CjType>,
+    apiInfo: APIInfo
+) where T <: OutputStream {
     let params = ArrayList<FuncParameter>.fromIterator(
         md.params |> filter {
         item => !(item.name == "..." && item.ty == "...")
@@ -478,9 +483,25 @@ func genStructWCAPIMethod<T>(os: StringWriter<T>, structName: String, md: FuncSi
                     cimguiFunctionDecl: md.cimguiFuncDecl
                 ))
         )
+        if (!md.defaultaArgs.isEmpty()) {
+            let defaultArgs = ArrayList<String>()
+            for (p in params) {
+                if (let Some(arg) <- md.defaultaArgs.get(p.name)) {
+                    defaultArgs.append(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
+                }
+            }
+            os.write("    @DefaultArgs[")
+            for ((i, arg) in withIndex(defaultArgs)) {
+                os.write(arg)
+                if (i != defaultArgs.size - 1) {
+                    os.write(", ")
+                }
+            }
+            os.writeln("]")
+        }
         os.writeln("    ${fnSb.toString()} {")
         if (md.isConstructor) {
-            os.write("        super(")
+            os.write("        _init(")
         } else {
             os.write("        return ")
         }
@@ -500,9 +521,17 @@ func genStructWCAPIMethod<T>(os: StringWriter<T>, structName: String, md: FuncSi
     }
 }
 
-func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: String, structDefs: ArrayList<StructDef>,
-    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>,
-    apiInfo: APIInfo) where T <: OutputStream {
+func genStructsWCAPICode<T>(
+    os: StringWriter<T>,
+    pkgName: String,
+    capiPkgName: String,
+    macrosPkgName: String,
+    structDefs: ArrayList<StructDef>,
+    funcs: ArrayList<FuncSignature>,
+    typeAlias: HashMap<String, CjType>,
+    globalConstants: ?HashMap<String, String>,
+    apiInfo: APIInfo
+) where T <: OutputStream {
     // SOME COMMENTS ....
     //
     // package xxx
@@ -573,6 +602,7 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     os.writeln("package ${pkgName}")
     os.writeln()
     os.writeln("import ${capiPkgName}")
+    os.writeln("import ${macrosPkgName}.*")
     for (def in structDefs) {
         os.writeln()
         os.writeln("public class ${def.name} <: StructWrapper<${getPkgName(capiPkgName)}.${def.name}> {")
@@ -666,12 +696,30 @@ func genStructsWCAPICode<T>(os: StringWriter<T>, pkgName: String, capiPkgName: S
     }
 }
 
-func genStructsWCAPICode(filename: String, pkgName: String, capiPkgName: String, structDefs: ArrayList<StructDef>,
-    funcs: ArrayList<FuncSignature>, typeAlias: HashMap<String, CjType>, globalConstants: ?HashMap<String, String>,
-    apiInfo: APIInfo) {
+func genStructsWCAPICode(
+    filename: String,
+    pkgName: String,
+    capiPkgName: String,
+    macrosPkgName: String,
+    structDefs: ArrayList<StructDef>,
+    funcs: ArrayList<FuncSignature>,
+    typeAlias: HashMap<String, CjType>,
+    globalConstants: ?HashMap<String, String>,
+    apiInfo: APIInfo
+) {
     try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
         try (sw = StringWriter(fp)) {
-            genStructsWCAPICode(sw, pkgName, capiPkgName, structDefs, funcs, typeAlias, globalConstants, apiInfo)
+            genStructsWCAPICode(
+                sw,
+                pkgName,
+                capiPkgName,
+                macrosPkgName,
+                structDefs,
+                funcs,
+                typeAlias,
+                globalConstants,
+                apiInfo
+            )
         }
     }
 }

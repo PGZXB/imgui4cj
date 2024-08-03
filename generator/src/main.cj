@@ -178,8 +178,8 @@ main(args: Array<String>): Int64 {
     // Generate cimgui structs wcapi (cj class) -> src/wcapi/structs.cj
     let structsWCAPICodeFilename = "${wcapiOutputDir}/structs.cj"
     println("Generating cimgui funcs wcapi -> ${structsWCAPICodeFilename} ...")
-    genStructsWCAPICode(structsWCAPICodeFilename, wcapiPkgName, capiPkgName, structDefs, funcsSigs, typeAlias,
-        globalConstants, apiInfo)
+    genStructsWCAPICode(structsWCAPICodeFilename, wcapiPkgName, capiPkgName, macrosPkgName, structDefs, funcsSigs,
+        typeAlias, globalConstants, apiInfo)
     println("Generated cimgui funcs wcapi -> ${structsWCAPICodeFilename}")
 
     // Generate re-exports wcapi -> src/wcapi/re_exports.cj

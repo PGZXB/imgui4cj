@@ -187,11 +187,17 @@ public let f32 = vaule<Float32>
 public let f64 = vaule<Float64>
 
 public open class StructWrapper<T> <: ToString where T <: CType {
-    protected let pointer: CPointer<T>
-    protected let count: ?Int64
-    protected let owned: Bool
+    protected var pointer: CPointer<T>
+    protected var count: ?Int64
+    protected var owned: Bool
 
-    public init(value!: ?T = None, count!: ?Int64 = None) {
+    public init() {
+        this.pointer = CPointer<T>()
+        this.count = None
+        this.owned = false
+    }
+
+    public init(value!: ?T, count!: ?Int64 = None) {
         this(unsafe { LibC.malloc<T>(count: count ?? 1) }, count: count, owned: true)
         if (let Some(v) <- value) {
             let n = count.getOrDefault {1}
@@ -202,6 +208,12 @@ public open class StructWrapper<T> <: ToString where T <: CType {
     }
 
     public init(pointer: CPointer<T>, count!: ?Int64, owned!: Bool) {
+        this.pointer = pointer
+        this.count = count
+        this.owned = owned
+    }
+
+    public func _init(pointer: CPointer<T>, count!: ?Int64, owned!: Bool) {
         this.pointer = pointer
         this.count = count
         this.owned = owned

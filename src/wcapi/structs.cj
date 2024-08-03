@@ -6,6 +6,7 @@
 package imgui4cj.wcapi
 
 import imgui4cj.capi
+import imgui4cj.macros.*
 
 public class ImBitVector <: StructWrapper<capi.ImBitVector> {
     public init(value!: ?capi.ImBitVector, count!: ?Int64 = None) {
@@ -68,23 +69,25 @@ public class ImColor <: StructWrapper<capi.ImColor> {
     }
 
     public init() {
-        super(ImColor_ImColor_Nil().getCPointer(), count: None, owned: true)
+        _init(ImColor_ImColor_Nil().getCPointer(), count: None, owned: true)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public init(r: Float32, g: Float32, b: Float32, a: Float32) {
-        super(ImColor_ImColor_Float(r, g, b, a).getCPointer(), count: None, owned: true)
+        _init(ImColor_ImColor_Float(r, g, b, a).getCPointer(), count: None, owned: true)
     }
 
     public init(col: ImVec4) {
-        super(ImColor_ImColor_Vec4(col).getCPointer(), count: None, owned: true)
+        _init(ImColor_ImColor_Vec4(col).getCPointer(), count: None, owned: true)
     }
 
+    @DefaultArgs[Int32(255)]
     public init(r: Int32, g: Int32, b: Int32, a: Int32) {
-        super(ImColor_ImColor_Int(r, g, b, a).getCPointer(), count: None, owned: true)
+        _init(ImColor_ImColor_Int(r, g, b, a).getCPointer(), count: None, owned: true)
     }
 
     public init(rgba: ImU32) {
-        super(ImColor_ImColor_U32(rgba).getCPointer(), count: None, owned: true)
+        _init(ImColor_ImColor_U32(rgba).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImColor {
@@ -108,10 +111,12 @@ public class ImColor <: StructWrapper<capi.ImColor> {
         }
     }
 
+    @DefaultArgs[Float32(1.0)]
     public static func HSV(pOut: ImColor, h: Float32, s: Float32, v: Float32, a: Float32): Unit {
         return ImColor_HSV(pOut, h, s, v, a)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public func SetHSV(h: Float32, s: Float32, v: Float32, a: Float32): Unit {
         return ImColor_SetHSV(this, h, s, v, a)
     }
@@ -168,7 +173,7 @@ public class ImDrawCmd <: StructWrapper<capi.ImDrawCmd> {
     }
 
     public init() {
-        super(ImDrawCmd_ImDrawCmd().getCPointer(), count: None, owned: true)
+        _init(ImDrawCmd_ImDrawCmd().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawCmd {
@@ -318,7 +323,7 @@ public class ImDrawData <: StructWrapper<capi.ImDrawData> {
     }
 
     public init() {
-        super(ImDrawData_ImDrawData().getCPointer(), count: None, owned: true)
+        _init(ImDrawData_ImDrawData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawData {
@@ -449,7 +454,7 @@ public class ImDrawDataBuilder <: StructWrapper<capi.ImDrawDataBuilder> {
     }
 
     public init() {
-        super(ImDrawDataBuilder_ImDrawDataBuilder().getCPointer(), count: None, owned: true)
+        _init(ImDrawDataBuilder_ImDrawDataBuilder().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawDataBuilder {
@@ -494,7 +499,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
     }
 
     public init(shared_data: ImDrawListSharedData) {
-        super(ImDrawList_ImDrawList(shared_data).getCPointer(), count: None, owned: true)
+        _init(ImDrawList_ImDrawList(shared_data).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawList {
@@ -658,10 +663,12 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         }
     }
 
+    @DefaultArgs[Int32(0)]
     public func AddBezierCubic(p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
         return ImDrawList_AddBezierCubic(this, p1, p2, p3, p4, col, thickness, num_segments)
     }
 
+    @DefaultArgs[Int32(0)]
     public func AddBezierQuadratic(p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32, num_segments: Int32): Unit {
         return ImDrawList_AddBezierQuadratic(this, p1, p2, p3, col, thickness, num_segments)
     }
@@ -670,10 +677,12 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddCallback(this, callback, callback_data)
     }
 
+    @DefaultArgs[Int32(0), Float32(1.0)]
     public func AddCircle(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
         return ImDrawList_AddCircle(this, center, radius, col, num_segments, thickness)
     }
 
+    @DefaultArgs[Int32(0)]
     public func AddCircleFilled(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32): Unit {
         return ImDrawList_AddCircleFilled(this, center, radius, col, num_segments)
     }
@@ -690,30 +699,37 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddDrawCmd(this)
     }
 
+    @DefaultArgs[Float32(0.0), Int32(0), Float32(1.0)]
     public func AddEllipse(center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32, thickness: Float32): Unit {
         return ImDrawList_AddEllipse(this, center, radius, col, rot, num_segments, thickness)
     }
 
+    @DefaultArgs[Float32(0.0), Int32(0)]
     public func AddEllipseFilled(center: ImVec2, radius: ImVec2, col: ImU32, rot: Float32, num_segments: Int32): Unit {
         return ImDrawList_AddEllipseFilled(this, center, radius, col, rot, num_segments)
     }
 
+    @DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 1.0), UInt32(4294967295)]
     public func AddImage(user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32): Unit {
         return ImDrawList_AddImage(this, user_texture_id, p_min, p_max, uv_min, uv_max, col)
     }
 
+    @DefaultArgs[ImVec2(0.0, 0.0), ImVec2(1.0, 0.0), ImVec2(1.0, 1.0), ImVec2(0.0, 1.0), UInt32(4294967295)]
     public func AddImageQuad(user_texture_id: ImTextureID, p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, uv1: ImVec2, uv2: ImVec2, uv3: ImVec2, uv4: ImVec2, col: ImU32): Unit {
         return ImDrawList_AddImageQuad(this, user_texture_id, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col)
     }
 
+    @DefaultArgs[Int32(0)]
     public func AddImageRounded(user_texture_id: ImTextureID, p_min: ImVec2, p_max: ImVec2, uv_min: ImVec2, uv_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
         return ImDrawList_AddImageRounded(this, user_texture_id, p_min, p_max, uv_min, uv_max, col, rounding, flags)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public func AddLine(p1: ImVec2, p2: ImVec2, col: ImU32, thickness: Float32): Unit {
         return ImDrawList_AddLine(this, p1, p2, col, thickness)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public func AddNgon(center: ImVec2, radius: Float32, col: ImU32, num_segments: Int32, thickness: Float32): Unit {
         return ImDrawList_AddNgon(this, center, radius, col, num_segments, thickness)
     }
@@ -726,6 +742,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddPolyline(this, points, num_points, col, flags, thickness)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public func AddQuad(p1: ImVec2, p2: ImVec2, p3: ImVec2, p4: ImVec2, col: ImU32, thickness: Float32): Unit {
         return ImDrawList_AddQuad(this, p1, p2, p3, p4, col, thickness)
     }
@@ -734,10 +751,12 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddQuadFilled(this, p1, p2, p3, p4, col)
     }
 
+    @DefaultArgs[Float32(0.0), Int32(0), Float32(1.0)]
     public func AddRect(p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags, thickness: Float32): Unit {
         return ImDrawList_AddRect(this, p_min, p_max, col, rounding, flags, thickness)
     }
 
+    @DefaultArgs[Float32(0.0), Int32(0)]
     public func AddRectFilled(p_min: ImVec2, p_max: ImVec2, col: ImU32, rounding: Float32, flags: ImDrawFlags): Unit {
         return ImDrawList_AddRectFilled(this, p_min, p_max, col, rounding, flags)
     }
@@ -746,14 +765,17 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_AddRectFilledMultiColor(this, p_min, p_max, col_upr_left, col_upr_right, col_bot_right, col_bot_left)
     }
 
+    @DefaultArgs[null<UInt8>()]
     public func AddText(pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable): Unit {
         return ImDrawList_AddText_Vec2(this, pos, col, text_begin, text_end)
     }
 
+    @DefaultArgs[null<UInt8>(), Float32(0.0), ImVec4.null()]
     public func AddText(font: ImFont, font_size: Float32, pos: ImVec2, col: ImU32, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip_rect: ImVec4): Unit {
         return ImDrawList_AddText_FontPtr(this, font, font_size, pos, col, text_begin, text_end, wrap_width, cpu_fine_clip_rect)
     }
 
+    @DefaultArgs[Float32(1.0)]
     public func AddTriangle(p1: ImVec2, p2: ImVec2, p3: ImVec2, col: ImU32, thickness: Float32): Unit {
         return ImDrawList_AddTriangle(this, p1, p2, p3, col, thickness)
     }
@@ -786,6 +808,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_GetClipRectMin(pOut, this)
     }
 
+    @DefaultArgs[Int32(0)]
     public func PathArcTo(center: ImVec2, radius: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
         return ImDrawList_PathArcTo(this, center, radius, a_min, a_max, num_segments)
     }
@@ -794,10 +817,12 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_PathArcToFast(this, center, radius, a_min_of_12, a_max_of_12)
     }
 
+    @DefaultArgs[Int32(0)]
     public func PathBezierCubicCurveTo(p2: ImVec2, p3: ImVec2, p4: ImVec2, num_segments: Int32): Unit {
         return ImDrawList_PathBezierCubicCurveTo(this, p2, p3, p4, num_segments)
     }
 
+    @DefaultArgs[Int32(0)]
     public func PathBezierQuadraticCurveTo(p2: ImVec2, p3: ImVec2, num_segments: Int32): Unit {
         return ImDrawList_PathBezierQuadraticCurveTo(this, p2, p3, num_segments)
     }
@@ -806,6 +831,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_PathClear(this)
     }
 
+    @DefaultArgs[Int32(0)]
     public func PathEllipticalArcTo(center: ImVec2, radius: ImVec2, rot: Float32, a_min: Float32, a_max: Float32, num_segments: Int32): Unit {
         return ImDrawList_PathEllipticalArcTo(this, center, radius, rot, a_min, a_max, num_segments)
     }
@@ -826,10 +852,12 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_PathLineToMergeDuplicate(this, pos)
     }
 
+    @DefaultArgs[Float32(0.0), Int32(0)]
     public func PathRect(rect_min: ImVec2, rect_max: ImVec2, rounding: Float32, flags: ImDrawFlags): Unit {
         return ImDrawList_PathRect(this, rect_min, rect_max, rounding, flags)
     }
 
+    @DefaultArgs[Int32(0), Float32(1.0)]
     public func PathStroke(col: ImU32, flags: ImDrawFlags, thickness: Float32): Unit {
         return ImDrawList_PathStroke(this, col, flags, thickness)
     }
@@ -874,6 +902,7 @@ public class ImDrawList <: StructWrapper<capi.ImDrawList> {
         return ImDrawList_PrimWriteVtx(this, pos, uv, col)
     }
 
+    @DefaultArgs[false]
     public func PushClipRect(clip_rect_min: ImVec2, clip_rect_max: ImVec2, intersect_with_current_clip_rect: Bool): Unit {
         return ImDrawList_PushClipRect(this, clip_rect_min, clip_rect_max, intersect_with_current_clip_rect)
     }
@@ -937,7 +966,7 @@ public class ImDrawListSharedData <: StructWrapper<capi.ImDrawListSharedData> {
     }
 
     public init() {
-        super(ImDrawListSharedData_ImDrawListSharedData().getCPointer(), count: None, owned: true)
+        _init(ImDrawListSharedData_ImDrawListSharedData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawListSharedData {
@@ -1086,7 +1115,7 @@ public class ImDrawListSplitter <: StructWrapper<capi.ImDrawListSplitter> {
     }
 
     public init() {
-        super(ImDrawListSplitter_ImDrawListSplitter().getCPointer(), count: None, owned: true)
+        _init(ImDrawListSplitter_ImDrawListSplitter().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImDrawListSplitter {
@@ -1212,7 +1241,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
     }
 
     public init() {
-        super(ImFont_ImFont().getCPointer(), count: None, owned: true)
+        _init(ImFont_ImFont().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImFont {
@@ -1430,6 +1459,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_AddGlyph(this, src_cfg, c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x)
     }
 
+    @DefaultArgs[true]
     public func AddRemapChar(dst: ImWchar, src: ImWchar, overwrite_dst: Bool): Unit {
         return ImFont_AddRemapChar(this, dst, src, overwrite_dst)
     }
@@ -1438,6 +1468,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_BuildLookupTable(this)
     }
 
+    @DefaultArgs[null<UInt8>(), null<CPointer<UInt8>>()]
     public func CalcTextSizeA(pOut: ImVec2, size: Float32, max_width: Float32, wrap_width: Float32, text_begin: CStringConvertable, text_end: CStringConvertable, remaining: Ref<CPointer<UInt8>>): Unit {
         return ImFont_CalcTextSizeA(pOut, this, size, max_width, wrap_width, text_begin, text_end, remaining)
     }
@@ -1482,6 +1513,7 @@ public class ImFont <: StructWrapper<capi.ImFont> {
         return ImFont_RenderChar(this, draw_list, size, pos, col, c)
     }
 
+    @DefaultArgs[Float32(0.0), false]
     public func RenderText(draw_list: ImDrawList, size: Float32, pos: ImVec2, col: ImU32, clip_rect: ImVec4, text_begin: CStringConvertable, text_end: CStringConvertable, wrap_width: Float32, cpu_fine_clip: Bool): Unit {
         return ImFont_RenderText(this, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip)
     }
@@ -1501,7 +1533,7 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
     }
 
     public init() {
-        super(ImFontAtlas_ImFontAtlas().getCPointer(), count: None, owned: true)
+        _init(ImFontAtlas_ImFontAtlas().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImFontAtlas {
@@ -1735,6 +1767,7 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         }
     }
 
+    @DefaultArgs[ImVec2(0.0, 0.0)]
     public func AddCustomRectFontGlyph(font: ImFont, id: ImWchar, width: Int32, height: Int32, advance_x: Float32, offset: ImVec2): Int32 {
         return ImFontAtlas_AddCustomRectFontGlyph(this, font, id, width, height, advance_x, offset)
     }
@@ -1747,22 +1780,27 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_AddFont(this, font_cfg)
     }
 
+    @DefaultArgs[ImFontConfig.null()]
     public func AddFontDefault(font_cfg: ImFontConfig): ImFont {
         return ImFontAtlas_AddFontDefault(this, font_cfg)
     }
 
+    @DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
     public func AddFontFromFileTTF(filename: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromFileTTF(this, filename, size_pixels, font_cfg, glyph_ranges)
     }
 
+    @DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
     public func AddFontFromMemoryCompressedBase85TTF(compressed_font_data_base85: CStringConvertable, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(this, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges)
     }
 
+    @DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
     public func AddFontFromMemoryCompressedTTF(compressed_font_data: Ref<Unit>, compressed_font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryCompressedTTF(this, compressed_font_data, compressed_font_data_size, size_pixels, font_cfg, glyph_ranges)
     }
 
+    @DefaultArgs[ImFontConfig.null(), null<ImWchar>()]
     public func AddFontFromMemoryTTF(font_data: Ref<Unit>, font_data_size: Int32, size_pixels: Float32, font_cfg: ImFontConfig, glyph_ranges: Ref<ImWchar>): ImFont {
         return ImFontAtlas_AddFontFromMemoryTTF(this, font_data, font_data_size, size_pixels, font_cfg, glyph_ranges)
     }
@@ -1835,10 +1873,12 @@ public class ImFontAtlas <: StructWrapper<capi.ImFontAtlas> {
         return ImFontAtlas_GetMouseCursorTexData(this, cursor, out_offset, out_size, out_uv_border, out_uv_fill)
     }
 
+    @DefaultArgs[null<Int32>()]
     public func GetTexDataAsAlpha8(out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
         return ImFontAtlas_GetTexDataAsAlpha8(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
     }
 
+    @DefaultArgs[null<Int32>()]
     public func GetTexDataAsRGBA32(out_pixels: CPointer<CPointer<UInt8>>, out_width: Ref<Int32>, out_height: Ref<Int32>, out_bytes_per_pixel: Ref<Int32>): Unit {
         return ImFontAtlas_GetTexDataAsRGBA32(this, out_pixels, out_width, out_height, out_bytes_per_pixel)
     }
@@ -1862,7 +1902,7 @@ public class ImFontAtlasCustomRect <: StructWrapper<capi.ImFontAtlasCustomRect> 
     }
 
     public init() {
-        super(ImFontAtlasCustomRect_ImFontAtlasCustomRect().getCPointer(), count: None, owned: true)
+        _init(ImFontAtlasCustomRect_ImFontAtlasCustomRect().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImFontAtlasCustomRect {
@@ -2002,7 +2042,7 @@ public class ImFontConfig <: StructWrapper<capi.ImFontConfig> {
     }
 
     public init() {
-        super(ImFontConfig_ImFontConfig().getCPointer(), count: None, owned: true)
+        _init(ImFontConfig_ImFontConfig().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImFontConfig {
@@ -2227,7 +2267,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
     }
 
     public init() {
-        super(ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder().getCPointer(), count: None, owned: true)
+        _init(ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImFontGlyphRangesBuilder {
@@ -2259,6 +2299,7 @@ public class ImFontGlyphRangesBuilder <: StructWrapper<capi.ImFontGlyphRangesBui
         return ImFontGlyphRangesBuilder_AddRanges(this, ranges)
     }
 
+    @DefaultArgs[null<UInt8>()]
     public func AddText(text: CStringConvertable, text_end: CStringConvertable): Unit {
         return ImFontGlyphRangesBuilder_AddText(this, text, text_end)
     }
@@ -2331,7 +2372,7 @@ public class ImGuiComboPreviewData <: StructWrapper<capi.ImGuiComboPreviewData> 
     }
 
     public init() {
-        super(ImGuiComboPreviewData_ImGuiComboPreviewData().getCPointer(), count: None, owned: true)
+        _init(ImGuiComboPreviewData_ImGuiComboPreviewData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiComboPreviewData {
@@ -2416,7 +2457,7 @@ public class ImGuiContextHook <: StructWrapper<capi.ImGuiContextHook> {
     }
 
     public init() {
-        super(ImGuiContextHook_ImGuiContextHook().getCPointer(), count: None, owned: true)
+        _init(ImGuiContextHook_ImGuiContextHook().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiContextHook {
@@ -2689,7 +2730,7 @@ public class ImGuiDebugAllocInfo <: StructWrapper<capi.ImGuiDebugAllocInfo> {
     }
 
     public init() {
-        super(ImGuiDebugAllocInfo_ImGuiDebugAllocInfo().getCPointer(), count: None, owned: true)
+        _init(ImGuiDebugAllocInfo_ImGuiDebugAllocInfo().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiDebugAllocInfo {
@@ -2754,7 +2795,7 @@ public class ImGuiDockContext <: StructWrapper<capi.ImGuiDockContext> {
     }
 
     public init() {
-        super(ImGuiDockContext_ImGuiDockContext().getCPointer(), count: None, owned: true)
+        _init(ImGuiDockContext_ImGuiDockContext().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiDockContext {
@@ -3011,7 +3052,7 @@ public class ImGuiIDStackTool <: StructWrapper<capi.ImGuiIDStackTool> {
     }
 
     public init() {
-        super(ImGuiIDStackTool_ImGuiIDStackTool().getCPointer(), count: None, owned: true)
+        _init(ImGuiIDStackTool_ImGuiIDStackTool().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiIDStackTool {
@@ -3096,7 +3137,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
     }
 
     public init() {
-        super(ImGuiIO_ImGuiIO().getCPointer(), count: None, owned: true)
+        _init(ImGuiIO_ImGuiIO().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiIO {
@@ -4166,6 +4207,7 @@ public class ImGuiIO <: StructWrapper<capi.ImGuiIO> {
         return ImGuiIO_SetAppAcceptingEvents(this, accepting_events)
     }
 
+    @DefaultArgs[Int32(-1)]
     public func SetKeyEventNativeData(key: ImGuiKey, native_keycode: Int32, native_scancode: Int32, native_legacy_index: Int32): Unit {
         return ImGuiIO_SetKeyEventNativeData(this, key, native_keycode, native_scancode, native_legacy_index)
     }
@@ -4478,7 +4520,7 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
     }
 
     public init() {
-        super(ImGuiInputTextCallbackData_ImGuiInputTextCallbackData().getCPointer(), count: None, owned: true)
+        _init(ImGuiInputTextCallbackData_ImGuiInputTextCallbackData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiInputTextCallbackData {
@@ -4634,6 +4676,7 @@ public class ImGuiInputTextCallbackData <: StructWrapper<capi.ImGuiInputTextCall
         return ImGuiInputTextCallbackData_HasSelection(this)
     }
 
+    @DefaultArgs[null<UInt8>()]
     public func InsertChars(pos: Int32, text: CStringConvertable, text_end: CStringConvertable): Unit {
         return ImGuiInputTextCallbackData_InsertChars(this, pos, text, text_end)
     }
@@ -4653,7 +4696,7 @@ public class ImGuiInputTextDeactivatedState <: StructWrapper<capi.ImGuiInputText
     }
 
     public init() {
-        super(ImGuiInputTextDeactivatedState_ImGuiInputTextDeactivatedState().getCPointer(), count: None, owned: true)
+        _init(ImGuiInputTextDeactivatedState_ImGuiInputTextDeactivatedState().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiInputTextDeactivatedState {
@@ -4702,7 +4745,7 @@ public class ImGuiInputTextState <: StructWrapper<capi.ImGuiInputTextState> {
     }
 
     public init() {
-        super(ImGuiInputTextState_ImGuiInputTextState().getCPointer(), count: None, owned: true)
+        _init(ImGuiInputTextState_ImGuiInputTextState().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiInputTextState {
@@ -5042,7 +5085,7 @@ public class ImGuiKeyOwnerData <: StructWrapper<capi.ImGuiKeyOwnerData> {
     }
 
     public init() {
-        super(ImGuiKeyOwnerData_ImGuiKeyOwnerData().getCPointer(), count: None, owned: true)
+        _init(ImGuiKeyOwnerData_ImGuiKeyOwnerData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiKeyOwnerData {
@@ -5107,7 +5150,7 @@ public class ImGuiKeyRoutingData <: StructWrapper<capi.ImGuiKeyRoutingData> {
     }
 
     public init() {
-        super(ImGuiKeyRoutingData_ImGuiKeyRoutingData().getCPointer(), count: None, owned: true)
+        _init(ImGuiKeyRoutingData_ImGuiKeyRoutingData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiKeyRoutingData {
@@ -5192,7 +5235,7 @@ public class ImGuiKeyRoutingTable <: StructWrapper<capi.ImGuiKeyRoutingTable> {
     }
 
     public init() {
-        super(ImGuiKeyRoutingTable_ImGuiKeyRoutingTable().getCPointer(), count: None, owned: true)
+        _init(ImGuiKeyRoutingTable_ImGuiKeyRoutingTable().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiKeyRoutingTable {
@@ -5251,7 +5294,7 @@ public class ImGuiLastItemData <: StructWrapper<capi.ImGuiLastItemData> {
     }
 
     public init() {
-        super(ImGuiLastItemData_ImGuiLastItemData().getCPointer(), count: None, owned: true)
+        _init(ImGuiLastItemData_ImGuiLastItemData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiLastItemData {
@@ -5356,7 +5399,7 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
     }
 
     public init() {
-        super(ImGuiListClipper_ImGuiListClipper().getCPointer(), count: None, owned: true)
+        _init(ImGuiListClipper_ImGuiListClipper().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiListClipper {
@@ -5440,6 +5483,7 @@ public class ImGuiListClipper <: StructWrapper<capi.ImGuiListClipper> {
         }
     }
 
+    @DefaultArgs[Float32(-1.0)]
     public func Begin(items_count: Int32, items_height: Float32): Unit {
         return ImGuiListClipper_Begin(this, items_count, items_height)
     }
@@ -5471,7 +5515,7 @@ public class ImGuiListClipperData <: StructWrapper<capi.ImGuiListClipperData> {
     }
 
     public init() {
-        super(ImGuiListClipperData_ImGuiListClipperData().getCPointer(), count: None, owned: true)
+        _init(ImGuiListClipperData_ImGuiListClipperData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiListClipperData {
@@ -5670,7 +5714,7 @@ public class ImGuiMenuColumns <: StructWrapper<capi.ImGuiMenuColumns> {
     }
 
     public init() {
-        super(ImGuiMenuColumns_ImGuiMenuColumns().getCPointer(), count: None, owned: true)
+        _init(ImGuiMenuColumns_ImGuiMenuColumns().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiMenuColumns {
@@ -5948,7 +5992,7 @@ public class ImGuiNavItemData <: StructWrapper<capi.ImGuiNavItemData> {
     }
 
     public init() {
-        super(ImGuiNavItemData_ImGuiNavItemData().getCPointer(), count: None, owned: true)
+        _init(ImGuiNavItemData_ImGuiNavItemData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiNavItemData {
@@ -6118,7 +6162,7 @@ public class ImGuiNextItemData <: StructWrapper<capi.ImGuiNextItemData> {
     }
 
     public init() {
-        super(ImGuiNextItemData_ImGuiNextItemData().getCPointer(), count: None, owned: true)
+        _init(ImGuiNextItemData_ImGuiNextItemData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiNextItemData {
@@ -6237,7 +6281,7 @@ public class ImGuiNextWindowData <: StructWrapper<capi.ImGuiNextWindowData> {
     }
 
     public init() {
-        super(ImGuiNextWindowData_ImGuiNextWindowData().getCPointer(), count: None, owned: true)
+        _init(ImGuiNextWindowData_ImGuiNextWindowData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiNextWindowData {
@@ -6486,7 +6530,7 @@ public class ImGuiOldColumnData <: StructWrapper<capi.ImGuiOldColumnData> {
     }
 
     public init() {
-        super(ImGuiOldColumnData_ImGuiOldColumnData().getCPointer(), count: None, owned: true)
+        _init(ImGuiOldColumnData_ImGuiOldColumnData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiOldColumnData {
@@ -6551,7 +6595,7 @@ public class ImGuiOldColumns <: StructWrapper<capi.ImGuiOldColumns> {
     }
 
     public init() {
-        super(ImGuiOldColumns_ImGuiOldColumns().getCPointer(), count: None, owned: true)
+        _init(ImGuiOldColumns_ImGuiOldColumns().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiOldColumns {
@@ -6746,7 +6790,7 @@ public class ImGuiOnceUponAFrame <: StructWrapper<capi.ImGuiOnceUponAFrame> {
     }
 
     public init() {
-        super(ImGuiOnceUponAFrame_ImGuiOnceUponAFrame().getCPointer(), count: None, owned: true)
+        _init(ImGuiOnceUponAFrame_ImGuiOnceUponAFrame().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiOnceUponAFrame {
@@ -6781,7 +6825,7 @@ public class ImGuiPayload <: StructWrapper<capi.ImGuiPayload> {
     }
 
     public init() {
-        super(ImGuiPayload_ImGuiPayload().getCPointer(), count: None, owned: true)
+        _init(ImGuiPayload_ImGuiPayload().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPayload {
@@ -6902,7 +6946,7 @@ public class ImGuiPlatformIO <: StructWrapper<capi.ImGuiPlatformIO> {
     }
 
     public init() {
-        super(ImGuiPlatformIO_ImGuiPlatformIO().getCPointer(), count: None, owned: true)
+        _init(ImGuiPlatformIO_ImGuiPlatformIO().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPlatformIO {
@@ -7177,7 +7221,7 @@ public class ImGuiPlatformImeData <: StructWrapper<capi.ImGuiPlatformImeData> {
     }
 
     public init() {
-        super(ImGuiPlatformImeData_ImGuiPlatformImeData().getCPointer(), count: None, owned: true)
+        _init(ImGuiPlatformImeData_ImGuiPlatformImeData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPlatformImeData {
@@ -7232,7 +7276,7 @@ public class ImGuiPlatformMonitor <: StructWrapper<capi.ImGuiPlatformMonitor> {
     }
 
     public init() {
-        super(ImGuiPlatformMonitor_ImGuiPlatformMonitor().getCPointer(), count: None, owned: true)
+        _init(ImGuiPlatformMonitor_ImGuiPlatformMonitor().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPlatformMonitor {
@@ -7317,7 +7361,7 @@ public class ImGuiPopupData <: StructWrapper<capi.ImGuiPopupData> {
     }
 
     public init() {
-        super(ImGuiPopupData_ImGuiPopupData().getCPointer(), count: None, owned: true)
+        _init(ImGuiPopupData_ImGuiPopupData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPopupData {
@@ -7422,11 +7466,11 @@ public class ImGuiPtrOrIndex <: StructWrapper<capi.ImGuiPtrOrIndex> {
     }
 
     public init(ptr: Ref<Unit>) {
-        super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(ptr).getCPointer(), count: None, owned: true)
+        _init(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(ptr).getCPointer(), count: None, owned: true)
     }
 
     public init(index: Int32) {
-        super(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(index).getCPointer(), count: None, owned: true)
+        _init(ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(index).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiPtrOrIndex {
@@ -7471,7 +7515,7 @@ public class ImGuiSettingsHandler <: StructWrapper<capi.ImGuiSettingsHandler> {
     }
 
     public init() {
-        super(ImGuiSettingsHandler_ImGuiSettingsHandler().getCPointer(), count: None, owned: true)
+        _init(ImGuiSettingsHandler_ImGuiSettingsHandler().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiSettingsHandler {
@@ -7698,7 +7742,7 @@ public class ImGuiStackSizes <: StructWrapper<capi.ImGuiStackSizes> {
     }
 
     public init() {
-        super(ImGuiStackSizes_ImGuiStackSizes().getCPointer(), count: None, owned: true)
+        _init(ImGuiStackSizes_ImGuiStackSizes().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiStackSizes {
@@ -7849,26 +7893,32 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_Clear(this)
     }
 
+    @DefaultArgs[false]
     public func GetBool(key: ImGuiID, default_val: Bool): Bool {
         return ImGuiStorage_GetBool(this, key, default_val)
     }
 
+    @DefaultArgs[false]
     public func GetBoolRef(key: ImGuiID, default_val: Bool): Ref<Bool> {
         return ImGuiStorage_GetBoolRef(this, key, default_val)
     }
 
+    @DefaultArgs[Float32(0.0)]
     public func GetFloat(key: ImGuiID, default_val: Float32): Float32 {
         return ImGuiStorage_GetFloat(this, key, default_val)
     }
 
+    @DefaultArgs[Float32(0.0)]
     public func GetFloatRef(key: ImGuiID, default_val: Float32): Ref<Float32> {
         return ImGuiStorage_GetFloatRef(this, key, default_val)
     }
 
+    @DefaultArgs[Int32(0)]
     public func GetInt(key: ImGuiID, default_val: Int32): Int32 {
         return ImGuiStorage_GetInt(this, key, default_val)
     }
 
+    @DefaultArgs[Int32(0)]
     public func GetIntRef(key: ImGuiID, default_val: Int32): Ref<Int32> {
         return ImGuiStorage_GetIntRef(this, key, default_val)
     }
@@ -7877,6 +7927,7 @@ public class ImGuiStorage <: StructWrapper<capi.ImGuiStorage> {
         return ImGuiStorage_GetVoidPtr(this, key)
     }
 
+    @DefaultArgs[null<Unit>()]
     public func GetVoidPtrRef(key: ImGuiID, default_val: Ref<Unit>): CPointer<CPointer<Unit>> {
         return ImGuiStorage_GetVoidPtrRef(this, key, default_val)
     }
@@ -7912,7 +7963,7 @@ public class ImGuiStyle <: StructWrapper<capi.ImGuiStyle> {
     }
 
     public init() {
-        super(ImGuiStyle_ImGuiStyle().getCPointer(), count: None, owned: true)
+        _init(ImGuiStyle_ImGuiStyle().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiStyle {
@@ -8471,7 +8522,7 @@ public class ImGuiTabBar <: StructWrapper<capi.ImGuiTabBar> {
     }
 
     public init() {
-        super(ImGuiTabBar_ImGuiTabBar().getCPointer(), count: None, owned: true)
+        _init(ImGuiTabBar_ImGuiTabBar().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTabBar {
@@ -8826,7 +8877,7 @@ public class ImGuiTabItem <: StructWrapper<capi.ImGuiTabItem> {
     }
 
     public init() {
-        super(ImGuiTabItem_ImGuiTabItem().getCPointer(), count: None, owned: true)
+        _init(ImGuiTabItem_ImGuiTabItem().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTabItem {
@@ -9022,7 +9073,7 @@ public class ImGuiTableColumnSortSpecs <: StructWrapper<capi.ImGuiTableColumnSor
     }
 
     public init() {
-        super(ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs().getCPointer(), count: None, owned: true)
+        _init(ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTableColumnSortSpecs {
@@ -9148,7 +9199,7 @@ public class ImGuiTableInstanceData <: StructWrapper<capi.ImGuiTableInstanceData
     }
 
     public init() {
-        super(ImGuiTableInstanceData_ImGuiTableInstanceData().getCPointer(), count: None, owned: true)
+        _init(ImGuiTableInstanceData_ImGuiTableInstanceData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTableInstanceData {
@@ -9233,7 +9284,7 @@ public class ImGuiTableSettings <: StructWrapper<capi.ImGuiTableSettings> {
     }
 
     public init() {
-        super(ImGuiTableSettings_ImGuiTableSettings().getCPointer(), count: None, owned: true)
+        _init(ImGuiTableSettings_ImGuiTableSettings().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTableSettings {
@@ -9322,7 +9373,7 @@ public class ImGuiTableSortSpecs <: StructWrapper<capi.ImGuiTableSortSpecs> {
     }
 
     public init() {
-        super(ImGuiTableSortSpecs_ImGuiTableSortSpecs().getCPointer(), count: None, owned: true)
+        _init(ImGuiTableSortSpecs_ImGuiTableSortSpecs().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTableSortSpecs {
@@ -9377,7 +9428,7 @@ public class ImGuiTableTempData <: StructWrapper<capi.ImGuiTableTempData> {
     }
 
     public init() {
-        super(ImGuiTableTempData_ImGuiTableTempData().getCPointer(), count: None, owned: true)
+        _init(ImGuiTableTempData_ImGuiTableTempData().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTableTempData {
@@ -9542,7 +9593,7 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
     }
 
     public init() {
-        super(ImGuiTextBuffer_ImGuiTextBuffer().getCPointer(), count: None, owned: true)
+        _init(ImGuiTextBuffer_ImGuiTextBuffer().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTextBuffer {
@@ -9566,6 +9617,7 @@ public class ImGuiTextBuffer <: StructWrapper<capi.ImGuiTextBuffer> {
         }
     }
 
+    @DefaultArgs[null<UInt8>()]
     public func append(str: CStringConvertable, str_end: CStringConvertable): Unit {
         return ImGuiTextBuffer_append(this, str, str_end)
     }
@@ -9613,8 +9665,9 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
         super(pointer, count: count, owned: owned)
     }
 
+    @DefaultArgs[""]
     public init(default_filter: CStringConvertable) {
-        super(ImGuiTextFilter_ImGuiTextFilter(default_filter).getCPointer(), count: None, owned: true)
+        _init(ImGuiTextFilter_ImGuiTextFilter(default_filter).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTextFilter {
@@ -9666,6 +9719,7 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
         return ImGuiTextFilter_Clear(this)
     }
 
+    @DefaultArgs["Filter(inc,-exc)", Float32(0.0)]
     public func Draw(label: CStringConvertable, width: Float32): Bool {
         return ImGuiTextFilter_Draw(this, label, width)
     }
@@ -9674,6 +9728,7 @@ public class ImGuiTextFilter <: StructWrapper<capi.ImGuiTextFilter> {
         return ImGuiTextFilter_IsActive(this)
     }
 
+    @DefaultArgs[null<UInt8>()]
     public func PassFilter(text: CStringConvertable, text_end: CStringConvertable): Bool {
         return ImGuiTextFilter_PassFilter(this, text, text_end)
     }
@@ -9750,11 +9805,11 @@ public class ImGuiTextRange <: StructWrapper<capi.ImGuiTextRange> {
     }
 
     public init() {
-        super(ImGuiTextRange_ImGuiTextRange_Nil().getCPointer(), count: None, owned: true)
+        _init(ImGuiTextRange_ImGuiTextRange_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(_b: CStringConvertable, _e: CStringConvertable) {
-        super(ImGuiTextRange_ImGuiTextRange_Str(_b, _e).getCPointer(), count: None, owned: true)
+        _init(ImGuiTextRange_ImGuiTextRange_Str(_b, _e).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTextRange {
@@ -9888,7 +9943,7 @@ public class ImGuiTypingSelectState <: StructWrapper<capi.ImGuiTypingSelectState
     }
 
     public init() {
-        super(ImGuiTypingSelectState_ImGuiTypingSelectState().getCPointer(), count: None, owned: true)
+        _init(ImGuiTypingSelectState_ImGuiTypingSelectState().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiTypingSelectState {
@@ -9977,7 +10032,7 @@ public class ImGuiViewport <: StructWrapper<capi.ImGuiViewport> {
     }
 
     public init() {
-        super(ImGuiViewport_ImGuiViewport().getCPointer(), count: None, owned: true)
+        _init(ImGuiViewport_ImGuiViewport().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiViewport {
@@ -10180,7 +10235,7 @@ public class ImGuiViewportP <: StructWrapper<capi.ImGuiViewportP> {
     }
 
     public init() {
-        super(ImGuiViewportP_ImGuiViewportP().getCPointer(), count: None, owned: true)
+        _init(ImGuiViewportP_ImGuiViewportP().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiViewportP {
@@ -10453,7 +10508,7 @@ public class ImGuiWindowClass <: StructWrapper<capi.ImGuiWindowClass> {
     }
 
     public init() {
-        super(ImGuiWindowClass_ImGuiWindowClass().getCPointer(), count: None, owned: true)
+        _init(ImGuiWindowClass_ImGuiWindowClass().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiWindowClass {
@@ -10599,7 +10654,7 @@ public class ImGuiWindowSettings <: StructWrapper<capi.ImGuiWindowSettings> {
     }
 
     public init() {
-        super(ImGuiWindowSettings_ImGuiWindowSettings().getCPointer(), count: None, owned: true)
+        _init(ImGuiWindowSettings_ImGuiWindowSettings().getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImGuiWindowSettings {
@@ -11200,19 +11255,19 @@ public class ImRect <: StructWrapper<capi.ImRect> {
     }
 
     public init() {
-        super(ImRect_ImRect_Nil().getCPointer(), count: None, owned: true)
+        _init(ImRect_ImRect_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(min: ImVec2, max: ImVec2) {
-        super(ImRect_ImRect_Vec2(min, max).getCPointer(), count: None, owned: true)
+        _init(ImRect_ImRect_Vec2(min, max).getCPointer(), count: None, owned: true)
     }
 
     public init(v: ImVec4) {
-        super(ImRect_ImRect_Vec4(v).getCPointer(), count: None, owned: true)
+        _init(ImRect_ImRect_Vec4(v).getCPointer(), count: None, owned: true)
     }
 
     public init(x1: Float32, y1: Float32, x2: Float32, y2: Float32) {
-        super(ImRect_ImRect_Float(x1, y1, x2, y2).getCPointer(), count: None, owned: true)
+        _init(ImRect_ImRect_Float(x1, y1, x2, y2).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImRect {
@@ -11357,11 +11412,11 @@ public class ImVec1 <: StructWrapper<capi.ImVec1> {
     }
 
     public init() {
-        super(ImVec1_ImVec1_Nil().getCPointer(), count: None, owned: true)
+        _init(ImVec1_ImVec1_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(_x: Float32) {
-        super(ImVec1_ImVec1_Float(_x).getCPointer(), count: None, owned: true)
+        _init(ImVec1_ImVec1_Float(_x).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImVec1 {
@@ -11396,11 +11451,11 @@ public class ImVec2 <: StructWrapper<capi.ImVec2> {
     }
 
     public init() {
-        super(ImVec2_ImVec2_Nil().getCPointer(), count: None, owned: true)
+        _init(ImVec2_ImVec2_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(_x: Float32, _y: Float32) {
-        super(ImVec2_ImVec2_Float(_x, _y).getCPointer(), count: None, owned: true)
+        _init(ImVec2_ImVec2_Float(_x, _y).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImVec2 {
@@ -11445,15 +11500,15 @@ public class ImVec2ih <: StructWrapper<capi.ImVec2ih> {
     }
 
     public init() {
-        super(ImVec2ih_ImVec2ih_Nil().getCPointer(), count: None, owned: true)
+        _init(ImVec2ih_ImVec2ih_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(_x: Int16, _y: Int16) {
-        super(ImVec2ih_ImVec2ih_short(_x, _y).getCPointer(), count: None, owned: true)
+        _init(ImVec2ih_ImVec2ih_short(_x, _y).getCPointer(), count: None, owned: true)
     }
 
     public init(rhs: ImVec2) {
-        super(ImVec2ih_ImVec2ih_Vec2(rhs).getCPointer(), count: None, owned: true)
+        _init(ImVec2ih_ImVec2ih_Vec2(rhs).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImVec2ih {
@@ -11498,11 +11553,11 @@ public class ImVec4 <: StructWrapper<capi.ImVec4> {
     }
 
     public init() {
-        super(ImVec4_ImVec4_Nil().getCPointer(), count: None, owned: true)
+        _init(ImVec4_ImVec4_Nil().getCPointer(), count: None, owned: true)
     }
 
     public init(_x: Float32, _y: Float32, _z: Float32, _w: Float32) {
-        super(ImVec4_ImVec4_Float(_x, _y, _z, _w).getCPointer(), count: None, owned: true)
+        _init(ImVec4_ImVec4_Float(_x, _y, _z, _w).getCPointer(), count: None, owned: true)
     }
 
     public static func null(): ImVec4 {

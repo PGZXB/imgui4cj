@@ -30,7 +30,7 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
         return inputTokens
     }
 
-    let funcCallExpr = { // Check inputTokens & Get func call
+    { // Check inputTokens & Get func call
         =>
         let fnDeclNode = parseDecl(inputTokens) as FuncDecl
         if (fnDeclNode.isNone()) {
@@ -41,22 +41,6 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
         if (fnDecl.funcParams.size < defaultArgs.size) {
             throw IllegalArgumentException("illegal default arguments: `${attrTokens}`")
         }
-
-        let funcRef = RefExpr()
-        funcRef.identifier = fnDecl.identifier
-
-        let funcCall = CallExpr()
-        funcCall.callFunc = funcRef
-        funcCall.arguments = ArrayList<Argument>(fnDecl.funcParams.size) {
-            i =>
-            let argRef = RefExpr()
-            argRef.identifier = fnDecl.funcParams[i].identifier
-            let arg = Argument()
-            arg.expr = argRef
-            arg
-        }
-
-        return funcCall
     }()
 
     let newline = Token(NL)
@@ -77,20 +61,16 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
         }
 
         // Change body
-        let returnExpr = ReturnExpr()
-        returnExpr.keyword = Token(RETURN)
-        returnExpr.expr = funcCallExpr
-
-        node.block.nodes = ArrayList<Node>()
+        let letNodes = ArrayList<Node>()
         for ((j, arg) in enumerate(fakeArgs)) {
             let letExpr = VarDecl()
             letExpr.keyword = Token(LET)
             letExpr.identifier = arg
             letExpr.assign = Token(ASSIGN)
             letExpr.expr = defaultArgs[j + defaultArgs.size - i]
-            node.block.nodes.append(letExpr)
+            letNodes.append(letExpr)
         }
-        node.block.nodes.append(returnExpr)
+        node.block.nodes.prependAll(letNodes)
 
         result += node.toTokens()
         result += newline
