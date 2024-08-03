@@ -47,7 +47,7 @@ if(IMGUI4CJ_GLFW_OPENGL3_BACKEND)
     
     find_package(OpenGL REQUIRED)
     if (OPENGL_FOUND)
-        list(APPEND IMGUI_LIBRARIES ${OPENGL_gl_LIBRARY})
+        list(APPEND IMGUI_LIBRARIES ${OPENGL_LIBRARY})
     else (OPENGL_FOUND)
         message(FATAL_ERROR "OpenGL not found")
     endif()
