@@ -27,7 +27,7 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
 3. Add package dependency to your `cjpm.toml`
   ```toml
   [dependencies]
-    imgui4cj = { path = "/path/to/imgui4cj", version = "0.1.0"}
+    imgui4cj = { path = "/path/to/imgui4cj", version = "0.2.0"}
 
   # ...
   ```
@@ -49,7 +49,7 @@ This project provides Cangjie programming language bindings for [Dear ImGui](htt
 2. Add package dependency to your `cjpm.toml`
   ```toml
   [dependencies]
-    imgui4cj = { path = "/path/to/imgui4cj", version = "0.1.0"}
+    imgui4cj = { path = "/path/to/imgui4cj", version = "0.2.0"}
 
   # ...
   ```
