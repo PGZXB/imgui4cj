@@ -1,59 +1,42 @@
 package imgui4cj.utils
 
-import std.fs.File
-import std.io.InputStream
-import std.collection.ArrayList
+import std.fs.Path
 
-// TODO: Replace Image and related functions with std/3rd library used to process image
+foreign func imgui4cj_loadImage(result: CPointer<CImage>, filename: CString, pErrMsg: CPointer<CPointer<UInt8>>): Int32
 
 @C
-public struct CImage {
+protected struct CImage {
     var width: Int32 = 0
     var height: Int32 = 0
-    var pixels: CPointer<Byte> = CPointer<Byte>()
-
-    public func release() {
-        unsafe { LibC.free<Byte>(pixels) }
-    }
+    var pixels: CPointer<UInt8> = CPointer<UInt8>()
 }
 
-public struct Image {
-    var width: Int32 = 0
-    var height: Int32 = 0
-    var pixels: ArrayList<Byte> = ArrayList<Byte>([])
+public class Image {
+    private Image(private let cImage: CImage) {
+    }
 
-    public func toCImage(): CImage {
-        var result = CImage()
-        result.width = width
-        result.height = height
-        result.pixels = unsafe { LibC.malloc<Byte>(count: pixels.size) }
+    ~init() {
+        unsafe { LibC.free<UInt8>(cImage.pixels) }
+    }
 
-        unsafe { // Copy from pixels to result.pixels
-            var p = result.pixels
-            for (byte in pixels) {
-                p.write(byte)
-                p += 1
+    protected func getCImage(): CImage {
+        return cImage
+    }
+
+    public static func load(filename: Path): Image {
+        return load(filename.toString())
+    }
+
+    public static func load(filename: String): Image {
+        try (filenameRes = unsafe { LibC.mallocCString(filename) }.asResource()) {
+            var cImage: CImage = CImage()
+            var errMsg: CPointer<UInt8> = CPointer<UInt8>()
+            let err = unsafe { imgui4cj_loadImage(inout cImage, filenameRes.value, inout errMsg) }
+            if (err != 0) {
+                throw IllegalArgumentException("Load image ${filename} failed: ${CString(errMsg)}")
             }
+            return Image(cImage)
         }
-
-        return result
-    }
-}
-
-public func tryLoadImage(_: InputStream): ?Image {
-    // TODO: Impt it: read many image formats as pixels
-    throw UnsupportedException("to be implemented")
-}
-
-public func tryLoadImage(filename: String): ?Image {
-    try (fp = File.openRead(filename)) {
-        return tryLoadImage(fp)
-    }
-    return None
-}
-
-public func loadImage(filename: String): Image {
-    return tryLoadImage(filename).getOrThrow {
-        IllegalArgumentException("invalid image file: ${filename}")
+        throw IllegalStateException("illegal state")
     }
 }

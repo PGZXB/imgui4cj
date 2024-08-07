@@ -21,6 +21,8 @@ file(GLOB IMGUI_SOURCES
 	${IMGUI_TABLES_SOURCE}
     # cimgui struct accessor wrappers
     ${CMAKE_CURRENT_SOURCE_DIR}/c_src/cimgui_struct_accessors.c
+    # image loading
+    ${CMAKE_CURRENT_SOURCE_DIR}/c_src/load_image.c
 )
 
 set(IMGUI_STATIC "no" CACHE STRING "Build as a static library")
@@ -97,6 +99,7 @@ target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/c_
 target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui)
 target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/generator/output)
 target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/cimgui/imgui)
+target_include_directories(${IMGUI4CJ_LIB} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/stb)
 
 if (IMGUI4CJ_GLFW_OPENGL3_BACKEND)
     target_compile_definitions(${IMGUI4CJ_LIB} PUBLIC IMGUI4CJ_GLFW_OPENGL3_BACKEND=1)

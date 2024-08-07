@@ -477,7 +477,7 @@ class GLFWOpenGL3Backend <: Backend {
             try (r = LibC.malloc<CImage>(count: icons.size).asResource()) {
                 let pCImage = r.value
                 for (icon in icons) {
-                    pCImage.write(icon.toCImage())
+                    pCImage.write(icon.getCImage())
                 }
                 imgui4cj_glfwSetWindowIcon(glfwWindowInstance, Int32(icons.size), r.value)
             }

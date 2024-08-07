@@ -1,6 +1,12 @@
 package helloworld
 
+import std.fs.Path
 import imgui4cj.*
+import imgui4cj.utils
+
+func getAssetsDirectory() {
+    return Path("${Path(@sourceFile()).directoryName}/../assets").toCanonical()
+}
 
 main(): Int64 {
     let clickCount = i64(0)
@@ -24,7 +30,9 @@ main(): Int64 {
     )
 
     let backend = getBackend(GLFWOpenGL3)
-    backend.createWindow("Hello IMGUI4CJ", 800, 600).setKeyCallback {
+    backend.createWindow("Hello IMGUI4CJ", 800, 600)
+    .setIcons([utils.Image.load(getAssetsDirectory().join("logo.jpg"))])
+    .setKeyCallback {
         key: Key, _: Int32, action: KeyAction, _: ModifierKey =>
         // Check key `space`
         if (key == KEY_SPACE && action == KEY_PRESS) {
