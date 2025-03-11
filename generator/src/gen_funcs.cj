@@ -2,7 +2,7 @@ package imgui4cj_generator
 
 import std.collection.{ArrayList, HashMap, HashSet, map, filter}
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 import encoding.json.*
 
 struct FuncParameter {
@@ -48,7 +48,7 @@ func parseFuncsJson(funcsJson: JsonValue): ArrayList<FuncSignature> {
             if (!fnSig.containsKey("defaults")) {
                 fnSig.put("defaults", JsonObject())
             }
-            result.append(
+            result.add(
                 FuncSignature(
                     fnSig["ov_cimguiname"].asString().getValue(), // name
                     ArrayList<FuncParameter>.fromIterator( // params
@@ -165,7 +165,7 @@ func genFuncsCode<T>(os: StringWriter<T>, pkgName: String, funcs: ArrayList<Func
             os.writeln("// ${fnSb.toString().split("\n")[0]} ...")
         } else {
             os.writeln(fnSb.toString())
-            symbols.append("${CAPI_IMPL_SYMBOL_PREFIX}${fn.name}")
+            symbols.add("${CAPI_IMPL_SYMBOL_PREFIX}${fn.name}")
         }
         if (i != funcs.size - 1) {
             os.writeln()
@@ -176,7 +176,7 @@ func genFuncsCode<T>(os: StringWriter<T>, pkgName: String, funcs: ArrayList<Func
 }
 
 func genFuncsCode(filename: String, pkgName: String, funcs: ArrayList<FuncSignature>): ArrayList<String> {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genFuncsCode(sw, pkgName, funcs)
         }
@@ -240,7 +240,7 @@ func genFuncsWCAPICode<T>(
             let ty = CjType.fromCType(p.ty, cArrayAsPointer: true)
             let (wcapiTy, wcapiArg) = getWCAPIArgument(ty, p.name, typeAlias)
             fnSb.append("${getValidCjIdentifier(p.name)}: ${wcapiTy}")
-            callArgs.append(wcapiArg)
+            callArgs.add(wcapiArg)
             if (!hasVaList && fn.structName == "") {
                 apiInfo.updateArgMappingForGlobalFunction(p.ty, wcapiTy)
             }
@@ -288,7 +288,7 @@ func genFuncsWCAPICode<T>(
                 let defaultArgs = ArrayList<String>()
                 for (p in params) {
                     if (let Some(arg) <- fn.defaultaArgs.get(p.name)) {
-                        defaultArgs.append(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
+                        defaultArgs.add(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
                     }
                 }
 
@@ -320,7 +320,7 @@ func genFuncsWCAPICode(
     definedStructNames: HashSet<String>,
     apiInfo: APIInfo
 ) {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             genFuncsWCAPICode(sw, pkgName, capiPkgName, macrosPkgName, funcs, typeAlias, definedStructNames, apiInfo)
         }

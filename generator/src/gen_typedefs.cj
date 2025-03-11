@@ -2,7 +2,7 @@ package imgui4cj_generator
 
 import std.collection.ArrayList
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 import encoding.json.*
 
 struct TypeDef {
@@ -14,7 +14,7 @@ func parseTypeDefsJson(typeDefsJson: JsonValue): ArrayList<TypeDef> {
     let result = ArrayList<TypeDef>()
 
     for ((k, v) in typeDefsJson.asObject().getFields()) {
-        result.append(TypeDef(k, v.asString().getValue()))
+        result.add(TypeDef(k, v.asString().getValue()))
     }
 
     return result
@@ -41,7 +41,7 @@ func genTypeDefsCodeImpl<T>(os: StringWriter<T>, pkgName: String, defs: ArrayLis
         if (def.alias == "ImGuiErrorLogCallback") {
             // Cangjie CFunc template type does not support `...` argument now
             os.writeln("public type ImGuiErrorLogCallback = CPointer<Unit>")
-            symbols.append("ImGuiErrorLogCallback")
+            symbols.add("ImGuiErrorLogCallback")
             continue
         }
         let cjType = CjType.fromCType(def.typename)
@@ -53,7 +53,7 @@ func genTypeDefsCodeImpl<T>(os: StringWriter<T>, pkgName: String, defs: ArrayLis
                     case _ => cjType.toString()
                 }
                 os.writeln("public type ${def.alias} = ${typename}")
-                symbols.append(def.alias)
+                symbols.add(def.alias)
         }
     }
     os.flush()
@@ -61,7 +61,7 @@ func genTypeDefsCodeImpl<T>(os: StringWriter<T>, pkgName: String, defs: ArrayLis
 }
 
 func genTypeDefsCode(filename: String, pkgName: String, defs: ArrayList<TypeDef>): ArrayList<String> {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genTypeDefsCodeImpl(sw, pkgName, defs)
         }

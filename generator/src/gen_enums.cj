@@ -2,7 +2,7 @@ package imgui4cj_generator
 
 import std.collection.ArrayList
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 import encoding.json.*
 
 struct EnumValueDef {
@@ -23,7 +23,7 @@ func parseEnumsJson(enumsJson: JsonValue): ArrayList<EnumDef> {
         let values = ArrayList<EnumValueDef>()
         for (vDefJ in vJ.asArray().getItems()) {
             let vDefJObj = vDefJ.asObject()
-            values.append(
+            values.add(
                 EnumValueDef(
                     Int32(vDefJObj["calc_value"].asInt().getValue()),
                     vDefJObj["name"].asString().getValue(),
@@ -31,7 +31,7 @@ func parseEnumsJson(enumsJson: JsonValue): ArrayList<EnumDef> {
                 )
             )
         }
-        result.append(EnumDef(k, values))
+        result.add(EnumDef(k, values))
     }
 
     return result
@@ -62,10 +62,10 @@ func genEnumsCodeImpl<T>(os: StringWriter<T>, pkgName: String, enumDefs: ArrayLi
         os.writeln("// enum ${def.name}")
         os.writeln("public type ${def.name} = Int32")
         os.writeln()
-        symbols.append(def.name)
+        symbols.add(def.name)
         for (valueDef in def.values) {
             os.writeln("public const ${valueDef.name}: ${def.name} = ${valueDef.calcValue}")
-            symbols.append(valueDef.name)
+            symbols.add(valueDef.name)
         }
         os.writeln()
     }
@@ -73,7 +73,7 @@ func genEnumsCodeImpl<T>(os: StringWriter<T>, pkgName: String, enumDefs: ArrayLi
 }
 
 func genEnumsCode(filename: String, pkgName: String, enumDefs: ArrayList<EnumDef>): ArrayList<String> {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genEnumsCodeImpl(sw, pkgName, enumDefs)
         }

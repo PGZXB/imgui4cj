@@ -95,7 +95,7 @@ public struct ImDrawDataBuilder {
     }
 
     public init() {
-        Layers = VArray<CPointer<ImVector_ImDrawListPtr>, $2>(item: CPointer<ImVector_ImDrawListPtr>())
+        Layers = VArray<CPointer<ImVector_ImDrawListPtr>, $2>(repeat: CPointer<ImVector_ImDrawListPtr>())
         LayerData1 = ImVector_ImDrawListPtr()
     }
 }
@@ -140,9 +140,9 @@ public struct ImDrawListSharedData {
         ClipRectFullscreen = ImVec4()
         InitialFlags = 0
         TempBuffer = ImVector_ImVec2()
-        ArcFastVtx = VArray<ImVec2, $48>(item: ImVec2())
+        ArcFastVtx = VArray<ImVec2, $48>(repeat: ImVec2())
         ArcFastRadiusCutoff = 0.0f32
-        CircleSegmentCounts = VArray<ImU8, $64>(item: 0)
+        CircleSegmentCounts = VArray<ImU8, $64>(repeat: 0)
         TexUvLines = CPointer<ImVec4>()
     }
 }
@@ -199,7 +199,7 @@ public struct ImFont {
         Ascent = 0.0f32
         Descent = 0.0f32
         MetricsTotalSurface = 0
-        Used4kPagesMap = VArray<ImU8, $2>(item: 0)
+        Used4kPagesMap = VArray<ImU8, $2>(repeat: 0)
     }
 }
 
@@ -227,7 +227,7 @@ public struct ImFontAtlas {
         Fonts = ImVector_ImFontPtr()
         CustomRects = ImVector_ImFontAtlasCustomRect()
         ConfigData = ImVector_ImFontConfig()
-        TexUvLines = VArray<ImVec4, $64>(item: ImVec4())
+        TexUvLines = VArray<ImVec4, $64>(repeat: ImVec4())
         FontBuilderIO = CPointer<ImFontBuilderIO>()
         FontBuilderFlags = 0
         PackIdMouseCursors = 0
@@ -289,7 +289,7 @@ public struct ImFontConfig {
         RasterizerMultiply = 0.0f32
         RasterizerDensity = 0.0f32
         EllipsisChar = 0
-        Name = VArray<UInt8, $40>(item: 0)
+        Name = VArray<UInt8, $40>(repeat: 0)
         DstFont = CPointer<ImFont>()
     }
 }
@@ -369,7 +369,7 @@ public struct ImGuiDataTypeStorage {
     }
 
     public init() {
-        Data = VArray<ImU8, $8>(item: 0)
+        Data = VArray<ImU8, $8>(repeat: 0)
     }
 }
 
@@ -409,7 +409,7 @@ public struct ImGuiDebugAllocInfo {
         TotalAllocCount = 0
         TotalFreeCount = 0
         LastEntriesIdx = 0
-        LastEntriesBuf = VArray<ImGuiDebugAllocEntry, $6>(item: ImGuiDebugAllocEntry())
+        LastEntriesBuf = VArray<ImGuiDebugAllocEntry, $6>(repeat: ImGuiDebugAllocEntry())
     }
 }
 
@@ -550,7 +550,7 @@ public struct ImGuiIO {
         MouseDelta = ImVec2()
         Ctx = CPointer<ImGuiContext>()
         MousePos = ImVec2()
-        MouseDown = VArray<Bool, $5>(item: false)
+        MouseDown = VArray<Bool, $5>(repeat: false)
         MouseWheel = 0.0f32
         MouseWheelH = 0.0f32
         MouseSource = 0
@@ -560,24 +560,24 @@ public struct ImGuiIO {
         KeyAlt = false
         KeySuper = false
         KeyMods = 0
-        KeysData = VArray<ImGuiKeyData, $154>(item: ImGuiKeyData())
+        KeysData = VArray<ImGuiKeyData, $154>(repeat: ImGuiKeyData())
         WantCaptureMouseUnlessPopupClose = false
         MousePosPrev = ImVec2()
-        MouseClickedPos = VArray<ImVec2, $5>(item: ImVec2())
-        MouseClickedTime = VArray<Float64, $5>(item: 0.0f64)
-        MouseClicked = VArray<Bool, $5>(item: false)
-        MouseDoubleClicked = VArray<Bool, $5>(item: false)
-        MouseClickedCount = VArray<ImU16, $5>(item: 0)
-        MouseClickedLastCount = VArray<ImU16, $5>(item: 0)
-        MouseReleased = VArray<Bool, $5>(item: false)
-        MouseDownOwned = VArray<Bool, $5>(item: false)
-        MouseDownOwnedUnlessPopupClose = VArray<Bool, $5>(item: false)
+        MouseClickedPos = VArray<ImVec2, $5>(repeat: ImVec2())
+        MouseClickedTime = VArray<Float64, $5>(repeat: 0.0f64)
+        MouseClicked = VArray<Bool, $5>(repeat: false)
+        MouseDoubleClicked = VArray<Bool, $5>(repeat: false)
+        MouseClickedCount = VArray<ImU16, $5>(repeat: 0)
+        MouseClickedLastCount = VArray<ImU16, $5>(repeat: 0)
+        MouseReleased = VArray<Bool, $5>(repeat: false)
+        MouseDownOwned = VArray<Bool, $5>(repeat: false)
+        MouseDownOwnedUnlessPopupClose = VArray<Bool, $5>(repeat: false)
         MouseWheelRequestAxisSwap = false
         MouseCtrlLeftAsRightClick = false
-        MouseDownDuration = VArray<Float32, $5>(item: 0.0f32)
-        MouseDownDurationPrev = VArray<Float32, $5>(item: 0.0f32)
-        MouseDragMaxDistanceAbs = VArray<ImVec2, $5>(item: ImVec2())
-        MouseDragMaxDistanceSqr = VArray<Float32, $5>(item: 0.0f32)
+        MouseDownDuration = VArray<Float32, $5>(repeat: 0.0f32)
+        MouseDownDurationPrev = VArray<Float32, $5>(repeat: 0.0f32)
+        MouseDragMaxDistanceAbs = VArray<ImVec2, $5>(repeat: ImVec2())
+        MouseDragMaxDistanceSqr = VArray<Float32, $5>(repeat: 0.0f32)
         PenPressure = 0.0f32
         AppFocusLost = false
         AppAcceptingEvents = false
@@ -788,7 +788,7 @@ public struct ImGuiKeyRoutingTable {
     }
 
     public init() {
-        Index = VArray<ImGuiKeyRoutingIndex, $154>(item: 0)
+        Index = VArray<ImGuiKeyRoutingIndex, $154>(repeat: 0)
         Entries = ImVector_ImGuiKeyRoutingData()
         EntriesNext = ImVector_ImGuiKeyRoutingData()
     }
@@ -885,7 +885,7 @@ public struct ImGuiMenuColumns {
         OffsetLabel = 0
         OffsetShortcut = 0
         OffsetMark = 0
-        Widths = VArray<ImU16, $4>(item: 0)
+        Widths = VArray<ImU16, $4>(repeat: 0)
     }
 }
 
@@ -1060,7 +1060,7 @@ public struct ImGuiPayload {
         SourceId = 0
         SourceParentId = 0
         DataFrameCount = 0
-        DataType = VArray<UInt8, $33>(item: 0)
+        DataType = VArray<UInt8, $33>(repeat: 0)
         Preview = false
         Delivery = false
     }
@@ -1290,7 +1290,7 @@ public struct ImGuiStyle {
         AntiAliasedFill = false
         CurveTessellationTol = 0.0f32
         CircleTessellationMaxError = 0.0f32
-        Colors = VArray<ImVec4, $55>(item: ImVec4())
+        Colors = VArray<ImVec4, $55>(repeat: ImVec4())
         HoverStationaryDelay = 0.0f32
         HoverDelayShort = 0.0f32
         HoverDelayNormal = 0.0f32
@@ -1492,7 +1492,7 @@ public struct ImGuiTextFilter {
     }
 
     public init() {
-        InputBuf = VArray<UInt8, $256>(item: 0)
+        InputBuf = VArray<UInt8, $256>(repeat: 0)
         Filters = ImVector_ImGuiTextRange()
         CountGrep = 0
     }
@@ -1546,7 +1546,7 @@ public struct ImGuiTypingSelectState {
 
     public init() {
         Request = ImGuiTypingSelectRequest()
-        SearchBuffer = VArray<UInt8, $64>(item: 0)
+        SearchBuffer = VArray<UInt8, $64>(repeat: 0)
         FocusScope = 0
         LastRequestFrame = 0
         LastRequestTime = 0.0f32
@@ -1599,8 +1599,8 @@ public struct ImGuiViewportP {
         LastAlpha = 0.0f32
         LastFocusedHadNavWindow = false
         PlatformMonitor = 0
-        BgFgDrawListsLastFrame = VArray<Int32, $2>(item: 0)
-        BgFgDrawLists = VArray<CPointer<ImDrawList>, $2>(item: CPointer<ImDrawList>())
+        BgFgDrawListsLastFrame = VArray<Int32, $2>(repeat: 0)
+        BgFgDrawLists = VArray<CPointer<ImDrawList>, $2>(repeat: CPointer<ImDrawList>())
         DrawDataP = ImDrawData()
         DrawDataBuilder = ImDrawDataBuilder()
         LastPlatformPos = ImVec2()
@@ -1639,7 +1639,7 @@ public struct ImGuiWindowDockStyle {
     }
 
     public init() {
-        Colors = VArray<ImU32, $6>(item: 0)
+        Colors = VArray<ImU32, $6>(repeat: 0)
     }
 }
 
@@ -1848,8 +1848,8 @@ public struct StbUndoState {
     }
 
     public init() {
-        undo_rec = VArray<StbUndoRecord, $99>(item: StbUndoRecord())
-        undo_char = VArray<ImWchar, $999>(item: 0)
+        undo_rec = VArray<StbUndoRecord, $99>(repeat: StbUndoRecord())
+        undo_char = VArray<ImWchar, $999>(repeat: 0)
         undo_point = 0
         redo_point = 0
         undo_char_point = 0
@@ -1864,7 +1864,7 @@ public struct ImBitArray_ImGuiKey_NamedKey_COUNT__lessImGuiKey_NamedKey_BEGIN {
     }
 
     public init() {
-        Storage = VArray<ImU32, $5>(item: 0)
+        Storage = VArray<ImU32, $5>(repeat: 0)
     }
 }
 

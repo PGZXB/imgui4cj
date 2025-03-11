@@ -3,7 +3,7 @@ package imgui4cj_generator
 import std.collection.{HashSet, any, map}
 import std.collection.{ArrayList, HashMap, TreeMap, forEach, enumerate}
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 import std.ast
 import std.convert.*
 import encoding.json.*
@@ -19,7 +19,7 @@ extend<T> ArrayList<T> {
     static func fromIterator(iter: Iterable<T>): ArrayList<T> {
         let result = ArrayList<T>()
         iter |> forEach {
-            val => result.append(val)
+            val => result.add(val)
         }
         return result
     }
@@ -39,7 +39,7 @@ func withIndex<T>(it: Iterable<T>): Iterator<(Int64, T)> {
 }
 
 func readJsonFile(path: String): JsonValue {
-    return JsonValue.fromStr(String.fromUtf8(File.openRead(path).readToEnd()))
+    return JsonValue.fromStr(String.fromUtf8(File.readFrom(path)))
 }
 
 func getPkgName(path: String): String {
@@ -186,7 +186,7 @@ enum CjType <: ToString {
             case Float64Type => "0.0f64"
             case CStringType => "CPointer<UInt8>()"
             case CFuncType(pTypes, retType) => "${this}(CPointer<Unit>())"
-            case VArrayType(ty, size) => "${this}(item: ${ty.getDefaultValueLiteral(typeAlias: typeAlias)})"
+            case VArrayType(ty, size) => "${this}(repeat: ${ty.getDefaultValueLiteral(typeAlias: typeAlias)})"
             case StructType(name) => "${this}()"
             case TypeAlias(name) => if (let Some(td) <- typeAlias) {
                 td.get(name)?.getDefaultValueLiteral(typeAlias: typeAlias) ?? "${this}()"
@@ -212,7 +212,7 @@ enum CjType <: ToString {
         }
 
         let leftPPos = ty.indexOf("[").getOrThrow()
-        let size = ty[leftPPos + 1..].trimRight("]")
+        let size = ty[leftPPos + 1..].removeSuffix("]")
         let cjTy = fromCType(ty[0..leftPPos])
         return if (size.isEmpty() || cArrayAsPointer) {
             cjTy.getPointer()
@@ -226,7 +226,7 @@ enum CjType <: ToString {
             return None
         }
 
-        let baseTy = ty[0..ty.size - 1].trimLeft("const").trimAscii()
+        let baseTy = ty[0..ty.size - 1].removePrefix("const").trimAscii()
         let baseCjTy = getCjTypeOfCType(baseTy, cArrayAsPointer: cArrayAsPointer)
         return baseCjTy.getPointer()
     }
@@ -235,7 +235,7 @@ enum CjType <: ToString {
         if (!ty.startsWith("struct ")) {
             return None
         }
-        return StructType(ty.trimLeft("struct "))
+        return StructType(ty.removePrefix("struct "))
     }
 
     private static func tryGetCjTypeOfCFunc(ty: String): ?CjType {
@@ -248,7 +248,7 @@ enum CjType <: ToString {
             throw UnsupportedException("Only one '(*)(\"' is allowed")
         }
 
-        let retAndParams = ty.trimRight(";").trimRight(")").split("(*)(")
+        let retAndParams = ty.removeSuffix(";").removeSuffix(")").split("(*)(")
         let retCType = retAndParams[0].trimAscii()
         let paramCTypes = retAndParams[1].split(",")
 
@@ -340,7 +340,7 @@ func tryConvertTemplateTypename(ty: String): ?String {
     }
 
     let converted = StringBuilder()
-    for (r in ty.trimRight(">").runes()) {
+    for (r in ty.removeSuffix(">").runes()) {
         if (r == r'<') {
             converted.append('_')
         } else if (r == r'>') {
@@ -756,38 +756,38 @@ class APIInfo {
     private let uncoveredStructs = ArrayList<String>()
 
     func updateArgMappingForGlobalFunction(ori: String, cj: String) {
-        argMappingOfGlobalFunctions.put(ori, cj)
+        argMappingOfGlobalFunctions.add(ori, cj)
     }
 
     func updateRetMappingForGlobalFunction(ori: String, cj: String) {
-        retMappingOfGlobalFunctions.put(ori, cj)
+        retMappingOfGlobalFunctions.add(ori, cj)
     }
 
     func addDescForGlobalFunction(cjSig: String, desc: FunctionDesc) {
-        descOfGlobalFunctions.put(cjSig, desc)
+        descOfGlobalFunctions.add(cjSig, desc)
     }
 
     func addUncoveredGlobalFunction(fn: String) {
-        uncoveredGlobalFunctions.append(fn)
+        uncoveredGlobalFunctions.add(fn)
     }
 
     func updateMappingForStructMembers(ori: String, cj: String) {
-        mappingOfStructMembers.put(ori, cj)
+        mappingOfStructMembers.add(ori, cj)
     }
 
     func updateArgMappingForStructFunction(ori: String, cj: String) {
-        argMappingOfStructFunctions.put(ori, cj)
+        argMappingOfStructFunctions.add(ori, cj)
     }
 
     func updateRetMappingForStructFunction(ori: String, cj: String) {
-        retMappingOfStructFunctions.put(ori, cj)
+        retMappingOfStructFunctions.add(ori, cj)
     }
 
     func addMemberDescForStruct(structName: String, member: (String, String, String)) {
         if (descOfStructs.contains(structName)) {
-            descOfStructs[structName].members.append(member)
+            descOfStructs[structName].members.add(member)
         } else {
-            descOfStructs.put(
+            descOfStructs.add(
                 structName,
                 StructDesc(
                     members: ArrayList<(String, String, String)>([member]),
@@ -799,9 +799,9 @@ class APIInfo {
 
     func addMethodDescForStruct(structName: String, md: (String, FunctionDesc)) {
         if (descOfStructs.contains(structName)) {
-            descOfStructs[structName].functions.append(md)
+            descOfStructs[structName].functions.add(md)
         } else {
-            descOfStructs.put(
+            descOfStructs.add(
                 structName,
                 StructDesc(
                     members: ArrayList<(String, String, String)>(),
@@ -812,7 +812,7 @@ class APIInfo {
     }
 
     func addUncoveredStruct(structName: String) {
-        uncoveredStructs.append(structName)
+        uncoveredStructs.add(structName)
     }
 
     func generateDocumentForGlobalFunctions<T>(os: StringWriter<T>) where T <: OutputStream {
@@ -850,7 +850,7 @@ class APIInfo {
     }
 
     func generateDocumentForGlobalFunctions(filename: String) {
-        try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+        try (fp = File(filename, Write)) {
             try (sw = StringWriter(fp)) {
                 generateDocumentForGlobalFunctions(sw)
             }
@@ -937,7 +937,7 @@ class APIInfo {
     }
 
     func generateDocumentForStructs(filename: String) {
-        try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+        try (fp = File(filename, Write)) {
             try (sw = StringWriter(fp)) {
                 generateDocumentForStructs(sw)
             }
@@ -1027,7 +1027,7 @@ func transLiteralFromCToWCAPI(cArg: String, cType: String, typeAlias: HashMap<St
     }
 
     // number
-    let numberArg = cArg.trimRight("f").trimLeft("+")
+    let numberArg = cArg.removeSuffix("f").removePrefix("+")
     if (Int64.tryParse(numberArg).isSome() || Float64.tryParse(numberArg).isSome()) {
         return "${getTypeName(cjType)}(${numberArg})"
     }

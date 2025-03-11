@@ -8,7 +8,7 @@ let STRING_POOL = HashMap<String, CPointer<UInt8>>()
 
 func getCStringFromPool(string: String): CPointer<UInt8> {
     if (!STRING_POOL.contains(string)) {
-        STRING_POOL.put(string, unsafe { LibC.mallocCString(string).getChars() })
+        STRING_POOL.add(string, unsafe { LibC.mallocCString(string).getChars() })
     }
     return STRING_POOL.get(string).getOrThrow()
 }
@@ -29,7 +29,7 @@ extend CString <: CStringConvertable {
     }
 }
 
-extend<T> CPointer<T> <: CStringConvertable where T <: UInt8 {
+extend CPointer<UInt8> <: CStringConvertable {
     public func asCString(): CPointer<UInt8> {
         return CPointer<UInt8>(this)
     }
@@ -156,7 +156,7 @@ public class Ref<T> <: ToString where T <: CType { // For int*, float*, ... argu
     }
 }
 
-extend<T> Ref<T> <: CStringConvertable where T <: UInt8 {
+extend Ref<UInt8> <: CStringConvertable {
     public func asCString(): CPointer<UInt8> {
         return CPointer<UInt8>(this.getCPointer())
     }

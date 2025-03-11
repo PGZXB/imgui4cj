@@ -7,7 +7,7 @@ import std.argopt.*
 extend<T> ArrayList<T> {
     operator func +(other: Collection<T>): ArrayList<T> {
         let result = this.clone()
-        result.appendAll(other)
+        result.add(all: other)
         return result
     }
 }
@@ -67,7 +67,7 @@ main(args: Array<String>): Int64 {
     let globalConstants = HashMap<String, String>()
     for (def in enumDefs) {
         for (val in def.values) {
-            globalConstants.put(val.name, val.calcValue.toString())
+            globalConstants.add(val.name, val.calcValue.toString())
         }
     }
 
@@ -84,8 +84,8 @@ main(args: Array<String>): Int64 {
             for (tSpecOne in ones) {
                 let specStructCxxName = tsDef.getSpecStructCxxName(tSpecOne)
                 let specStructDef = tsDef.specialize(tSpecOne)
-                template2SepcOne.put(specStructCxxName, specStructDef.name)
-                templateSpecOneStructDefs.append(specStructDef)
+                template2SepcOne.add(specStructCxxName, specStructDef.name)
+                templateSpecOneStructDefs.add(specStructDef)
             }
         }
     }
@@ -99,18 +99,18 @@ main(args: Array<String>): Int64 {
             continue // SKIP the four
         }
         if (let Some(specOne) <- template2SepcOne.get(d.typename)) {
-            typeAlias.put(d.alias, StructType(specOne))
+            typeAlias.add(d.alias, StructType(specOne))
         } else {
-            typeAlias.put(d.alias, CjType.fromCType(d.typename))
+            typeAlias.add(d.alias, CjType.fromCType(d.typename))
         }
     }
     /// 2. enums
     for (e in enumDefs) {
-        typeAlias.put(e.name, Int32Type)
+        typeAlias.add(e.name, Int32Type)
     }
     /// 3. template structs
     for ((_, specOne) in template2SepcOne) {
-        typeAlias.put(specOne, StructType(specOne))
+        typeAlias.add(specOne, StructType(specOne))
     }
 
     // Generate cimgui structs -> src/capi/structs.cj
@@ -127,8 +127,8 @@ main(args: Array<String>): Int64 {
     for ((alias, ty) in typeAlias) {
         match (ty) {
             case StructType(name) => if (!definedStructNames.contains(name)) {
-                undefStructTypedefs.append(TypeDef(alias, "void"))
-                typeAlias.put(alias, UnitType)
+                undefStructTypedefs.add(TypeDef(alias, "void"))
+                typeAlias.add(alias, UnitType)
                 apiInfo.addUncoveredStruct(name)
             }
             case _ => continue

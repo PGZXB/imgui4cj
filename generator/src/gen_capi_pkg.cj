@@ -2,7 +2,7 @@ package imgui4cj_generator
 
 import std.collection.ArrayList
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 
 func genReExportCode<T>(os: StringWriter<T>, pkgName: String, implPkgName: String, symbols: ArrayList<String>) where T <: OutputStream {
     // SOME COMMENTS ....
@@ -17,12 +17,12 @@ func genReExportCode<T>(os: StringWriter<T>, pkgName: String, implPkgName: Strin
     os.writeln("package ${pkgName}")
     os.writeln()
     for (s in symbols) {
-        os.writeln("public import ${implPkgName}.${s} as ${s.trimLeft(CAPI_IMPL_SYMBOL_PREFIX)}")
+        os.writeln("public import ${implPkgName}.${s} as ${s.removePrefix(CAPI_IMPL_SYMBOL_PREFIX)}")
     }
 }
 
 func genReExportCode(filename: String, pkgName: String, implPkgName: String, symbols: ArrayList<String>) {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genReExportCode(sw, pkgName, implPkgName, symbols)
         }

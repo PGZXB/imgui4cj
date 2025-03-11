@@ -2,7 +2,7 @@ package imgui4cj_generator
 
 import std.collection.{ArrayList, HashMap, LinkedList, forEach, filter, all}
 import std.io.{OutputStream, StringWriter}
-import std.fs.{File, OpenOption}
+import std.fs.{File, OpenMode}
 import encoding.json.*
 
 struct StructMemberDef {
@@ -87,12 +87,12 @@ struct TemplateStructDef {
                     case Integer(_, name, _) =>
                         mName = mName.replace(name, spec) // unsafe but enough
                         if (mName.endsWith("]")) {
-                            mSize = mName[mName.indexOf("[").getOrThrow() + 1..].trimRight("]")
+                            mSize = mName[mName.indexOf("[").getOrThrow() + 1..].removeSuffix("]")
                         }
                 }
             }
 
-            specMembers.append(StructMemberDef(mTy, mName, mTemplateType, mSize, mBitfield))
+            specMembers.add(StructMemberDef(mTy, mName, mTemplateType, mSize, mBitfield))
         }
 
         return StructDef(
@@ -111,7 +111,7 @@ func parseStructsJson(structsJson: JsonValue): ArrayList<StructDef> {
         let values = ArrayList<StructMemberDef>()
         for (vDefJ in vJ.asArray().getItems()) {
             let vDefJObj = vDefJ.asObject()
-            values.append(
+            values.add(
                 StructMemberDef(
                     vDefJObj["type"].asString().getValue(),
                     vDefJObj["name"].asString().getValue(),
@@ -130,7 +130,7 @@ func parseStructsJson(structsJson: JsonValue): ArrayList<StructDef> {
 
         // Skip some structs which are not supported by Cangjie's @C now
         if (!hasBitfield && !hasUnionMember) {
-            result.append(StructDef(k, values))
+            result.add(StructDef(k, values))
         }
     }
 
@@ -188,7 +188,7 @@ func parseTemplateSpecTypenamesJson(tstJson: JsonValue): HashMap<String, ArrayLi
             for (i in 0..kkParts.size) {
                 kkParts[i] = kkParts[i].trimAscii()
             }
-            perTemplate.append(kkParts)
+            perTemplate.add(kkParts)
         }
         result[k] = perTemplate
     }
@@ -266,14 +266,14 @@ func genStructsCodeImpl<T>(os: StringWriter<T>, pkgName: String, structDefs: Arr
             os.writeln()
         }
 
-        symbols.append(def.name)
+        symbols.add(def.name)
     }
     return symbols
 }
 
 func genStructsCode(filename: String, pkgName: String, structDefs: ArrayList<StructDef>,
     typeAlias!: ?HashMap<String, CjType> = None, globalConstants!: ?HashMap<String, String> = None): ArrayList<String> {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genStructsCodeImpl(sw, pkgName, structDefs, typeAlias, globalConstants)
         }
@@ -343,7 +343,7 @@ func genStructAccessorCWrappersCode<T>(os: StringWriter<T>, structDefs: ArrayLis
 }
 
 func genStructAccessorCWrappersCode(filename: String, structDefs: ArrayList<StructDef>) {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             genStructAccessorCWrappersCode(sw, structDefs)
         }
@@ -401,7 +401,7 @@ func genStructAccessorFuncsCode<T>(os: StringWriter<T>, pkgName: String, structD
             os.writeln("public func access_${def.name}_${mName}(self: CPointer<${def.name}>): CPointer<${ty}> {")
             os.writeln("    return unsafe { imgui4cj_access_${def.name}_${mName}(self) }")
             os.writeln("}")
-            symbols.append("access_${def.name}_${mName}")
+            symbols.add("access_${def.name}_${mName}")
         }
         os.writeln()
     }
@@ -411,7 +411,7 @@ func genStructAccessorFuncsCode<T>(os: StringWriter<T>, pkgName: String, structD
 
 func genStructAccessorFuncsCode(filename: String, pkgName: String, structDefs: ArrayList<StructDef>,
     typeAlias!: ?HashMap<String, CjType> = None, globalConstants!: ?HashMap<String, String> = None): ArrayList<String> {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             return genStructAccessorFuncsCode(sw, pkgName, structDefs, typeAlias, globalConstants)
         }
@@ -440,7 +440,7 @@ func genStructWCAPIMethod<T>(
         for ((i, p) in withIndex(params) where md.isClassStaticMethod || md.isConstructor || i != selfIdx) {
             let ty = CjType.fromCType(p.ty, cArrayAsPointer: true)
             let (wcapiTy, _) = getWCAPIArgument(ty, "DONT_CARE", typeAlias)
-            callArgs.append((getValidCjIdentifier(p.name), wcapiTy))
+            callArgs.addLast((getValidCjIdentifier(p.name), wcapiTy))
             apiInfo.updateArgMappingForStructFunction(p.ty, wcapiTy)
         }
 
@@ -464,9 +464,9 @@ func genStructWCAPIMethod<T>(
 
         if (!md.isClassStaticMethod && !md.isConstructor) {
             if (selfIdx == 0) {
-                callArgs.prepend(("this", "DONT_CARE"))
-            } else if (let Some(fistNode) <- callArgs.firstNode()) {
-                callArgs.insertAfter(fistNode, ("this", "DONT_CARE"))
+                callArgs.addFirst(("this", "DONT_CARE"))
+            } else if (let Some(fistNode) <- callArgs.firstNode) {
+                callArgs.addAfter(fistNode, ("this", "DONT_CARE"))
             }
         }
 
@@ -487,7 +487,7 @@ func genStructWCAPIMethod<T>(
             let defaultArgs = ArrayList<String>()
             for (p in params) {
                 if (let Some(arg) <- md.defaultaArgs.get(p.name)) {
-                    defaultArgs.append(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
+                    defaultArgs.add(transLiteralFromCToWCAPI(arg, p.ty, typeAlias))
                 }
             }
             os.write("    @DefaultArgs[")
@@ -588,11 +588,11 @@ func genStructsWCAPICode<T>(
     for (fn in funcs) {
         if (fn.structName != "") {
             if (fn.isConstructor) {
-                constructorTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
+                constructorTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.add(fn)
             } else if (fn.isDestructor) {
                 destructorTable[fn.structName] = fn
             } else {
-                methodTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.append(fn)
+                methodTable.getOrPut(fn.structName) {ArrayList<FuncSignature>()}.add(fn)
             }
         }
     }
@@ -707,7 +707,7 @@ func genStructsWCAPICode(
     globalConstants: ?HashMap<String, String>,
     apiInfo: APIInfo
 ) {
-    try (fp = File(filename, OpenOption.CreateOrTruncate(false))) {
+    try (fp = File(filename, Write)) {
         try (sw = StringWriter(fp)) {
             genStructsWCAPICode(
                 sw,

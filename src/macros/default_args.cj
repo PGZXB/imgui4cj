@@ -22,7 +22,7 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
         let fakeFnCall = fakeFnCallNode.getOrThrow()
         let defaultArgs = ArrayList<Expr>()
         fakeFnCall.arguments |> forEach {
-            item => defaultArgs.append(item.expr)
+            item => defaultArgs.add(item.expr)
         }
         defaultArgs
     }()
@@ -51,7 +51,7 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
         let fakeArgs = ArrayList<Token>()
         let currentDefaultParams = node.funcParams[(node.funcParams.size - i)..node.funcParams.size]
         currentDefaultParams |> forEach {
-            item: FuncParam => fakeArgs.append(item.identifier)
+            item: FuncParam => fakeArgs.add(item.identifier)
         }
 
         // Change parameter list
@@ -68,9 +68,9 @@ public macro DefaultArgs(attrTokens: Tokens, inputTokens: Tokens): Tokens {
             letExpr.identifier = arg
             letExpr.assign = Token(ASSIGN)
             letExpr.expr = defaultArgs[j + defaultArgs.size - i]
-            letNodes.append(letExpr)
+            letNodes.add(letExpr)
         }
-        node.block.nodes.prependAll(letNodes)
+        node.block.nodes.add(all: letNodes, at: 0)
 
         result += node.toTokens()
         result += newline
